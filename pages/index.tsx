@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import ParallaxSection from '../components/ParallaxSection'
+import About from '../components/About'
+import ParallaxHero from '../components/ParallaxHero'
 import PersonalTimeLine from '../components/PersonalTimeLine'
 import Projects from '../components/Projects'
 import Skills from '../components/Skills'
@@ -18,7 +19,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <ParallaxSection />
+        <ParallaxHero />
+        <About />
         <PersonalTimeLine timeline={PERSONAL_TIMELINE} />
         <Projects />
         <Skills skills={SKILLS_DATA} />
