@@ -8,8 +8,16 @@ import Skills from '../components/Skills'
 import Footer from '../components/Footer'
 import { SKILLS_DATA } from '../utils/data/skillsData'
 import { PERSONAL_TIMELINE } from '../utils/data/timeLineData'
+import { getAllBlockData } from '../utils/notion'
+import { GetBlockResponse } from '@notionhq/client/build/src/api-endpoints'
+import { WebsiteData } from '../interfaces'
 
-const Home: NextPage = () => {
+interface Props {
+  websiteData: WebsiteData
+}
+const Home: NextPage<Props> = (  {websiteData}: Props ) => {
+  console.log("DATA:", websiteData)
+  
   return (
     <div>
       <Head>
@@ -20,7 +28,7 @@ const Home: NextPage = () => {
 
       <main>
         <ParallaxHero />
-        <About />
+        <About about={websiteData.about}/>
         <PersonalTimeLine timeline={PERSONAL_TIMELINE} />
         <Projects />
         <Skills skills={SKILLS_DATA} />
@@ -28,6 +36,16 @@ const Home: NextPage = () => {
       <Footer />
     </div>
   )
+}
+export async function getStaticProps() {
+  const response = await getAllBlockData()
+  console.log("getStaticProps", response)
+  const websiteData = response?.about ? response : null
+  return {
+    props: {
+      websiteData
+    }
+  }
 }
 
 export default Home
