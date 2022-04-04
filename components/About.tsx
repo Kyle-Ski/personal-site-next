@@ -6,7 +6,7 @@ interface Props {
 }
 
 const About = ({ about }: Props) => {
-  console.log("ABOUT:", about)
+  console.log('ABOUT:', about)
   return (
     <div>
       <Image src="/Me.jpg" alt="Head-shot of Kyle" width={72} height={72} />

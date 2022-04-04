@@ -2,6 +2,7 @@ import { Client, LogLevel } from '@notionhq/client'
 import {
   ABOUT_TITLE,
   PERSONAL_TIMELINE_TITLE,
+  PROJECTS_TITLE,
   SKILLS_TITLE,
   WEBSITE_DATA_BLOCK_ID,
 } from './constants'
@@ -51,37 +52,32 @@ export const getAllBlockData = async () => {
   return returnThing
 }
 
-export const formatBlockDataToWebsite = async (allBlocks: ListBlockChildrenResponse[]) => {
+export const formatBlockDataToWebsite = async (
+  allBlocks: ListBlockChildrenResponse[]
+) => {
   let websiteData: WebsiteData = {
     about: { aboutParagraph: '' },
-    personalTimeline: null,
-    projects: null,
-    skills: null,
+    personalTimeline: [],
+    projects: [],
+    skills: [],
   }
   for (let i = 0; i < allBlocks.length; i++) {
     let block = allBlocks[i]
     let results = block.results[0] as BlockObjectResponse
     if ('paragraph' in results) {
-      console.log('HERE? toggle')
-      websiteData.about.aboutParagraph =
-      results.paragraph.rich_text[0].plain_text
-    //   switch (title) {
-    //     case ABOUT_TITLE:
-    //       if ('paragraph' in children.results[0])
-    //         websiteData.about.aboutParagraph =
-    //           children.results[0].paragraph.rich_text[0].plain_text
-    //       console.log('HERE?', websiteData)
-    //       return
-    //     case PERSONAL_TIMELINE_TITLE:
-    //       if ('code' in children.results[0]) return
-    //     // websiteData.personalTimeline = children.results[0].code.rich_text[0].plain_text
-    //     case SKILLS_TITLE:
-    //       if ('code' in children.results[0]) return
-    //     // websiteData.skills = children.results[0].code.rich_text[0].plain_text
-    //   }
+      websiteData.about.aboutParagraph = results.paragraph.rich_text[0].plain_text
     }
     if ('code' in results) {
-        // websiteData.personalTimeline = children.results[0].code.rich_text[0].plain_text
+      console.log('CODE:', results.code, results.code.caption[0].plain_text)
+      if (results.code.caption[0].plain_text === PERSONAL_TIMELINE_TITLE) {
+        websiteData.personalTimeline = JSON.parse(results.code.rich_text[0].plain_text)
+      }
+      if (results.code.caption[0].plain_text === SKILLS_TITLE) {
+        websiteData.skills = JSON.parse(results.code.rich_text[0].plain_text)
+      }
+      if (results.code.caption[0].plain_text === PROJECTS_TITLE) {
+        websiteData.projects = JSON.parse(results.code.rich_text[0].plain_text)
+      }
     }
   }
   console.log('websiteData', websiteData)

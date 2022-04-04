@@ -7,6 +7,7 @@ type Props = {
 const PersonalTimeLine = ({ timeline }: Props) => {
   return (
     <div>
+      <h3>Personal Timeline</h3>
       {timeline &&
         timeline.map((item, index) => (
           <div key={`${item?.title}${index}`}>
