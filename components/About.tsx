@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { AboutData } from '../interfaces'
+import { ABOUT_TITLE } from '../utils/constants'
 
 interface Props {
   about: AboutData
@@ -8,7 +9,7 @@ interface Props {
 const About = ({ about }: Props) => {
   console.log('ABOUT:', about)
   return (
-    <div>
+    <div id={ABOUT_TITLE}>
       <Image src="/Me.jpg" alt="Head-shot of Kyle" width={72} height={72} />
       <div>
         {about?.aboutParagraph}

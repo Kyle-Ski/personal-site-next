@@ -8,7 +8,8 @@ export interface SkillItem {
 
 export interface PersonalTimeLineItem {
   title?: string
-  description?: string
+  description?: string,
+  dateRange?: string,
 }
 
 export interface ImgDimensions {

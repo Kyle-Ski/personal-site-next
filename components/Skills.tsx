@@ -1,6 +1,7 @@
 import { SkillItem } from '../interfaces'
 import { dimensionNormalizer } from '../utils/conversionHelpers'
 import Image from 'next/image'
+import { SKILLS_TITLE } from '../utils/constants'
 type Props = {
   skills: SkillItem[]
 }
@@ -25,7 +26,7 @@ const Skills = ({ skills }: Props) => {
   }
   return (
     <div>
-      <h3>Skills</h3>
+      <h3 id={SKILLS_TITLE}>Skills</h3>
       <>{buildSkills(skills)}</>
     </div>
   )

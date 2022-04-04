@@ -4,3 +4,5 @@ export const ABOUT_TITLE = 'About'
 export const PERSONAL_TIMELINE_TITLE = 'Personal Timeline'
 export const PROJECTS_TITLE = 'Projects'
 export const SKILLS_TITLE = 'Skills'
+
+export const PERSONAL_TIMELINE_ANCHOR = 'personal_timeline'

@@ -1,4 +1,5 @@
 import { ProjectItem } from '../interfaces'
+import { PROJECTS_TITLE } from '../utils/constants'
 
 type Props = {
   projects: ProjectItem[]
@@ -11,7 +12,7 @@ const Projects = ({ projects }: Props) => {
   }
   return (
     <div>
-      <h3>Projects</h3>
+      <h3 id={PROJECTS_TITLE}>Projects</h3>
       {buildProjects(projects)}
     </div>
   )
