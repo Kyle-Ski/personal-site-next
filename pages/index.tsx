@@ -10,6 +10,7 @@ import { getAllBlockData } from '../utils/notion'
 import { WebsiteData } from '../interfaces'
 import BackToTop from '../components/BackToTop'
 import { useRef } from 'react'
+import ToggleDarkMode from '../components/ToggleDarkMode'
 
 interface Props {
   websiteData: WebsiteData
@@ -31,6 +32,7 @@ const Home: NextPage<Props> = ({ websiteData }: Props) => {
       <div ref={refScrollUp} />
       <main>
         <ParallaxHero />
+        <ToggleDarkMode />
         <About about={about} />
         <PersonalTimeLine timeline={personalTimeline} />
         <Projects projects={projects} />
