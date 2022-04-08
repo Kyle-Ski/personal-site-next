@@ -6,10 +6,21 @@ import PersonalTimeLine from '../components/PersonalTimeLine'
 import Projects from '../components/Projects'
 import Skills from '../components/Skills'
 import Footer from '../components/Footer'
-import { SKILLS_DATA } from '../utils/data/skillsData'
-import { PERSONAL_TIMELINE } from '../utils/data/timeLineData'
+import { getAllBlockData } from '../utils/notion'
+import { WebsiteData } from '../interfaces'
+import BackToTop from '../components/BackToTop'
+import { useRef } from 'react'
 
-const Home: NextPage = () => {
+interface Props {
+  websiteData: WebsiteData
+}
+const Home: NextPage<Props> = ({ websiteData }: Props) => {
+  console.log('DATA:', websiteData)
+  const { about, personalTimeline, projects, skills } = websiteData
+  const refScrollUp = useRef<any>() // TODO Fix this
+  const handleScrollUp = () => {
+    refScrollUp?.current?.scrollIntoView({ behavior: 'smooth' })
+  }
   return (
     <div>
       <Head>
@@ -17,17 +28,27 @@ const Home: NextPage = () => {
         <meta name="description" content="Kyle Czajkowski's personal website" />
         <link rel="icon" href="/Me.jpg" />
       </Head>
-
+      <div ref={refScrollUp} />
       <main>
         <ParallaxHero />
-        <About />
-        <PersonalTimeLine timeline={PERSONAL_TIMELINE} />
-        <Projects />
-        <Skills skills={SKILLS_DATA} />
+        <About about={about} />
+        <PersonalTimeLine timeline={personalTimeline} />
+        <Projects projects={projects} />
+        <Skills skills={skills} />
+        <BackToTop handleScroll={handleScrollUp} />
       </main>
       <Footer />
     </div>
   )
+}
+export async function getStaticProps() {
+  const response = await getAllBlockData()
+  const websiteData = response?.about ? response : null
+  return {
+    props: {
+      websiteData,
+    },
+  }
 }
 
 export default Home
