@@ -11,14 +11,14 @@ import { WebsiteData } from '../interfaces'
 import BackToTop from '../components/BackToTop'
 import { useRef } from 'react'
 import ToggleDarkMode from '../components/ToggleDarkMode'
-
+import { DarkModeProvider } from '../hooks/useDarkMode'
 interface Props {
   websiteData: WebsiteData
 }
 const Home: NextPage<Props> = ({ websiteData }: Props) => {
   console.log('DATA:', websiteData)
   const { about, personalTimeline, projects, skills } = websiteData
-  const refScrollUp = useRef<any>() // TODO Fix this
+  const refScrollUp = useRef<HTMLDivElement | null>(null)
   const handleScrollUp = () => {
     refScrollUp?.current?.scrollIntoView({ behavior: 'smooth' })
   }
@@ -30,16 +30,18 @@ const Home: NextPage<Props> = ({ websiteData }: Props) => {
         <link rel="icon" href="/Me.jpg" />
       </Head>
       <div ref={refScrollUp} />
-      <main>
-        <ParallaxHero />
-        <ToggleDarkMode />
-        <About about={about} />
-        <PersonalTimeLine timeline={personalTimeline} />
-        <Projects projects={projects} />
-        <Skills skills={skills} />
-        <BackToTop handleScroll={handleScrollUp} />
-      </main>
-      <Footer />
+      <DarkModeProvider>
+        <main>
+          <ParallaxHero />
+          <ToggleDarkMode />
+          <About about={about} />
+          <PersonalTimeLine timeline={personalTimeline} />
+          <Projects projects={projects} />
+          <Skills skills={skills} />
+          <BackToTop handleScroll={handleScrollUp} />
+        </main>
+        <Footer />
+      </DarkModeProvider>
     </div>
   )
 }
