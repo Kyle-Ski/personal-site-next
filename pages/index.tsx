@@ -12,11 +12,12 @@ import BackToTop from '../components/BackToTop'
 import { useRef } from 'react'
 import ToggleDarkMode from '../components/ToggleDarkMode'
 import { DarkModeProvider } from '../hooks/useDarkMode'
+import { websiteData } from '../utils/data/websiteData'
 interface Props {
   websiteData: WebsiteData
 }
 const Home: NextPage<Props> = ({ websiteData }: Props) => {
-  console.log('DATA:', websiteData)
+  // console.log('DATA:', websiteData)
   const { about, personalTimeline, projects, skills } = websiteData
   const refScrollUp = useRef<HTMLDivElement | null>(null)
   const handleScrollUp = () => {
@@ -46,8 +47,8 @@ const Home: NextPage<Props> = ({ websiteData }: Props) => {
   )
 }
 export async function getStaticProps() {
-  const response = await getAllBlockData()
-  const websiteData = response?.about ? response : null
+  // const response = await getAllBlockData()
+  // const websiteData = response?.about ? response : null
   return {
     props: {
       websiteData,
