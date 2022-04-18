@@ -4,6 +4,11 @@
   --secondary-accent-color: #aba022;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   height: 100%;
@@ -53,6 +58,9 @@ body[data-theme='dark'] {
 
 div {
   color: var(--color-text-primary);
+}
+h2 {
+  margin: 3rem auto 2rem auto;
 }
 
 a {

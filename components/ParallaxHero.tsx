@@ -32,8 +32,8 @@ const ParallaxHero = () => {
           style={{ transform: `translateY(${offset * 0.5}px)` }}
         />
         <div className={styles.heroNameWrapper}>
-          <h1 className={styles.headline}>About</h1>
-          <h2 className={styles.subHeadline}>Kyle Czajkowski</h2>
+          <h1 className={styles.headline}></h1>
+          <h1 className={styles.subHeadline}>Kyle Czajkowski</h1>
         </div>
       </section>
     </div>

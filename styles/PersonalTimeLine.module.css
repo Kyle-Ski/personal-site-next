@@ -1,0 +1,28 @@
+.timeLineWrapper {
+  margin-left: 15vw;
+  margin-right: 15vw;
+}
+
+.timeLineSeparator {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .timeLineWrapper {
+    margin-left: 5vw;
+    margin-right: 5vw;
+  }
+
+  /* .listWrapper {
+    display: flex;
+    flex-direction: column;
+  } */
+  .listWrapper hr {
+    width: 100%;
+  }
+
+  .timeLineSeparator {
+    display: block;
+    align-self: center;
+  }
+}

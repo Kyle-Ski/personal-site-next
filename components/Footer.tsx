@@ -1,3 +1,3 @@
-const Footer = () => <footer></footer>
+const Footer = () => <footer>© {new Date().getFullYear()} Kyle Czajkowski</footer>
 
 export default Footer

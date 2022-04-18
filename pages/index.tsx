@@ -9,32 +9,33 @@ import Footer from '../components/Footer'
 import { getAllBlockData } from '../utils/notion'
 import { WebsiteData } from '../interfaces'
 import BackToTop from '../components/BackToTop'
-import { useRef } from 'react'
-import ToggleDarkMode from '../components/ToggleDarkMode'
 import { DarkModeProvider } from '../hooks/useDarkMode'
 import { websiteData } from '../utils/data/websiteData'
+import NavBar from '../components/NavBar'
+
 interface Props {
   websiteData: WebsiteData
 }
 const Home: NextPage<Props> = ({ websiteData }: Props) => {
   // console.log('DATA:', websiteData)
   const { about, personalTimeline, projects, skills } = websiteData
-  const refScrollUp = useRef<HTMLDivElement | null>(null)
   const handleScrollUp = () => {
-    refScrollUp?.current?.scrollIntoView({ behavior: 'smooth' })
+    window?.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }
   return (
-    <div>
+    <div >
       <Head>
         <title>Kyle Czajkowski</title>
         <meta name="description" content="Kyle Czajkowski's personal website" />
         <link rel="icon" href="/Me.jpg" />
       </Head>
-      <div ref={refScrollUp} />
       <DarkModeProvider>
         <main>
+          <NavBar />
           <ParallaxHero />
-          <ToggleDarkMode />
           <About about={about} />
           <PersonalTimeLine timeline={personalTimeline} />
           <Projects projects={projects} />

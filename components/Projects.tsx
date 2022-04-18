@@ -12,7 +12,7 @@ const Projects = ({ projects }: Props) => {
   }
   return (
     <div>
-      <h3 id={PROJECTS_TITLE}>Projects</h3>
+      <h2 id={PROJECTS_TITLE}>Projects</h2>
       {buildProjects(projects)}
     </div>
   )

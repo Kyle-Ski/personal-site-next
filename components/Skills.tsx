@@ -26,7 +26,7 @@ const Skills = ({ skills }: Props) => {
   }
   return (
     <div>
-      <h3 id={SKILLS_TITLE}>Skills</h3>
+      <h2 id={SKILLS_TITLE}>Skills</h2>
       <>{buildSkills(skills)}</>
     </div>
   )
