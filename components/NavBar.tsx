@@ -1,6 +1,4 @@
 import styles from '../styles/NavBar.module.css'
-import Popup from 'reactjs-popup'
-import 'reactjs-popup/dist/index.css'
 import ToggleDarkMode from './ToggleDarkMode'
 import { ABOUT_TITLE, PERSONAL_TIMELINE_ANCHOR } from '../utils/constants'
 
