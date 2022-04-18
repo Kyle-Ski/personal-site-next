@@ -1,5 +1,6 @@
 import { ProjectItem } from '../interfaces'
 import { PROJECTS_TITLE } from '../utils/constants'
+import styles from '../styles/Projects.module.css'
 
 type Props = {
   projects: ProjectItem[]
@@ -11,9 +12,10 @@ const Projects = ({ projects }: Props) => {
     })
   }
   return (
-    <div>
+    <div className={styles.projectsWrapper}>
       <h2 id={PROJECTS_TITLE}>Projects</h2>
-      {buildProjects(projects)}
+      {/* {buildProjects(projects)} */}
+      <>🚧🚧🚧🚧 Under Construction.. Come back soon!🚧🚧🚧🚧</>
     </div>
   )
 }

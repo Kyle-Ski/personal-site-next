@@ -2,6 +2,8 @@ import { SkillItem } from '../interfaces'
 import { dimensionNormalizer } from '../utils/conversionHelpers'
 import Image from 'next/image'
 import { SKILLS_TITLE } from '../utils/constants'
+import styles from '../styles/Skills.module.css'
+
 type Props = {
   skills: SkillItem[]
 }
@@ -25,9 +27,10 @@ const Skills = ({ skills }: Props) => {
     })
   }
   return (
-    <div>
+    <div className={styles.skillsWrapper}>
       <h2 id={SKILLS_TITLE}>Skills</h2>
-      <>{buildSkills(skills)}</>
+      {/* <>{buildSkills(skills)}</> */}
+      <>🚧🚧🚧🚧 Under Construction.. Come back soon!🚧🚧🚧🚧</>
     </div>
   )
 }
