@@ -20,7 +20,7 @@ const Skills = ({ skills }: Props) => {
             src={skill.src}
             alt={skill.alt}
             placeholder="blur"
-            blurDataURL={`data:image/svg+xml;base64,${imgStrToBase64(shimmer(700, 475))}`}  
+            blurDataURL={`data:image/svg+xml;base64,${imgStrToBase64(shimmer(700, 475))}`}
             layout="fixed"
             width={width}
             height={height}

@@ -1,7 +1,12 @@
 import styles from '../styles/NavBar.module.css'
+import {
+  ABOUT_TITLE,
+  FOOTER,
+  PERSONAL_TIMELINE_ANCHOR,
+  PROJECTS_TITLE,
+  SKILLS_TITLE,
+} from '../utils/constants'
 import ToggleDarkMode from './ToggleDarkMode'
-import { ABOUT_TITLE, PERSONAL_TIMELINE_ANCHOR, PROJECTS_TITLE, SKILLS_TITLE } from '../utils/constants'
-import ContactIcons from './ContactIcons'
 
 const NavBar = () => {
   return (
@@ -27,12 +32,13 @@ const NavBar = () => {
             <a href={`#${SKILLS_TITLE}`}>
               <li>Skills</li>
             </a>
-            <li>Get in contact:<ContactIcons /></li>
-            <ToggleDarkMode />
+            <a href={`#${FOOTER}`}>
+              <li>Get in Contact</li>
+            </a>
           </ul>
         </div>
       </nav>
-
+      <ToggleDarkMode />
     </div>
   )
 }
