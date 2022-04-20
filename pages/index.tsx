@@ -10,7 +10,6 @@ import { getAllBlockData } from '../utils/notion'
 import { WebsiteData } from '../interfaces'
 import BackToTop from '../components/BackToTop'
 import { DarkModeProvider } from '../hooks/useDarkMode'
-import { websiteData } from '../utils/data/websiteData'
 import NavBar from '../components/NavBar'
 
 interface Props {
@@ -48,8 +47,8 @@ const Home: NextPage<Props> = ({ websiteData }: Props) => {
   )
 }
 export async function getStaticProps() {
-  // const response = await getAllBlockData()
-  // const websiteData = response?.about ? response : null
+  const response = await getAllBlockData()
+  const websiteData = response?.about ? response : null
   return {
     props: {
       websiteData,
