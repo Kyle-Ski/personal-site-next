@@ -15,7 +15,7 @@ const Projects = ({ projects }: Props) => {
     <div className={styles.projectsWrapper}>
       <h2 id={PROJECTS_TITLE}>Projects</h2>
       {/* {buildProjects(projects)} */}
-      <>🚧🚧🚧🚧 Under Construction.. Come back soon!🚧🚧🚧🚧</>
+      <>🚧 Under Construction.. Come back soon!🚧</>
     </div>
   )
 }

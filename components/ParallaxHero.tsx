@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { imgStrToBase64, shimmer } from '../utils/imageHelpers'
 
 const ParallaxHero = () => {
   const [offset, setOffset] = useState<number>(0)
@@ -28,6 +29,8 @@ const ParallaxHero = () => {
           alt="Hero Image of the La Sal range from Goblin Valley State Park UT"
           layout="fill"
           objectFit="cover"
+          placeholder="blur"
+          blurDataURL={`data:image/svg+xml;base64,${imgStrToBase64(shimmer(700, 475))}`}
           quality={100}
           style={{ transform: `translateY(${offset * 0.5}px)` }}
         />

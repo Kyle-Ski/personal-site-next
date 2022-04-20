@@ -1,6 +1,12 @@
 import styles from '../styles/NavBar.module.css'
+import {
+  ABOUT_TITLE,
+  FOOTER,
+  PERSONAL_TIMELINE_ANCHOR,
+  PROJECTS_TITLE,
+  SKILLS_TITLE,
+} from '../utils/constants'
 import ToggleDarkMode from './ToggleDarkMode'
-import { ABOUT_TITLE, PERSONAL_TIMELINE_ANCHOR, PROJECTS_TITLE, SKILLS_TITLE } from '../utils/constants'
 
 const NavBar = () => {
   return (
@@ -14,7 +20,6 @@ const NavBar = () => {
           <span className={styles.menuToggleSpan}></span>
 
           <ul className={styles.menu}>
-          <ToggleDarkMode />
             <a href={`#${ABOUT_TITLE}`}>
               <li>About</li>
             </a>
@@ -27,10 +32,13 @@ const NavBar = () => {
             <a href={`#${SKILLS_TITLE}`}>
               <li>Skills</li>
             </a>
+            <a href={`#${FOOTER}`}>
+              <li>Get in Contact</li>
+            </a>
           </ul>
         </div>
       </nav>
-
+      <ToggleDarkMode />
     </div>
   )
 }
