@@ -9,35 +9,40 @@ import Footer from '../components/Footer'
 import { getAllBlockData } from '../utils/notion'
 import { WebsiteData } from '../interfaces'
 import BackToTop from '../components/BackToTop'
-import { useRef } from 'react'
+import { DarkModeProvider } from '../hooks/useDarkMode'
+import NavBar from '../components/NavBar'
 
 interface Props {
   websiteData: WebsiteData
 }
 const Home: NextPage<Props> = ({ websiteData }: Props) => {
-  console.log('DATA:', websiteData)
+  // console.log('DATA:', websiteData)
   const { about, personalTimeline, projects, skills } = websiteData
-  const refScrollUp = useRef<any>() // TODO Fix this
   const handleScrollUp = () => {
-    refScrollUp?.current?.scrollIntoView({ behavior: 'smooth' })
+    window?.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }
   return (
-    <div>
+    <div >
       <Head>
         <title>Kyle Czajkowski</title>
         <meta name="description" content="Kyle Czajkowski's personal website" />
         <link rel="icon" href="/Me.jpg" />
       </Head>
-      <div ref={refScrollUp} />
-      <main>
-        <ParallaxHero />
-        <About about={about} />
-        <PersonalTimeLine timeline={personalTimeline} />
-        <Projects projects={projects} />
-        <Skills skills={skills} />
-        <BackToTop handleScroll={handleScrollUp} />
-      </main>
-      <Footer />
+      <DarkModeProvider>
+        <main>
+          <NavBar />
+          <ParallaxHero />
+          <About about={about} />
+          <PersonalTimeLine timeline={personalTimeline} />
+          <Projects projects={projects} />
+          <Skills skills={skills} />
+          <BackToTop handleScroll={handleScrollUp} />
+        </main>
+        <Footer />
+      </DarkModeProvider>
     </div>
   )
 }

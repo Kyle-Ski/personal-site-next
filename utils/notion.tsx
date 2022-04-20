@@ -64,11 +64,10 @@ export const formatBlockDataToWebsite = async (
   for (let i = 0; i < allBlocks.length; i++) {
     let block = allBlocks[i]
     let results = block.results[0] as BlockObjectResponse
-    if ('paragraph' in results) {
+    if (results?.type === 'paragraph') {
       websiteData.about.aboutParagraph = results.paragraph.rich_text[0].plain_text
     }
-    if ('code' in results) {
-      console.log('CODE:', results.code, results.code.caption[0].plain_text)
+    if (results?.type === 'code') {
       if (results.code.caption[0].plain_text === PERSONAL_TIMELINE_TITLE) {
         websiteData.personalTimeline = JSON.parse(results.code.rich_text[0].plain_text)
       }

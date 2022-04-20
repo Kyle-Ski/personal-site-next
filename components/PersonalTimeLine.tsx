@@ -1,14 +1,17 @@
 import { PersonalTimeLineItem } from '../interfaces'
 import { PERSONAL_TIMELINE_ANCHOR } from '../utils/constants'
 import styles from '../styles/Home.module.css'
+import timelineStyles from '../styles/PersonalTimeLine.module.css'
+
 type Props = {
   timeline: PersonalTimeLineItem[]
 }
 
 const PersonalTimeLine = ({ timeline }: Props) => {
   return (
-    <div>
-      <h3 id={PERSONAL_TIMELINE_ANCHOR}>Personal Timeline</h3>
+    <div className={timelineStyles.timeLineWrapper}>
+      <h2 id={PERSONAL_TIMELINE_ANCHOR}>Personal Timeline</h2>
+      <div className={timelineStyles.listWrapper}>
       {timeline &&
         timeline.map((item, index) => (
           <div key={`${item?.title}${index}`} className={styles.timelineItem}>
@@ -26,8 +29,10 @@ const PersonalTimeLine = ({ timeline }: Props) => {
                   : `Default Description ${index + 1}`}
               </p>
             </div>
+            <p className={timelineStyles.timeLineSeparator}>...</p>
           </div>
         ))}
+        </div>
     </div>
   )
 }

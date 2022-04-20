@@ -24,16 +24,16 @@ const ParallaxHero = () => {
         <Image
           id="heroImg"
           priority={true}
-          src="/20220204_065056.jpeg"
-          alt="Hero Image of Torrey's peak at sunrise"
+          src="/heroImg.jpg"
+          alt="Hero Image of the La Sal range from Goblin Valley State Park UT"
           layout="fill"
           objectFit="cover"
           quality={100}
           style={{ transform: `translateY(${offset * 0.5}px)` }}
         />
-        <div className={styles.textWrapper}>
-          <h1 className={styles.headline}>About</h1>
-          <h2 className={styles.subHeadline}>Kyle Czajkowski</h2>
+        <div className={styles.heroNameWrapper}>
+          <h1 className={styles.headline}></h1>
+          <h1 className={styles.subHeadline}>Kyle Czajkowski</h1>
         </div>
       </section>
     </div>
