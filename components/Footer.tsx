@@ -4,8 +4,8 @@ import ContactIcons from './ContactIcons'
 
 const Footer = () => (
   <div id={FOOTER} className={styles.footerWrapper}>
-    <footer>© {new Date().getFullYear()} Kyle Czajkowski</footer>
     <ContactIcons />
+    <footer>© {new Date().getFullYear()} Kyle Czajkowski</footer>
   </div>
 )
 

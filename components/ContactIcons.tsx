@@ -13,12 +13,15 @@ const ContactIcons = () => {
   return (
     <div className={styles.iconsWrapper}>
       <Tooltip
+        hideArrow
+        css={{ backgroundColor: '#55893c' }}
         content="Download Kyle's resume."
         color="primary"
         placement="topStart"
         contentColor="warning"
       >
         <Link
+          aria-details="Link used to download Kyle's resume."
           target="_blank"
           underline={false}
           href="https://raw.githubusercontent.com/Kyle-Ski/Personal-Site2/e583b4fa93cd222df3691bd75e92ecedc3f0852e/public/img/Feb_2022.pdf"

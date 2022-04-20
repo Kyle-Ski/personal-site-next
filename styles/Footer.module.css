@@ -1,9 +1,9 @@
 .footerWrapper {
   height: 10vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   border-top: 2px solid var(--color-text-secondary);
   margin-top: 5vh;
 }

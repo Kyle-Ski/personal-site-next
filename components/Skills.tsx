@@ -33,7 +33,7 @@ const Skills = ({ skills }: Props) => {
     <div className={styles.skillsWrapper}>
       <h2 id={SKILLS_TITLE}>Skills</h2>
       {/* <>{buildSkills(skills)}</> */}
-      <>🚧🚧🚧🚧 Under Construction.. Come back soon!🚧🚧🚧🚧</>
+      <>🚧 Under Construction.. Come back soon!🚧</>
     </div>
   )
 }
