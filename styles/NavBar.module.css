@@ -30,6 +30,7 @@
   
   transition: color 0.3s ease;
 }
+.menuToggle:hover
 
 .menuToggle a:hover
 {
@@ -140,8 +141,13 @@
 
 .menu li
 {
+  color: var(--color-bg-secondary);
   padding: 10px 0;
   font-size: 22px;
+}
+
+.menu li:hover {
+  color: var(--color-green-0);
 }
 
 /*

@@ -1,0 +1,29 @@
+.iconsWrapper {
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.iconItem {
+    z-index: 300;
+    height: 5vh;
+    width: 5vh;
+}
+
+.iconItem:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: all .2s ease-in-out;
+}
+
+.iconItem svg {
+    height: 5vh;
+    width: 5vh;
+    text-decoration: none;
+}
+
+.iconItem:hover svg {
+    text-decoration: none;
+    fill: var(--color-bg-secondary)
+}
+
