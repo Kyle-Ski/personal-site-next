@@ -11,7 +11,6 @@ import { WebsiteData } from '../interfaces'
 import BackToTop from '../components/BackToTop'
 import { DarkModeProvider } from '../hooks/useDarkMode'
 import NavBar from '../components/NavBar'
-import {websiteData} from '../utils/data/websiteData'
 
 interface Props {
   websiteData: WebsiteData
@@ -48,8 +47,8 @@ const Home: NextPage<Props> = ({ websiteData }: Props) => {
   )
 }
 export async function getStaticProps() {
-  // const response = await getAllBlockData()
-  // const websiteData = response?.about ? response : null
+  const response = await getAllBlockData()
+  const websiteData = response?.about ? response : null
   return {
     props: {
       websiteData,
