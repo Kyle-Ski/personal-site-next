@@ -3,6 +3,10 @@
   margin-right: 15vw;
 }
 
+.timeLineWrapper h2 {
+  text-align: center;
+}
+
 .timeLineSeparator {
   display: none;
 }
