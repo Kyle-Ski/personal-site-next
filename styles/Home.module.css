@@ -23,7 +23,7 @@
   word-break: keep-all;
   font-size: 10rem;
   text-transform: uppercase;
-  color: var(--color-bg-primary);
+  color: var(--color-bg-toggle);
 }
 
 .parallax {
@@ -90,6 +90,7 @@
 }
 
 .timelineItem {
+  text-align: center;
   display: grid;
   grid-template-columns: 1fr 1px 2fr;
   grid-gap: 10px;
@@ -102,6 +103,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 @media (max-width: 600px) {
