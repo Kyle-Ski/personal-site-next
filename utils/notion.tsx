@@ -11,6 +11,7 @@ import {
   GetBlockResponse,
 } from '@notionhq/client/build/src/api-endpoints'
 import { WebsiteData, BlockObjectResponse, RichTextItemResponse } from '../interfaces'
+import { websiteData } from './data/websiteData'
 /**
  * Initialize Notion client & configure a default db query
  */
@@ -31,7 +32,10 @@ export const getAllPageBlocks = async () => {
   return response as ListBlockChildrenResponse
 }
 
-export const getAllBlockData = async () => {
+export const getAllBlockData = async (isOnline: boolean) => {
+  if (!isOnline) {
+    return websiteData
+  }
   const allIds = await getAllPageBlocks()
   let returnArray: ListBlockChildrenResponse[] = []
   let count = 0

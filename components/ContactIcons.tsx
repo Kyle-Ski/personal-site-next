@@ -6,8 +6,9 @@ import {
   AiOutlineMail,
   AiOutlineTwitter,
 } from 'react-icons/ai'
-import { Tooltip, Link } from '@nextui-org/react'
+import { Tooltip, Link as LinkUi } from '@nextui-org/react'
 import styles from '../styles/ContactIcons.module.css'
+import Link from 'next/link'
 
 const ContactIcons = () => {
   return (
@@ -20,7 +21,7 @@ const ContactIcons = () => {
         placement="topStart"
         contentColor="warning"
       >
-        <Link
+        <LinkUi
           aria-details="Link used to download Kyle's resume."
           target="_blank"
           underline={false}
@@ -30,40 +31,42 @@ const ContactIcons = () => {
           <div className={styles.iconItem}>
             <AiOutlineDownload />
           </div>
-        </Link>
+        </LinkUi>
       </Tooltip>
-      <Link target="_blank" underline={false} href="https://github.com/Kyle-Ski">
-        <div className={styles.iconItem}>
-          <AiOutlineGithub />
-        </div>
+      <Link href="https://github.com/Kyle-Ski">
+        <LinkUi target="_blank" underline={false}>
+          <div className={styles.iconItem}>
+            <AiOutlineGithub />
+          </div>
+        </LinkUi>
       </Link>
-      <Link
-        target="_blank"
-        underline={false}
-        href="https://www.instagram.com/ski_roy_jenkins"
-      >
-        <div className={styles.iconItem}>
-          <AiOutlineInstagram />
-        </div>
+      <Link href="https://www.instagram.com/ski_roy_jenkins">
+        <LinkUi target="_blank" underline={false}>
+          <div className={styles.iconItem}>
+            <AiOutlineInstagram />
+          </div>
+        </LinkUi>
       </Link>
-      <Link
-        target="_blank"
-        underline={false}
-        href="https://www.linkedin.com/in/kyle-czajkowski"
-      >
-        <div className={styles.iconItem}>
-          <AiFillLinkedin />
-        </div>
+      <Link href="https://www.linkedin.com/in/kyle-czajkowski">
+        <LinkUi target="_blank" underline={false}>
+          <div className={styles.iconItem}>
+            <AiFillLinkedin />
+          </div>
+        </LinkUi>
       </Link>
-      <Link target="_blank" underline={false} href="mailto:kyle@czajkowski.tech">
-        <div className={styles.iconItem}>
-          <AiOutlineMail />
-        </div>
+      <Link href="mailto:kyle@czajkowski.tech">
+        <LinkUi target="_blank" underline={false}>
+          <div className={styles.iconItem}>
+            <AiOutlineMail />
+          </div>
+        </LinkUi>
       </Link>
-      <Link target="_blank" underline={false} href="https://twitter.com/SkiRoyJenkins">
-        <div className={styles.iconItem}>
-          <AiOutlineTwitter />
-        </div>
+      <Link href="https://twitter.com/SkiRoyJenkins">
+        <LinkUi target="_blank" underline={false}>
+          <div className={styles.iconItem}>
+            <AiOutlineTwitter />
+          </div>
+        </LinkUi>
       </Link>
     </div>
   )

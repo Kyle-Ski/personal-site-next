@@ -25,7 +25,7 @@ const ParallaxHero = () => {
         <Image
           id="heroImg"
           priority={true}
-          src="/heroImg.jpg"
+          src="/DSC04570-Pano.jpg"
           alt="Hero Image of the La Sal range from Goblin Valley State Park UT"
           layout="fill"
           objectFit="cover"

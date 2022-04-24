@@ -47,7 +47,7 @@ const Home: NextPage<Props> = ({ websiteData }: Props) => {
   )
 }
 export async function getStaticProps() {
-  const response = await getAllBlockData()
+  const response = await getAllBlockData(process.env?.NODE_ENV === 'production')
   const websiteData = response?.about ? response : null
   return {
     props: {

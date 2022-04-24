@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styles from '../styles/NavBar.module.css'
 import {
   ABOUT_TITLE,
@@ -20,21 +21,21 @@ const NavBar = () => {
           <span className={styles.menuToggleSpan}></span>
 
           <ul className={styles.menu}>
-            <a href={`#${ABOUT_TITLE}`}>
+            <Link href={`#${ABOUT_TITLE}`}>
               <li>About</li>
-            </a>
-            <a href={`#${PERSONAL_TIMELINE_ANCHOR}`}>
+            </Link>
+            <Link href={`#${PERSONAL_TIMELINE_ANCHOR}`}>
               <li>Personal Timeline</li>
-            </a>
-            <a href={`#${PROJECTS_TITLE}`}>
+            </Link>
+            <Link href={`#${PROJECTS_TITLE}`}>
               <li>Projects</li>
-            </a>
-            <a href={`#${SKILLS_TITLE}`}>
+            </Link>
+            <Link href={`#${SKILLS_TITLE}`}>
               <li>Skills</li>
-            </a>
-            <a href={`#${FOOTER}`}>
+            </Link>
+            <Link href={`#${FOOTER}`}>
               <li>Get in Contact</li>
-            </a>
+            </Link>
           </ul>
         </div>
       </nav>
