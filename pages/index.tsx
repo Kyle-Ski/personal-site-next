@@ -25,7 +25,7 @@ const Home: NextPage<Props> = ({ websiteData }: Props) => {
     })
   }
   return (
-    <div>
+    <div >
       <Head>
         <title>Kyle Czajkowski</title>
         <meta name="description" content="Kyle Czajkowski's personal website" />
@@ -47,7 +47,7 @@ const Home: NextPage<Props> = ({ websiteData }: Props) => {
   )
 }
 export async function getStaticProps() {
-  const response = await getAllBlockData(process.env?.NODE_ENV === 'development')
+  const response = await getAllBlockData(process.env?.NODE_ENV === 'production')
   const websiteData = response?.about ? response : null
   return {
     props: {
