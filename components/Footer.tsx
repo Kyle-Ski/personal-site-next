@@ -12,8 +12,7 @@ const Footer = () => (
         <LinkUi
           block
           style={{ color: 'var(--color-green-0)' }}
-          target={'_blank'}
-          href="https://github.com/Kyle-Ski/personal-site-next"
+          target='_blank'
         >
           © {new Date().getFullYear()} By Kyle Czajkowski
         </LinkUi>

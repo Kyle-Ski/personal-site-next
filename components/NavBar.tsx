@@ -21,19 +21,19 @@ const NavBar = () => {
           <span className={styles.menuToggleSpan}></span>
 
           <ul className={styles.menu}>
-            <Link href={`#${ABOUT_TITLE}`}>
+            <Link passHref href={`#${ABOUT_TITLE}`}>
               <li>About</li>
             </Link>
-            <Link href={`#${PERSONAL_TIMELINE_ANCHOR}`}>
+            <Link passHref href={`#${PERSONAL_TIMELINE_ANCHOR}`}>
               <li>Personal Timeline</li>
             </Link>
-            <Link href={`#${PROJECTS_TITLE}`}>
+            <Link passHref href={`#${PROJECTS_TITLE}`}>
               <li>Projects</li>
             </Link>
-            <Link href={`#${SKILLS_TITLE}`}>
+            <Link passHref href={`#${SKILLS_TITLE}`}>
               <li>Skills</li>
             </Link>
-            <Link href={`#${FOOTER}`}>
+            <Link passHref href={`#${FOOTER}`}>
               <li>Get in Contact</li>
             </Link>
           </ul>

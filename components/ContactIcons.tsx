@@ -34,7 +34,7 @@ const ContactIcons = () => {
         </LinkUi>
       </Tooltip>
       <Link passHref href="https://github.com/Kyle-Ski">
-        <LinkUi target="_blank" href="https://github.com/Kyle-Ski" underline={false}>
+        <LinkUi target="_blank" underline={false}>
           <div className={styles.iconItem}>
             <AiOutlineGithub />
           </div>
@@ -43,7 +43,6 @@ const ContactIcons = () => {
       <Link passHref href="https://www.instagram.com/ski_roy_jenkins">
         <LinkUi
           target="_blank"
-          href="https://www.instagram.com/ski_roy_jenkins"
           underline={false}
         >
           <div className={styles.iconItem}>
@@ -54,7 +53,6 @@ const ContactIcons = () => {
       <Link passHref href="https://www.linkedin.com/in/kyle-czajkowski">
         <LinkUi
           target="_blank"
-          href="https://www.linkedin.com/in/kyle-czajkowski"
           underline={false}
         >
           <div className={styles.iconItem}>
@@ -63,7 +61,7 @@ const ContactIcons = () => {
         </LinkUi>
       </Link>
       <Link passHref href="mailto:kyle@czajkowski.tech">
-        <LinkUi target="_blank" href="mailto:kyle@czajkowski.tech" underline={false}>
+        <LinkUi target="_blank" underline={false}>
           <div className={styles.iconItem}>
             <AiOutlineMail />
           </div>
@@ -72,7 +70,6 @@ const ContactIcons = () => {
       <Link passHref href="https://twitter.com/SkiRoyJenkins">
         <LinkUi
           target="_blank"
-          href="https://twitter.com/SkiRoyJenkins"
           underline={false}
         >
           <div className={styles.iconItem}>
