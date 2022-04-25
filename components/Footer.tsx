@@ -8,7 +8,7 @@ const Footer = () => (
   <div id={FOOTER} className={styles.footerWrapper}>
     <ContactIcons />
     <footer>
-      <Link href="https://github.com/Kyle-Ski/personal-site-next">
+      <Link passHref href="https://github.com/Kyle-Ski/personal-site-next">
         <LinkUi
           block
           style={{ color: 'var(--color-green-0)' }}

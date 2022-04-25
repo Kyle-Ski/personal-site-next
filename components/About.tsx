@@ -24,8 +24,8 @@ const About = ({ about }: Props) => {
       <div className={styles.aboutText}>
         {about?.aboutParagraph}
         {
-          <Link href="https://www.kylieis.online/">
-            <LinkUi target={'_blank'} href="https://www.kylieis.online/">
+          <Link passHref href="https://www.kylieis.online/">
+            <LinkUi target='_blank' href="https://www.kylieis.online/">
               my wife
             </LinkUi>
           </Link>
