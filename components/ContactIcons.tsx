@@ -22,7 +22,7 @@ const ContactIcons = () => {
         contentColor="warning"
       >
         <LinkUi
-          aria-details="Link used to download Kyle's resume."
+          aria-label="Link used to download Kyle's resume."
           target="_blank"
           underline={false}
           href="https://raw.githubusercontent.com/Kyle-Ski/Personal-Site2/add902b9b38d35d5f4d16cc10bb13fc15bf68f8f/public/img/Resume_April_2022.pdf"
@@ -33,45 +33,36 @@ const ContactIcons = () => {
           </div>
         </LinkUi>
       </Tooltip>
-      <Link passHref href="https://github.com/Kyle-Ski">
+      <Link passHref aria-label="Link to Kyle's Git Hub" href="https://github.com/Kyle-Ski">
         <LinkUi target="_blank" underline={false}>
           <div className={styles.iconItem}>
             <AiOutlineGithub />
           </div>
         </LinkUi>
       </Link>
-      <Link passHref href="https://www.instagram.com/ski_roy_jenkins">
-        <LinkUi
-          target="_blank"
-          underline={false}
-        >
+      <Link passHref aria-label="Link to Kyle's Instagram" href="https://www.instagram.com/ski_roy_jenkins">
+        <LinkUi target="_blank" underline={false}>
           <div className={styles.iconItem}>
             <AiOutlineInstagram />
           </div>
         </LinkUi>
       </Link>
-      <Link passHref href="https://www.linkedin.com/in/kyle-czajkowski">
-        <LinkUi
-          target="_blank"
-          underline={false}
-        >
+      <Link passHref aria-label="Link to Kyle's Linkedin" href="https://www.linkedin.com/in/kyle-czajkowski">
+        <LinkUi target="_blank" underline={false}>
           <div className={styles.iconItem}>
             <AiFillLinkedin />
           </div>
         </LinkUi>
       </Link>
-      <Link passHref href="mailto:kyle@czajkowski.tech">
+      <Link passHref aria-label="Link to send Kyle an email" href="mailto:kyle@czajkowski.tech">
         <LinkUi target="_blank" underline={false}>
           <div className={styles.iconItem}>
             <AiOutlineMail />
           </div>
         </LinkUi>
       </Link>
-      <Link passHref href="https://twitter.com/SkiRoyJenkins">
-        <LinkUi
-          target="_blank"
-          underline={false}
-        >
+      <Link passHref aria-label="Link to Kyle's Twitter" href="https://twitter.com/SkiRoyJenkins">
+        <LinkUi target="_blank" underline={false}>
           <div className={styles.iconItem}>
             <AiOutlineTwitter />
           </div>

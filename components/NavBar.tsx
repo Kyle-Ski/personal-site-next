@@ -14,7 +14,7 @@ const NavBar = () => {
     <div className={styles.navWrapper}>
       <nav role="navigation">
         <div className={styles.menuToggle}>
-          <input type="checkbox" />
+          <input type="checkbox" aria-label='Open site navigation'/>
 
           <span className={styles.menuToggleSpan}></span>
           <span className={styles.menuToggleSpan}></span>

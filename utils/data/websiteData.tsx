@@ -151,11 +151,11 @@ export const websiteData = {
       width: 3840,
     },
     {
-      "name": "Kotlin",
-      "src": "/skillImgs/kotlin.png",
-      "alt": "Kotlin Icon",
-      "height": 335,
-      "width": 707
+      name: 'Kotlin',
+      src: '/skillImgs/kotlin.png',
+      alt: 'Kotlin Icon',
+      height: 335,
+      width: 707,
     },
   ],
 }

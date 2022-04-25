@@ -25,12 +25,12 @@ const About = ({ about }: Props) => {
         {about?.aboutParagraph}
         {
           <Link passHref href="https://www.kylieis.online/">
-            <LinkUi target='_blank' href="https://www.kylieis.online/">
+            <LinkUi target="_blank" href="https://www.kylieis.online/">
               my wife
             </LinkUi>
           </Link>
-        }{' '}
-        and our dog: backpacking, hiking, and climbing 14er's.
+        }
+        {" and our dog: backpacking, hiking, and climbing 14er's."}
       </div>
     </div>
   )
