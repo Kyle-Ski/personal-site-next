@@ -26,7 +26,7 @@ const ParallaxHero = () => {
           id="heroImg"
           priority={true}
           src="/DSC04570-Pano.jpg"
-          alt="Hero Image of the La Sal range from Goblin Valley State Park UT"
+          alt="Hero Image of the Maroon Bells near Crater Lake"
           layout="fill"
           objectFit="cover"
           placeholder="blur"

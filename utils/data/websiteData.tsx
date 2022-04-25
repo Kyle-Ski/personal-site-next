@@ -150,5 +150,12 @@ export const websiteData = {
       height: 2160,
       width: 3840,
     },
+    {
+      "name": "Kotlin",
+      "src": "/skillImgs/kotlin.png",
+      "alt": "Kotlin Icon",
+      "height": 335,
+      "width": 707
+    },
   ],
 }

@@ -51,9 +51,8 @@ export const getAllBlockData = async (isOnline: boolean) => {
     }
     count++
   }
-  let returnThing = await formatBlockDataToWebsite(returnArray)
-  console.log('return thing:', returnThing)
-  return returnThing
+  let blockData = await formatBlockDataToWebsite(returnArray)
+  return blockData
 }
 
 export const formatBlockDataToWebsite = async (
@@ -69,6 +68,7 @@ export const formatBlockDataToWebsite = async (
     let block = allBlocks[i]
     let results = block.results[0] as BlockObjectResponse
     if (results?.type === 'paragraph') {
+      console.log('-->', results.paragraph)
       websiteData.about.aboutParagraph = results.paragraph.rich_text[0].plain_text
     }
     if (results?.type === 'code') {
@@ -83,6 +83,5 @@ export const formatBlockDataToWebsite = async (
       }
     }
   }
-  console.log('websiteData', websiteData)
   return websiteData
 }

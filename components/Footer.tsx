@@ -9,7 +9,12 @@ const Footer = () => (
     <ContactIcons />
     <footer>
       <Link href="https://github.com/Kyle-Ski/personal-site-next">
-        <LinkUi block style={{ color: 'var(--color-green-0)' }} target={'_blank'}>
+        <LinkUi
+          block
+          style={{ color: 'var(--color-green-0)' }}
+          target={'_blank'}
+          href="https://github.com/Kyle-Ski/personal-site-next"
+        >
           © {new Date().getFullYear()} By Kyle Czajkowski
         </LinkUi>
       </Link>

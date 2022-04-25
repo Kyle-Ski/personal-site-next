@@ -29,12 +29,15 @@ const Skills = ({ skills }: Props) => {
       )
     })
   }
-  return (<>
-      <h2 id={SKILLS_TITLE} className={styles.header}>Skills</h2>
-    <div className={styles.skillsWrapper}>
-      <>{buildSkills(skills)}</>
-    </div>
-  </>
+  return (
+    <>
+      <h2 id={SKILLS_TITLE} className={styles.header}>
+        Skills
+      </h2>
+      <div className={styles.skillsWrapper}>
+        <>{buildSkills(skills)}</>
+      </div>
+    </>
   )
 }
 
