@@ -7,11 +7,10 @@ import {
 } from '../utils/constants'
 import utilStyles from '../styles/utils.module.css'
 
-type inactiveThemeType = 'light' | 'dark'
 interface DarkMode {
   activeTheme?: string
   toggleTheme: () => void
-  inactiveTheme: inactiveThemeType
+  inactiveTheme: string
 }
 
 const DarkModeContext = createContext<DarkMode>({} as DarkMode)
