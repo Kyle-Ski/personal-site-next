@@ -4,3 +4,28 @@
     text-align: center;
 }
 
+.resumeActions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.resumeAction {
+    margin: 0 30px;
+}
+
+.resumeAction svg:hover {
+    color: var(--color-green-0)
+}
+
+.resumeActionButton {
+    margin: 0 30px;
+    background: var(--color-bg-primary);
+    border: 3px solid var(--color-green-0);
+    border-radius: 6px;
+    height: 45px;
+    width: 200px;
+    color: var(--color-text-primary)
+}
+

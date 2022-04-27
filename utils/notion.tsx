@@ -28,7 +28,6 @@ export const getAllPageBlocks = async () => {
   const response =
     process.env.NOTION_PAGE_ID &&
     (await notion.blocks.children.list({ block_id: WEBSITE_DATA_BLOCK_ID }))
-  console.log('response:', response)
   return response as ListBlockChildrenResponse
 }
 
@@ -68,7 +67,6 @@ export const formatBlockDataToWebsite = async (
     let block = allBlocks[i]
     let results = block.results[0] as BlockObjectResponse
     if (results?.type === 'paragraph') {
-      console.log('-->', results.paragraph)
       websiteData.about.aboutParagraph = results.paragraph.rich_text[0].plain_text
     }
     if (results?.type === 'code') {

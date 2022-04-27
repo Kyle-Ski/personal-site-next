@@ -7,10 +7,11 @@ import {
 } from '../utils/constants'
 import utilStyles from '../styles/utils.module.css'
 
+type inactiveThemeType = 'light' | 'dark'
 interface DarkMode {
   activeTheme?: string
   toggleTheme: () => void
-  inactiveTheme: string
+  inactiveTheme: inactiveThemeType
 }
 
 const DarkModeContext = createContext<DarkMode>({} as DarkMode)
@@ -57,20 +58,6 @@ const DarkModeProvider: FC = ({ children }) => {
   const value = { activeTheme, toggleTheme, inactiveTheme }
 
   return <DarkModeContext.Provider value={value}>{children}</DarkModeContext.Provider>
-  return (
-    <button
-      aria-label={`Change to ${inactiveTheme} mode`}
-      title={`Change to ${inactiveTheme} mode`}
-      type="button"
-      onClick={toggleTheme}
-    >
-      {activeTheme === LIGHT_THEME ? (
-        <span className={utilStyles.singleRow}>Toggle {inactiveTheme} mode</span>
-      ) : (
-        <span className={utilStyles.singleRow}>Toggle {inactiveTheme} mode</span>
-      )}
-    </button>
-  )
 }
 
 const useDarkMode = () => {

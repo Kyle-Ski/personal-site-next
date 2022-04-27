@@ -122,6 +122,7 @@ button:hover {
 
 .webviewer {
   display: block;
+  height: 100vh;
 }
 
 #heroImg {

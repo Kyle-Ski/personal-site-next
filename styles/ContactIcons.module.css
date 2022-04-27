@@ -30,12 +30,12 @@
 @media (max-width: 1100px) {
   .iconItem {
     padding: 0.5vh;
-    height: 2.5vh;
-    width: 2.5vh;
+    height: 4vh;
+    width: 4vh;
   }
 
   .iconItem svg {
-    height: 2.5vh;
-    width: 2.5vh;
+    height: 4vh;
+    width: 4vh;
   }
 }

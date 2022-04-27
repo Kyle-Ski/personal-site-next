@@ -13,26 +13,6 @@ import Link from 'next/link'
 const ContactIcons = () => {
   return (
     <div className={styles.iconsWrapper}>
-      <Tooltip
-        hideArrow
-        css={{ backgroundColor: '#55893c' }}
-        content="Download Kyle's resume."
-        color="primary"
-        placement="topStart"
-        contentColor="warning"
-      >
-        <LinkUi
-          aria-label="Link used to download Kyle's resume."
-          target="_blank"
-          underline={false}
-          href={process.env.RESUME_LINK}
-          download
-        >
-          <div className={styles.iconItem}>
-            <AiOutlineDownload />
-          </div>
-        </LinkUi>
-      </Tooltip>
       <Link passHref aria-label="Link to Kyle's Git Hub" href="https://github.com/Kyle-Ski">
         <LinkUi target="_blank" underline={false}>
           <div className={styles.iconItem}>

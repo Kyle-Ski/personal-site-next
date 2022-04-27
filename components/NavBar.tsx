@@ -5,6 +5,7 @@ import {
   FOOTER,
   PERSONAL_TIMELINE_ANCHOR,
   PROJECTS_TITLE,
+  RESUME_ANCHOR,
   SKILLS_TITLE,
 } from '../utils/constants'
 import ToggleDarkMode from './ToggleDarkMode'
@@ -32,6 +33,9 @@ const NavBar = () => {
             </Link>
             <Link passHref href={`#${SKILLS_TITLE}`}>
               <li>Skills</li>
+            </Link>
+            <Link passHref href={`#${RESUME_ANCHOR}`}>
+              <li>Resume</li>
             </Link>
             <Link passHref href={`#${FOOTER}`}>
               <li>Get in Contact</li>
