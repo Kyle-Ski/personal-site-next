@@ -5,6 +5,9 @@ const nextConfig = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  env: {
+    RESUME_LINK: process.env.RESUME_LINK
+  }
 }
 
 module.exports = nextConfig

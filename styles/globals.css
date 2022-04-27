@@ -116,6 +116,14 @@ button:hover {
   display: none;
 }
 
+.hidden {
+  display: none;
+}
+
+.webviewer {
+  display: block;
+}
+
 #heroImg {
   z-index: -1;
 }

@@ -11,7 +11,8 @@ import { WebsiteData } from '../interfaces'
 import BackToTop from '../components/BackToTop'
 import { DarkModeProvider } from '../hooks/useDarkMode'
 import NavBar from '../components/NavBar'
-
+import dynamic from 'next/dynamic'
+const ResumeViewer = dynamic(() => import('../components/ResumeViewer'), {ssr: false})
 interface Props {
   websiteData: WebsiteData
 }
@@ -39,6 +40,7 @@ const Home: NextPage<Props> = ({ websiteData }: Props) => {
           <PersonalTimeLine timeline={personalTimeline} />
           <Skills skills={skills} />
           <Projects projects={projects} />
+          {typeof window === 'undefined' ? null : <ResumeViewer />}
           <BackToTop handleScroll={handleScrollUp} />
         </main>
         <Footer />

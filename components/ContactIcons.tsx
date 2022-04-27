@@ -25,7 +25,7 @@ const ContactIcons = () => {
           aria-label="Link used to download Kyle's resume."
           target="_blank"
           underline={false}
-          href="https://raw.githubusercontent.com/Kyle-Ski/Personal-Site2/add902b9b38d35d5f4d16cc10bb13fc15bf68f8f/public/img/Resume_April_2022.pdf"
+          href={process.env.RESUME_LINK}
           download
         >
           <div className={styles.iconItem}>
