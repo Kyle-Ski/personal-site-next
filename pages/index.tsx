@@ -31,6 +31,7 @@ const Home: NextPage<Props> = ({ websiteData }: Props) => {
         <title>Kyle Czajkowski</title>
         <meta name="description" content="Kyle Czajkowski's personal website" />
         <link rel="icon" href="/Me.jpg" />
+        <meta name="google-site-verification" content="Gj4fTNTUagYn--QC4cntqO4rOaJvehv6-gCqcSsxPWs" />
       </Head>
       <DarkModeProvider>
         <main>
