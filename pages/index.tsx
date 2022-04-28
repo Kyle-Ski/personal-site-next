@@ -12,7 +12,8 @@ import BackToTop from '../components/BackToTop'
 import { DarkModeProvider } from '../hooks/useDarkMode'
 import NavBar from '../components/NavBar'
 import dynamic from 'next/dynamic'
-const ResumeViewer = dynamic(() => import('../components/ResumeViewer'), {ssr: false})
+import Script from 'next/script'
+const ResumeViewer = dynamic(() => import('../components/ResumeViewer'), { ssr: false })
 interface Props {
   websiteData: WebsiteData
 }
@@ -28,6 +29,12 @@ const Home: NextPage<Props> = ({ websiteData }: Props) => {
   return (
     <div >
       <Head>
+        <script dangerouslySetInnerHTML={{
+          __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-MJR2GX3');`}}/>
         <title>Kyle Czajkowski</title>
         <meta name="description" content="Kyle Czajkowski's personal website" />
         <link rel="icon" href="/Me.jpg" />
@@ -35,14 +42,17 @@ const Home: NextPage<Props> = ({ websiteData }: Props) => {
       </Head>
       <DarkModeProvider>
         <main>
-          <NavBar />
-          <ParallaxHero />
-          <About about={about} />
-          <PersonalTimeLine timeline={personalTimeline} />
-          <Skills skills={skills} />
-          <Projects projects={projects} />
-          {typeof window === 'undefined' ? null : <ResumeViewer />}
-          <BackToTop handleScroll={handleScrollUp} />
+            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJR2GX3"
+              height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe></noscript>
+
+            <NavBar />
+            <ParallaxHero />
+            <About about={about} />
+            <PersonalTimeLine timeline={personalTimeline} />
+            <Skills skills={skills} />
+            <Projects projects={projects} />
+            {typeof window === 'undefined' ? null : <ResumeViewer />}
+            <BackToTop handleScroll={handleScrollUp} />
         </main>
         <Footer />
       </DarkModeProvider>
