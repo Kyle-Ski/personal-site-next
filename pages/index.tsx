@@ -13,6 +13,7 @@ import { DarkModeProvider } from '../hooks/useDarkMode'
 import NavBar from '../components/NavBar'
 import dynamic from 'next/dynamic'
 import Script from 'next/script'
+import StravaFeed from '../components/StravaFeed'
 const ResumeViewer = dynamic(() => import('../components/ResumeViewer'), { ssr: false })
 interface Props {
   websiteData: WebsiteData
@@ -42,8 +43,9 @@ const Home: NextPage<Props> = ({ websiteData }: Props) => {
           <About about={about} />
           <PersonalTimeLine timeline={personalTimeline} />
           <Skills skills={skills} />
-          <Projects projects={projects} />
           {typeof window === 'undefined' ? null : <ResumeViewer />}
+          <StravaFeed />
+          <Projects projects={projects} />          
           <BackToTop handleScroll={handleScrollUp} />
         </main>
         <Footer />
