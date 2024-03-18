@@ -45,6 +45,7 @@ body[data-theme='light'] {
   --color-bg-secondary: #fff;
   --color-bg-tertiary: #b9b9b9;
   --color-bg-toggle: #222222;
+  --color-bg-toggle-border: #e9e9e9;
 }
 
 body[data-theme='dark'] {
@@ -55,6 +56,7 @@ body[data-theme='dark'] {
   --color-bg-secondary: #292929;
   --color-bg-tertiary: #464646;
   --color-bg-toggle: #e9e9e9;
+  --color-bg-toggle-border: #222222;
 }
 
 div {
