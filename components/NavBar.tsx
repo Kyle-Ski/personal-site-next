@@ -7,6 +7,7 @@ import {
   PROJECTS_TITLE,
   RESUME_ANCHOR,
   SKILLS_TITLE,
+  STRAVA_TITLE,
 } from '../utils/constants'
 import ToggleDarkMode from './ToggleDarkMode'
 
@@ -36,6 +37,9 @@ const NavBar = () => {
             </Link>
             <Link passHref href={`#${RESUME_ANCHOR}`}>
               <li>Resume</li>
+            </Link>
+            <Link passHref href={`#${STRAVA_TITLE}`}>
+              <li>Strava Runs</li>
             </Link>
             <Link passHref href={`#${FOOTER}`}>
               <li>Get in Contact</li>

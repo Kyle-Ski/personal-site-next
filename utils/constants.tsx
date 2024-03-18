@@ -1,4 +1,5 @@
 export const ABOUT_TITLE: string = 'About'
+export const STRAVA_TITLE: string = 'strava_activities'
 export const DARK_THEME: string = 'dark'
 export const FOOTER: string = 'footer'
 export const LIGHT_THEME: string = 'light'
