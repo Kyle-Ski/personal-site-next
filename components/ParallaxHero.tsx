@@ -25,8 +25,8 @@ const ParallaxHero = () => {
         <Image
           id="heroImg"
           priority={true}
-          src="/DSC04570-Pano.jpg"
-          alt="Hero Image of the Maroon Bells near Crater Lake"
+          src="/CrestonesAtSunrise.jpeg"
+          alt="Hero Image of the Crestone Peaks at sunrise in Colorado"
           layout="fill"
           objectFit="cover"
           placeholder="blur"
