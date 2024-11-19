@@ -6,7 +6,7 @@ This is my personal website you can visit at [kyle.czajkowski.tech](kyle.czajkow
 # CLI commands
 
 Format everything:
-_(make sure you've saved everything first)_
+_(Make sure you've saved everything first)_
 
 ```bash
 yarn format
