@@ -1,9 +1,7 @@
 "use client";
 
-import { Button, Loading } from "@nextui-org/react";
-import WebViewer from "@pdftron/webviewer";
+import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
-import { useRef, useState } from "react";
 import { AiOutlineDownload } from "react-icons/ai";
 import { Tooltip } from "@nextui-org/react";
 import styles from "../styles/ResumeViewer.module.css";
@@ -17,37 +15,32 @@ const ResumeViewer = () => {
   const [showResume, setShowResume] = useState<"Show" | "Hide">("Show");
   const [resumeLoaded, setResumeLoaded] = useState<boolean>(false);
 
-  const buildPdfViewer = () => {
-    if (!resumeLoaded) {
-      setShowLoading(true);
-    } else {
-      setShowLoading(false);
-    }
-    if (showResume === "Show") {
-      setShowResume("Hide");
-    } else {
-      setShowResume("Show");
-    }
-    if (
-      typeof window !== "undefined" &&
-      viewer?.current &&
-      process.env.RESUME_LINK &&
-      !viewer.current?.hasChildNodes()
-    ) {
-      WebViewer(
-        {
-          path: "/webviewer/lib",
-          initialDoc: process.env.RESUME_LINK,
-        },
-        viewer.current
-      ).then((instance) => {
-        instance.Core.annotationManager.setReadOnly(true);
-        instance.UI.setTheme(inactiveTheme === "light" ? "dark" : "light");
-        if (instance.UI.Events.DOCUMENT_LOADED) {
+  useEffect(() => {
+    const loadWebViewer = async () => {
+      if (typeof window !== "undefined" && viewer?.current && !viewer.current?.hasChildNodes()) {
+        const WebViewer = (await import("@pdftron/webviewer")).default;
+        WebViewer(
+          {
+            path: "/webviewer/lib",
+            initialDoc: process.env.UPDATED_RESUME_LINK,
+          },
+          viewer.current
+        ).then((instance) => {
+          instance.Core.annotationManager.setReadOnly(true);
+          instance.UI.setTheme(inactiveTheme === "light" ? "dark" : "light");
           setResumeLoaded(true);
           setShowLoading(false);
-        }
-      });
+        });
+      }
+    };
+
+    loadWebViewer();
+  }, [inactiveTheme]);
+
+  const toggleResume = () => {
+    setShowResume((prev) => (prev === "Show" ? "Hide" : "Show"));
+    if (!resumeLoaded) {
+      setShowLoading(true);
     }
   };
 
@@ -64,7 +57,7 @@ const ResumeViewer = () => {
           className={styles.resumeActionButton}
           onClick={(e: React.SyntheticEvent) => {
             e.preventDefault();
-            buildPdfViewer();
+            toggleResume();
           }}
         >
           {showResume} Resume
@@ -80,7 +73,7 @@ const ResumeViewer = () => {
           >
             <a
               aria-label="Link used to download Kyle's resume."
-              href={process.env.RESUME_LINK}
+              href={process.env.UPDATED_RESUME_LINK}
               target="_blank"
               rel="noopener noreferrer"
               download
@@ -91,11 +84,7 @@ const ResumeViewer = () => {
           </Tooltip>
         </div>
       </div>
-      {showLoading === false ? null : (
-        <Loading size="xl" color="success">
-          Loading Resume...
-        </Loading>
-      )}
+      {showLoading && <div>Loading...</div>}
       <div ref={viewer} className={pdfClassName}></div>
     </div>
   );

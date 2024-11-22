@@ -23,18 +23,21 @@ const ParallaxHero = () => {
   return (
     <div>
       <section className={styles.hero}>
-        <Image
-          id="heroImg"
-          priority={true}
-          src="/CrestonesAtSunrise.jpeg"
-          alt="Hero Image of the Crestone Peaks at sunrise in Colorado"
-          layout="fill"
-          objectFit="cover"
-          placeholder="blur"
-          blurDataURL={`data:image/svg+xml;base64,${imgStrToBase64(shimmer(700, 475))}`}
-          quality={100}
-          style={{ transform: `translateY(${offset * 0.5}px)` }}
-        />
+      <Image
+  id="heroImg"
+  priority={true}
+  src="/CrestonesAtSunrise.jpeg"
+  alt="Hero Image of the Crestone Peaks at sunrise in Colorado"
+  fill
+  placeholder="blur"
+  blurDataURL={`data:image/svg+xml;base64,${imgStrToBase64(shimmer(700, 475))}`}
+  quality={100}
+  style={{
+    objectFit: "cover",
+    transform: `translateY(${offset * 0.5}px)`,
+  }}
+/>
+
         <div className={styles.heroNameWrapper}>
           <h1 className={styles.subHeadline}>Kyle Czajkowski</h1>
         </div>
