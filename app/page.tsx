@@ -9,10 +9,8 @@ import { AboutData, WebsiteData } from '../interfaces';
 import BackToTop from '../components/BackToTop';
 import NavBar from '../components/NavBar';
 import StravaFeed from '../components/StravaFeed';
-// import dynamic from 'next/dynamic';
 import ResumeViewer from '../components/ResumeViewer';
 
-// const ResumeViewer = dynamic(() => import('../components/ResumeViewer'), { ssr: false });
 
 export default async function Page() {
   const response = await getAllBlockData(process.env?.NODE_ENV === 'production');
@@ -23,8 +21,8 @@ export default async function Page() {
     skills: [],
   };
 
-  const { about, personalTimeline, projects, skills } = websiteData || {};
-
+  const { about, personalTimeline, projects, skills } = websiteData;
+  const resumeLink = process.env.UPDATED_RESUME_LINK || "/Kyle_Czajkowski_2024_L.pdf"
   return (
     <div>
       <main>
@@ -33,7 +31,7 @@ export default async function Page() {
         <About about={about} />
         <PersonalTimeLine timeline={personalTimeline} />
         <Skills skills={skills} />
-        <ResumeViewer />
+        <ResumeViewer resumeLink={resumeLink} />
         <StravaFeed />
         <Projects projects={projects} />
         <BackToTop />

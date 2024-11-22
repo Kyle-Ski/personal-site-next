@@ -8,7 +8,7 @@ import styles from "../styles/ResumeViewer.module.css";
 import { useDarkMode } from "../hooks/useDarkMode";
 import { RESUME_ANCHOR } from "../utils/constants";
 
-const ResumeViewer = () => {
+const ResumeViewer = ({ resumeLink }: { resumeLink: string | "/Kyle_Czajkowski_2024_L.pdf" }) => {
   const { inactiveTheme } = useDarkMode();
   const viewer = useRef<HTMLDivElement | null>(null);
   const [showLoading, setShowLoading] = useState<boolean>(false);
@@ -22,11 +22,11 @@ const ResumeViewer = () => {
         WebViewer(
           {
             path: "/webviewer/lib",
-            initialDoc: process.env.RESUME_LINK,
+            initialDoc: resumeLink,
           },
           viewer.current
         ).then((instance) => {
-          instance.Core.annotationManager.setReadOnly(true);
+          instance.Core.annotationManager.enableReadOnlyMode();
           instance.UI.setTheme(inactiveTheme === "light" ? "dark" : "light");
           setResumeLoaded(true);
           setShowLoading(false);
@@ -73,7 +73,7 @@ const ResumeViewer = () => {
           >
             <a
               aria-label="Link used to download Kyle's resume."
-              href={process.env.RESUME_LINK}
+              href={resumeLink}
               target="_blank"
               rel="noopener noreferrer"
               download

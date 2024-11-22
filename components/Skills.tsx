@@ -23,7 +23,7 @@ const Skills = ({ skills }: Props) => {
             blurDataURL={`data:image/svg+xml;base64,${imgStrToBase64(shimmer(700, 475))}`}
             width={width}
             height={height}
-            style={{ objectFit: "contain" }}
+            style={{ objectFit: "contain", height: "auto", width: "60%" }}
           />
         </div>
       )

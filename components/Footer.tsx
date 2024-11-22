@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link';
 import styles from '../styles/Footer.module.css';
 import { FOOTER } from '../utils/constants';

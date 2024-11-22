@@ -1,3 +1,5 @@
+'use client'
+
 import { PersonalTimeLineItem } from '../interfaces'
 import { PERSONAL_TIMELINE_ANCHOR } from '../utils/constants'
 import styles from '../styles/Home.module.css'
