@@ -5,7 +5,7 @@ import Projects from '../components/Projects';
 import Skills from '../components/Skills';
 import Footer from '../components/Footer';
 import { getAllBlockData } from '../utils/notion';
-import { WebsiteData } from '../interfaces';
+import { AboutData, WebsiteData } from '../interfaces';
 import BackToTop from '../components/BackToTop';
 import NavBar from '../components/NavBar';
 import StravaFeed from '../components/StravaFeed';
@@ -16,7 +16,12 @@ import ResumeViewer from '../components/ResumeViewer';
 
 export default async function Page() {
   const response = await getAllBlockData(process.env?.NODE_ENV === 'production');
-  const websiteData: WebsiteData = response?.about ? response : null;
+  const websiteData: WebsiteData = response?.about ? response : {
+    about: {} as AboutData,
+    personalTimeline: [],
+    projects: [],
+    skills: [],
+  };
 
   const { about, personalTimeline, projects, skills } = websiteData || {};
 
@@ -28,7 +33,7 @@ export default async function Page() {
         <About about={about} />
         <PersonalTimeLine timeline={personalTimeline} />
         <Skills skills={skills} />
-        {typeof window === 'undefined' ? null : <ResumeViewer />}
+        <ResumeViewer />
         <StravaFeed />
         <Projects projects={projects} />
         <BackToTop />
