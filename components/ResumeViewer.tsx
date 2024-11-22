@@ -23,6 +23,7 @@ const ResumeViewer = ({ resumeLink }: { resumeLink: string | "/Kyle_Czajkowski_2
           {
             path: "/webviewer/lib",
             initialDoc: resumeLink,
+            disableLogs: true
           },
           viewer.current
         ).then((instance) => {
