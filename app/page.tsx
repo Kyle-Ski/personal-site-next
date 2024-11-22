@@ -30,10 +30,10 @@ export default async function Page() {
         <ParallaxHero />
         <About about={about} />
         <PersonalTimeLine timeline={personalTimeline} />
-        <Skills skills={skills} />
-        <ResumeViewer resumeLink={resumeLink} />
-        <StravaFeed />
         <Projects />
+        <ResumeViewer resumeLink={resumeLink} />
+        <Skills skills={skills} />
+        <StravaFeed />
         <BackToTop />
       </main>
       <Footer />
