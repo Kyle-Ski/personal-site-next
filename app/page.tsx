@@ -21,7 +21,7 @@ export default async function Page() {
     skills: [],
   };
 
-  const { about, personalTimeline, projects, skills } = websiteData;
+  const { about, personalTimeline, skills } = websiteData;
   const resumeLink = process.env.UPDATED_RESUME_LINK || "/Kyle_Czajkowski_2024_L.pdf"
   return (
     <div>
@@ -33,7 +33,7 @@ export default async function Page() {
         <Skills skills={skills} />
         <ResumeViewer resumeLink={resumeLink} />
         <StravaFeed />
-        <Projects  />
+        <Projects />
         <BackToTop />
       </main>
       <Footer />
