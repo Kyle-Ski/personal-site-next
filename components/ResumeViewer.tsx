@@ -22,7 +22,7 @@ const ResumeViewer = () => {
         WebViewer(
           {
             path: "/webviewer/lib",
-            initialDoc: process.env.UPDATED_RESUME_LINK,
+            initialDoc: process.env.RESUME_LINK,
           },
           viewer.current
         ).then((instance) => {
@@ -73,7 +73,7 @@ const ResumeViewer = () => {
           >
             <a
               aria-label="Link used to download Kyle's resume."
-              href={process.env.UPDATED_RESUME_LINK}
+              href={process.env.RESUME_LINK}
               target="_blank"
               rel="noopener noreferrer"
               download
