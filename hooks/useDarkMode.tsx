@@ -1,3 +1,4 @@
+"use client"
 import { createContext, FC, useContext, useEffect, useState } from 'react'
 import {
   DARK_THEME,
@@ -5,7 +6,6 @@ import {
   THEME_STRING,
   UNDEFINED_STRING,
 } from '../utils/constants'
-import utilStyles from '../styles/utils.module.css'
 
 interface DarkMode {
   activeTheme?: string

@@ -1,3 +1,4 @@
+"use client"
 import { Button, Loading } from '@nextui-org/react'
 import WebViewer from '@pdftron/webviewer'
 import classNames from 'classnames'

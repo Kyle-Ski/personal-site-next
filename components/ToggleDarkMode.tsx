@@ -1,3 +1,4 @@
+"use client"
 import { LIGHT_THEME } from '../utils/constants'
 import { useDarkMode } from '../hooks/useDarkMode'
 import styles from '../styles/DarkMode.module.css'

@@ -1,38 +1,40 @@
-import { useEffect, useState } from 'react'
-import { BsFillArrowUpSquareFill } from 'react-icons/bs'
-import { IconContext } from 'react-icons'
+"use client";
 
-type Props = {
-  handleScroll: () => void
-}
-const BackToTop = ({ handleScroll }: Props) => {
-  const [scrollPosition, setScrollPosition] = useState(0)
-  const [showButton, setShowButton] = useState(false)
+import { useEffect, useState } from "react";
+import { BsFillArrowUpSquareFill } from "react-icons/bs";
+import { IconContext } from "react-icons";
+
+const BackToTop = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [showButton, setShowButton] = useState(false);
+
   const handleVisibleButton = () => {
-    if (window) {
-      const position = window?.scrollY
-      setScrollPosition(position)
-      if (scrollPosition > 100) {
-        return setShowButton(true)
-      } else {
-        return setShowButton(false)
-      }
-    }
-  }
+    const position = window.scrollY;
+    setScrollPosition(position);
+    setShowButton(position > 100);
+  };
+
+  const handleScrollUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
-    if (window) {
-      window.addEventListener('scroll', handleVisibleButton)
-    }
-    return () => window.removeEventListener('scroll', handleVisibleButton)
-  })
+    window.addEventListener("scroll", handleVisibleButton);
+    return () => window.removeEventListener("scroll", handleVisibleButton);
+  }, [scrollPosition]); // Dependencies include scrollPosition to ensure updates
 
   return (
     <IconContext.Provider
-      value={{ className: `scroll ${showButton ? 'show-button' : 'hide-button'}` }}
+      value={{
+        className: `scroll ${showButton ? "show-button" : "hide-button"}`,
+      }}
     >
-      <BsFillArrowUpSquareFill onClick={handleScroll} />
+      {showButton && <BsFillArrowUpSquareFill onClick={handleScrollUp} />}
     </IconContext.Provider>
-  )
-}
-export default BackToTop
+  );
+};
+
+export default BackToTop;
