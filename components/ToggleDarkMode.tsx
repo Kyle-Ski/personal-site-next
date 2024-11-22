@@ -1,16 +1,17 @@
-"use client"
-import { LIGHT_THEME } from '../utils/constants'
-import { useDarkMode } from '../hooks/useDarkMode'
-import styles from '../styles/DarkMode.module.css'
-import { BsMoonStarsFill, BsSunriseFill } from 'react-icons/bs'
-import { Tooltip } from '@nextui-org/react'
+"use client";
+import { LIGHT_THEME } from "../utils/constants";
+import { useDarkMode } from "../hooks/useDarkMode";
+import styles from "../styles/DarkMode.module.css";
+import { BsMoonStarsFill, BsSunriseFill } from "react-icons/bs";
+import { Tooltip } from "@nextui-org/react";
 
 const ToggleDarkMode = () => {
-  const { inactiveTheme, toggleTheme, activeTheme } = useDarkMode()
+  const { inactiveTheme, toggleTheme, activeTheme } = useDarkMode();
+
   return (
     <Tooltip
       hideArrow
-      css={{ backgroundColor: '#55893c' }}
+      css={{ backgroundColor: "#55893c" }}
       placement="leftStart"
       content={`Toggle ${inactiveTheme} mode`}
     >
@@ -21,18 +22,12 @@ const ToggleDarkMode = () => {
         type="button"
         onClick={toggleTheme}
       >
-        {activeTheme === LIGHT_THEME ? (
-          <span className={styles.buttonText}>
-            {inactiveTheme === 'light' ? <BsSunriseFill /> : <BsMoonStarsFill />}
-          </span>
-        ) : (
-          <span className={styles.buttonText}>
-            {inactiveTheme === 'light' ? <BsSunriseFill /> : <BsMoonStarsFill />}
-          </span>
-        )}
+        <span className={styles.buttonText}>
+          {activeTheme === LIGHT_THEME ? <BsMoonStarsFill /> : <BsSunriseFill />}
+        </span>
       </button>
     </Tooltip>
-  )
-}
+  );
+};
 
-export default ToggleDarkMode
+export default ToggleDarkMode;

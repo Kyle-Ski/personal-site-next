@@ -3,7 +3,20 @@
   max-width: 90%;
   display: grid;
   column-gap: 1.5rem;
-  grid-template-columns: 20vw 70vw;
+  grid-template-columns: 1fr 2fr; /* Proportional layout for image and text */
+  align-items: center; /* Ensures alignment for vertical centering */
+}
+
+.aboutWrapper img {
+  max-width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  padding: 10px;
+  border-radius: 17px; /* Slightly rounded corners */
+}
+
+.aboutWrapper a {
+  color: var(--color-green-3);
+  text-decoration: none;
 }
 
 .aboutWrapper a:hover {
@@ -12,39 +25,28 @@
   text-decoration: underline;
 }
 
-.aboutWrapper a {
-  color: var(--color-green-3);
-}
-
-.aboutWrapper img {
-  max-width: 100%;
-  height: 100%;
-  padding: 10px;
-  align-self: center;
-  border-radius: 3%;
-}
-
 .aboutText {
   font-size: 1.5rem;
-  margin: auto 5vw;
-  max-width: inherit;
+  margin: 0 5vw;
 }
 
 @media (max-width: 1100px) {
-  .aboutText {
-    font-size: 1.5rem;
-    margin: 5vw 5vw;
-    max-width: inherit;
-  }
-
-  .aboutWrapper :first-child {
-    align-self: center;
-  }
-
   .aboutWrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack the image and text */
     margin: 0 auto;
     max-width: 95%;
+    gap: 1.5rem; /* Add spacing between stacked items */
+  }
+
+  .aboutWrapper img {
+    width: 80%; /* Resize image for smaller screens */
+    margin: 0 auto; /* Center the image */
+  }
+
+  .aboutText {
+    font-size: 1.25rem; /* Adjust font size for smaller screens */
+    margin: 0 2rem;
+    text-align: center; /* Center-align text */
   }
 }

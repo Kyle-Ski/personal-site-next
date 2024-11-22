@@ -33,7 +33,7 @@ export default async function Page() {
         <Skills skills={skills} />
         <ResumeViewer resumeLink={resumeLink} />
         <StravaFeed />
-        <Projects projects={projects} />
+        <Projects  />
         <BackToTop />
       </main>
       <Footer />
