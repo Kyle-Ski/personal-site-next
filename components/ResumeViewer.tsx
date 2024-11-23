@@ -1,94 +1,89 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import classNames from "classnames";
 import { AiOutlineDownload } from "react-icons/ai";
 import { Tooltip } from "@nextui-org/react";
-import styles from "../styles/ResumeViewer.module.css";
-import { useDarkMode } from "../hooks/useDarkMode";
-import { RESUME_ANCHOR } from "../utils/constants";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
-const ResumeViewer = ({ resumeLink }: { resumeLink: string | "/Kyle_Czajkowski_2024_L.pdf" }) => {
-  const { inactiveTheme } = useDarkMode();
-  const viewer = useRef<HTMLDivElement | null>(null);
-  const [showLoading, setShowLoading] = useState<boolean>(false);
-  const [showResume, setShowResume] = useState<"Show" | "Hide">("Show");
-  const [resumeLoaded, setResumeLoaded] = useState<boolean>(false);
-
-  useEffect(() => {
-    const loadWebViewer = async () => {
-      if (typeof window !== "undefined" && viewer?.current && !viewer.current?.hasChildNodes()) {
-        const WebViewer = (await import("@pdftron/webviewer")).default;
-        WebViewer(
-          {
-            path: "/webviewer/lib",
-            initialDoc: resumeLink,
-            disableLogs: true
-          },
-          viewer.current
-        ).then((instance) => {
-          instance.Core.annotationManager.enableReadOnlyMode();
-          instance.UI.setTheme(inactiveTheme === "light" ? "dark" : "light");
-          setResumeLoaded(true);
-          setShowLoading(false);
-        });
-      }
-    };
-
-    loadWebViewer();
-  }, [inactiveTheme]);
-
-  const toggleResume = () => {
-    setShowResume((prev) => (prev === "Show" ? "Hide" : "Show"));
-    if (!resumeLoaded) {
-      setShowLoading(true);
-    }
-  };
-
-  const pdfClassName = classNames({
-    hidden: showResume === "Show",
-    webviewer: showResume === "Hide",
-  });
+const ResumeSection = () => {
+  const resumeLink = "/Kyle_Czajkowski_2024_L.pdf";
 
   return (
-    <div className={styles.container}>
-      <h2 id={RESUME_ANCHOR} className="text-3xl font-bold mb-8 text-center">Resume</h2>
-      <div className={styles.resumeActions}>
-        <button
-          className={styles.resumeActionButton}
-          onClick={(e: React.SyntheticEvent) => {
-            e.preventDefault();
-            toggleResume();
-          }}
-        >
-          {showResume} Resume
-        </button>
-        <div className={styles.resumeAction}>
-          <Tooltip
-            hideArrow
-            css={{ backgroundColor: "#55893c" }}
-            content="Download Kyle's resume."
-            color="primary"
-            placement="topStart"
-            contentColor="warning"
-          >
-            <a
-              aria-label="Link used to download Kyle's resume."
-              href={resumeLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-              className={styles.iconItem}
-            >
-              <AiOutlineDownload size="5em" />
-            </a>
-          </Tooltip>
-        </div>
+    <section className="container mx-auto px-4 py-8">
+      <h2 className="text-3xl font-bold mb-8 text-center">Resume</h2>
+
+      {/* Highlights Section */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <Card className="bg-white dark:bg-gray-800">
+          <CardHeader>
+            <CardTitle>Full-Stack Development</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              5+ years of experience building scalable web and mobile applications using modern
+              frameworks like Next.js, React, and TypeScript.
+            </p>
+          </CardContent>
+        </Card>
+        <Card className="bg-white dark:bg-gray-800">
+          <CardHeader>
+            <CardTitle>Collaborative Problem Solving</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              Strong communication skills and experience working in agile teams to solve complex
+              technical challenges.
+            </p>
+          </CardContent>
+        </Card>
+        <Card className="bg-white dark:bg-gray-800">
+          <CardHeader>
+            <CardTitle>Adaptable Skillset</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              Flexible in learning new tools, frameworks, and environments to deliver high-quality
+              solutions.
+            </p>
+          </CardContent>
+        </Card>
+        <Card className="bg-white dark:bg-gray-800">
+          <CardHeader>
+            <CardTitle>Team Player</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              Proven ability to collaborate with team members, share knowledge, and contribute to
+              project success with effective communication and problem-solving skills.
+            </p>
+          </CardContent>
+        </Card>
       </div>
-      {showLoading && <div>Loading...</div>}
-      <div ref={viewer} className={pdfClassName}></div>
-    </div>
+
+      {/* Download Resume Button */}
+      <div className="mt-8 flex justify-center">
+        <Tooltip
+          hideArrow
+          css={{ backgroundColor: "#55893c" }}
+          content="Download Kyle's resume."
+          color="primary"
+          placement="topStart"
+          contentColor="warning"
+        >
+          <a
+            aria-label="Link to download Kyle's resume."
+            href={resumeLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            download
+            className="inline-flex items-center px-4 py-2 text-white bg-green-600 rounded-lg shadow hover:bg-green-700 transition-colors"
+          >
+            <AiOutlineDownload className="mr-2" size={24} />
+            Download Resume
+          </a>
+        </Tooltip>
+      </div>
+    </section>
   );
 };
 
-export default ResumeViewer;
+export default ResumeSection;

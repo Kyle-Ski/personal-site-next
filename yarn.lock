@@ -397,11 +397,6 @@
     "@types/node-fetch" "^2.5.10"
     node-fetch "^2.6.1"
 
-"@pdftron/webviewer@^8.1.0":
-  version "8.4.1"
-  resolved "https://registry.yarnpkg.com/@pdftron/webviewer/-/webviewer-8.4.1.tgz#003e0c5c6158a8e56609102dca7fd000c61cde35"
-  integrity sha512-eTHMMumTTzFgr+dIm+FrpSeevLILHUZd6KzXP7SlKQ+6ZIsxNgKiax9ArUi82fo/vfb/NGx6Go0bsJ8VxX5+8w==
-
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
