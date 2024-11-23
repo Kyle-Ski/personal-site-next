@@ -52,7 +52,7 @@ const ResumeViewer = ({ resumeLink }: { resumeLink: string | "/Kyle_Czajkowski_2
 
   return (
     <div className={styles.container}>
-      <h2 id={RESUME_ANCHOR}>Resume</h2>
+      <h2 id={RESUME_ANCHOR} className="text-3xl font-bold mb-8 text-center">Resume</h2>
       <div className={styles.resumeActions}>
         <button
           className={styles.resumeActionButton}
