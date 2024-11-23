@@ -8,7 +8,7 @@ const ResumeSection = () => {
   const resumeLink = process.env.UPDATED_RESUME_LINK || "/Kyle_Czajkowski_2024_L.pdf";
 
   return (
-    <section className="container mx-auto px-4 py-8">
+    <section id="resume" className="container mx-auto px-4 py-8">
       <h2 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
         Resume
       </h2>
