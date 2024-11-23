@@ -6,7 +6,7 @@ const nextConfig = {
     defaultLocale: "en",
   },
   env: {
-    RESUME_LINK: process.env.RESUME_LINK
+    UPDATED_RESUME_LINK: process.env.UPDATED_RESUME_LINK
   }
 }
 

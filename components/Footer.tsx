@@ -1,20 +1,21 @@
-import { Link as LinkUi } from '@nextui-org/react'
-import Link from 'next/link'
-import styles from '../styles/Footer.module.css'
-import { FOOTER } from '../utils/constants'
-import ContactIcons from './ContactIcons'
+'use client'
+
+import Link from 'next/link';
+import styles from '../styles/Footer.module.css';
+import { FOOTER } from '../utils/constants';
+import ContactIcons from './ContactIcons';
 
 const Footer = () => (
   <div id={FOOTER} className={styles.footerWrapper}>
     <ContactIcons />
     <footer>
-      <Link passHref href="https://github.com/Kyle-Ski/personal-site-next">
-        <LinkUi block style={{ color: 'var(--color-green-0)' }} target="_blank">
+      <Link href="https://github.com/Kyle-Ski/personal-site-next" target="_blank" rel="noopener noreferrer">
+        <span style={{ color: 'var(--color-green-0)' }}>
           © {new Date().getFullYear()} By Kyle Czajkowski
-        </LinkUi>
+        </span>
       </Link>
     </footer>
   </div>
-)
+);
 
-export default Footer
+export default Footer;

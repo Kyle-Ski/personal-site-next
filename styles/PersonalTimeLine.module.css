@@ -1,34 +1,87 @@
+/* Wrapper for the entire timeline */
 .timeLineWrapper {
-  font-size: 20px;
-  margin-left: 15vw;
-  margin-right: 15vw;
+  font-size: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-.timeLineWrapper h2 {
+/* Title for the timeline */
+.timeLineTitle {
   text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: var(--color-text-primary);
 }
 
-.timeLineSeparator {
-  display: none;
+/* Wrapper for timeline items */
+.listWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-@media (max-width: 1100px) {
+/* Each individual timeline item */
+.timelineItem {
+  position: relative;
+  padding: 1.5rem 2rem;
+  background: var(--color-bg-secondary); /* Matches the project cards */
+  border: 1px solid var(--color-bg-tertiary); /* Subtle border for definition */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Matches project card shadow */
+  margin-bottom: 2rem;
+  width: 100%; /* Ensure cards take full width */
+  max-width: 700px; /* Wider than project cards */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Interactive effect */
+}
+
+.timelineItem:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Content inside a timeline item */
+.timelineContent {
+  z-index: 1;
+}
+
+/* Title inside a timeline item */
+.timelineTitle {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-primary);
+}
+
+/* Date range inside a timeline item */
+.timelineDate {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* Description inside a timeline item */
+.timelineDescription {
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
   .timeLineWrapper {
-    font-size: 25px;
-    margin-left: 5vw;
-    margin-right: 5vw;
+    font-size: 14px;
+    padding: 1rem;
   }
 
-  /* .listWrapper {
-    display: flex;
-    flex-direction: column;
-  } */
-  .listWrapper hr {
-    width: 100%;
+  .timelineItem {
+    padding: 1rem;
   }
 
-  .timeLineSeparator {
-    display: block;
-    align-self: center;
+  .timelineTitle {
+    font-size: 1.25rem;
   }
 }
