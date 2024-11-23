@@ -9,13 +9,15 @@ const ResumeSection = () => {
 
   return (
     <section className="container mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold mb-8 text-center">Resume</h2>
+      <h2 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
+        Resume
+      </h2>
 
       {/* Highlights Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <Card className="bg-white dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700">
+        <Card className="bg-white dark:bg-gray-800 shadow-md border border-gray-300 dark:border-gray-700">
           <CardHeader>
-            <CardTitle>Full-Stack Development</CardTitle>
+            <CardTitle className="text-gray-900 dark:text-gray-100">Full-Stack Development</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-gray-700 dark:text-gray-300">
@@ -24,9 +26,9 @@ const ResumeSection = () => {
             </p>
           </CardContent>
         </Card>
-        <Card className="bg-white dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700">
+        <Card className="bg-white dark:bg-gray-800 shadow-md border border-gray-300 dark:border-gray-700">
           <CardHeader>
-            <CardTitle>Collaborative Problem Solving</CardTitle>
+            <CardTitle className="text-gray-900 dark:text-gray-100">Collaborative Problem Solving</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-gray-700 dark:text-gray-300">
@@ -35,9 +37,9 @@ const ResumeSection = () => {
             </p>
           </CardContent>
         </Card>
-        <Card className="bg-white dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700">
+        <Card className="bg-white dark:bg-gray-800 shadow-md border border-gray-300 dark:border-gray-700">
           <CardHeader>
-            <CardTitle>Adaptable Skillset</CardTitle>
+            <CardTitle className="text-gray-900 dark:text-gray-100">Adaptable Skillset</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-gray-700 dark:text-gray-300">
@@ -46,9 +48,9 @@ const ResumeSection = () => {
             </p>
           </CardContent>
         </Card>
-        <Card className="bg-white dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700">
+        <Card className="bg-white dark:bg-gray-800 shadow-md border border-gray-300 dark:border-gray-700">
           <CardHeader>
-            <CardTitle>Team Player</CardTitle>
+            <CardTitle className="text-gray-900 dark:text-gray-100">Team Player</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-gray-700 dark:text-gray-300">
@@ -74,10 +76,10 @@ const ResumeSection = () => {
             target="_blank"
             rel="noopener noreferrer"
             download
-            className="inline-flex items-center px-4 py-2 text-white bg-green-600 rounded-lg shadow hover:bg-green-700 transition-colors"
+            className="inline-flex items-center px-4 py-2 text-white bg-green-600 hover:bg-green-700 rounded-lg shadow transition-colors"
           >
             <AiOutlineDownload className="mr-2" size={24} aria-hidden="true" />
-            <span>Download Resume</span>
+            <span className="text-white">Download Resume</span>
           </a>
         </Tooltip>
       </div>
