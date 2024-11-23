@@ -5,7 +5,7 @@ import { Tooltip } from "@nextui-org/react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 const ResumeSection = () => {
-  const resumeLink = "/Kyle_Czajkowski_2024_L.pdf";
+  const resumeLink = process.env.UPDATED_RESUME_LINK || "/Kyle_Czajkowski_2024_L.pdf";
 
   return (
     <section className="container mx-auto px-4 py-8">
@@ -13,7 +13,7 @@ const ResumeSection = () => {
 
       {/* Highlights Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <Card className="bg-white dark:bg-gray-800">
+        <Card className="bg-white dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle>Full-Stack Development</CardTitle>
           </CardHeader>
@@ -24,7 +24,7 @@ const ResumeSection = () => {
             </p>
           </CardContent>
         </Card>
-        <Card className="bg-white dark:bg-gray-800">
+        <Card className="bg-white dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle>Collaborative Problem Solving</CardTitle>
           </CardHeader>
@@ -35,7 +35,7 @@ const ResumeSection = () => {
             </p>
           </CardContent>
         </Card>
-        <Card className="bg-white dark:bg-gray-800">
+        <Card className="bg-white dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle>Adaptable Skillset</CardTitle>
           </CardHeader>
@@ -46,7 +46,7 @@ const ResumeSection = () => {
             </p>
           </CardContent>
         </Card>
-        <Card className="bg-white dark:bg-gray-800">
+        <Card className="bg-white dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle>Team Player</CardTitle>
           </CardHeader>

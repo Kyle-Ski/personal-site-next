@@ -22,7 +22,7 @@ const PersonalTimeLine = ({ timeline }: Props) => {
           timeline.map((item, index) => (
             <Card
               key={`${item?.title}${index}`}
-              className="w-full max-w-xl bg-white dark:bg-gray-800 shadow-md"
+              className="w-full max-w-xl bg-white dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700"
             >
               <CardHeader>
                 <CardTitle className="text-center text-xl font-semibold">
