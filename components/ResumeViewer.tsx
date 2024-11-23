@@ -70,15 +70,14 @@ const ResumeSection = () => {
           contentColor="warning"
         >
           <a
-            aria-label="Link to download Kyle's resume."
             href={resumeLink}
             target="_blank"
             rel="noopener noreferrer"
             download
             className="inline-flex items-center px-4 py-2 text-white bg-green-600 rounded-lg shadow hover:bg-green-700 transition-colors"
           >
-            <AiOutlineDownload className="mr-2" size={24} />
-            Download Resume
+            <AiOutlineDownload className="mr-2" size={24} aria-hidden="true" />
+            <span>Download Resume</span>
           </a>
         </Tooltip>
       </div>

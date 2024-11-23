@@ -45,7 +45,9 @@ export default function Projects() {
             >
               <CardHeader>
                 <CardTitle>{project.title}</CardTitle>
-                <CardDescription>{project.description}</CardDescription>
+                <CardDescription className="text-gray-700 dark:text-gray-400">
+                  {project.description}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -59,7 +61,7 @@ export default function Projects() {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500 hover:underline"
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
                 >
                   View Project
                 </a>

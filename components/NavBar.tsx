@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import styles from '../styles/NavBar.module.css'
+import Link from "next/link";
+import styles from "../styles/NavBar.module.css";
 import {
   ABOUT_TITLE,
   FOOTER,
@@ -8,48 +8,62 @@ import {
   RESUME_ANCHOR,
   SKILLS_TITLE,
   STRAVA_TITLE,
-} from '../utils/constants'
-import ToggleDarkMode from './ToggleDarkMode'
+} from "../utils/constants";
+import ToggleDarkMode from "./ToggleDarkMode";
 
 const NavBar = () => {
   return (
     <div className={styles.navWrapper}>
       <nav role="navigation">
         <div className={styles.menuToggle}>
-          <input type="checkbox" aria-label='Open site navigation'/>
+          <input type="checkbox" aria-label="Open site navigation" />
 
           <span className={styles.menuToggleSpan}></span>
           <span className={styles.menuToggleSpan}></span>
           <span className={styles.menuToggleSpan}></span>
 
           <ul className={styles.menu}>
-            <Link passHref href={`#${ABOUT_TITLE}`}>
-              <li>About</li>
-            </Link>
-            <Link passHref href={`#${PERSONAL_TIMELINE_ANCHOR}`}>
-              <li>Personal Timeline</li>
-            </Link>
-            <Link passHref href={`#${PROJECTS_TITLE}`}>
-              <li>Projects</li>
-            </Link>
-            <Link passHref href={`#${SKILLS_TITLE}`}>
-              <li>Skills</li>
-            </Link>
-            <Link passHref href={`#${RESUME_ANCHOR}`}>
-              <li>Resume</li>
-            </Link>
-            <Link passHref href={`#${STRAVA_TITLE}`}>
-              <li>Strava Runs</li>
-            </Link>
-            <Link passHref href={`#${FOOTER}`}>
-              <li>Get in Contact</li>
-            </Link>
+            <li>
+              <Link passHref href={`#${ABOUT_TITLE}`}>
+                About
+              </Link>
+            </li>
+            <li>
+              <Link passHref href={`#${PERSONAL_TIMELINE_ANCHOR}`}>
+                Personal Timeline
+              </Link>
+            </li>
+            <li>
+              <Link passHref href={`#${PROJECTS_TITLE}`}>
+                Projects
+              </Link>
+            </li>
+            <li>
+              <Link passHref href={`#${SKILLS_TITLE}`}>
+                Skills
+              </Link>
+            </li>
+            <li>
+              <Link passHref href={`#${RESUME_ANCHOR}`}>
+                Resume
+              </Link>
+            </li>
+            <li>
+              <Link passHref href={`#${STRAVA_TITLE}`}>
+                Strava Runs
+              </Link>
+            </li>
+            <li>
+              <Link passHref href={`#${FOOTER}`}>
+                Get in Contact
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>
       <ToggleDarkMode />
     </div>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;
