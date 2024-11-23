@@ -26,7 +26,7 @@
 .timelineItem {
   position: relative;
   padding: 1.5rem 2rem;
-  background: var(--color-bg-secondary); /* Matches the project cards */
+  background: #ffffff; /* Default light mode background */
   border: 1px solid var(--color-bg-tertiary); /* Subtle border for definition */
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Matches project card shadow */
@@ -36,9 +36,18 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease; /* Interactive effect */
 }
 
+/* Hover effect for timeline item */
 .timelineItem:hover {
   transform: translateY(-5px); /* Slight lift effect on hover */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Dark mode support for timeline item */
+@media (prefers-color-scheme: dark) {
+  .timelineItem {
+    background: #2d3748; /* Dark mode background matches other cards */
+    color: #e2e8f0; /* Dark mode text color */
+  }
 }
 
 /* Content inside a timeline item */

@@ -7,13 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "node utils/copy-webviewer-files.js",
     "format": "prettier --ignore-path .gitignore .next \"**/*.{ts,tsx,md}\" --write ."
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.8-beta.5",
     "@notionhq/client": "^1.0.4",
-    "@pdftron/webviewer": "^8.1.0",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.3.1",
     "clsx": "^2.1.1",
