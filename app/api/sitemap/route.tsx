@@ -1,6 +1,4 @@
-import { NextResponse } from "next/server";
-
-export async function GET(): Promise<NextResponse> {
+export async function GET(): Promise<Response> {
   const baseUrl = "https://kyle.czajkowski.tech";
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -13,7 +11,7 @@ export async function GET(): Promise<NextResponse> {
     </url>
   </urlset>`;
 
-  return new NextResponse(sitemap, {
+  return new Response(sitemap, {
     headers: {
       "Content-Type": "application/xml",
     },
