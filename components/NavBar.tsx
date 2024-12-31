@@ -24,37 +24,42 @@ const NavBar = () => {
 
           <ul className={styles.menu}>
             <li>
-              <Link passHref href={`#${ABOUT_TITLE}`}>
+              <Link passHref href={`/#${ABOUT_TITLE}`}>
                 About
               </Link>
             </li>
             <li>
-              <Link passHref href={`#${PERSONAL_TIMELINE_ANCHOR}`}>
+              <Link passHref href={`/#${PERSONAL_TIMELINE_ANCHOR}`}>
                 Personal Timeline
               </Link>
             </li>
             <li>
-              <Link passHref href={`#${PROJECTS_TITLE}`}>
+              <Link passHref href={`/#${PROJECTS_TITLE}`}>
                 Projects
               </Link>
             </li>
             <li>
-              <Link passHref href={`#${SKILLS_TITLE}`}>
+              <Link passHref href={`/blog`}>
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link passHref href={`/#${SKILLS_TITLE}`}>
                 Skills
               </Link>
             </li>
             <li>
-              <Link passHref href={`#${RESUME_ANCHOR}`}>
+              <Link passHref href={`/#${RESUME_ANCHOR}`}>
                 Resume
               </Link>
             </li>
             <li>
-              <Link passHref href={`#${STRAVA_TITLE}`}>
+              <Link passHref href={`/#${STRAVA_TITLE}`}>
                 Strava Runs
               </Link>
             </li>
             <li>
-              <Link passHref href={`#${FOOTER}`}>
+              <Link passHref href={`/#${FOOTER}`}>
                 Get in Contact
               </Link>
             </li>

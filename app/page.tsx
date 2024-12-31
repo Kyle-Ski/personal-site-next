@@ -26,7 +26,6 @@ export default async function Page() {
   return (
     <div>
       <main>
-        <NavBar />
         <ParallaxHero />
         <About about={about} />
         <PersonalTimeLine timeline={personalTimeline} />
@@ -36,7 +35,6 @@ export default async function Page() {
         <StravaFeed />
         <BackToTop />
       </main>
-      <Footer />
     </div>
   );
 }
