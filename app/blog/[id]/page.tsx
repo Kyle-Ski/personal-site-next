@@ -64,12 +64,12 @@ export default async function BlogPostPage({ params }: PageProps) {
         },
         block: {
             blockquote: ({ children }: PortableTextComponentProps<any>) => (
-                <blockquote className="mt-6 mb-6 pl-4 border-l-4 border-gray-300 italic text-gray-600 dark:border-gray-500 dark:text-gray-400">
+                <blockquote className="mt-6 mb-6 pl-4 border-l-4 border-gray-300 italic text-gray-600 dark:border-gray-800 dark:text-gray-200">
                     {children}
                 </blockquote>
             ),
             normal: ({ children }: PortableTextComponentProps<any>) => (
-                <p className="mt-2 mb-2">{children}</p>
+                <p className="mt-2 mb-2 text-lg sm:text-base">{children}</p>
             ),
             custom: ({ children, value }: PortableTextComponentProps<any>) => {
                 switch (value.style) {
@@ -112,7 +112,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     }
 
     return (
-        <article className="container mx-auto py-12 max-w-3xl">
+        <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-3xl">
             <Link
                 href="/blog"
                 className="flex items-center gap-2 text-muted-foreground hover:text-primary mb-8"
@@ -132,7 +132,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             )}
 
             <div className="space-y-4">
-                <h1 className="text-4xl font-bold">{post.title}</h1>
+                <h1 className="text-3xl sm:text-4xl font-bold">{post.title}</h1>
 
                 <div className="flex items-center gap-4">
                     <Avatar>
@@ -151,14 +151,14 @@ export default async function BlogPostPage({ params }: PageProps) {
                     {post.categories?.map((category) => (
                         <span
                             key={category}
-                            className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm"
+                            className="px-3 py-1 rounded-full text-sm bg-primary/10 text-primary dark:bg-gray-700 dark:text-gray-100"
                         >
                             {category}
                         </span>
                     ))}
                 </div>
 
-                <div className="prose prose-lg dark:prose-invert max-w-none">
+                <div className="prose prose-lg dark:prose-invert">
                     <PortableText value={post.body} components={portableTextComponents} />
                 </div>
             </div>
