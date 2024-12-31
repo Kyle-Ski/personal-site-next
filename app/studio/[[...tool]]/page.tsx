@@ -16,7 +16,7 @@ export { metadata, viewport } from 'next-sanity/studio'
 
 export default function StudioPage() {
   {/* @ts-expect-error Server Component */ }
-  const studio = <NextStudio config={config} />
+  const studio = (<><NextStudio config={config} /></>)
 
   if (!studio) {
     return null
