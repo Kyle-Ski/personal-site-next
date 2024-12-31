@@ -8,6 +8,7 @@ import { notFound } from "next/navigation"
 import { SanityService } from "@/lib/cmsProvider"
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
+import { Metadata } from "next";
 
 interface PageProps {
     params: { id: string }
@@ -20,6 +21,22 @@ function urlFor(source: any) {
     return builder.image(source).url();
 }
 
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const sanityService = new SanityService({
+        projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+        dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+        apiVersion: '2024-01-01',
+        useCdn: true
+    });
+
+    const post = await sanityService.getPostBySlug(params.id);
+
+    return {
+        title: post?.title,
+        description: post?.excerpt,
+    }
+}
 
 export default async function BlogPostPage({ params }: PageProps) {
     const sanityService = new SanityService({
