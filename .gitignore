@@ -38,3 +38,5 @@ yarn-error.log*
 /public/webviewer*
 
 /app/studio/**
+
+yarn.lock
