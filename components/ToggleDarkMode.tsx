@@ -10,9 +10,9 @@ const ToggleDarkMode = () => {
 
   return (
     <Tooltip
-      hideArrow
-      css={{ backgroundColor: "#55893c" }}
-      placement="leftStart"
+      showArrow={true}
+      style={{ backgroundColor: "#55893c" }}
+      placement="left-start"
       content={`Toggle ${inactiveTheme} mode`}
     >
       <button
