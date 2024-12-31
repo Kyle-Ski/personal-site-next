@@ -37,4 +37,4 @@ yarn-error.log*
 #WebViewer PDF
 /public/webviewer*
 
-/app/studio/*
+/app/studio/**
