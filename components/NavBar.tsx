@@ -2,24 +2,24 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // Import usePathname
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import ToggleDarkMode from "./ToggleDarkMode";
-import { cn } from "@/lib/utils"; // Ensure this utility is correctly defined
+import { ABOUT_TITLE, FOOTER, PERSONAL_TIMELINE_ANCHOR, PROJECTS_TITLE, RESUME_ANCHOR, SKILLS_TITLE, STRAVA_TITLE } from "@/utils/constants";
 
 const NavBar = () => {
   const pathname = usePathname(); // Get the current pathname
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { href: "/#about", label: "About" },
-    { href: "/#personal-timeline", label: "Personal Timeline" },
-    { href: "/#projects", label: "Projects" },
-    { href: "/blog", label: "Blog" },
-    { href: "/#skills", label: "Skills" },
-    { href: "/#resume", label: "Resume" },
-    { href: "/#strava", label: "Strava Runs" },
-    { href: "/#contact", label: "Get in Contact" },
+    { href: `/#${ABOUT_TITLE}`, label: "About" },
+    { href: `/#${PERSONAL_TIMELINE_ANCHOR}`, label: "Personal Timeline" },
+    { href: `/#${PROJECTS_TITLE}`, label: "Projects" },
+    { href: `/blog`, label: "Blog" },
+    { href: `/#${SKILLS_TITLE}`, label: "Skills" },
+    { href: `/#${RESUME_ANCHOR}`, label: "Resume" },
+    { href: `/#${STRAVA_TITLE}`, label: "Strava Runs" },
+    { href: `/#${FOOTER}`, label: "Get in Contact" },
   ];
 
   // Helper function to determine if the link is active
@@ -37,12 +37,12 @@ const NavBar = () => {
 
   return (
     <>
-      <header className="fixed top-0 w-full z-50 bg-background border-b">
+      <header className="fixed top-0 w-full z-50 bg-[var(--color-bg-primary)] border-b border-[var(--color-border)]">
         <div className="container mx-auto px-4">
           <nav className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link href="/" className="text-xl font-bold text-gray-800 dark:text-white">
+              <Link href="/" className="text-xl font-bold text-[var(--color-text-primary)] dark:text-[var(--color-text-primary)]">
                 Kyle Czajkowski
               </Link>
             </div>
@@ -55,8 +55,8 @@ const NavBar = () => {
                   href={item.href}
                   className={`
                     text-sm font-medium transition-colors duration-300 
-                    ${isActive(item.href) ? "text-primary underline" : "text-gray-700 dark:text-gray-300"}
-                    hover:text-primary hover:underline
+                    ${isActive(item.href) ? "text-[var(--accent-color)] underline" : "text-[var(--secondary-accent-color)] dark:text-[var(--color-text-secondary)]"}
+                    hover:text-[var(--accent-color)] hover:underline
                   `}
                 >
                   {item.label}
@@ -70,13 +70,14 @@ const NavBar = () => {
               <ToggleDarkMode />
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="ml-4 p-2 rounded-md hover:bg-accent transition-colors duration-300"
+                className="ml-4 p-2 rounded-md hover:bg-[var(--color-accent)] transition-colors duration-300"
                 aria-label="Toggle menu"
+                aria-expanded={isOpen}
               >
                 {isOpen ? (
-                  <X className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+                  <X className="h-6 w-6 text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary)]" />
                 ) : (
-                  <Menu className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+                  <Menu className="h-6 w-6 text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary)]" />
                 )}
               </button>
             </div>
@@ -85,15 +86,15 @@ const NavBar = () => {
           {/* Mobile Navigation Menu */}
           {isOpen && (
             <div className="md:hidden">
-              <div className="px-2 pt-2 pb-3 space-y-1 bg-background rounded-lg mb-2">
+              <div className="px-2 pt-2 pb-3 space-y-1 bg-[var(--color-bg-primary)] rounded-lg mb-2">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     className={`
                       block px-3 py-2 rounded-md text-base font-medium transition 
-                      ${isActive(item.href) ? "text-primary underline" : "text-gray-700 dark:text-gray-300"}
-                      hover:text-primary hover:underline
+                      ${isActive(item.href) ? "text-[var(--color-primary)] underline" : "text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary)]"}
+                      hover:text-[var(--color-primary)] hover:underline
                     `}
                     onClick={handleLinkClick}
                   >

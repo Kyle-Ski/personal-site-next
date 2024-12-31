@@ -3,6 +3,7 @@ import { DarkModeProvider } from '../hooks/useDarkMode';
 import Script from 'next/script';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
+import BackToTop from '@/components/BackToTop';
 
 export const metadata = {
   title: 'Kyle Czajkowski',
@@ -64,6 +65,7 @@ export default function RootLayout({
           <NavBar />
           {children}
           <Footer />
+          <BackToTop />
         </DarkModeProvider>
       </body>
     </html>
