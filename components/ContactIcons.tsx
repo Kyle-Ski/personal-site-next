@@ -8,6 +8,7 @@ import {
 } from 'react-icons/ai';
 import styles from '../styles/ContactIcons.module.css';
 import Link from 'next/link';
+import BuyMeCoffeeLink from './buyMeCoffee';
 
 const ContactIcons = () => {
   return (
