@@ -11,18 +11,18 @@ import { client } from "@/sanity/lib/client";
 import { Metadata } from "next";
 
 interface PageProps {
-    params: { id: string }
+    params: Promise<{ id: string }>
 }
 
 const builder = imageUrlBuilder(client);
-
 
 function urlFor(source: any) {
     return builder.image(source).url();
 }
 
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { id } = await params;
+
     const sanityService = new SanityService({
         projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
         dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         useCdn: true
     });
 
-    const post = await sanityService.getPostBySlug(params.id);
+    const post = await sanityService.getPostBySlug(id);
 
     return {
         title: post?.title,
@@ -39,6 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
+    const { id } = await params;
     const sanityService = new SanityService({
         projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
         dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
@@ -104,7 +105,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     };
 
 
-    const post = await sanityService.getPostBySlug(params.id);
+    const post = await sanityService.getPostBySlug(id);
     console.log("POST:", post)
     if (!post) {
         notFound();
