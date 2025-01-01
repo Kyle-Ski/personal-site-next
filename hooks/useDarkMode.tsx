@@ -15,7 +15,11 @@ interface DarkMode {
 
 const DarkModeContext = createContext<DarkMode>({} as DarkMode);
 
-const DarkModeProvider: FC = ({ children }) => {
+type Props = {
+  children?: React.ReactNode
+};
+
+const DarkModeProvider: FC<Props> = ({ children }) => {
   const [activeTheme, setActiveTheme] = useState<string | undefined>(
     typeof document !== UNDEFINED_STRING
       ? document.body.dataset.theme

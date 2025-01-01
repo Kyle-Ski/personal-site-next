@@ -6,6 +6,7 @@
   justify-content: space-around;
   border-top: 2px solid var(--color-text-secondary);
   margin-top: 5vh;
+  background-color: var(--color-bg-secondary);
 }
 .footerWrapper a {
   cursor: pointer;

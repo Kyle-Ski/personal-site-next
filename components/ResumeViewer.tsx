@@ -64,12 +64,10 @@ const ResumeSection = () => {
       {/* Download Resume Button */}
       <div className="mt-8 flex justify-center">
         <Tooltip
-          hideArrow
-          css={{ backgroundColor: "#55893c" }}
+          showArrow={false}
           content="Download Kyle's resume."
           color="primary"
-          placement="topStart"
-          contentColor="warning"
+          placement="top-start"
         >
           <a
             href={resumeLink}

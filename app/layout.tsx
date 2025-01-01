@@ -1,15 +1,18 @@
 import '../styles/globals.css'
 import { DarkModeProvider } from '../hooks/useDarkMode';
 import Script from 'next/script';
+import NavBar from '@/components/NavBar';
+import Footer from '@/components/Footer';
+import BackToTop from '@/components/BackToTop';
 
 export const metadata = {
-    title: 'Kyle Czajkowski',
-    description: "Kyle Czajkowski's personal website",
-    icons: {
-      icon: '/Me.jpg',
-    },
-  };
-  
+  title: 'Kyle Czajkowski',
+  description: "Kyle Czajkowski's personal website",
+  icons: {
+    icon: '/Me.jpg',
+  },
+};
+
 
 export default function RootLayout({
   children,
@@ -59,7 +62,10 @@ export default function RootLayout({
 
         {/* Application content */}
         <DarkModeProvider>
+          <NavBar />
           {children}
+          <Footer />
+          <BackToTop />
         </DarkModeProvider>
       </body>
     </html>
