@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import ToggleDarkMode from "./ToggleDarkMode";
 import { ABOUT_TITLE, FOOTER, PERSONAL_TIMELINE_ANCHOR, PROJECTS_TITLE, RESUME_ANCHOR, SKILLS_TITLE, STRAVA_TITLE } from "@/utils/constants";
 
 const NavBar = () => {
-  const pathname = usePathname(); // Get the current pathname
   const [isOpen, setIsOpen] = useState(false);
+  const [activeItem, setActiveItem] = useState('')
 
   const navItems = [
     { href: `/#${ABOUT_TITLE}`, label: "About" },
@@ -24,20 +23,18 @@ const NavBar = () => {
 
   // Helper function to determine if the link is active
   const isActive = (href: string) => {
-    if (href === "/blog") {
-      return pathname.startsWith("/blog");
-    }
-    return pathname === href;
+    return activeItem === href;
   };
 
   // Function to close the menu when a link is clicked
-  const handleLinkClick = () => {
+  const handleLinkClick = (item: string) => {
+    setActiveItem(item)
     setIsOpen(false);
   };
 
   return (
     <>
-      <header className="fixed top-0 w-full z-50 bg-[var(--color-bg-primary)] border-b border-[var(--color-border)]">
+      <header className="fixed top-0 w-full z-50 bg-[var(--color-bg-secondary)] border-b border-[var(--color-border)]">
         <div className="container mx-auto px-4">
           <nav className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -49,19 +46,22 @@ const NavBar = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-4 ml-auto">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`
-                    text-sm font-medium transition-colors duration-300 
-                    ${isActive(item.href) ? "text-[var(--accent-color)] underline" : "text-[var(--secondary-accent-color)] dark:text-[var(--color-text-secondary)]"}
-                    hover:text-[var(--accent-color)] hover:underline
-                  `}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`
+                      text-sm font-medium transition-colors duration-300 
+                      ${isActive(item.href) ? "text-[var(--accent-color)] underline" : "text-[var(--color-text-primary)] dark:text-[var(--color-text-secondary)]"}
+                      hover:text-[var(--accent-color)] hover:underline
+                    `}
+                    onClick={() => handleLinkClick(item.href)}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              })}
               <ToggleDarkMode />
             </div>
 
@@ -96,7 +96,7 @@ const NavBar = () => {
                       ${isActive(item.href) ? "text-[var(--color-primary)] underline" : "text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary)]"}
                       hover:text-[var(--color-primary)] hover:underline
                     `}
-                    onClick={handleLinkClick}
+                    onClick={() => handleLinkClick(item.href)}
                   >
                     {item.label}
                   </Link>

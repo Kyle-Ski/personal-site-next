@@ -106,7 +106,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
 
     const post = await sanityService.getPostBySlug(id);
-    console.log("POST:", post)
+
     if (!post) {
         notFound();
     }
