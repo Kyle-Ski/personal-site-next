@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { SanityService } from "@/lib/cmsProvider"
 import { formatDistance } from "date-fns"
 import Link from "next/link"
+import { PortableTextBlock } from "@portabletext/types";
 
 export interface Author {
     _id: string
@@ -20,7 +21,7 @@ export interface Post {
     categories: string[]
     author: Author
     content: any[]
-    body: any
+    body: PortableTextBlock[]
 }
 
 async function getPosts(): Promise<Post[]> {
