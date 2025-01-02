@@ -70,7 +70,7 @@ export default async function BlogPage() {
 
                                     {/* Post Header */}
                                     <CardHeader className="space-y-2">
-                                        <CardTitle className="line-clamp-2 transition-colors group-hover:text-foreground/90 dark:group-hover:text-foreground">
+                                        <CardTitle className="line-clamp-2 transition-colors group-hover:text-[var(--color-text-accent)] dark:group-hover:text-[var(--color-text-accent)]">
                                             {post.title}
                                         </CardTitle>
                                         <CardDescription className="dark:text-muted-foreground">

@@ -102,6 +102,20 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <li className="ml-2">{children}</li>
             ),
         },
+        marks: {
+            strong: ({ children }: { children: React.ReactNode }) => (
+                <strong className="font-semibold">{children}</strong>
+            ),
+            em: ({ children }: { children: React.ReactNode }) => (
+                <em className="italic">{children}</em>
+            ),
+            underline: ({ children }: { children: React.ReactNode }) => (
+                <span className="underline">{children}</span>
+            ),
+            code: ({ children }: { children: React.ReactNode }) => (
+                <code className="bg-gray-100 text-gray-800 p-1 rounded">{children}</code>
+            ),
+        },
     };
 
 

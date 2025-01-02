@@ -43,7 +43,7 @@ body {
 body,
 body[data-theme='light'] {
   --color-text-primary: #181818;
-  --color-text-accent: var(--color-red);
+  --color-text-accent: var(--color-green-3);
   --color-text-secondary: #414141;
   --color-bg-primary: #f5f5f5;
   --color-bg-secondary: #fff;

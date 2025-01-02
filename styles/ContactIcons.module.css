@@ -2,12 +2,18 @@
   padding: 10px 0;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .iconItem {
   z-index: 300;
   height: 5vh;
   width: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .iconItem:hover {
@@ -27,9 +33,13 @@
   fill: var(--color-green-0);
 }
 
+/* Tablet and smaller desktop screens */
 @media (max-width: 1100px) {
+  .iconsWrapper {
+    gap: 1.25rem;
+  }
+  
   .iconItem {
-    padding: 0.5vh;
     height: 4vh;
     width: 4vh;
   }
@@ -37,5 +47,103 @@
   .iconItem svg {
     height: 4vh;
     width: 4vh;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 768px) {
+  .iconsWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 8px 16px;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  /* Create two rows */
+  .iconsWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Style for each row */
+  .iconsWrapper::before,
+  .iconsWrapper::after {
+    content: '';
+    display: none;
+  }
+
+  /* Top row container */
+  .iconsWrapper > *:nth-child(-n+4) {
+    margin: 0;
+  }
+
+  /* Bottom row container */
+  .iconsWrapper > *:nth-child(n+5) {
+    margin: 0;
+  }
+
+  /* Create the rows */
+  .iconsWrapper {
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  /* First row - 4 icons */
+  .iconsWrapper > *:nth-child(-n+4) {
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  /* Second row - 3 icons */
+  .iconsWrapper > *:nth-child(n+5) {
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  /* Row containers */
+  .rowContainer {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+  }
+  
+  .iconItem {
+    height: 3.5vh;
+    width: 3.5vh;
+    min-height: 28px;
+    min-width: 28px;
+  }
+
+  .iconItem svg {
+    height: 3.5vh;
+    width: 3.5vh;
+    min-height: 28px;
+    min-width: 28px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .iconsWrapper {
+    gap: 0.75rem;
+    padding: 8px;
+    max-width: 280px;
+  }
+  
+  .iconItem {
+    min-height: 24px;
+    min-width: 24px;
+  }
+  
+  .iconItem svg {
+    min-height: 24px;
+    min-width: 24px;
   }
 }

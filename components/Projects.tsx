@@ -18,11 +18,18 @@ export default function Projects() {
       link: "https://github.com/Kyle-Ski/strava-notion-webhooks2?tab=readme-ov-file#strava-notion-webhooks-integration",
     },
     {
-      title: "Packr Database",
+      title: "Leaf-N-Go",
       description:
-        "A database component for the Packr application, facilitating efficient data management and storage solutions.",
-      technologies: ["Database Design", "Data Management"],
-      link: "https://github.com/Kyle-Ski/packr-database",
+        "An environmental tech packing tool for outdoor adventurers, featuring customizable checklists, environmental insights, and trip planning tools.",
+      technologies: ["Next.js", "TypeScript", "Supabase"],
+      link: "https://github.com/Kyle-Ski/leaf-n-go",
+    },
+    {
+      title: "Strava Node v3",
+      description:
+        "A Node.js package for interacting with the Strava API, supporting features such as activity tracking, user authentication, and data fetching.",
+      technologies: ["Node.js", "TypeScript", "Strava API"],
+      link: "https://github.com/node-strava/node-strava-v3",
     },
     {
       title: "Climb Log",
