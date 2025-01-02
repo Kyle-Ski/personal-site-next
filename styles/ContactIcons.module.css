@@ -4,7 +4,11 @@
   flex-direction: row;
   justify-content: center;
   gap: 1.5rem;
-  flex-wrap: wrap;
+}
+
+.rowContainer {
+  display: flex;
+  gap: 1.5rem;
 }
 
 .iconItem {
@@ -39,6 +43,10 @@
     gap: 1.25rem;
   }
   
+  .rowContainer {
+    gap: 1.25rem;
+  }
+  
   .iconItem {
     height: 4vh;
     width: 4vh;
@@ -53,61 +61,14 @@
 /* Mobile screens */
 @media (max-width: 768px) {
   .iconsWrapper {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     gap: 1rem;
     padding: 8px 16px;
     max-width: 320px;
     margin: 0 auto;
   }
 
-  /* Create two rows */
-  .iconsWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  /* Style for each row */
-  .iconsWrapper::before,
-  .iconsWrapper::after {
-    content: '';
-    display: none;
-  }
-
-  /* Top row container */
-  .iconsWrapper > *:nth-child(-n+4) {
-    margin: 0;
-  }
-
-  /* Bottom row container */
-  .iconsWrapper > *:nth-child(n+5) {
-    margin: 0;
-  }
-
-  /* Create the rows */
-  .iconsWrapper {
-    display: grid;
-    grid-template-rows: auto auto;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  /* First row - 4 icons */
-  .iconsWrapper > *:nth-child(-n+4) {
-    display: flex;
-    gap: 1.25rem;
-  }
-
-  /* Second row - 3 icons */
-  .iconsWrapper > *:nth-child(n+5) {
-    display: flex;
-    gap: 1.25rem;
-  }
-
-  /* Row containers */
   .rowContainer {
     display: flex;
     justify-content: center;
@@ -135,6 +96,10 @@
     gap: 0.75rem;
     padding: 8px;
     max-width: 280px;
+  }
+  
+  .rowContainer {
+    gap: 1rem;
   }
   
   .iconItem {
