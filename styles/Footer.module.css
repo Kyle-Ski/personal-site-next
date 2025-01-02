@@ -1,5 +1,6 @@
 .footerWrapper {
-  height: 10vh;
+  min-height: 10vh; /* Ensure a baseline height */
+  height: auto; /* Allow dynamic height based on content */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -8,6 +9,7 @@
   margin-top: 5vh;
   background-color: var(--color-bg-secondary);
 }
+
 .footerWrapper a {
   cursor: pointer;
 }

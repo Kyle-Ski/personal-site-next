@@ -18,7 +18,6 @@ interface IconData {
 }
 
 const ContactIcons = () => {
-  // First row icons
   const topRowIcons: IconData[] = [
     { href: "https://github.com/Kyle-Ski", icon: AiOutlineGithub, label: "Link to Kyle's GitHub" },
     { href: "https://www.instagram.com/ski_roy_jenkins", icon: AiOutlineInstagram, label: "Link to Kyle's Instagram" },
@@ -26,7 +25,6 @@ const ContactIcons = () => {
     { href: "mailto:kyle@czajkowski.tech", icon: AiOutlineMail, label: "Link to send Kyle an email" },
   ];
 
-  // Second row icons
   const bottomRowIcons: IconData[] = [
     { href: "https://twitter.com/SkiRoyJenkins", icon: AiOutlineTwitter, label: "Link to Kyle's Twitter" },
     { href: "https://bsky.app/profile/skiroyjenkins.bsky.social", icon: FaBluesky, label: "Link to Kyle's BlueSky" },
