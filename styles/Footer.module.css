@@ -1,15 +1,31 @@
 .footerWrapper {
-  min-height: 10vh; /* Ensure a baseline height */
-  height: auto; /* Allow dynamic height based on content */
+  min-height: 10vh;
+  height: auto;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   border-top: 2px solid var(--color-text-secondary);
   margin-top: 5vh;
   background-color: var(--color-bg-secondary);
+  padding: 0 2rem;
 }
 
 .footerWrapper a {
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .footerWrapper {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .footerWrapper footer {
+    width: 100%;
+    text-align: center;
+  }
 }

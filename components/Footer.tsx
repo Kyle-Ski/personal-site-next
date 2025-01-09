@@ -7,7 +7,9 @@ import ContactIcons from "./ContactIcons";
 
 const Footer = () => (
   <div id={FOOTER} className={styles.footerWrapper}>
-    <ContactIcons />
+    <div className="flex-1">
+      <ContactIcons />
+    </div>
     <footer>
       <Link
         href="https://github.com/Kyle-Ski/personal-site-next"
