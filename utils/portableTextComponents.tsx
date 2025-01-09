@@ -65,7 +65,11 @@ export const portableTextComponents: PortableTextComponents = {
             </p>
         ),
         blockquote: ({ children }) => (
-            <blockquote className="mt-6 mb-6 pl-4 border-l-4 border-gray-300 italic text-gray-600 dark:border-gray-700 dark:text-gray-300">
+            <blockquote style={{
+                borderLeft: '4px solid #D1D5DB', // Tailwind's gray-300 equivalent
+                paddingLeft: '1rem',
+                marginTop: '1rem'
+            }} className="mt-6 mb-6 pl-4 border-l-4 border-gray-300 italic text-gray-600 dark:border-gray-700 dark:text-gray-300">
                 {children}
             </blockquote>
         ),
@@ -156,7 +160,7 @@ export const portableTextComponents: PortableTextComponents = {
     },
     list: {
         bullet: ({ children }) => (
-            <ul className="list-disc ml-6 space-y-2 my-4">{children}</ul>
+            <ul style={{listStyleType: "disc"}} className="list-disc ml-6 space-y-2 my-4">{children}</ul>
         ),
         number: ({ children }) => (
             <ol className="list-decimal ml-6 space-y-2 my-4">{children}</ol>
