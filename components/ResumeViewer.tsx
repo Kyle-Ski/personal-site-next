@@ -5,7 +5,7 @@ import { Tooltip } from "@nextui-org/react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 const ResumeSection = () => {
-  const resumeLink = "/Kyle_Czajkowski_2024.pdf";
+  const resumeLink = "/Kyle_Czajkowski_2025.pdf";
 
   return (
     <section id="resume" className="container mx-auto px-4 py-8">
