@@ -6,6 +6,7 @@
  * You can learn more about the next-sanity package here:
  * https://github.com/sanity-io/next-sanity
  */
+export const runtime = 'edge';
 
 import { NextStudio } from 'next-sanity/studio'
 import config from '../../../sanity.config'

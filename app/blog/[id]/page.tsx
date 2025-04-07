@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { PortableText } from "@portabletext/react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ChevronLeft } from "lucide-react"
