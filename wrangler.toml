@@ -1,5 +1,13 @@
 name = "personal-site"
 compatibility_date = "2025-04-07"
+compatibility_flags = ["nodejs_compat"]
+
+# These are necessary for handling larger payloads
+workers_dev = true
+main = "./.vercel/output/functions/_worker.js"
 
 [site]
-bucket = "./.next/static"
+bucket = "./.vercel/output/static"
+
+[build]
+command = "npm run build:worker"

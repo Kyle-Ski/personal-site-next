@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "build:worker": "next build && npx @cloudflare/next-on-pages",
+    "deploy": "wrangler deploy",
     "format": "prettier --ignore-path .gitignore .next \"**/*.{ts,tsx,md}\" --write ."
   },
   "dependencies": {
@@ -36,6 +38,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.12",
     "@types/node": "^20.11.0",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
