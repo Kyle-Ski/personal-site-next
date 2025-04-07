@@ -4,7 +4,7 @@ compatibility_flags = ["nodejs_compat"]
 
 # These are necessary for handling larger payloads
 workers_dev = true
-main = "./.vercel/output/functions/_worker.js"
+main = ".vercel/output/static/_worker.js/index.js"
 
 [site]
 bucket = "./.vercel/output/static"
