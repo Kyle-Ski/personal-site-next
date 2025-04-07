@@ -1,0 +1,5 @@
+name = "personal-site"
+compatibility_date = "2025-04-07"
+
+[site]
+bucket = "./.next/static"
