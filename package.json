@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --ignore-path .gitignore .next \"**/*.{ts,tsx,md}\" --write ."
+    "format": "prettier --ignore-path .gitignore .next \"**/*.{ts,tsx,md}\" --write .",
+    "preview": "opennextjs-cloudflare && wrangler dev",
+    "deploy": "opennextjs-cloudflare && wrangler deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
@@ -36,6 +39,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.0.0-beta.1",
     "@types/node": "^20.11.0",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
@@ -45,6 +49,7 @@
     "postcss": "^8.4.33",
     "prettier": "^3.2.0",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "wrangler": "^4.8.0"
   }
 }
