@@ -3,8 +3,7 @@ import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
 import Link from "next/link";
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import CodeBlock from "./codeBlock";
 
 const builder = imageUrlBuilder(client);
 
@@ -59,24 +58,9 @@ export const portableTextComponents: PortableTextComponents = {
                 />
             </div>
         ),
-        code: ({ value }: { value: { code: string; language?: string } }) => {
-            const { code, language } = value;
-            return (
-                <div className="my-6">
-                    <SyntaxHighlighter
-                        language={language || "javascript"}
-                        style={materialLight}
-                        customStyle={{
-                            padding: "1rem",
-                            borderRadius: "0.375rem",
-                        }}
-                        showLineNumbers
-                    >
-                        {code}
-                    </SyntaxHighlighter>
-                </div>
-            );
-        },
+        code: ({ value }: { value: { code: string; language?: string } }) => (
+            <CodeBlock code={value.code} language={value.language} />
+        ),
     },
     block: {
         normal: ({ children }) => (
