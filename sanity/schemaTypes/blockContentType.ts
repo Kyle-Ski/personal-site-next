@@ -1,5 +1,5 @@
 import {defineType, defineArrayMember} from 'sanity'
-import {ImageIcon} from '@sanity/icons'
+import {CodeIcon, ImageIcon} from '@sanity/icons'
 
 /**
  * This is the schema type for block content used in the post document type
@@ -56,6 +56,26 @@ export const blockContentType = defineType({
           },
         ],
       },
+    }),
+    defineArrayMember({
+      type: 'code',
+      title: 'Code block',
+      icon: CodeIcon,
+      options: {
+        withFilename: true,
+        // report the languages you want to support:
+        languageAlternatives: [
+          {title: 'JavaScript', value: 'javascript'},
+          {title: 'TypeScript', value: 'typescript'},
+          {title: 'JSON',       value: 'json'},
+          {title: 'HTML',       value: 'html'},
+          {title: 'CSS',        value: 'css'},
+          {title: 'Bash',       value: 'bash'},
+          {title: 'SQL',        value: 'sql'},
+        ],
+        // default language if none picked
+        language: 'javascript',
+      }
     }),
     // You can add additional types here. Note that you can't use
     // primitive types such as 'string' and 'number' in the same array

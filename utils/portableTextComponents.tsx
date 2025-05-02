@@ -3,6 +3,8 @@ import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
 import Link from "next/link";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 const builder = imageUrlBuilder(client);
 
@@ -57,6 +59,24 @@ export const portableTextComponents: PortableTextComponents = {
                 />
             </div>
         ),
+        code: ({ value }: { value: { code: string; language?: string } }) => {
+            const { code, language } = value;
+            return (
+                <div className="my-6">
+                    <SyntaxHighlighter
+                        language={language || "javascript"}
+                        style={materialLight}
+                        customStyle={{
+                            padding: "1rem",
+                            borderRadius: "0.375rem",
+                        }}
+                        showLineNumbers
+                    >
+                        {code}
+                    </SyntaxHighlighter>
+                </div>
+            );
+        },
     },
     block: {
         normal: ({ children }) => (
@@ -160,7 +180,7 @@ export const portableTextComponents: PortableTextComponents = {
     },
     list: {
         bullet: ({ children }) => (
-            <ul style={{listStyleType: "disc"}} className="list-disc ml-6 space-y-2 my-4">{children}</ul>
+            <ul style={{ listStyleType: "disc" }} className="list-disc ml-6 space-y-2 my-4">{children}</ul>
         ),
         number: ({ children }) => (
             <ol className="list-decimal ml-6 space-y-2 my-4">{children}</ol>
@@ -182,7 +202,7 @@ export const portableTextComponents: PortableTextComponents = {
             <em className="italic">{children}</em>
         ),
         code: ({ children }) => (
-            <code className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-1.5 py-0.5 rounded">
+            <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm font-mono">
                 {children}
             </code>
         ),
