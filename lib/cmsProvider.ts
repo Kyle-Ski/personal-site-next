@@ -17,9 +17,9 @@ export class SanityService {
 
   async getAllPosts(): Promise<Post[]> {
     return this.client.fetch(`
-      *[_type == "post"] | order(_createdAt desc) {
+      *[_type == "post"] | order(publishedAt desc) {
         _id,
-        _createdAt,
+        publishedAt,
         title,
         "slug": slug.current,
         excerpt,
@@ -38,7 +38,7 @@ export class SanityService {
     const [post] = await this.client.fetch(`
       *[_type == "post" && slug.current == $slug] {
         _id,
-        _createdAt,
+        publishedAt,
         title,
         "slug": slug.current,
         excerpt,

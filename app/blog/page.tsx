@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { SanityService } from "@/lib/cmsProvider"
-import { formatDistance } from "date-fns"
+import { format } from "date-fns"
 import Link from "next/link"
 import { PortableTextBlock } from "@portabletext/types";
 
@@ -13,7 +13,7 @@ export interface Author {
 
 export interface Post {
     _id: string
-    _createdAt: string
+    publishedAt: string
     title: string
     slug: string
     excerpt: string
@@ -75,7 +75,7 @@ export default async function BlogPage() {
                                             {post.title}
                                         </CardTitle>
                                         <CardDescription className="dark:text-muted-foreground">
-                                            {formatDistance(new Date(post._createdAt), new Date(), { addSuffix: true })}
+                                            {format(new Date(post.publishedAt), 'MMMM d, yyyy')}
                                         </CardDescription>
                                     </CardHeader>
 

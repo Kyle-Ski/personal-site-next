@@ -80,7 +80,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                         <div>
                             <p className="font-medium">{post.author?.name}</p>
                             <p className="text-sm text-muted-foreground">
-                                {format(new Date(post._createdAt), "MMMM d, yyyy")}
+                                {format(new Date(post.publishedAt), "MMMM d, yyyy")}
                             </p>
                         </div>
                     </div>
