@@ -37,12 +37,12 @@ const GearStats = ({ gear }: GearStatsProps) => {
       value: `${totalWeight.lb.toFixed(1)} lbs`,
       subtext: `${totalWeight.oz.toFixed(0)} oz`
     },
-    {
-      icon: DollarSign,
-      label: "Total Investment",
-      value: `$${totalValue.toLocaleString()}`,
-      subtext: "and counting..."
-    },
+    // {
+    //   icon: DollarSign,
+    //   label: "Total Investment",
+    //   value: `$${totalValue.toLocaleString()}`,
+    //   subtext: "...well worth it"
+    // },
     {
       icon: Calendar,
       label: "Avg Days Owned",

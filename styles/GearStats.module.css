@@ -100,22 +100,45 @@
   background: linear-gradient(135deg, #1a3d28 0%, #2a4165 100%);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .statsSection {
     padding: 3rem 0;
   }
   
   .statsGrid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Increased minimum width */
     gap: 1rem;
   }
   
   .statCard {
     padding: 1rem;
+    flex-direction: column; /* Switch to vertical layout */
+    align-items: center; /* Center everything */
+    text-align: center; /* Center text */
+    gap: 0.75rem; /* Reduce gap */
+  }
+  
+  .statIcon {
+    padding: 0.5rem; /* Reduce icon padding */
+    margin-bottom: 0.25rem;
+  }
+  
+  .statIcon svg {
+    width: 20px; /* Slightly smaller icon */
+    height: 20px;
+  }
+  
+  .statContent {
+    flex: none; /* Remove flex: 1 since we're vertical now */
+    width: 100%;
   }
   
   .statValue {
     font-size: 1.5rem;
+  }
+  
+  .statLabel,
+  .statSubtext {
+    font-size: 0.8rem; /* Slightly smaller text */
   }
 }
