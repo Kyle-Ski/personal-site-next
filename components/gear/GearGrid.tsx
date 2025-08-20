@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Search, Filter, X, ExternalLink, Weight, Package, Eye, EyeOff } from 'lucide-react'
+import { Search, Filter, X, ExternalLink, Weight, Package, Eye, EyeOff, DollarSign } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { GearItem } from '@/utils/notionGear'
@@ -197,17 +197,17 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
             key={item.id} 
             className={`${styles.gearCard} ${item.isRetired ? styles.retired : ''}`}
           >
-            <div className={styles.cardImageWrapper}>
+            <div className={styles.imageWrapper}>
               {item.imageUrl ? (
                 <Image
                   src={item.imageUrl}
                   alt={item.title}
-                  width={150}
-                  height={150}
-                  className={styles.cardImage}
+                  width={200}
+                  height={200}
+                  className={styles.image}
                 />
               ) : (
-                <div className={styles.noImage}>
+                <div className={styles.imagePlaceholder}>
                   <Package size={40} />
                 </div>
               )}
@@ -216,39 +216,46 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
               )}
             </div>
 
-            <CardContent className={styles.cardContent}>
-              <h3 className={styles.cardTitle}>{item.title}</h3>
-              
+            <CardContent className={styles.content}>
+              <h3 className={styles.itemTitle}>{item.title}</h3>
+              <p className={styles.itemProduct}>{item.product}</p>
+
               {item.brand && (
-                <p className={styles.cardBrand}>{item.brand}</p>
+                <Badge variant="outline" className={styles.brandBadge}>
+                  {item.brand}
+                </Badge>
               )}
 
-              <div className={styles.cardSpecs}>
+              <div className={styles.specs}>
                 {item.weight_oz && (
-                  <span className={styles.cardSpec}>
-                    <Weight size={12} />
-                    {item.weight_oz} oz
-                  </span>
+                  <div className={styles.spec}>
+                    <Weight size={14} />
+                    <span>{item.weight_oz} oz</span>
+                  </div>
                 )}
                 {item.cost && (
-                  <span className={styles.cardSpec}>
-                    ${item.cost}
-                  </span>
+                  <div className={styles.spec}>
+                    <DollarSign size={14} />
+                    <span>{item.cost}</span>
+                  </div>
                 )}
               </div>
 
               {item.packLists.length > 0 && (
-                <div className={styles.cardPackLists}>
-                  {item.packLists.slice(0, 2).map((list, index) => (
-                    <Badge key={index} variant="secondary" className={styles.packListBadge}>
-                      {list}
-                    </Badge>
-                  ))}
-                  {item.packLists.length > 2 && (
-                    <span className={styles.morePackLists}>
-                      +{item.packLists.length - 2}
-                    </span>
-                  )}
+                <div className={styles.packLists}>
+                  <p className={styles.packListLabel}>Used in:</p>
+                  <div className={styles.packListTags}>
+                    {item.packLists.slice(0, 2).map((list, index) => (
+                      <span key={index} className={styles.packListTag}>
+                        {list}
+                      </span>
+                    ))}
+                    {item.packLists.length > 2 && (
+                      <span className={styles.packListTag}>
+                        +{item.packLists.length - 2}
+                      </span>
+                    )}
+                  </div>
                 </div>
               )}
 
@@ -257,8 +264,9 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles.cardLink}
+                  className={styles.link}
                 >
+                  <span>View Product</span>
                   <ExternalLink size={14} />
                 </Link>
               )}

@@ -23,9 +23,9 @@ export default async function GearPage() {
       
       {/* Featured Gear Section */}
       <section className="container mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold mb-2 text-center">Essential Kit</h2>
+        <h2 className="text-3xl font-bold mb-2 text-center">Gear Favorites</h2>
         <p className="text-center text-gray-600 dark:text-gray-400 mb-8">
-          The gear that's earned its place in my pack
+          My favorite gear to use
         </p>
         <GearFeatured items={featuredGear} />
       </section>
@@ -35,7 +35,7 @@ export default async function GearPage() {
 
       {/* Main Gear Grid with Filters */}
       <section className="container mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold mb-8 text-center">The Full Arsenal</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">Gear Closet</h2>
         <GearGrid 
           gear={allGear}
           categories={categories}

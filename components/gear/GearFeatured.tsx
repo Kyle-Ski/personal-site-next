@@ -25,7 +25,7 @@ const GearFeatured = ({ items }: GearFeaturedProps) => {
         'Pack': '🧳',
     };
 
-    const getCategoryEmoji = (category: string) => emojiMap[category] || '🎯';
+    const getCategoryEmoji = (category: string) => emojiMap[category] || '⭐️';
     return (
         <div className={styles.featuredGrid}>
             {items.map((item) => {

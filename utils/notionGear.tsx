@@ -113,19 +113,20 @@ export const getFeaturedGear = (gear: GearItem[]): GearItem[] => {
   // Priority items that appear in multiple pack lists
   const priorityIds = [
     'FINDr 102 Skis', 
-    'Arc\'teryx Beta Insulated Jacket',
+    'Trail Runners',
     'Backcountry Ski Boots',
-    'Zed 12 Bindings'
+    '2-Person Tent',
+    'Insulated Sleeping Pad',
+    'Trekking Poles'
   ]
   
   const featured = gear.filter(item => 
     !item.isRetired && (
-      priorityIds.some(priority => item.title.includes(priority)) ||
-      item.packLists.length >= 3 || // Items used in 3+ pack lists
-      (item.cost && item.cost > 400) // High-value items
+      priorityIds.some(priority => {
+        return item.title.toLowerCase().includes(priority.toLowerCase());
+      })
     )
   ).slice(0, 6) // Limit to 6 featured items
-  
   return featured
 }
 

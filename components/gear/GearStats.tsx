@@ -47,7 +47,7 @@ const GearStats = ({ gear }: GearStatsProps) => {
       icon: Calendar,
       label: "Avg Days Owned",
       value: Math.floor(avgDaysOwned).toString(),
-      subtext: "battle-tested"
+      subtext: "repair, don't replace"
     }
   ]
 
@@ -72,11 +72,11 @@ const GearStats = ({ gear }: GearStatsProps) => {
           })}
         </div>
         
-        <div className={styles.funFact}>
+        {/* <div className={styles.funFact}>
           <p>
             💡 <strong>Fun fact:</strong> The total weight of my gear could supply a small expedition to Denali
           </p>
-        </div>
+        </div> */}
       </div>
     </section>
   )
