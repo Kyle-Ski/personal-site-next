@@ -14,6 +14,7 @@ const NavBar = () => {
     { href: `/#${ABOUT_TITLE}`, label: "About" },
     { href: `/#${PERSONAL_TIMELINE_ANCHOR}`, label: "Personal Timeline" },
     { href: `/#${PROJECTS_TITLE}`, label: "Projects" },
+    { href: `/gear`, label: "Gear" },
     { href: `/blog`, label: "Blog" },
     { href: `/#${SKILLS_TITLE}`, label: "Skills" },
     { href: `/#${RESUME_ANCHOR}`, label: "Resume" },
