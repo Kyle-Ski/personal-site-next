@@ -6,11 +6,22 @@ import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
 
 export const metadata = {
-  title: 'Kyle Czajkowski',
-  description: "Kyle Czajkowski's personal website",
+  title: 'Kyle Czajkowski - Full-Stack Developer & Mountain Enthusiast',
+  description: "Software engineer specializing in React, TypeScript, and Node.js. Sharing insights on web development, outdoor adventures, and gear reviews.",
+  keywords: 'full-stack developer, react, typescript, software engineer, outdoor gear, 14ers, colorado',
   icons: {
     icon: '/Me.jpg',
   },
+  openGraph: {
+    title: 'Kyle Czajkowski - Developer & Adventurer',
+    description: 'Software engineer specializing in React, TypeScript, and Node.js. Sharing insights on web development, outdoor adventures, and gear reviews.',
+    images: ['/og-image.jpg'],
+    url: 'https://kyle.czajkowski.tech'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    creator: '@SkiRoyJenkins'
+  }
 };
 
 
