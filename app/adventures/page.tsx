@@ -75,7 +75,7 @@ export default async function AdventuresPage() {
       {/* Hero Section */}
       <AdventureHero
         title="Adventures & Expeditions"
-        subtitle="Exploring Colorado's peaks, trails, and backcountry one summit at a time"
+        subtitle="Exploring Colorado&apos;s peaks, trails, and backcountry one summit at a time"
         backgroundImage="/images/adventure-hero.jpg"
         stats={heroStats}
       />
@@ -117,7 +117,7 @@ export default async function AdventuresPage() {
               <Mountain className="h-24 w-24 text-green-200 dark:text-green-800 mx-auto mb-6" />
               <h3 className="text-xl font-semibold mb-4">Adventure Reports Coming Soon!</h3>
               <p className="text-muted-foreground mb-6">
-                I'm currently documenting my recent adventures. Check back soon for detailed trip reports, route information, and gear insights.
+                I&apos;m currently documenting my recent adventures. Check back soon for detailed trip reports, route information, and gear insights.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/blog" className="btn-adventure">
@@ -148,7 +148,7 @@ export default async function AdventuresPage() {
       <section className="container mx-auto px-4 py-16 text-center">
         <h3 className="text-2xl font-bold mb-4">Ready for Your Own Adventure?</h3>
         <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-          Whether you're planning your first 14er or looking for gear recommendations, I'd love to help fellow adventurers get outside safely.
+          Whether you&apos;re planning your first 14er or looking for gear recommendations, I&apos;d love to help fellow adventurers get outside safely.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/gear" className="btn-adventure">

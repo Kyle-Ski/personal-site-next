@@ -96,7 +96,7 @@ const PeakTracker = () => {
                     </CardHeader>
                     <CardContent>
                         <div className="text-2xl font-bold text-green-700 dark:text-green-400">
-                            {Math.max(...completedPeaks.map(p => p.elevation)).toLocaleString()}'
+                            {Math.max(...completedPeaks.map(p => p.elevation)).toLocaleString()}&apos;
                         </div>
                         <p className="text-xs text-muted-foreground">
                             {completedPeaks.find(p => p.elevation === Math.max(...completedPeaks.map(peak => peak.elevation)))?.name}
@@ -130,7 +130,7 @@ const PeakTracker = () => {
                         Colorado 14ers Progress
                     </CardTitle>
                     <CardDescription>
-                        Tracking my journey to summit Colorado's highest peaks
+                        Tracking my journey to summit Colorado&apos;s highest peaks
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -170,7 +170,7 @@ const PeakTracker = () => {
                                         <div className="font-medium">{peak.name}</div>
                                         <div className="text-sm text-muted-foreground flex items-center gap-2">
                                             <MapPin className="h-3 w-3" />
-                                            {peak.range} • {peak.elevation.toLocaleString()}'
+                                            {peak.range} • {peak.elevation.toLocaleString()}&apos;
                                             {peak.completedDate && (
                                                 <>
                                                     <Calendar className="h-3 w-3 ml-2" />

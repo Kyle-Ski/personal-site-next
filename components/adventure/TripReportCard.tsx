@@ -70,7 +70,7 @@ const TripReportCard = ({ trip }: TripReportCardProps) => {
                         {trip.elevation && trip.elevation > 0 && (
                             <div className="flex items-center gap-1">
                                 <Mountain size={14} />
-                                {trip.elevation.toLocaleString()}'
+                                {trip.elevation.toLocaleString()}&apos;
                             </div>
                         )}
                         {trip.distance && trip.distance > 0 && (
