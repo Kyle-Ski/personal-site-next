@@ -2,26 +2,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Mountain, MapPin, Calendar, TrendingUp, Thermometer } from 'lucide-react'
+import { Mountain, MapPin, Calendar, TrendingUp, Thermometer, Clock } from 'lucide-react'
 import { format } from 'date-fns'
+import { TripReport } from '@/lib/cmsProvider'
 
 interface TripReportCardProps {
-    trip: {
-        slug: string
-        title: string
-        location: string
-        date: string
-        elevation?: number
-        distance?: number
-        difficulty: 'easy' | 'moderate' | 'difficult' | 'expert'
-        activities: string[]
-        mainImage?: string
-        excerpt?: string
-        weather?: {
-            conditions: string
-            temperature?: { low: number; high: number }
-        }
-    }
+    trip: TripReport
 }
 
 const TripReportCard = ({ trip }: TripReportCardProps) => {
@@ -35,6 +21,10 @@ const TripReportCard = ({ trip }: TripReportCardProps) => {
         }
     }
 
+    // Handle date formatting - use trip date if available, otherwise published date
+    const tripDate = trip.date || trip.publishedAt
+    const formattedDate = tripDate ? format(new Date(tripDate), 'MMM dd, yyyy') : 'Date TBD'
+
     return (
         <Link href={`/adventures/${trip.slug}`}>
             <Card className="group h-full overflow-hidden hover:shadow-lg transition-all duration-300 adventure-card">
@@ -47,6 +37,7 @@ const TripReportCard = ({ trip }: TripReportCardProps) => {
                             width={600}
                             height={400}
                             className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                            priority={false}
                         />
                     </div>
                 )}
@@ -64,11 +55,11 @@ const TripReportCard = ({ trip }: TripReportCardProps) => {
                     <div className="space-y-1 text-sm text-muted-foreground">
                         <div className="flex items-center gap-2">
                             <MapPin size={14} />
-                            {trip.location}
+                            {trip.location || 'Location TBD'}
                         </div>
                         <div className="flex items-center gap-2">
                             <Calendar size={14} />
-                            {format(new Date(trip.date), 'MMM dd, yyyy')}
+                            {formattedDate}
                         </div>
                     </div>
                 </CardHeader>
@@ -76,13 +67,13 @@ const TripReportCard = ({ trip }: TripReportCardProps) => {
                 <CardContent className="pt-0">
                     {/* Stats */}
                     <div className="flex flex-wrap gap-4 mb-3 text-sm text-muted-foreground">
-                        {trip.elevation && (
+                        {trip.elevation && trip.elevation > 0 && (
                             <div className="flex items-center gap-1">
                                 <Mountain size={14} />
                                 {trip.elevation.toLocaleString()}'
                             </div>
                         )}
-                        {trip.distance && (
+                        {trip.distance && trip.distance > 0 && (
                             <div className="flex items-center gap-1">
                                 <TrendingUp size={14} />
                                 {trip.distance} mi
@@ -97,23 +88,55 @@ const TripReportCard = ({ trip }: TripReportCardProps) => {
                     </div>
 
                     {/* Activities */}
-                    <div className="flex flex-wrap gap-1 mb-3">
-                        {trip.activities.slice(0, 3).map((activity) => (
-                            <Badge key={activity} variant="outline" className="text-xs border-green-200 text-green-800 dark:border-green-800 dark:text-green-200">
-                                {activity}
-                            </Badge>
-                        ))}
-                        {trip.activities.length > 3 && (
-                            <Badge variant="outline" className="text-xs">
-                                +{trip.activities.length - 3}
-                            </Badge>
-                        )}
-                    </div>
+                    {trip.activities && trip.activities.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mb-3">
+                            {trip.activities.slice(0, 3).map((activity) => (
+                                <Badge key={activity} variant="outline" className="text-xs border-green-200 text-green-800 dark:border-green-800 dark:text-green-200">
+                                    {activity}
+                                </Badge>
+                            ))}
+                            {trip.activities.length > 3 && (
+                                <Badge variant="outline" className="text-xs">
+                                    +{trip.activities.length - 3}
+                                </Badge>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Tags as fallback if no activities */}
+                    {(!trip.activities || trip.activities.length === 0) && trip.tags && trip.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mb-3">
+                            {trip.tags.slice(0, 3).map((tag) => (
+                                <Badge key={tag} variant="outline" className="text-xs border-green-200 text-green-800 dark:border-green-800 dark:text-green-200">
+                                    {tag}
+                                </Badge>
+                            ))}
+                            {trip.tags.length > 3 && (
+                                <Badge variant="outline" className="text-xs">
+                                    +{trip.tags.length - 3}
+                                </Badge>
+                            )}
+                        </div>
+                    )}
 
                     {/* Excerpt */}
                     {trip.excerpt && (
                         <CardDescription className="line-clamp-3">
                             {trip.excerpt}
+                        </CardDescription>
+                    )}
+
+                    {/* Route Notes Preview */}
+                    {!trip.excerpt && trip.routeNotes && (
+                        <CardDescription className="line-clamp-3">
+                            {trip.routeNotes}
+                        </CardDescription>
+                    )}
+
+                    {/* Fallback if no description */}
+                    {!trip.excerpt && !trip.routeNotes && (
+                        <CardDescription className="line-clamp-3 italic">
+                            Click to read the full adventure report...
                         </CardDescription>
                     )}
                 </CardContent>

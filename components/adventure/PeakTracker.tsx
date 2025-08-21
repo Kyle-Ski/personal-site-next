@@ -141,8 +141,8 @@ const PeakTracker = () => {
                                 key={range}
                                 onClick={() => setSelectedRange(range)}
                                 className={`px-3 py-1 rounded-full text-sm transition-colors ${selectedRange === range
-                                    ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100'
-                                    : 'bg-secondary text-secondary-foreground hover:bg-accent'
+                                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100'
+                                        : 'bg-secondary text-secondary-foreground hover:bg-accent'
                                     }`}
                             >
                                 {range === 'all' ? 'All Ranges' : range}
@@ -156,8 +156,8 @@ const PeakTracker = () => {
                             <div
                                 key={peak.id}
                                 className={`flex items-center justify-between p-4 rounded-lg border transition-colors ${peak.completed
-                                    ? 'bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800'
-                                    : 'bg-background border-border hover:bg-accent'
+                                        ? 'bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800'
+                                        : 'bg-background border-border hover:bg-accent'
                                     }`}
                             >
                                 <div className="flex items-center gap-3">
