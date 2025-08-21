@@ -115,7 +115,7 @@ export default async function TripReportPage({ params }: PageProps) {
                             <Card className="adventure-card">
                                 <CardContent className="p-4 text-center">
                                     <Mountain className="h-6 w-6 text-green-600 mx-auto mb-2" />
-                                    <div className="font-medium">{tripReport.elevation.toLocaleString()}'</div>
+                                    <div className="font-medium">{tripReport.elevation.toLocaleString()}&apos;</div>
                                     <div className="text-sm text-muted-foreground">Elevation</div>
                                 </CardContent>
                             </Card>
