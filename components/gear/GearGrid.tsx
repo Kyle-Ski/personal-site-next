@@ -193,8 +193,8 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
       {/* Gear Grid */}
       <div className={styles.gearGrid}>
         {filteredGear.map((item) => (
-          <Card 
-            key={item.id} 
+          <Card
+            key={item.id}
             className={`${styles.gearCard} ${item.isRetired ? styles.retired : ''}`}
           >
             <div className={styles.imageWrapper}>
@@ -204,6 +204,11 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
                   alt={item.title}
                   width={200}
                   height={200}
+                  loading="lazy"
+                  placeholder="empty"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
                   className={styles.image}
                 />
               ) : (
