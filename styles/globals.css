@@ -371,11 +371,11 @@ button:hover {
   .adventure-stats {
     grid-template-columns: 1fr;
   }
-  
+
   .adventure-hero {
     padding: 3rem 0;
   }
-  
+
   .adventure-section h2::after {
     width: 30px;
     height: 2px;
@@ -476,6 +476,7 @@ button:hover {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -491,6 +492,7 @@ button:hover {
     opacity: 0;
     transform: translateX(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -536,6 +538,196 @@ body[data-theme='dark'] {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
+}
+
+[data-theme='dark'] .bg-green-100 {
+  background-color: rgba(34, 197, 94, 0.1) !important;
+}
+
+[data-theme='dark'] .text-green-800 {
+  color: #4ade80 !important;
+}
+
+[data-theme='dark'] .bg-yellow-100 {
+  background-color: rgba(234, 179, 8, 0.1) !important;
+}
+
+[data-theme='dark'] .text-yellow-800 {
+  color: #facc15 !important;
+}
+
+[data-theme='dark'] .bg-orange-100 {
+  background-color: rgba(249, 115, 22, 0.1) !important;
+}
+
+[data-theme='dark'] .text-orange-800 {
+  color: #fb923c !important;
+}
+
+[data-theme='dark'] .bg-red-100 {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+}
+
+[data-theme='dark'] .text-red-800 {
+  color: #f87171 !important;
+}
+
+[data-theme='dark'] .bg-gray-100 {
+  background-color: rgba(156, 163, 175, 0.1) !important;
+}
+
+[data-theme='dark'] .text-gray-800 {
+  color: #d1d5db !important;
+}
+
+/* Card and background fixes */
+[data-theme='dark'] .bg-white {
+  background-color: #1f2937 !important;
+}
+
+[data-theme='dark'] .bg-gray-50 {
+  background-color: #111827 !important;
+}
+
+[data-theme='dark'] .text-gray-900 {
+  color: #f9fafb !important;
+}
+
+[data-theme='dark'] .text-gray-600 {
+  color: #9ca3af !important;
+}
+
+[data-theme='dark'] .text-gray-500 {
+  color: #6b7280 !important;
+}
+
+/* Border fixes */
+[data-theme='dark'] .border-gray-200 {
+  border-color: #374151 !important;
+}
+
+[data-theme='dark'] .border-gray-300 {
+  border-color: #4b5563 !important;
+}
+
+/* Adventure-specific enhancements */
+[data-theme='dark'] .adventure-card {
+  background: rgba(31, 41, 55, 0.8) !important;
+  border-color: rgba(75, 85, 99, 0.5) !important;
+}
+
+[data-theme='dark'] .adventure-card:hover {
+  background: rgba(31, 41, 55, 0.95) !important;
+  border-color: #4ade80 !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Trip report meta improvements */
+[data-theme='dark'] .trip-report-meta {
+  background: rgba(31, 41, 55, 0.6) !important;
+  border-color: rgba(75, 85, 99, 0.3) !important;
+}
+
+[data-theme='dark'] .trip-report-meta-value {
+  color: #f9fafb !important;
+}
+
+[data-theme='dark'] .trip-report-meta-label {
+  color: #9ca3af !important;
+}
+
+/* Weather widget dark mode */
+[data-theme='dark'] .weather-widget {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%) !important;
+}
+
+/* Enhanced adventure stats for dark mode */
+[data-theme='dark'] .adventure-stat {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3) !important;
+}
+
+[data-theme='dark'] .adventure-stat:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4) !important;
+}
+
+/* Adventure navigation dark mode */
+[data-theme='dark'] .adventure-nav {
+  background: rgba(22, 163, 74, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  border-bottom-color: rgba(34, 197, 94, 0.3) !important;
+}
+
+[data-theme='dark'] .adventure-nav .nav-link {
+  color: #f0fdf4 !important;
+}
+
+[data-theme='dark'] .adventure-nav .nav-link:hover {
+  color: #fbbf24 !important;
+}
+
+/* Adventure hero section dark mode */
+[data-theme='dark'] .adventure-hero {
+  background: linear-gradient(135deg, #166534 0%, #15803d 50%, #16a34a 100%) !important;
+}
+
+[data-theme='dark'] .adventure-hero::before {
+  opacity: 0.15 !important;
+}
+
+/* Badge variants for dark mode */
+[data-theme='dark'] .badge-adventure {
+  background: #16a34a !important;
+  border-color: #22c55e !important;
+  color: #f0fdf4 !important;
+}
+
+[data-theme='dark'] .badge-adventure:hover {
+  background: #22c55e !important;
+  color: #14532d !important;
+}
+
+/* Button improvements */
+[data-theme='dark'] .btn-adventure {
+  background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%) !important;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3) !important;
+}
+
+[data-theme='dark'] .btn-adventure:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4) !important;
+}
+
+/* Gear highlight sections */
+[data-theme='dark'] .gear-highlight {
+  background: rgba(22, 163, 74, 0.1) !important;
+  border-color: rgba(34, 197, 94, 0.2) !important;
+}
+
+[data-theme='dark'] .gear-highlight h4 {
+  color: #22c55e !important;
+}
+
+/* Timeline dark mode improvements */
+[data-theme='dark'] .timelineItem {
+  background: #1f2937 !important;
+  border-color: #374151 !important;
+  color: #f9fafb !important;
+}
+
+[data-theme='dark'] .timelineItem:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+  border-color: #4ade80 !important;
+}
+
+/* Empty state improvements */
+[data-theme='dark'] .text-green-200 {
+  color: #bbf7d0 !important;
+}
+
+[data-theme='dark'] .text-green-800 {
+  color: #16a34a !important;
 }
 
 /*TODO responsiveness*/

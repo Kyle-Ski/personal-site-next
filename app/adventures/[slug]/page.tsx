@@ -230,7 +230,7 @@ export default async function TripReportPage({ params }: PageProps) {
                 )}
 
                 {/* Main Content */}
-                <div className="prose prose-lg max-w-none adventure-content">
+                <div className="prose prose-lg max-w-none adventure-content dark:prose-invert">
                     {tripReport.body && tripReport.body.length > 0 ? (
                         <PortableText
                             value={tripReport.body}
