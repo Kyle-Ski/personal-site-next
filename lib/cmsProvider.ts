@@ -62,21 +62,27 @@ export class SanityService {
 
   async getAllPosts(): Promise<Post[]> {
     return this.client.fetch(`
-      *[_type == "post"] | order(publishedAt desc) {
-        _id,
-        publishedAt,
+    *[_type == "post"] | order(publishedAt desc) {
+      _id,
+      publishedAt,
+      title,
+      "slug": slug.current,
+      excerpt,
+      "mainImage": mainImage.asset->url,
+      "categories": categories[]->{
         title,
-        "slug": slug.current,
-        excerpt,
-        "mainImage": mainImage.asset->url,
-        "categories": categories[]->title,
-        "author": author->{
-          _id,
-          name,
-          "image": image.asset->url
-        }
-      }
-    `);
+        color,
+        isOutdoor,
+        _id
+      },
+      "author": author->{
+        _id,
+        name,
+        "image": image.asset->url
+      },
+      body
+    }
+  `);
   }
 
   async getPostBySlug(slug: string): Promise<Post> {

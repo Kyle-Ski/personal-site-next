@@ -2,8 +2,6 @@
 
 import { useState, useMemo } from "react"
 import Image from "next/image"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { format } from "date-fns"
 import Link from "next/link"
 import { Search, Filter, X, Mountain, Code, Calendar } from "lucide-react"
@@ -16,6 +14,13 @@ export interface Author {
     image: string
 }
 
+export interface Category {
+    title: string
+    color: string
+    isOutdoor: boolean
+    _id: string
+}
+
 export interface Post {
     _id: string
     publishedAt: string
@@ -23,7 +28,7 @@ export interface Post {
     slug: string
     excerpt: string
     mainImage: string
-    categories: string[]
+    categories: Category[] // Updated to use Category objects
     author: Author
     content: any[]
     body: PortableTextBlock[]
@@ -35,33 +40,11 @@ const CATEGORY_GROUPS = {
         name: 'Adventure & Outdoors',
         icon: Mountain,
         color: 'green',
-        categories: [
-            'Trail Running',
-            'Backpacking',
-            '14ers & Peaks',
-            'Backcountry Skiing',
-            'Hiking',
-            'Trip Reports',
-            'Gear Reviews',
-            'Route Beta',
-            'Winter Adventures',
-            'Safety & Techniques'
-        ]
     },
     tech: {
         name: 'Technology & Development',
         icon: Code,
         color: 'blue',
-        categories: [
-            'React',
-            'TypeScript',
-            'Node.js',
-            'Web Development',
-            'API Development',
-            'DevOps',
-            'Tech Tutorials',
-            'Project Updates'
-        ]
     }
 }
 
@@ -78,18 +61,22 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
     const filteredPosts = useMemo(() => {
         let filtered = posts
 
-        // Group filter
+        // Group filter - now using isOutdoor flag and color from CMS
         if (selectedGroup !== 'all') {
-            const groupCategories = CATEGORY_GROUPS[selectedGroup].categories
-            filtered = filtered.filter(post =>
-                post.categories.some(cat => groupCategories.includes(cat))
-            )
+            filtered = filtered.filter(post => {
+                if (selectedGroup === 'outdoor') {
+                    return post.categories.some(cat => cat.isOutdoor === true)
+                } else if (selectedGroup === 'tech') {
+                    return post.categories.some(cat => cat.color === 'blue' && !cat.isOutdoor)
+                }
+                return true
+            })
         }
 
-        // Category filter
+        // Category filter - now using actual category titles from CMS
         if (selectedCategory) {
             filtered = filtered.filter(post =>
-                post.categories.includes(selectedCategory)
+                post.categories.some(cat => cat.title === selectedCategory)
             )
         }
 
@@ -99,7 +86,7 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
                 post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 post.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 post.categories.some(cat =>
-                    cat.toLowerCase().includes(searchTerm.toLowerCase())
+                    cat.title.toLowerCase().includes(searchTerm.toLowerCase())
                 )
             )
         }
@@ -114,16 +101,30 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
     }
 
     const getAvailableCategories = () => {
+        let availableCategories: Category[] = []
+
         if (selectedGroup === 'all') {
-            return Array.from(new Set(posts.flatMap(post => post.categories)))
+            availableCategories = posts.flatMap(post => post.categories)
+        } else if (selectedGroup === 'outdoor') {
+            availableCategories = posts.flatMap(post =>
+                post.categories.filter(cat => cat.isOutdoor === true)
+            )
+        } else if (selectedGroup === 'tech') {
+            availableCategories = posts.flatMap(post =>
+                post.categories.filter(cat => cat.color === 'blue' && !cat.isOutdoor)
+            )
         }
-        return CATEGORY_GROUPS[selectedGroup].categories.filter(cat =>
-            posts.some(post => post.categories.includes(cat))
+
+        // Remove duplicates and return category titles
+        const uniqueCategories = availableCategories.filter((cat, index, self) =>
+            index === self.findIndex(c => c.title === cat.title)
         )
+
+        return uniqueCategories.map(cat => cat.title)
     }
 
-    const getCategoryClass = (category: string) => {
-        if (CATEGORY_GROUPS.outdoor.categories.includes(category)) {
+    const getCategoryClass = (category: Category) => {
+        if (category.isOutdoor) {
             return 'outdoor'
         }
         return 'tech'
@@ -205,20 +206,27 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
                             <div className={styles.filterGroup}>
                                 <h3 className={styles.filterGroupTitle}>Categories</h3>
                                 <div className={styles.filterButtons}>
-                                    {getAvailableCategories().map((category) => (
-                                        <button
-                                            key={category}
-                                            onClick={() => setSelectedCategory(
-                                                selectedCategory === category ? '' : category
-                                            )}
-                                            className={`${styles.filterButton} ${selectedCategory === category
-                                                    ? `${styles.active} ${styles[getCategoryClass(category)]}`
+                                    {getAvailableCategories().map((category) => {
+                                        // Find the actual category object to determine its class
+                                        const categoryObj = posts.flatMap(post => post.categories)
+                                            .find(cat => cat.title === category)
+                                        const categoryClass = categoryObj ? getCategoryClass(categoryObj) : 'tech'
+
+                                        return (
+                                            <button
+                                                key={category}
+                                                onClick={() => setSelectedCategory(
+                                                    selectedCategory === category ? '' : category
+                                                )}
+                                                className={`${styles.filterButton} ${selectedCategory === category
+                                                    ? `${styles.active} ${styles[categoryClass]}`
                                                     : ''
-                                                }`}
-                                        >
-                                            {category}
-                                        </button>
-                                    ))}
+                                                    }`}
+                                            >
+                                                {category}
+                                            </button>
+                                        )
+                                    })}
                                 </div>
                             </div>
 
@@ -281,10 +289,10 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
                                         <div className={styles.postCategories}>
                                             {post.categories.slice(0, 3).map((category) => (
                                                 <span
-                                                    key={category}
+                                                    key={category._id}
                                                     className={`${styles.categoryBadge} ${styles[getCategoryClass(category)]}`}
                                                 >
-                                                    {category}
+                                                    {category.title}
                                                 </span>
                                             ))}
                                             {post.categories.length > 3 && (
