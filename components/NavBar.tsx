@@ -45,6 +45,7 @@ const NavBar = () => {
       type: "adventure",
       icon: Mountain
     },
+    { href: `/gear/reviews`, label: "Gear Reviews", icon: Mountain  },
     {
       href: `/peaks`,
       label: "Peak Tracker",
