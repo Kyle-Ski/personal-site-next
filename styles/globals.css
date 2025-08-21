@@ -67,6 +67,7 @@ body[data-theme='dark'] {
 div {
   color: var(--color-text-primary);
 }
+
 h2 {
   /* margin: 2rem auto 2rem auto; */
 }
@@ -136,21 +137,417 @@ button:hover {
   z-index: -1;
 }
 
+/* Adventure Card Styling */
+.adventure-card {
+  border: 1px solid hsl(var(--border));
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.adventure-card:hover {
+  box-shadow: var(--adventure-shadow-lg);
+  border-color: var(--adventure-primary);
+}
+
+.adventure-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--adventure-gradient);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.adventure-card:hover::before {
+  opacity: 1;
+}
+
+/* Adventure Navigation Styles */
+.adventure-nav {
+  background: var(--adventure-hero-gradient);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(45, 80, 22, 0.2);
+}
+
+.adventure-nav .nav-link {
+  color: white;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.adventure-nav .nav-link:hover {
+  color: var(--adventure-accent);
+}
+
+.adventure-nav .nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--adventure-accent);
+}
+
+/* Adventure Hero Section */
+.adventure-hero {
+  background: var(--adventure-gradient);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.adventure-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/images/mountain-pattern.svg') repeat;
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.adventure-hero .hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Adventure Badges */
+.badge-adventure {
+  background: var(--adventure-primary);
+  color: white;
+  border: 1px solid var(--adventure-primary-light);
+}
+
+.badge-adventure:hover {
+  background: var(--adventure-primary-light);
+}
+
+/* Adventure Buttons */
+.btn-adventure {
+  background: var(--adventure-gradient);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-adventure:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--adventure-shadow-lg);
+}
+
+.btn-adventure::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-adventure:hover::before {
+  left: 100%;
+}
+
+/* Adventure Section Styling */
+.adventure-section {
+  position: relative;
+}
+
+.adventure-section h2 {
+  color: var(--adventure-primary);
+  position: relative;
+  display: inline-block;
+}
+
+.adventure-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--adventure-gradient);
+  border-radius: 2px;
+}
+
+/* Difficulty Color Classes */
+.difficulty-easy {
+  --diff-color: #22c55e;
+  --diff-bg: rgba(34, 197, 94, 0.1);
+  --diff-border: rgba(34, 197, 94, 0.3);
+}
+
+.difficulty-moderate {
+  --diff-color: #eab308;
+  --diff-bg: rgba(234, 179, 8, 0.1);
+  --diff-border: rgba(234, 179, 8, 0.3);
+}
+
+.difficulty-difficult {
+  --diff-color: #f97316;
+  --diff-bg: rgba(249, 115, 22, 0.1);
+  --diff-border: rgba(249, 115, 22, 0.3);
+}
+
+.difficulty-expert {
+  --diff-color: #ef4444;
+  --diff-bg: rgba(239, 68, 68, 0.1);
+  --diff-border: rgba(239, 68, 68, 0.3);
+}
+
+.difficulty-badge {
+  color: var(--diff-color);
+  background: var(--diff-bg);
+  border: 1px solid var(--diff-border);
+}
+
+/* Adventure Stats Grid */
+.adventure-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.adventure-stat {
+  background: var(--adventure-gradient);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.adventure-stat:hover {
+  transform: translateY(-4px);
+}
+
+.adventure-stat-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 1rem auto;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.adventure-stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.adventure-stat-label {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+/* Map Integration Styles */
+.adventure-map {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: var(--adventure-shadow-lg);
+  border: 2px solid var(--adventure-primary);
+}
+
+/* Responsive Adventure Layouts */
+@media (max-width: 768px) {
+  .adventure-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .adventure-hero {
+    padding: 3rem 0;
+  }
+  
+  .adventure-section h2::after {
+    width: 30px;
+    height: 2px;
+  }
+}
+
+/* Dark Mode Adventure Adjustments */
+.dark .adventure-card {
+  background: rgba(45, 80, 22, 0.05);
+  border-color: rgba(45, 80, 22, 0.2);
+}
+
+.dark .adventure-card:hover {
+  background: rgba(45, 80, 22, 0.1);
+  border-color: var(--adventure-primary-light);
+}
+
+.dark .adventure-section h2 {
+  color: var(--adventure-success);
+}
+
+/* Trip Report Specific Styles */
+.trip-report-header {
+  background: var(--adventure-gradient);
+  color: white;
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+}
+
+.trip-report-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: rgba(45, 80, 22, 0.05);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(45, 80, 22, 0.1);
+}
+
+.trip-report-meta-item {
+  text-align: center;
+  padding: 1rem;
+}
+
+.trip-report-meta-icon {
+  color: var(--adventure-primary);
+  margin-bottom: 0.5rem;
+}
+
+.trip-report-meta-value {
+  font-weight: bold;
+  font-size: 1.125rem;
+  margin-bottom: 0.25rem;
+}
+
+.trip-report-meta-label {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+/* Weather Widget Styles */
+.weather-widget {
+  background: linear-gradient(135deg, #87ceeb 0%, #4682b4 100%);
+  color: white;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  margin: 1rem 0;
+}
+
+.weather-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.5rem;
+}
+
+/* Gear Integration */
+.gear-highlight {
+  background: rgba(45, 80, 22, 0.05);
+  border: 1px solid rgba(45, 80, 22, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.gear-highlight h4 {
+  color: var(--adventure-primary);
+  margin-bottom: 0.5rem;
+}
+
+/* Animation Classes */
+.fade-in-adventure {
+  animation: fadeInAdventure 0.6s ease-out;
+}
+
+@keyframes fadeInAdventure {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in-adventure {
+  animation: slideInAdventure 0.8s ease-out;
+}
+
+@keyframes slideInAdventure {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Updated globals.css additions */
+/* Add these to your existing styles/globals.css */
+
+/* Adventure-specific CSS variable extensions */
+body {
+  /* Adventure theme variables */
+  --color-adventure-primary: #2d5016;
+  --color-adventure-secondary: #3d6b1f;
+  --color-adventure-accent: #ff6b35;
+  --color-adventure-success: #228b22;
+}
+
+body[data-theme='dark'] {
+  --color-adventure-primary: #4ade80;
+  --color-adventure-secondary: #22c55e;
+  --color-adventure-accent: #fb923c;
+  --color-adventure-success: #16a34a;
+}
+
+/* Enhanced link styling for adventure content */
+.adventure-content a {
+  color: var(--color-adventure-primary);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.adventure-content a:hover {
+  color: var(--color-adventure-secondary);
+  box-shadow: inset 0 -2px 0 0 var(--color-adventure-primary);
+}
+
+/* Adventure typography */
+.adventure-heading {
+  background: var(--adventure-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
 /*TODO responsiveness*/
-@media (min-width: 300px) {
-}
+@media (min-width: 300px) {}
 
-@media (min-width: 700px) {
-}
+@media (min-width: 700px) {}
 
-@media (min-width: 900px) {
-}
+@media (min-width: 900px) {}
 
-@media (min-width: 1100px) {
-}
+@media (min-width: 1100px) {}
 
-@media (min-width: 1300px) {
-}
+@media (min-width: 1300px) {}
 
 @layer base {
   :root {
@@ -179,7 +576,25 @@ button:hover {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+
+    /* Adventure color palette */
+    --adventure-primary: #2d5016;
+    --adventure-primary-light: #3d6b1f;
+    --adventure-primary-dark: #1d3309;
+    --adventure-secondary: #8b4513;
+    --adventure-accent: #ff6b35;
+    --adventure-success: #228b22;
+    --adventure-warning: #daa520;
+
+    /* Adventure gradients */
+    --adventure-gradient: linear-gradient(135deg, #2d5016 0%, #3d6b1f 50%, #228b22 100%);
+    --adventure-hero-gradient: linear-gradient(135deg, rgba(45, 80, 22, 0.9) 0%, rgba(61, 107, 31, 0.8) 100%);
+
+    /* Adventure shadows */
+    --adventure-shadow: 0 4px 6px -1px rgba(45, 80, 22, 0.1), 0 2px 4px -1px rgba(45, 80, 22, 0.06);
+    --adventure-shadow-lg: 0 10px 15px -3px rgba(45, 80, 22, 0.1), 0 4px 6px -2px rgba(45, 80, 22, 0.05);
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -212,6 +627,7 @@ button:hover {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
