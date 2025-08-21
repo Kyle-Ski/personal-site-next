@@ -7,7 +7,7 @@ interface AdventureHeroProps {
     stats?: {
         label: string
         value: string
-        icon: React.ComponentType<{ size?: number; className?: string }>
+        icon: React.ComponentType<{ size?: number; className?: string }> | any
     }[]
 }
 
