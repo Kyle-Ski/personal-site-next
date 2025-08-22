@@ -1,0 +1,3755 @@
+{
+  "lastUpdated": "2025-08-22T18:48:59.980Z",
+  "totalActivities": 268,
+  "activities": [
+    {
+      "id": 15494108520,
+      "name": "Lilly Lake while Ally and Kylie Hurefanoed",
+      "type": "hiking",
+      "date": "2025-08-17",
+      "distanceMiles": 8.08,
+      "elevationGainFeet": 2044,
+      "durationHours": 3.59,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.62,
+        -105.47
+      ]
+    },
+    {
+      "id": 15482956798,
+      "name": "Blanca-> Ellingwood backpack",
+      "type": "hiking",
+      "date": "2025-08-15",
+      "distanceMiles": 12.42,
+      "elevationGainFeet": 5154,
+      "durationHours": 7.27,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.56,
+        -105.55
+      ]
+    },
+    {
+      "id": 15403770523,
+      "name": "I'm gonna finish this meatloaf, get on a plane to Toronto and shoot you in your lying face.",
+      "type": "hiking",
+      "date": "2025-08-09",
+      "distanceMiles": 7.33,
+      "elevationGainFeet": 2119,
+      "durationHours": 3.69,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.95,
+        -122.6
+      ]
+    },
+    {
+      "id": 15166748323,
+      "name": "No, you are not tripping, that IS an emu.",
+      "type": "trail-running",
+      "date": "2025-07-19",
+      "distanceMiles": 6.17,
+      "elevationGainFeet": 1132,
+      "durationHours": 1.23,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.83,
+        -122.53
+      ]
+    },
+    {
+      "id": 15030821251,
+      "name": "Noble Lakes Overnight",
+      "type": "hiking",
+      "date": "2025-07-05",
+      "distanceMiles": 17.1,
+      "elevationGainFeet": 3107,
+      "durationHours": 6.57,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.58,
+        -119.79
+      ]
+    },
+    {
+      "id": 14706174905,
+      "name": "My Mama says that alligators are ornery because they got all them teeth and no toothbrush.",
+      "type": "trail-running",
+      "date": "2025-06-05",
+      "distanceMiles": 3.67,
+      "elevationGainFeet": 991,
+      "durationHours": 0.72,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.51,
+        -122.47
+      ]
+    },
+    {
+      "id": 14602034979,
+      "name": "Deja vu all over again",
+      "type": "trail-running",
+      "date": "2025-05-26",
+      "distanceMiles": 6.5,
+      "elevationGainFeet": 1280,
+      "durationHours": 1.42,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.44,
+        -122.37
+      ]
+    },
+    {
+      "id": 14494394356,
+      "name": "Hey! There are skittles in there!",
+      "type": "trail-running",
+      "date": "2025-05-15",
+      "distanceMiles": 5.23,
+      "elevationGainFeet": 1552,
+      "durationHours": 1.21,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.55,
+        -122.51
+      ]
+    },
+    {
+      "id": 14380276286,
+      "name": "I would be proud to partake of your pecan pie.",
+      "type": "trail-running",
+      "date": "2025-05-04",
+      "distanceMiles": 6.55,
+      "elevationGainFeet": 1512,
+      "durationHours": 1.56,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.51,
+        -122.47
+      ]
+    },
+    {
+      "id": 14247035462,
+      "name": "Like deep fried butter, I am unhealthy, yet irresistible.",
+      "type": "hiking",
+      "date": "2025-04-21",
+      "distanceMiles": 5.78,
+      "elevationGainFeet": 2726,
+      "durationHours": 2.89,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        33.46,
+        -111.48
+      ]
+    },
+    {
+      "id": 14225774576,
+      "name": "I painted a tunnel on the side of the library. When it dries, I'm going for it.",
+      "type": "hiking",
+      "date": "2025-04-19",
+      "distanceMiles": 6.68,
+      "elevationGainFeet": 1775,
+      "durationHours": 2.49,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.85,
+        -105.38
+      ]
+    },
+    {
+      "id": 14218264759,
+      "name": "Smiling's my favorite!",
+      "type": "hiking",
+      "date": "2025-04-18",
+      "distanceMiles": 5.13,
+      "elevationGainFeet": 2684,
+      "durationHours": 2.48,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.97,
+        -105.26
+      ]
+    },
+    {
+      "id": 14208924449,
+      "name": "Glory is fleeting, but obscurity is forever.",
+      "type": "hiking",
+      "date": "2025-04-17",
+      "distanceMiles": 3.73,
+      "elevationGainFeet": 2028,
+      "durationHours": 1.72,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.65,
+        -105.2
+      ]
+    },
+    {
+      "id": 14207715454,
+      "name": "You gotta have the marshmallows, that's what makes it fun.",
+      "type": "hiking",
+      "date": "2025-04-17",
+      "distanceMiles": 2.74,
+      "elevationGainFeet": 1401,
+      "durationHours": 1.2,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        40,
+        -105.28
+      ]
+    },
+    {
+      "id": 14092286914,
+      "name": "Kicking up more sand than a sea turtle laying eggs.",
+      "type": "hiking",
+      "date": "2025-04-05",
+      "distanceMiles": 5.51,
+      "elevationGainFeet": 427,
+      "durationHours": 1.76,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.74,
+        -119.56
+      ]
+    },
+    {
+      "id": 14091040803,
+      "name": "I am what happens between the maternity ward and the Crematorium.",
+      "type": "hiking",
+      "date": "2025-04-05",
+      "distanceMiles": 11.6,
+      "elevationGainFeet": 3310,
+      "durationHours": 5.21,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.74,
+        -119.57
+      ]
+    },
+    {
+      "id": 14080784116,
+      "name": "Just keep swimming, just keep swimming!",
+      "type": "hiking",
+      "date": "2025-04-04",
+      "distanceMiles": 10.41,
+      "elevationGainFeet": 2881,
+      "durationHours": 4.5,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.74,
+        -119.57
+      ]
+    },
+    {
+      "id": 14074070244,
+      "name": "I can feel the righteousness surging!",
+      "type": "hiking",
+      "date": "2025-04-03",
+      "distanceMiles": 2.62,
+      "elevationGainFeet": 1053,
+      "durationHours": 1.21,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.72,
+        -119.68
+      ]
+    },
+    {
+      "id": 14024171887,
+      "name": "Never ignore coincidence. Unless, of course, you're busy. In which case, always ignore coincidence.",
+      "type": "hiking",
+      "date": "2025-03-29",
+      "distanceMiles": 6.62,
+      "elevationGainFeet": 1322,
+      "durationHours": 1.91,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.75,
+        -122.45
+      ]
+    },
+    {
+      "id": 13957256512,
+      "name": "Hmm. That came off as less sarcastic than intended. Let me try again.",
+      "type": "hiking",
+      "date": "2025-03-22",
+      "distanceMiles": 8.06,
+      "elevationGainFeet": 2789,
+      "durationHours": 2.7,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.88,
+        -121.93
+      ]
+    },
+    {
+      "id": 13941128442,
+      "name": "We Gotta Go To The Crappy Town Where I'm A Hero.",
+      "type": "hiking",
+      "date": "2025-03-20",
+      "distanceMiles": 3.25,
+      "elevationGainFeet": 912,
+      "durationHours": 1.17,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.59,
+        -122.51
+      ]
+    },
+    {
+      "id": 13708399249,
+      "name": "Plan to be spontaneous tomorrow.",
+      "type": "trail-running",
+      "date": "2025-02-23",
+      "distanceMiles": 5.26,
+      "elevationGainFeet": 1211,
+      "durationHours": 1.14,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.51,
+        -122.48
+      ]
+    },
+    {
+      "id": 13653410902,
+      "name": "A person is smart. People are dumb, panicky, dangerous animals and you know it.",
+      "type": "hiking",
+      "date": "2025-02-17",
+      "distanceMiles": 6.62,
+      "elevationGainFeet": 1440,
+      "durationHours": 1.87,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.55,
+        -122.51
+      ]
+    },
+    {
+      "id": 13636273295,
+      "name": "Excuse me, yeah, uh, I-I believe you have my stapler...",
+      "type": "trail-running",
+      "date": "2025-02-15",
+      "distanceMiles": 4.58,
+      "elevationGainFeet": 994,
+      "durationHours": 0.95,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.51,
+        -122.47
+      ]
+    },
+    {
+      "id": 13566761819,
+      "name": "I am NOTHING like Family Guy! When I make jokes they are inherent to a story! Deep situational and emotional jokes based on what is relevant and has a point, not just one random interchangeable joke after another!",
+      "type": "trail-running",
+      "date": "2025-02-07",
+      "distanceMiles": 8.6,
+      "elevationGainFeet": 1772,
+      "durationHours": 2.11,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.51,
+        -122.47
+      ]
+    },
+    {
+      "id": 13353480968,
+      "name": "I do something nice for you, you do something nice for me - like not kill me.",
+      "type": "hiking",
+      "date": "2025-01-14",
+      "distanceMiles": 2.68,
+      "elevationGainFeet": 591,
+      "durationHours": 0.99,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.55,
+        -122.51
+      ]
+    },
+    {
+      "id": 13293348229,
+      "name": "A good trap doesn't scare people It makes them curious.",
+      "type": "hiking",
+      "date": "2025-01-07",
+      "distanceMiles": 3.54,
+      "elevationGainFeet": 531,
+      "durationHours": 1.39,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        36.49,
+        -121.21
+      ]
+    },
+    {
+      "id": 12695351527,
+      "name": "You've gotta cross over the anger bridge and come back to the friendship shore.",
+      "type": "trail-running",
+      "date": "2024-10-19",
+      "distanceMiles": 6.53,
+      "elevationGainFeet": 1486,
+      "durationHours": 1.51,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.51,
+        -122.47
+      ]
+    },
+    {
+      "id": 12401194578,
+      "name": "I have Van Gogh's ear for music",
+      "type": "trail-running",
+      "date": "2024-09-13",
+      "distanceMiles": 4.53,
+      "elevationGainFeet": 1027,
+      "durationHours": 0.95,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.51,
+        -122.47
+      ]
+    },
+    {
+      "id": 12072823308,
+      "name": "Putting the FUN in dysfunctional",
+      "type": "hiking",
+      "date": "2024-08-05",
+      "distanceMiles": 19.04,
+      "elevationGainFeet": 2470,
+      "durationHours": 6.91,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        43.6,
+        -110.87
+      ]
+    },
+    {
+      "id": 12063787549,
+      "name": "Pedal Damn it!",
+      "type": "hiking",
+      "date": "2024-08-04",
+      "distanceMiles": 4.87,
+      "elevationGainFeet": 1535,
+      "durationHours": 1.58,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        43.53,
+        -111.19
+      ]
+    },
+    {
+      "id": 12044964814,
+      "name": "I need your clothes, your boots, and your bicycle.",
+      "type": "hiking",
+      "date": "2024-08-02",
+      "distanceMiles": 4.46,
+      "elevationGainFeet": 1572,
+      "durationHours": 1.53,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        43.47,
+        -110.76
+      ]
+    },
+    {
+      "id": 12036332418,
+      "name": "People are dying that have never died before",
+      "type": "hiking",
+      "date": "2024-08-01",
+      "distanceMiles": 7.85,
+      "elevationGainFeet": 2507,
+      "durationHours": 2.79,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        43.73,
+        -110.74
+      ]
+    },
+    {
+      "id": 11965858900,
+      "name": "Never be certain of anything. It's a sign of weakness.",
+      "type": "hiking",
+      "date": "2024-07-23",
+      "distanceMiles": 3.14,
+      "elevationGainFeet": 761,
+      "durationHours": 1.08,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.55,
+        -122.51
+      ]
+    },
+    {
+      "id": 11965209244,
+      "name": "Yep, gonna lose a toenail. There goes sandal season!",
+      "type": "hiking",
+      "date": "2024-07-23",
+      "distanceMiles": 3.14,
+      "elevationGainFeet": 827,
+      "durationHours": 1.12,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.55,
+        -122.51
+      ]
+    },
+    {
+      "id": 11660025193,
+      "name": "I am your father's brother's nephew's cousin's former roommate.",
+      "type": "hiking",
+      "date": "2024-06-15",
+      "distanceMiles": 4.78,
+      "elevationGainFeet": 633,
+      "durationHours": 1.89,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.61,
+        -109.53
+      ]
+    },
+    {
+      "id": 11372842409,
+      "name": "Shannon Falls before Bus",
+      "type": "hiking",
+      "date": "2024-05-09",
+      "distanceMiles": 1.03,
+      "elevationGainFeet": 141,
+      "durationHours": 0.28,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        49.67,
+        -123.16
+      ]
+    },
+    {
+      "id": 11372656623,
+      "name": "People are dying that have never died before",
+      "type": "hiking",
+      "date": "2024-05-09",
+      "distanceMiles": 1.15,
+      "elevationGainFeet": 174,
+      "durationHours": 0.41,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        49.67,
+        -123.13
+      ]
+    },
+    {
+      "id": 11372381622,
+      "name": "Squamish 'Splorin and Post Holin'",
+      "type": "hiking",
+      "date": "2024-05-09",
+      "distanceMiles": 5.98,
+      "elevationGainFeet": 2067,
+      "durationHours": 2.86,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        49.67,
+        -123.13
+      ]
+    },
+    {
+      "id": 11226039643,
+      "name": "If you can't be a good example, be a warning.",
+      "type": "hiking",
+      "date": "2024-04-20",
+      "distanceMiles": 6.64,
+      "elevationGainFeet": 427,
+      "durationHours": 2.12,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.85,
+        -108.37
+      ]
+    },
+    {
+      "id": 11022722988,
+      "name": "Perpetual imminent death.",
+      "type": "trail-running",
+      "date": "2024-03-23",
+      "distanceMiles": 10.69,
+      "elevationGainFeet": 955,
+      "durationHours": 2.08,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.42,
+        -109.46
+      ]
+    },
+    {
+      "id": 10507630062,
+      "name": "I should have packed my lava lamp",
+      "type": "hiking",
+      "date": "2024-01-06",
+      "distanceMiles": 4.29,
+      "elevationGainFeet": 738,
+      "durationHours": 1.54,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.11,
+        -108.7
+      ]
+    },
+    {
+      "id": 10435960984,
+      "name": "Welcome to the real world. It sucks. You're gonna love it!",
+      "type": "hiking",
+      "date": "2023-12-25",
+      "distanceMiles": 2.22,
+      "elevationGainFeet": 364,
+      "durationHours": 0.92,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.16,
+        -113.5
+      ]
+    },
+    {
+      "id": 10431967761,
+      "name": "Give a man a fish and feed him for a day. Teach a man to fish and feed him for a lifetime. Teach a man to cycle and he will realize fishing is stupid and boring.",
+      "type": "hiking",
+      "date": "2023-12-24",
+      "distanceMiles": 4.92,
+      "elevationGainFeet": 561,
+      "durationHours": 1.84,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.28,
+        -113.65
+      ]
+    },
+    {
+      "id": 10421938188,
+      "name": "If properly dried and trimmed, New-York-style pizza can be used to make a box for Chicago-style pizza.",
+      "type": "hiking",
+      "date": "2023-12-22",
+      "distanceMiles": 1.49,
+      "elevationGainFeet": 269,
+      "durationHours": 0.55,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.21,
+        -112.94
+      ]
+    },
+    {
+      "id": 10420801046,
+      "name": "I was a life guard my junior year in high school. Had to give mouth-to-mouth to Mrs. Beerman. She belched up a lung full of corned beef and chlorine. I haven't been in a pool since.",
+      "type": "hiking",
+      "date": "2023-12-22",
+      "distanceMiles": 5.5,
+      "elevationGainFeet": 1919,
+      "durationHours": 2.01,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.26,
+        -112.95
+      ]
+    },
+    {
+      "id": 10416406938,
+      "name": "If I could have any superpower, I'd want to be able to whisper to someone: Your opinion is wrong and bad! and have them internalize it.",
+      "type": "hiking",
+      "date": "2023-12-21",
+      "distanceMiles": 4.01,
+      "elevationGainFeet": 482,
+      "durationHours": 1.7,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.16,
+        -113.51
+      ]
+    },
+    {
+      "id": 10391438513,
+      "name": "It's outrageous, egregious, preposterous.",
+      "type": "hiking",
+      "date": "2023-12-16",
+      "distanceMiles": 3.33,
+      "elevationGainFeet": 860,
+      "durationHours": 1.12,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.65,
+        -105.2
+      ]
+    },
+    {
+      "id": 10241292042,
+      "name": "Dead Horse 30k",
+      "type": "trail-running",
+      "date": "2023-11-18",
+      "distanceMiles": 17.14,
+      "elevationGainFeet": 1667,
+      "durationHours": 3.42,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.66,
+        -109.68
+      ]
+    },
+    {
+      "id": 10139421124,
+      "name": "Do you think horses get songs stuck in their heads?",
+      "type": "hiking",
+      "date": "2023-10-31",
+      "distanceMiles": 0.73,
+      "elevationGainFeet": 144,
+      "durationHours": 0.28,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.69,
+        -109.54
+      ]
+    },
+    {
+      "id": 10137300301,
+      "name": "Skull Arch and Fiery Furnace Haloween 'Splorin",
+      "type": "hiking",
+      "date": "2023-10-31",
+      "distanceMiles": 3.26,
+      "elevationGainFeet": 656,
+      "durationHours": 1.86,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.74,
+        -109.57
+      ]
+    },
+    {
+      "id": 10001659137,
+      "name": "Funnel Arch Scramblin",
+      "type": "hiking",
+      "date": "2023-10-08",
+      "distanceMiles": 1.05,
+      "elevationGainFeet": 335,
+      "durationHours": 0.6,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.52,
+        -109.6
+      ]
+    },
+    {
+      "id": 9996159248,
+      "name": "He Like A Man Who Took A High Dive In A Low Well.",
+      "type": "hiking",
+      "date": "2023-10-07",
+      "distanceMiles": 0.72,
+      "elevationGainFeet": 135,
+      "durationHours": 0.23,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.39,
+        -109.87
+      ]
+    },
+    {
+      "id": 9995843575,
+      "name": "Denial of denial is one of the first signs of denial.",
+      "type": "trail-running",
+      "date": "2023-10-07",
+      "distanceMiles": 8.68,
+      "elevationGainFeet": 1955,
+      "durationHours": 2.4,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.4,
+        -109.9
+      ]
+    },
+    {
+      "id": 9957678048,
+      "name": "Ophir loop w/ Otis & Kylie!",
+      "type": "hiking",
+      "date": "2023-10-01",
+      "distanceMiles": 4.23,
+      "elevationGainFeet": 1043,
+      "durationHours": 1.56,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.57,
+        -106.08
+      ]
+    },
+    {
+      "id": 9952163337,
+      "name": "Falcon Ridge Loop Scramble",
+      "type": "trail-running",
+      "date": "2023-09-30",
+      "distanceMiles": 3.6,
+      "elevationGainFeet": 1709,
+      "durationHours": 2.61,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.58,
+        -106.11
+      ]
+    },
+    {
+      "id": 9886251187,
+      "name": "Doing more than the minimum amount of work is my definition of failing.",
+      "type": "hiking",
+      "date": "2023-09-20",
+      "distanceMiles": 2.54,
+      "elevationGainFeet": 1266,
+      "durationHours": 1.1,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        40,
+        -105.28
+      ]
+    },
+    {
+      "id": 9782204959,
+      "name": "Killamanjaro Lemosho Route Expedition",
+      "type": "hiking",
+      "date": "2023-08-28",
+      "distanceMiles": 36.54,
+      "elevationGainFeet": 0,
+      "durationHours": 0,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        -3,
+        37.15
+      ]
+    },
+    {
+      "id": 9634951487,
+      "name": "Surely not EVERYONE was kung fu fighting.",
+      "type": "trail-running",
+      "date": "2023-08-12",
+      "distanceMiles": 10.52,
+      "elevationGainFeet": 1657,
+      "durationHours": 2.22,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.04,
+        -108
+      ]
+    },
+    {
+      "id": 9596619330,
+      "name": "Lost Lake Butte",
+      "type": "hiking",
+      "date": "2023-08-06",
+      "distanceMiles": 3.49,
+      "elevationGainFeet": 1129,
+      "durationHours": 1.04,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        45.5,
+        -121.82
+      ]
+    },
+    {
+      "id": 9596619291,
+      "name": "At this point, we aren't just flirting with disaster",
+      "type": "trail-running",
+      "date": "2023-08-05",
+      "distanceMiles": 8.87,
+      "elevationGainFeet": 1417,
+      "durationHours": 1.72,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        45.49,
+        -121.82
+      ]
+    },
+    {
+      "id": 9548073003,
+      "name": "Pacing Never Summer 100k",
+      "type": "trail-running",
+      "date": "2023-07-29",
+      "distanceMiles": 14.42,
+      "elevationGainFeet": 2339,
+      "durationHours": 4.3,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        40.61,
+        -106.01
+      ]
+    },
+    {
+      "id": 9538100569,
+      "name": "If I fall... don't bring me back.",
+      "type": "trail-running",
+      "date": "2023-07-28",
+      "distanceMiles": 6.06,
+      "elevationGainFeet": 659,
+      "durationHours": 1.36,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        40.61,
+        -106.02
+      ]
+    },
+    {
+      "id": 9512846450,
+      "name": "Dear frozen yogurt. You are the celery of desserts. Be ice cream or be nothing. Zero stars.",
+      "type": "trail-running",
+      "date": "2023-07-24",
+      "distanceMiles": 6.31,
+      "elevationGainFeet": 607,
+      "durationHours": 1.11,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.05,
+        -108.09
+      ]
+    },
+    {
+      "id": 9488259755,
+      "name": "Babies aren't dishwasher safe.",
+      "type": "trail-running",
+      "date": "2023-07-20",
+      "distanceMiles": 5.05,
+      "elevationGainFeet": 594,
+      "durationHours": 0.87,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.05,
+        -108.6
+      ]
+    },
+    {
+      "id": 9464852081,
+      "name": "Crag Crest With Otis",
+      "type": "hiking",
+      "date": "2023-07-16",
+      "distanceMiles": 10.87,
+      "elevationGainFeet": 1729,
+      "durationHours": 3.73,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.04,
+        -108
+      ]
+    },
+    {
+      "id": 9419473594,
+      "name": "Kendal Mountain Run",
+      "type": "trail-running",
+      "date": "2023-07-09",
+      "distanceMiles": 12.41,
+      "elevationGainFeet": 3930,
+      "durationHours": 3.02,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.81,
+        -107.66
+      ]
+    },
+    {
+      "id": 9412605203,
+      "name": "Silverton Alpine 8 Mile",
+      "type": "trail-running",
+      "date": "2023-07-08",
+      "distanceMiles": 8.59,
+      "elevationGainFeet": 407,
+      "durationHours": 1.33,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.82,
+        -107.66
+      ]
+    },
+    {
+      "id": 9388645391,
+      "name": "You're hoping for a unicorn?",
+      "type": "trail-running",
+      "date": "2023-07-04",
+      "distanceMiles": 14.36,
+      "elevationGainFeet": 5697,
+      "durationHours": 5.3,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.5,
+        -106.43
+      ]
+    },
+    {
+      "id": 9302524052,
+      "name": "Mount Baker via Colman-Demming",
+      "type": "hiking",
+      "date": "2023-06-16",
+      "distanceMiles": 22.93,
+      "elevationGainFeet": 9406,
+      "durationHours": 12.32,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        48.84,
+        -121.9
+      ]
+    },
+    {
+      "id": 9273531938,
+      "name": "Sauk Mountain",
+      "type": "hiking",
+      "date": "2023-06-15",
+      "distanceMiles": 4.55,
+      "elevationGainFeet": 1624,
+      "durationHours": 1.68,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        48.52,
+        -121.61
+      ]
+    },
+    {
+      "id": 9257777576,
+      "name": "Breakfast loops",
+      "type": "trail-running",
+      "date": "2023-06-13",
+      "distanceMiles": 5.94,
+      "elevationGainFeet": 820,
+      "durationHours": 1.01,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.05,
+        -108.6
+      ]
+    },
+    {
+      "id": 9246957247,
+      "name": "Kendal Road w/Otis #2!",
+      "type": "hiking",
+      "date": "2023-06-11",
+      "distanceMiles": 9.87,
+      "elevationGainFeet": 3176,
+      "durationHours": 3.29,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.81,
+        -107.66
+      ]
+    },
+    {
+      "id": 9196636718,
+      "name": "Little Wild Horse and Bell Canyon",
+      "type": "hiking",
+      "date": "2023-06-03",
+      "distanceMiles": 8.17,
+      "elevationGainFeet": 774,
+      "durationHours": 2.67,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.58,
+        -110.8
+      ]
+    },
+    {
+      "id": 9191318245,
+      "name": "Wild Horse Window",
+      "type": "trail-running",
+      "date": "2023-06-02",
+      "distanceMiles": 2.09,
+      "elevationGainFeet": 495,
+      "durationHours": 0.48,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.65,
+        -110.66
+      ]
+    },
+    {
+      "id": 9183605262,
+      "name": "Life moves pretty fast. If you don't stop and look around once in a while, you could miss it.",
+      "type": "trail-running",
+      "date": "2023-06-01",
+      "distanceMiles": 10.85,
+      "elevationGainFeet": 1745,
+      "durationHours": 2.03,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.11,
+        -108.7
+      ]
+    },
+    {
+      "id": 9164566207,
+      "name": "Kendall Road Climb ",
+      "type": "hiking",
+      "date": "2023-05-29",
+      "distanceMiles": 9.08,
+      "elevationGainFeet": 2874,
+      "durationHours": 3.48,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.81,
+        -107.66
+      ]
+    },
+    {
+      "id": 9152622118,
+      "name": "If You're Nothing Without The Suit, Then You Shouldn't Have It",
+      "type": "trail-running",
+      "date": "2023-05-27",
+      "distanceMiles": 6.2,
+      "elevationGainFeet": 840,
+      "durationHours": 1.37,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.12,
+        -108.84
+      ]
+    },
+    {
+      "id": 9147012277,
+      "name": "We never really grow up, we only learn how to ride in public.",
+      "type": "trail-running",
+      "date": "2023-05-26",
+      "distanceMiles": 4.01,
+      "elevationGainFeet": 1148,
+      "durationHours": 1.04,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.73,
+        -109.31
+      ]
+    },
+    {
+      "id": 9115689122,
+      "name": "Trail of ten falls",
+      "type": "hiking",
+      "date": "2023-05-21",
+      "distanceMiles": 8.54,
+      "elevationGainFeet": 1207,
+      "durationHours": 2.9,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        44.88,
+        -122.66
+      ]
+    },
+    {
+      "id": 9106554853,
+      "name": "Memaloose Loops",
+      "type": "hiking",
+      "date": "2023-05-20",
+      "distanceMiles": 2.92,
+      "elevationGainFeet": 709,
+      "durationHours": 1.25,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        45.69,
+        -121.35
+      ]
+    },
+    {
+      "id": 9065609202,
+      "name": "Only dead people know what happens when we die and that frustrates me.",
+      "type": "hiking",
+      "date": "2023-05-13",
+      "distanceMiles": 4.06,
+      "elevationGainFeet": 1017,
+      "durationHours": 1.57,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.58,
+        -109.64
+      ]
+    },
+    {
+      "id": 8939049062,
+      "name": "The truth is rarely pure and never simple",
+      "type": "trail-running",
+      "date": "2023-04-22",
+      "distanceMiles": 6.86,
+      "elevationGainFeet": 932,
+      "durationHours": 1.2,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.14,
+        -108.76
+      ]
+    },
+    {
+      "id": 8927797574,
+      "name": "Some of them want to use you Some of them want to get used by you Some of them want to abuse you Some of them want to be abused.",
+      "type": "trail-running",
+      "date": "2023-04-20",
+      "distanceMiles": 3.58,
+      "elevationGainFeet": 1965,
+      "durationHours": 1.16,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.12,
+        -108.39
+      ]
+    },
+    {
+      "id": 8891724724,
+      "name": "An object at rest cannot be stopped.",
+      "type": "trail-running",
+      "date": "2023-04-14",
+      "distanceMiles": 2.62,
+      "elevationGainFeet": 617,
+      "durationHours": 0.69,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.12,
+        -108.32
+      ]
+    },
+    {
+      "id": 8873728657,
+      "name": "Do you think that makes me less dangerous, or more dangerous?",
+      "type": "trail-running",
+      "date": "2023-04-11",
+      "distanceMiles": 5.13,
+      "elevationGainFeet": 682,
+      "durationHours": 1.05,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.16,
+        -108.78
+      ]
+    },
+    {
+      "id": 8863063352,
+      "name": "I love the smell of chain lube in the morning",
+      "type": "hiking",
+      "date": "2023-04-09",
+      "distanceMiles": 7.24,
+      "elevationGainFeet": 600,
+      "durationHours": 2.89,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.78,
+        -111.42
+      ]
+    },
+    {
+      "id": 8863062452,
+      "name": "Saw the whole thing, dude. First you were all like \"whoa\", and we were like \"whoa\", and you were like \"whoa...\"",
+      "type": "hiking",
+      "date": "2023-04-08",
+      "distanceMiles": 13.85,
+      "elevationGainFeet": 548,
+      "durationHours": 5.48,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.78,
+        -111.18
+      ]
+    },
+    {
+      "id": 8777048196,
+      "name": "Lower Monument Loop ",
+      "type": "trail-running",
+      "date": "2023-03-25",
+      "distanceMiles": 4.65,
+      "elevationGainFeet": 856,
+      "durationHours": 0.95,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.11,
+        -108.7
+      ]
+    },
+    {
+      "id": 8766925178,
+      "name": "Afternoon Trail Run",
+      "type": "trail-running",
+      "date": "2023-03-23",
+      "distanceMiles": 8,
+      "elevationGainFeet": 653,
+      "durationHours": 1.5,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.85,
+        -108.37
+      ]
+    },
+    {
+      "id": 8737841704,
+      "name": "Stagecoach Trail Run w/Kylie",
+      "type": "trail-running",
+      "date": "2023-03-18",
+      "distanceMiles": 5.81,
+      "elevationGainFeet": 1319,
+      "durationHours": 1.34,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.12,
+        -108.32
+      ]
+    },
+    {
+      "id": 8698757565,
+      "name": "Lower Monument Loop",
+      "type": "hiking",
+      "date": "2023-03-11",
+      "distanceMiles": 4.64,
+      "elevationGainFeet": 938,
+      "durationHours": 1.51,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.11,
+        -108.7
+      ]
+    },
+    {
+      "id": 8666481959,
+      "name": "Garfield with Ally",
+      "type": "hiking",
+      "date": "2023-03-05",
+      "distanceMiles": 3.79,
+      "elevationGainFeet": 2018,
+      "durationHours": 1.96,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.12,
+        -108.39
+      ]
+    },
+    {
+      "id": 8466983366,
+      "name": "Arches Ultra Half",
+      "type": "trail-running",
+      "date": "2023-01-28",
+      "distanceMiles": 13.32,
+      "elevationGainFeet": 951,
+      "durationHours": 2.42,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.66,
+        -109.68
+      ]
+    },
+    {
+      "id": 8290016523,
+      "name": "Christmas Sunrise Hike 🎄",
+      "type": "hiking",
+      "date": "2022-12-25",
+      "distanceMiles": 3.07,
+      "elevationGainFeet": 1306,
+      "durationHours": 1.13,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        33.51,
+        -111.94
+      ]
+    },
+    {
+      "id": 8287009368,
+      "name": "Tom's Thumb and Lookout Jaunt with Otis",
+      "type": "hiking",
+      "date": "2022-12-24",
+      "distanceMiles": 5.85,
+      "elevationGainFeet": 1680,
+      "durationHours": 1.84,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        33.69,
+        -111.8
+      ]
+    },
+    {
+      "id": 8282770504,
+      "name": "Piestewa Loop",
+      "type": "hiking",
+      "date": "2022-12-23",
+      "distanceMiles": 5.08,
+      "elevationGainFeet": 1886,
+      "durationHours": 1.97,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        33.54,
+        -112.02
+      ]
+    },
+    {
+      "id": 8279214550,
+      "name": "Picacho Peak with Kylie",
+      "type": "hiking",
+      "date": "2022-12-22",
+      "distanceMiles": 3.08,
+      "elevationGainFeet": 1824,
+      "durationHours": 1.66,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        32.64,
+        -111.4
+      ]
+    },
+    {
+      "id": 8272645092,
+      "name": "Camelback",
+      "type": "hiking",
+      "date": "2022-12-20",
+      "distanceMiles": 2.46,
+      "elevationGainFeet": 1348,
+      "durationHours": 1.3,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        33.52,
+        -111.97
+      ]
+    },
+    {
+      "id": 8229159469,
+      "name": "Serpent's Kitchen 🐍👨‍🍳 ",
+      "type": "hiking",
+      "date": "2022-12-09",
+      "distanceMiles": 4.96,
+      "elevationGainFeet": 1047,
+      "durationHours": 1.66,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.03,
+        -108.63
+      ]
+    },
+    {
+      "id": 8146210019,
+      "name": "Garfield with Kylie ",
+      "type": "hiking",
+      "date": "2022-11-20",
+      "distanceMiles": 3.69,
+      "elevationGainFeet": 1939,
+      "durationHours": 1.73,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.12,
+        -108.39
+      ]
+    },
+    {
+      "id": 8114183059,
+      "name": "Tellerico ",
+      "type": "hiking",
+      "date": "2022-11-13",
+      "distanceMiles": 5.65,
+      "elevationGainFeet": 2129,
+      "durationHours": 2.11,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.22,
+        -108.51
+      ]
+    },
+    {
+      "id": 8053718268,
+      "name": "Humboldt ",
+      "type": "hiking",
+      "date": "2022-11-01",
+      "distanceMiles": 11.28,
+      "elevationGainFeet": 4199,
+      "durationHours": 5.55,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.97,
+        -105.51
+      ]
+    },
+    {
+      "id": 7918032148,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2022-10-05",
+      "distanceMiles": 6.86,
+      "elevationGainFeet": 1060,
+      "durationHours": 2.02,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.05,
+        -108.6
+      ]
+    },
+    {
+      "id": 7861703520,
+      "name": "Cranberry Trail",
+      "type": "hiking",
+      "date": "2022-09-24",
+      "distanceMiles": 2.67,
+      "elevationGainFeet": 515,
+      "durationHours": 1.01,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        64.94,
+        -147.86
+      ]
+    },
+    {
+      "id": 7852253132,
+      "name": "Curry Ridge Trail ",
+      "type": "hiking",
+      "date": "2022-09-22",
+      "distanceMiles": 7.39,
+      "elevationGainFeet": 1194,
+      "durationHours": 2.4,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        62.59,
+        -150.23
+      ]
+    },
+    {
+      "id": 7841414434,
+      "name": "Lake Kontrashibuna -> Falls -> Beaver Ponds",
+      "type": "hiking",
+      "date": "2022-09-20",
+      "distanceMiles": 9.83,
+      "elevationGainFeet": 1020,
+      "durationHours": 3.53,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        60.2,
+        -154.33
+      ]
+    },
+    {
+      "id": 7835022406,
+      "name": "Byron Glacier",
+      "type": "hiking",
+      "date": "2022-09-19",
+      "distanceMiles": 2.1,
+      "elevationGainFeet": 203,
+      "durationHours": 0.7,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        60.77,
+        -148.84
+      ]
+    },
+    {
+      "id": 7831087785,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2022-09-18",
+      "distanceMiles": 0.77,
+      "elevationGainFeet": 79,
+      "durationHours": 0.32,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        60.79,
+        -148.88
+      ]
+    },
+    {
+      "id": 7792468080,
+      "name": "Morning Run x2",
+      "type": "trail-running",
+      "date": "2022-09-11",
+      "distanceMiles": 4.05,
+      "elevationGainFeet": 1870,
+      "durationHours": 1.11,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.01,
+        -106.84
+      ]
+    },
+    {
+      "id": 7760114197,
+      "name": "Antero 4x4 + Hike ",
+      "type": "hiking",
+      "date": "2022-09-05",
+      "distanceMiles": 4.66,
+      "elevationGainFeet": 1585,
+      "durationHours": 2.12,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.67,
+        -106.26
+      ]
+    },
+    {
+      "id": 7748445653,
+      "name": "Uncompahgre Peak",
+      "type": "hiking",
+      "date": "2022-09-03",
+      "distanceMiles": 7.69,
+      "elevationGainFeet": 2877,
+      "durationHours": 2.92,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.06,
+        -107.42
+      ]
+    },
+    {
+      "id": 7725739633,
+      "name": "Garfield With Luis",
+      "type": "hiking",
+      "date": "2022-08-30",
+      "distanceMiles": 3.64,
+      "elevationGainFeet": 2064,
+      "durationHours": 1.6,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.12,
+        -108.39
+      ]
+    },
+    {
+      "id": 7694246207,
+      "name": "Langley Backpack",
+      "type": "hiking",
+      "date": "2022-08-23",
+      "distanceMiles": 20.19,
+      "elevationGainFeet": 4465,
+      "durationHours": 7.91,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        36.45,
+        -118.17
+      ]
+    },
+    {
+      "id": 7687276099,
+      "name": "Whitney Mountaineers Route Overnight",
+      "type": "hiking",
+      "date": "2022-08-21",
+      "distanceMiles": 11.95,
+      "elevationGainFeet": 6483,
+      "durationHours": 7.56,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        36.59,
+        -118.24
+      ]
+    },
+    {
+      "id": 7600669835,
+      "name": "Weekend in the Weminuche",
+      "type": "hiking",
+      "date": "2022-08-05",
+      "distanceMiles": 22.97,
+      "elevationGainFeet": 8586,
+      "durationHours": 11.19,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.63,
+        -107.69
+      ]
+    },
+    {
+      "id": 7548218385,
+      "name": "Morning Trail Run",
+      "type": "trail-running",
+      "date": "2022-07-29",
+      "distanceMiles": 5.36,
+      "elevationGainFeet": 588,
+      "durationHours": 0.91,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.05,
+        -108.09
+      ]
+    },
+    {
+      "id": 7505381378,
+      "name": "Wildcat Trail",
+      "type": "hiking",
+      "date": "2022-07-21",
+      "distanceMiles": 5.13,
+      "elevationGainFeet": 1388,
+      "durationHours": 1.79,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.78,
+        -108.68
+      ]
+    },
+    {
+      "id": 7483414168,
+      "name": "Little Bear Blanca Backpack",
+      "type": "hiking",
+      "date": "2022-07-14",
+      "distanceMiles": 16.82,
+      "elevationGainFeet": 7254,
+      "durationHours": 9.75,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.56,
+        -105.55
+      ]
+    },
+    {
+      "id": 7442377843,
+      "name": "Sultan and Spencer",
+      "type": "hiking",
+      "date": "2022-07-09",
+      "distanceMiles": 7.49,
+      "elevationGainFeet": 2936,
+      "durationHours": 3.57,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.75,
+        -107.71
+      ]
+    },
+    {
+      "id": 7418770078,
+      "name": "Morning Trail Run",
+      "type": "trail-running",
+      "date": "2022-07-05",
+      "distanceMiles": 3.57,
+      "elevationGainFeet": 1850,
+      "durationHours": 1,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.12,
+        -108.39
+      ]
+    },
+    {
+      "id": 7408643510,
+      "name": "Sunrise Garfield ",
+      "type": "hiking",
+      "date": "2022-07-03",
+      "distanceMiles": 3.69,
+      "elevationGainFeet": 1844,
+      "durationHours": 1.67,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.12,
+        -108.39
+      ]
+    },
+    {
+      "id": 7398729323,
+      "name": "Wilson Peak",
+      "type": "hiking",
+      "date": "2022-07-01",
+      "distanceMiles": 9.95,
+      "elevationGainFeet": 3885,
+      "durationHours": 4.67,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.88,
+        -108.02
+      ]
+    },
+    {
+      "id": 7363249221,
+      "name": "Backpack up to Capitol Lake and the Saddle",
+      "type": "hiking",
+      "date": "2022-06-23",
+      "distanceMiles": 14.31,
+      "elevationGainFeet": 3501,
+      "durationHours": 5.86,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.23,
+        -107.08
+      ]
+    },
+    {
+      "id": 7297360800,
+      "name": "Garfield #1",
+      "type": "hiking",
+      "date": "2022-06-12",
+      "distanceMiles": 3.77,
+      "elevationGainFeet": 1867,
+      "durationHours": 1.62,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.12,
+        -108.39
+      ]
+    },
+    {
+      "id": 7260778382,
+      "name": "Tour de Huron",
+      "type": "hiking",
+      "date": "2022-06-05",
+      "distanceMiles": 11.51,
+      "elevationGainFeet": 4104,
+      "durationHours": 4.93,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.98,
+        -106.44
+      ]
+    },
+    {
+      "id": 7249888898,
+      "name": "Belford & Oxford",
+      "type": "hiking",
+      "date": "2022-06-03",
+      "distanceMiles": 11.15,
+      "elevationGainFeet": 5866,
+      "durationHours": 5.78,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39,
+        -106.37
+      ]
+    },
+    {
+      "id": 7218273515,
+      "name": "Princeton #2 ",
+      "type": "hiking",
+      "date": "2022-05-28",
+      "distanceMiles": 7.12,
+      "elevationGainFeet": 3376,
+      "durationHours": 4.3,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.75,
+        -106.2
+      ]
+    },
+    {
+      "id": 7206508160,
+      "name": "Sherm Attempt",
+      "type": "hiking",
+      "date": "2022-05-26",
+      "distanceMiles": 3.9,
+      "elevationGainFeet": 1781,
+      "durationHours": 1.83,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.21,
+        -106.17
+      ]
+    },
+    {
+      "id": 7152677363,
+      "name": "Quandry #2",
+      "type": "hiking",
+      "date": "2022-05-16",
+      "distanceMiles": 7.36,
+      "elevationGainFeet": 3366,
+      "durationHours": 3.92,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.38,
+        -106.06
+      ]
+    },
+    {
+      "id": 7143422160,
+      "name": "Holy bucket ",
+      "type": "hiking",
+      "date": "2022-05-14",
+      "distanceMiles": 3.2,
+      "elevationGainFeet": 400,
+      "durationHours": 1.07,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.05,
+        -108.59
+      ]
+    },
+    {
+      "id": 7104709787,
+      "name": "Lunch Hike",
+      "type": "hiking",
+      "date": "2022-05-07",
+      "distanceMiles": 2.32,
+      "elevationGainFeet": 587,
+      "durationHours": 0.97,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.61,
+        -105.72
+      ]
+    },
+    {
+      "id": 7092504147,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-05-05",
+      "distanceMiles": 1.52,
+      "elevationGainFeet": 249,
+      "durationHours": 0.47,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 7017819041,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-04-21",
+      "distanceMiles": 1.23,
+      "elevationGainFeet": 246,
+      "durationHours": 0.39,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 7002741763,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-04-18",
+      "distanceMiles": 1.69,
+      "elevationGainFeet": 262,
+      "durationHours": 0.51,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6997873881,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-04-17",
+      "distanceMiles": 1.82,
+      "elevationGainFeet": 312,
+      "durationHours": 0.56,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6986618519,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-04-15",
+      "distanceMiles": 1.37,
+      "elevationGainFeet": 249,
+      "durationHours": 0.47,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6980872541,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-04-14",
+      "distanceMiles": 1.66,
+      "elevationGainFeet": 272,
+      "durationHours": 0.5,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6975808815,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-04-13",
+      "distanceMiles": 1.73,
+      "elevationGainFeet": 262,
+      "durationHours": 0.5,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6970204589,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-04-12",
+      "distanceMiles": 1.78,
+      "elevationGainFeet": 95,
+      "durationHours": 0.59,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6965188454,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-04-11",
+      "distanceMiles": 1.75,
+      "elevationGainFeet": 269,
+      "durationHours": 0.53,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6961559197,
+      "name": "Lunch Hike",
+      "type": "hiking",
+      "date": "2022-04-10",
+      "distanceMiles": 1.6,
+      "elevationGainFeet": 446,
+      "durationHours": 0.5,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6955357262,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-04-09",
+      "distanceMiles": 1.74,
+      "elevationGainFeet": 266,
+      "durationHours": 0.56,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6947635503,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2022-04-07",
+      "distanceMiles": 3.32,
+      "elevationGainFeet": 774,
+      "durationHours": 1.2,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.43,
+        -106.16
+      ]
+    },
+    {
+      "id": 6951574866,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2022-04-07",
+      "distanceMiles": 3.22,
+      "elevationGainFeet": 610,
+      "durationHours": 1.19,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.43,
+        -106.16
+      ]
+    },
+    {
+      "id": 6945671115,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-04-07",
+      "distanceMiles": 1.45,
+      "elevationGainFeet": 358,
+      "durationHours": 0.43,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6940425548,
+      "name": "Morning Hike 🐕",
+      "type": "hiking",
+      "date": "2022-04-06",
+      "distanceMiles": 0.83,
+      "elevationGainFeet": 262,
+      "durationHours": 0.25,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6921108698,
+      "name": "Morning Otis Hike",
+      "type": "hiking",
+      "date": "2022-04-02",
+      "distanceMiles": 1.83,
+      "elevationGainFeet": 318,
+      "durationHours": 0.55,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6902679231,
+      "name": "Lunch Hike 🐕",
+      "type": "hiking",
+      "date": "2022-03-29",
+      "distanceMiles": 1.6,
+      "elevationGainFeet": 276,
+      "durationHours": 0.48,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6896406215,
+      "name": "Elope Hike",
+      "type": "hiking",
+      "date": "2022-03-28",
+      "distanceMiles": 2.21,
+      "elevationGainFeet": 1368,
+      "durationHours": 1.09,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.66,
+        -105.88
+      ]
+    },
+    {
+      "id": 6951574023,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-03-28",
+      "distanceMiles": 1.95,
+      "elevationGainFeet": 1227,
+      "durationHours": 1.12,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.66,
+        -105.88
+      ]
+    },
+    {
+      "id": 6892850091,
+      "name": "Lunch Hike",
+      "type": "hiking",
+      "date": "2022-03-27",
+      "distanceMiles": 1.03,
+      "elevationGainFeet": 144,
+      "durationHours": 0.32,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6886927197,
+      "name": "Lunch Hike 🐕",
+      "type": "hiking",
+      "date": "2022-03-26",
+      "distanceMiles": 1.88,
+      "elevationGainFeet": 335,
+      "durationHours": 0.56,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6864548503,
+      "name": "Morning Jaunt with Otis",
+      "type": "hiking",
+      "date": "2022-03-22",
+      "distanceMiles": 1.57,
+      "elevationGainFeet": 236,
+      "durationHours": 0.43,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6860226152,
+      "name": "Lunch Hike 🐕 ",
+      "type": "hiking",
+      "date": "2022-03-21",
+      "distanceMiles": 1.57,
+      "elevationGainFeet": 256,
+      "durationHours": 0.46,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6857203725,
+      "name": "Goblins Lair and Some Other Things",
+      "type": "hiking",
+      "date": "2022-03-19",
+      "distanceMiles": 3.85,
+      "elevationGainFeet": 561,
+      "durationHours": 1.4,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.56,
+        -110.7
+      ]
+    },
+    {
+      "id": 6951573070,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2022-03-19",
+      "distanceMiles": 3.86,
+      "elevationGainFeet": 545,
+      "durationHours": 1.46,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.56,
+        -110.7
+      ]
+    },
+    {
+      "id": 6951571988,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2022-03-18",
+      "distanceMiles": 2.59,
+      "elevationGainFeet": 646,
+      "durationHours": 1.25,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.36,
+        -111.47
+      ]
+    },
+    {
+      "id": 6845720283,
+      "name": "Sand Creek Falls",
+      "type": "hiking",
+      "date": "2022-03-18",
+      "distanceMiles": 3.15,
+      "elevationGainFeet": 840,
+      "durationHours": 1.3,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.36,
+        -111.47
+      ]
+    },
+    {
+      "id": 6843503448,
+      "name": "Ruin Arch",
+      "type": "hiking",
+      "date": "2022-03-18",
+      "distanceMiles": 0.9,
+      "elevationGainFeet": 177,
+      "durationHours": 0.39,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.17,
+        -110.74
+      ]
+    },
+    {
+      "id": 6951570996,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-03-18",
+      "distanceMiles": 0.59,
+      "elevationGainFeet": 105,
+      "durationHours": 0.26,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.16,
+        -110.74
+      ]
+    },
+    {
+      "id": 6833851066,
+      "name": "Morning 🐕 Hike",
+      "type": "hiking",
+      "date": "2022-03-16",
+      "distanceMiles": 1.57,
+      "elevationGainFeet": 246,
+      "durationHours": 0.49,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6823502377,
+      "name": "Morning Hike 🐕",
+      "type": "hiking",
+      "date": "2022-03-14",
+      "distanceMiles": 0.9,
+      "elevationGainFeet": 171,
+      "durationHours": 0.33,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6819500258,
+      "name": "Lunch Hike with Otis 🐕",
+      "type": "hiking",
+      "date": "2022-03-13",
+      "distanceMiles": 1.55,
+      "elevationGainFeet": 266,
+      "durationHours": 0.49,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6807693801,
+      "name": "Morning Hike with Otis",
+      "type": "hiking",
+      "date": "2022-03-11",
+      "distanceMiles": 0.81,
+      "elevationGainFeet": 69,
+      "durationHours": 0.22,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6803335759,
+      "name": "Morning Hike With Otis",
+      "type": "hiking",
+      "date": "2022-03-10",
+      "distanceMiles": 1.73,
+      "elevationGainFeet": 262,
+      "durationHours": 0.55,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6798333045,
+      "name": "Morning Hike with Oats(otis)",
+      "type": "hiking",
+      "date": "2022-03-09",
+      "distanceMiles": 0.75,
+      "elevationGainFeet": 144,
+      "durationHours": 0.24,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6951570716,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2022-03-01",
+      "distanceMiles": 2.74,
+      "elevationGainFeet": 830,
+      "durationHours": 1.28,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.68,
+        -105.52
+      ]
+    },
+    {
+      "id": 6708418629,
+      "name": "Lunch Hike",
+      "type": "hiking",
+      "date": "2022-02-19",
+      "distanceMiles": 4.77,
+      "elevationGainFeet": 1155,
+      "durationHours": 2.05,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.61,
+        -105.72
+      ]
+    },
+    {
+      "id": 6951569717,
+      "name": "Lunch Hike",
+      "type": "hiking",
+      "date": "2022-02-19",
+      "distanceMiles": 4.59,
+      "elevationGainFeet": 1089,
+      "durationHours": 2.12,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.61,
+        -105.71
+      ]
+    },
+    {
+      "id": 6678630574,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-02-13",
+      "distanceMiles": 1.71,
+      "elevationGainFeet": 390,
+      "durationHours": 0.49,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6672507997,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-02-12",
+      "distanceMiles": 1.37,
+      "elevationGainFeet": 253,
+      "durationHours": 0.46,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6666987613,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-02-11",
+      "distanceMiles": 1.74,
+      "elevationGainFeet": 259,
+      "durationHours": 0.58,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6663653600,
+      "name": "Evans from Guanella Pass Attempt 🏔",
+      "type": "hiking",
+      "date": "2022-02-10",
+      "distanceMiles": 8.49,
+      "elevationGainFeet": 2913,
+      "durationHours": 3.55,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.61,
+        -105.72
+      ]
+    },
+    {
+      "id": 6658330675,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-02-09",
+      "distanceMiles": 1.81,
+      "elevationGainFeet": 427,
+      "durationHours": 0.6,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6641974279,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-02-06",
+      "distanceMiles": 1.81,
+      "elevationGainFeet": 276,
+      "durationHours": 0.59,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6636615250,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-02-05",
+      "distanceMiles": 3.51,
+      "elevationGainFeet": 459,
+      "durationHours": 1.14,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6631000113,
+      "name": "Cupid & Grizzly D",
+      "type": "hiking",
+      "date": "2022-02-04",
+      "distanceMiles": 6.06,
+      "elevationGainFeet": 3081,
+      "durationHours": 2.59,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.66,
+        -105.88
+      ]
+    },
+    {
+      "id": 6626602754,
+      "name": "Lunch Hike",
+      "type": "hiking",
+      "date": "2022-02-03",
+      "distanceMiles": 2,
+      "elevationGainFeet": 299,
+      "durationHours": 0.62,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6621311340,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-02-02",
+      "distanceMiles": 1.88,
+      "elevationGainFeet": 279,
+      "durationHours": 0.57,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6617400877,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-02-01",
+      "distanceMiles": 4.1,
+      "elevationGainFeet": 384,
+      "durationHours": 1.27,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6606840419,
+      "name": "Long Morning Hike With Otis",
+      "type": "hiking",
+      "date": "2022-01-30",
+      "distanceMiles": 5.42,
+      "elevationGainFeet": 446,
+      "durationHours": 1.78,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6600777938,
+      "name": "Otis needs to climb at least 100ft before he poops now",
+      "type": "hiking",
+      "date": "2022-01-29",
+      "distanceMiles": 0.64,
+      "elevationGainFeet": 154,
+      "durationHours": 0.22,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6595709825,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-01-28",
+      "distanceMiles": 4.34,
+      "elevationGainFeet": 400,
+      "durationHours": 1.3,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6590656494,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-01-27",
+      "distanceMiles": 3.21,
+      "elevationGainFeet": 322,
+      "durationHours": 1.02,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6585596149,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-01-26",
+      "distanceMiles": 2.42,
+      "elevationGainFeet": 305,
+      "durationHours": 0.76,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6570927796,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-01-23",
+      "distanceMiles": 5.6,
+      "elevationGainFeet": 430,
+      "durationHours": 1.86,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6559191188,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-01-21",
+      "distanceMiles": 1.66,
+      "elevationGainFeet": 236,
+      "durationHours": 0.5,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6553733976,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-01-20",
+      "distanceMiles": 1.67,
+      "elevationGainFeet": 249,
+      "durationHours": 0.52,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6549502731,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-01-19",
+      "distanceMiles": 1.05,
+      "elevationGainFeet": 177,
+      "durationHours": 0.35,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6544072471,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-01-18",
+      "distanceMiles": 1.44,
+      "elevationGainFeet": 49,
+      "durationHours": 0.45,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6538653982,
+      "name": "Otis Said \"All done\" 🥶🥶",
+      "type": "hiking",
+      "date": "2022-01-17",
+      "distanceMiles": 8.34,
+      "elevationGainFeet": 1962,
+      "durationHours": 2.84,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.61,
+        -105.72
+      ]
+    },
+    {
+      "id": 6534534148,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-01-16",
+      "distanceMiles": 1.57,
+      "elevationGainFeet": 322,
+      "durationHours": 0.49,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6529038808,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-01-15",
+      "distanceMiles": 4.44,
+      "elevationGainFeet": 381,
+      "durationHours": 1.39,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6522757491,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-01-14",
+      "distanceMiles": 1.64,
+      "elevationGainFeet": 236,
+      "durationHours": 0.51,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6517779009,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-01-13",
+      "distanceMiles": 1.75,
+      "elevationGainFeet": 226,
+      "durationHours": 0.51,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6512883364,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2022-01-12",
+      "distanceMiles": 1.52,
+      "elevationGainFeet": 243,
+      "durationHours": 0.44,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.72,
+        -105.69
+      ]
+    },
+    {
+      "id": 6502490295,
+      "name": "I should track these more... morning walk with Oats",
+      "type": "hiking",
+      "date": "2022-01-10",
+      "distanceMiles": 0.78,
+      "elevationGainFeet": 151,
+      "durationHours": 0.23,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.73,
+        -105.69
+      ]
+    },
+    {
+      "id": 6951568231,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-12-04",
+      "distanceMiles": 6.48,
+      "elevationGainFeet": 2320,
+      "durationHours": 3.66,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.39,
+        -106.09
+      ]
+    },
+    {
+      "id": 6303710606,
+      "name": "Lunch Hike",
+      "type": "hiking",
+      "date": "2021-11-24",
+      "distanceMiles": 2.74,
+      "elevationGainFeet": 791,
+      "durationHours": 1.09,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.7,
+        -105.85
+      ]
+    },
+    {
+      "id": 6951565120,
+      "name": "Lunch Hike",
+      "type": "hiking",
+      "date": "2021-11-24",
+      "distanceMiles": 2.54,
+      "elevationGainFeet": 699,
+      "durationHours": 1.17,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.7,
+        -105.85
+      ]
+    },
+    {
+      "id": 6951564227,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-11-18",
+      "distanceMiles": 10.33,
+      "elevationGainFeet": 3930,
+      "durationHours": 5.39,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39,
+        -106.38
+      ]
+    },
+    {
+      "id": 6252667927,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-11-13",
+      "distanceMiles": 2.26,
+      "elevationGainFeet": 846,
+      "durationHours": 0.94,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.2,
+        -106.16
+      ]
+    },
+    {
+      "id": 6951559723,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-11-13",
+      "distanceMiles": 2.03,
+      "elevationGainFeet": 863,
+      "durationHours": 0.98,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.2,
+        -106.16
+      ]
+    },
+    {
+      "id": 6951558843,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2021-10-29",
+      "distanceMiles": 3.32,
+      "elevationGainFeet": 26,
+      "durationHours": 1.57,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.01,
+        -106.86
+      ]
+    },
+    {
+      "id": 6951557621,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-10-29",
+      "distanceMiles": 3.82,
+      "elevationGainFeet": 2523,
+      "durationHours": 2.38,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39,
+        -106.84
+      ]
+    },
+    {
+      "id": 6951555630,
+      "name": "Uncompahgre ",
+      "type": "hiking",
+      "date": "2021-10-21",
+      "distanceMiles": 7.49,
+      "elevationGainFeet": 2753,
+      "durationHours": 4.12,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.06,
+        -107.42
+      ]
+    },
+    {
+      "id": 6133926906,
+      "name": "Maroon Pass Backpacking ",
+      "type": "hiking",
+      "date": "2021-10-17",
+      "distanceMiles": 13.88,
+      "elevationGainFeet": 3241,
+      "durationHours": 5.78,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.1,
+        -106.94
+      ]
+    },
+    {
+      "id": 6951552593,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-10-17",
+      "distanceMiles": 13.19,
+      "elevationGainFeet": 3018,
+      "durationHours": 6.01,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.1,
+        -106.94
+      ]
+    },
+    {
+      "id": 6951548428,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-10-10",
+      "distanceMiles": 6.58,
+      "elevationGainFeet": 1093,
+      "durationHours": 3.18,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        40.08,
+        -105.59
+      ]
+    },
+    {
+      "id": 6070340605,
+      "name": "Kelso Ridge Sunset #2",
+      "type": "hiking",
+      "date": "2021-10-05",
+      "distanceMiles": 6.75,
+      "elevationGainFeet": 2867,
+      "durationHours": 2.95,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.66,
+        -105.78
+      ]
+    },
+    {
+      "id": 6060433785,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-10-03",
+      "distanceMiles": 13.05,
+      "elevationGainFeet": 2526,
+      "durationHours": 4.93,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.23,
+        -107.08
+      ]
+    },
+    {
+      "id": 6951543653,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-10-03",
+      "distanceMiles": 12.83,
+      "elevationGainFeet": 2507,
+      "durationHours": 5.25,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.23,
+        -107.08
+      ]
+    },
+    {
+      "id": 5981619520,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2021-09-17",
+      "distanceMiles": 5.01,
+      "elevationGainFeet": 1955,
+      "durationHours": 2.09,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.96,
+        -106.46
+      ]
+    },
+    {
+      "id": 5961750684,
+      "name": "Hail and thunder? No thank you",
+      "type": "hiking",
+      "date": "2021-09-14",
+      "distanceMiles": 4.48,
+      "elevationGainFeet": 1434,
+      "durationHours": 1.65,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.8,
+        -105.78
+      ]
+    },
+    {
+      "id": 5951843448,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2021-09-12",
+      "distanceMiles": 5.77,
+      "elevationGainFeet": 1988,
+      "durationHours": 2.63,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.6,
+        -105.64
+      ]
+    },
+    {
+      "id": 5940157189,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2021-09-10",
+      "distanceMiles": 3.68,
+      "elevationGainFeet": 1463,
+      "durationHours": 1.55,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.66,
+        -105.88
+      ]
+    },
+    {
+      "id": 5939899761,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2021-09-10",
+      "distanceMiles": 3.58,
+      "elevationGainFeet": 1483,
+      "durationHours": 1.76,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.66,
+        -105.88
+      ]
+    },
+    {
+      "id": 5758878525,
+      "name": "Evening Hike",
+      "type": "hiking",
+      "date": "2021-08-06",
+      "distanceMiles": 3.23,
+      "elevationGainFeet": 1263,
+      "durationHours": 1.36,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.98,
+        -105.51
+      ]
+    },
+    {
+      "id": 5750142300,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-08-06",
+      "distanceMiles": 8.19,
+      "elevationGainFeet": 3448,
+      "durationHours": 3.81,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.62,
+        -105.47
+      ]
+    },
+    {
+      "id": 5674858238,
+      "name": "Mt Sneffels W Ridge",
+      "type": "hiking",
+      "date": "2021-07-23",
+      "distanceMiles": 3.95,
+      "elevationGainFeet": 2047,
+      "durationHours": 1.72,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.99,
+        -107.78
+      ]
+    },
+    {
+      "id": 5669045133,
+      "name": "Wetterhorn Peak",
+      "type": "hiking",
+      "date": "2021-07-21",
+      "distanceMiles": 7.31,
+      "elevationGainFeet": 2904,
+      "durationHours": 3.13,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.03,
+        -107.49
+      ]
+    },
+    {
+      "id": 5643616903,
+      "name": "Mt Harvard",
+      "type": "hiking",
+      "date": "2021-07-17",
+      "distanceMiles": 12.91,
+      "elevationGainFeet": 4337,
+      "durationHours": 4.8,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.87,
+        -106.27
+      ]
+    },
+    {
+      "id": 5623378587,
+      "name": "Pyramid",
+      "type": "hiking",
+      "date": "2021-07-13",
+      "distanceMiles": 9.1,
+      "elevationGainFeet": 4835,
+      "durationHours": 4.28,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.1,
+        -106.94
+      ]
+    },
+    {
+      "id": 5613913113,
+      "name": "Evening Hike",
+      "type": "hiking",
+      "date": "2021-07-11",
+      "distanceMiles": 6.71,
+      "elevationGainFeet": 2524,
+      "durationHours": 2.42,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.6,
+        -105.71
+      ]
+    },
+    {
+      "id": 5597893860,
+      "name": "Kelso Ridge Sunset",
+      "type": "hiking",
+      "date": "2021-07-08",
+      "distanceMiles": 6.71,
+      "elevationGainFeet": 3120,
+      "durationHours": 2.63,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.66,
+        -105.78
+      ]
+    },
+    {
+      "id": 5576070320,
+      "name": "Handes (2nd bit)",
+      "type": "hiking",
+      "date": "2021-07-04",
+      "distanceMiles": 1.39,
+      "elevationGainFeet": 0,
+      "durationHours": 0.49,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.93,
+        -107.48
+      ]
+    },
+    {
+      "id": 5576070017,
+      "name": "Handes (1st bit, watch stopped)",
+      "type": "hiking",
+      "date": "2021-07-04",
+      "distanceMiles": 5.43,
+      "elevationGainFeet": 3514,
+      "durationHours": 2.29,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.94,
+        -107.46
+      ]
+    },
+    {
+      "id": 5576066979,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-07-03",
+      "distanceMiles": 11.46,
+      "elevationGainFeet": 4101,
+      "durationHours": 4.53,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.94,
+        -107.46
+      ]
+    },
+    {
+      "id": 5534389384,
+      "name": "Wet Lindsey Attempt",
+      "type": "hiking",
+      "date": "2021-06-26",
+      "distanceMiles": 7.51,
+      "elevationGainFeet": 2805,
+      "durationHours": 3.44,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.62,
+        -105.47
+      ]
+    },
+    {
+      "id": 5449881866,
+      "name": "Sunset Bierstadt",
+      "type": "hiking",
+      "date": "2021-06-10",
+      "distanceMiles": 7.38,
+      "elevationGainFeet": 2608,
+      "durationHours": 2.86,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.6,
+        -105.71
+      ]
+    },
+    {
+      "id": 5425369408,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-06-06",
+      "distanceMiles": 4.45,
+      "elevationGainFeet": 1722,
+      "durationHours": 1.89,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.66,
+        -105.88
+      ]
+    },
+    {
+      "id": 5302780702,
+      "name": "Mt. Silverheels",
+      "type": "hiking",
+      "date": "2021-05-15",
+      "distanceMiles": 8.47,
+      "elevationGainFeet": 3356,
+      "durationHours": 3.68,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.36,
+        -106.06
+      ]
+    },
+    {
+      "id": 5198873818,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2021-04-26",
+      "distanceMiles": 8,
+      "elevationGainFeet": 1736,
+      "durationHours": 1.97,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.65,
+        -105.2
+      ]
+    },
+    {
+      "id": 5190602392,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-04-25",
+      "distanceMiles": 0.4,
+      "elevationGainFeet": 92,
+      "durationHours": 0.17,
+      "location": "Unknown Location",
+      "startCoordinates": []
+    },
+    {
+      "id": 5022189815,
+      "name": "A Sniper Shot my Knee",
+      "type": "hiking",
+      "date": "2021-03-27",
+      "distanceMiles": 9.94,
+      "elevationGainFeet": 3819,
+      "durationHours": 4.43,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.99,
+        -105.47
+      ]
+    },
+    {
+      "id": 4974516632,
+      "name": "Little Death Hollow",
+      "type": "hiking",
+      "date": "2021-03-16",
+      "distanceMiles": 25.45,
+      "elevationGainFeet": 1463,
+      "durationHours": 9.38,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.78,
+        -111.18
+      ]
+    },
+    {
+      "id": 4974497271,
+      "name": "Lunch Hike",
+      "type": "hiking",
+      "date": "2021-03-16",
+      "distanceMiles": 26.36,
+      "elevationGainFeet": 1493,
+      "durationHours": 10.1,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.78,
+        -111.18
+      ]
+    },
+    {
+      "id": 4974501816,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2021-03-15",
+      "distanceMiles": 2.15,
+      "elevationGainFeet": 630,
+      "durationHours": 1.07,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.78,
+        -111.18
+      ]
+    },
+    {
+      "id": 4974499739,
+      "name": "Bow Tie and Halo Arch",
+      "type": "hiking",
+      "date": "2021-03-14",
+      "distanceMiles": 2.37,
+      "elevationGainFeet": 476,
+      "durationHours": 0.84,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.57,
+        -109.63
+      ]
+    },
+    {
+      "id": 4903536585,
+      "name": "La Plata Winter Route",
+      "type": "hiking",
+      "date": "2021-03-06",
+      "distanceMiles": 8.41,
+      "elevationGainFeet": 4768,
+      "durationHours": 4,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.07,
+        -106.51
+      ]
+    },
+    {
+      "id": 4879529330,
+      "name": "Bierstadt Round 2",
+      "type": "hiking",
+      "date": "2021-03-02",
+      "distanceMiles": 9.98,
+      "elevationGainFeet": 3301,
+      "durationHours": 3.32,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.61,
+        -105.72
+      ]
+    },
+    {
+      "id": 4861386636,
+      "name": "Galbraith via Nightbird",
+      "type": "hiking",
+      "date": "2021-02-27",
+      "distanceMiles": 5.4,
+      "elevationGainFeet": 1470,
+      "durationHours": 1.86,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.76,
+        -105.24
+      ]
+    },
+    {
+      "id": 4826572453,
+      "name": "Twin Sisters",
+      "type": "hiking",
+      "date": "2021-02-21",
+      "distanceMiles": 7.43,
+      "elevationGainFeet": 3274,
+      "durationHours": 2.93,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        40.31,
+        -105.54
+      ]
+    },
+    {
+      "id": 4818919551,
+      "name": "Snowy Windy Mines Peak Jaunt",
+      "type": "hiking",
+      "date": "2021-02-20",
+      "distanceMiles": 3.94,
+      "elevationGainFeet": 1211,
+      "durationHours": 1.66,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.8,
+        -105.78
+      ]
+    },
+    {
+      "id": 4793589903,
+      "name": "Royal Arch via Baseline",
+      "type": "hiking",
+      "date": "2021-02-15",
+      "distanceMiles": 4.06,
+      "elevationGainFeet": 1795,
+      "durationHours": 1.76,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        40,
+        -105.29
+      ]
+    },
+    {
+      "id": 4788864633,
+      "name": "Cliche Things",
+      "type": "hiking",
+      "date": "2021-02-14",
+      "distanceMiles": 3.57,
+      "elevationGainFeet": 1627,
+      "durationHours": 1.6,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.66,
+        -105.88
+      ]
+    },
+    {
+      "id": 4782077763,
+      "name": "1st and 2nd Flatiron",
+      "type": "hiking",
+      "date": "2021-02-13",
+      "distanceMiles": 21.56,
+      "elevationGainFeet": 2444,
+      "durationHours": 1.92,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        40,
+        -105.29
+      ]
+    },
+    {
+      "id": 4750867956,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-02-07",
+      "distanceMiles": 0.91,
+      "elevationGainFeet": 1873,
+      "durationHours": 0.5,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.86,
+        -104.93
+      ]
+    },
+    {
+      "id": 4744897284,
+      "name": "Montaña Verde",
+      "type": "hiking",
+      "date": "2021-02-06",
+      "distanceMiles": 3.87,
+      "elevationGainFeet": 817,
+      "durationHours": 1.23,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.98,
+        -105.32
+      ]
+    },
+    {
+      "id": 4715415254,
+      "name": "Humboldt Attempt",
+      "type": "hiking",
+      "date": "2021-01-31",
+      "distanceMiles": 12.77,
+      "elevationGainFeet": 4816,
+      "durationHours": 5.94,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.99,
+        -105.47
+      ]
+    },
+    {
+      "id": 4676496277,
+      "name": "Grey Rock via Meadows",
+      "type": "hiking",
+      "date": "2021-01-24",
+      "distanceMiles": 8.16,
+      "elevationGainFeet": 2723,
+      "durationHours": 3.14,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        40.69,
+        -105.28
+      ]
+    },
+    {
+      "id": 4631802559,
+      "name": "Horseshoe Mountain Attempt",
+      "type": "hiking",
+      "date": "2021-01-16",
+      "distanceMiles": 6.28,
+      "elevationGainFeet": 1424,
+      "durationHours": 2.21,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.2,
+        -106.12
+      ]
+    },
+    {
+      "id": 4562876888,
+      "name": "Cheif Mountain",
+      "type": "hiking",
+      "date": "2021-01-03",
+      "distanceMiles": 2.88,
+      "elevationGainFeet": 974,
+      "durationHours": 1.02,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.68,
+        -105.52
+      ]
+    },
+    {
+      "id": 4550277159,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2021-01-01",
+      "distanceMiles": 4.11,
+      "elevationGainFeet": 1731,
+      "durationHours": 1.87,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.36,
+        -106.07
+      ]
+    },
+    {
+      "id": 4399261017,
+      "name": "Otis can't snowshoe",
+      "type": "hiking",
+      "date": "2020-11-27",
+      "distanceMiles": 1.82,
+      "elevationGainFeet": 348,
+      "durationHours": 0.76,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.2,
+        -106.16
+      ]
+    },
+    {
+      "id": 4377507333,
+      "name": "Grizzly Lake",
+      "type": "hiking",
+      "date": "2020-11-22",
+      "distanceMiles": 5.73,
+      "elevationGainFeet": 1294,
+      "durationHours": 2.44,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.7,
+        -106.34
+      ]
+    },
+    {
+      "id": 4282635202,
+      "name": "Quandary Peak",
+      "type": "hiking",
+      "date": "2020-11-03",
+      "distanceMiles": 6.47,
+      "elevationGainFeet": 3028,
+      "durationHours": 2.9,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.39,
+        -106.06
+      ]
+    },
+    {
+      "id": 4269173825,
+      "name": "Afternoon Hike",
+      "type": "hiking",
+      "date": "2020-10-31",
+      "distanceMiles": 2.59,
+      "elevationGainFeet": 636,
+      "durationHours": 0.91,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        38.49,
+        -107.56
+      ]
+    },
+    {
+      "id": 4177928199,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2020-10-10",
+      "distanceMiles": 4.08,
+      "elevationGainFeet": 1385,
+      "durationHours": 1.77,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.67,
+        -105.88
+      ]
+    },
+    {
+      "id": 4152535946,
+      "name": "Mt Belford",
+      "type": "hiking",
+      "date": "2020-10-04",
+      "distanceMiles": 8.23,
+      "elevationGainFeet": 4504,
+      "durationHours": 3.98,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39,
+        -106.37
+      ]
+    },
+    {
+      "id": 4121162460,
+      "name": "Blue lakes",
+      "type": "hiking",
+      "date": "2020-09-27",
+      "distanceMiles": 6.66,
+      "elevationGainFeet": 1368,
+      "durationHours": 3,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        40.08,
+        -105.58
+      ]
+    },
+    {
+      "id": 4103235373,
+      "name": "Lost Creek Wilderness Loop",
+      "type": "hiking",
+      "date": "2020-09-20",
+      "distanceMiles": 30.68,
+      "elevationGainFeet": 6051,
+      "durationHours": 11.23,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.28,
+        -105.51
+      ]
+    },
+    {
+      "id": 3988108300,
+      "name": "Lower Mohawk Lakes",
+      "type": "hiking",
+      "date": "2020-08-29",
+      "distanceMiles": 5.88,
+      "elevationGainFeet": 1442,
+      "durationHours": 2.88,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.44,
+        -106.05
+      ]
+    },
+    {
+      "id": 3956522064,
+      "name": "Kelso Ridge",
+      "type": "hiking",
+      "date": "2020-08-23",
+      "distanceMiles": 7.51,
+      "elevationGainFeet": 3560,
+      "durationHours": 3.39,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        39.66,
+        -105.78
+      ]
+    },
+    {
+      "id": 3933856394,
+      "name": "Longs Peak",
+      "type": "hiking",
+      "date": "2020-08-17",
+      "distanceMiles": 13.55,
+      "elevationGainFeet": 5144,
+      "durationHours": 5.88,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        40.27,
+        -105.56
+      ]
+    },
+    {
+      "id": 3885259219,
+      "name": "Morning Hike",
+      "type": "hiking",
+      "date": "2020-08-08",
+      "distanceMiles": 1.71,
+      "elevationGainFeet": 1696,
+      "durationHours": 0.84,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.95,
+        -107.42
+      ]
+    },
+    {
+      "id": 3885257463,
+      "name": "Night Hike",
+      "type": "hiking",
+      "date": "2020-08-08",
+      "distanceMiles": 3.02,
+      "elevationGainFeet": 1869,
+      "durationHours": 1.35,
+      "location": "Unknown Location",
+      "startCoordinates": [
+        37.94,
+        -107.46
+      ]
+    }
+  ]
+}

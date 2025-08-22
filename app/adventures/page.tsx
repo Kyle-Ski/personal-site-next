@@ -1,6 +1,6 @@
 import AdventureHero from '@/components/adventure/AdventureHero'
 import TripReportCard from '@/components/adventure/TripReportCard'
-import { Mountain, MapPin, Calendar, Trophy, TrendingUp } from 'lucide-react'
+import { Mountain, MapPin, Calendar, Trophy, TrendingUp, ArrowUp } from 'lucide-react'
 import { SanityService, TripReport, AdventureStats } from '@/lib/cmsProvider'
 import Link from 'next/link'
 
@@ -37,7 +37,11 @@ async function getAdventureData(): Promise<{
         totalPeaks: 0, 
         totalMiles: 0, 
         highestElevation: 0, 
-        completedThisYear: 0 
+        completedThisYear: 0,
+        totalElevationGain: 0,
+        stravaActivities: 0,
+        tripReports: 0,
+        duplicatesRemoved: 0
       } 
     };
   }
@@ -46,7 +50,7 @@ async function getAdventureData(): Promise<{
 export default async function AdventuresPage() {
   const { tripReports, stats } = await getAdventureData();
 
-  // Build hero stats from real data
+  // Build hero stats from real data - now with 5 stats including elevation gained
   const heroStats = [
     {
       label: 'Peaks Summited',
@@ -59,13 +63,18 @@ export default async function AdventuresPage() {
       icon: MapPin
     },
     {
-      label: 'This Year',
-      value: `${stats.completedThisYear} Adventures`,
-      icon: Calendar
+      label: 'Elevation Gained',
+      value: stats.totalElevationGain > 0 ? `${Math.round(stats.totalElevationGain / 1000).toLocaleString()}k ft` : 'Climbing...',
+      icon: ArrowUp
     },
+    // {
+    //   label: 'This Year',
+    //   value: `${stats.completedThisYear} Adventures`,
+    //   icon: Calendar
+    // },
     {
       label: 'Highest Summit',
-      value: stats.highestElevation > 0 ? `${stats.highestElevation.toLocaleString()}'` : 'TBD',
+      value: '19,341 ft',
       icon: TrendingUp
     }
   ];
@@ -74,8 +83,8 @@ export default async function AdventuresPage() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <AdventureHero
-        title="Adventures & Expeditions"
-        subtitle="Exploring Colorado&apos;s peaks, trails, and backcountry one summit at a time"
+        title="Adventures in the Great Outdoors"
+        subtitle="Exploring as many peaks, trails, and backcountry lines as I can"
         backgroundImage="/images/adventure-hero.jpg"
         stats={heroStats}
       />

@@ -1,10 +1,10 @@
 import { SanityService, GearReview } from "@/lib/cmsProvider"
 import GearReviewDetail from "@/components/gear/GearReviewDetail"
 import { notFound } from "next/navigation"
+import { Metadata } from "next"
 
-interface Props {
-    params: { slug: string }
-    searchParams: { [key: string]: string | string[] | undefined }
+interface PageProps {
+    params: Promise<{ slug: string }>
 }
 
 async function getGearReview(slug: string): Promise<GearReview | null> {
@@ -23,9 +23,10 @@ async function getGearReview(slug: string): Promise<GearReview | null> {
     }
 }
 
-export async function generateMetadata({ params }: Props) {
-    const review = await getGearReview(params.slug)
-
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const review = await getGearReview(slug)
+    
     if (!review) {
         return {
             title: 'Gear Review Not Found - Kyle Czajkowski',
@@ -52,20 +53,20 @@ export async function generateMetadata({ params }: Props) {
             description: review.excerpt,
             images: review.mainImage ? [review.mainImage] : [],
         },
-        // Structured data for gear reviews
         other: {
             'product:brand': review.brand,
             'product:availability': 'in_stock',
             'product:condition': 'new',
-            'product:price:amount': review.price?.toString(),
+            // 'product:price:amount': review.price?.toString(),
             'product:price:currency': 'USD',
             'product:retailer_item_id': review.slug,
         }
     }
 }
 
-export default async function GearReviewPage({ params }: Props) {
-    const review = await getGearReview(params.slug)
+export default async function GearReviewPage({ params }: PageProps) {
+    const { slug } = await params;
+    const review = await getGearReview(slug)
 
     if (!review) {
         notFound()
