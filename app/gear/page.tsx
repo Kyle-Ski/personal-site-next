@@ -43,6 +43,7 @@ export default async function GearPage() {
           packLists={packLists}
         />
       </section>
+      <AdventureNav currentPage="gear" />
     </div>
   )
 }

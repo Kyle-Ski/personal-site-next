@@ -2,228 +2,194 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, Mountain, Code } from "lucide-react";
+import { Menu, X, Mountain, Code, ChevronDown } from "lucide-react";
 import ToggleDarkMode from "./ToggleDarkMode";
 import { ABOUT_TITLE, FOOTER, PERSONAL_TIMELINE_ANCHOR, PROJECTS_TITLE, RESUME_ANCHOR, SKILLS_TITLE, STRAVA_TITLE } from "@/utils/constants";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState('')
+  const [activeItem, setActiveItem] = useState('');
+  const [showAdventureDropdown, setShowAdventureDropdown] = useState(false);
 
-  const navItems = [
-    {
-      href: `/#${ABOUT_TITLE}`,
-      label: "About",
-      type: "main"
-    },
-    {
-      href: `/#${PERSONAL_TIMELINE_ANCHOR}`,
-      label: "Timeline",
-      type: "main"
-    },
-    {
-      href: `/#${PROJECTS_TITLE}`,
-      label: "Projects",
-      type: "main"
-    },
-    {
-      href: `/blog`,
-      label: "Blog",
-      type: "main",
-      icon: Code
-    },
-    // Adventure section
-    // {
-    //   href: `/adventures`,
-    //   label: "Adventures",
-    //   type: "adventure",
-    //   icon: Mountain
-    // },
-    {
-      href: `/gear`,
-      label: "Gear Room",
-      type: "adventure",
-      icon: Mountain
-    },
-    // { href: `/gear/reviews`, label: "Gear Reviews",type: "adventure", icon: Mountain },
-    // {
-    //   href: `/peaks`,
-    //   label: "Peak Tracker",
-    //   type: "adventure",
-    //   icon: Mountain
-    // },
-    // Other sections
-    {
-      href: `/#${SKILLS_TITLE}`,
-      label: "Skills",
-      type: "main"
-    },
-    {
-      href: `/#${RESUME_ANCHOR}`,
-      label: "Resume",
-      type: "main"
-    },
-    // {
-    //   href: `/#${STRAVA_TITLE}`,
-    //   label: "Training",
-    //   type: "adventure"
-    // },
-    {
-      href: `/#${FOOTER}`,
-      label: "Contact",
-      type: "main"
-    },
+  const mainNavItems = [
+    { href: `/#${ABOUT_TITLE}`, label: "About" },
+    { href: `/#${PERSONAL_TIMELINE_ANCHOR}`, label: "Timeline" },
+    { href: `/#${PROJECTS_TITLE}`, label: "Projects" },
+    { href: `/blog`, label: "Blog", icon: Code },
   ];
 
-  // Helper function to determine if the link is active
-  const isActive = (href: string) => {
-    return activeItem === href;
-  };
+  const adventureItems = [
+    { href: `/adventures`, label: "Trip Reports", description: "Recent adventures & route info" },
+    { href: `/gear`, label: "Gear Room", description: "My complete gear collection" },
+    { href: `/gear/reviews`, label: "Gear Reviews", description: "Field-tested gear insights" },
+    { href: `/peaks`, label: "Peak Tracker", description: "Colorado 14ers & summits" },
+    { href: `/#${STRAVA_TITLE}`, label: "Training", description: "Running & fitness tracking" },
+  ];
 
-  // Function to close the menu when a link is clicked
+  const otherNavItems = [
+    { href: `/#${SKILLS_TITLE}`, label: "Skills" },
+    { href: `/#${RESUME_ANCHOR}`, label: "Resume" },
+    { href: `/#${FOOTER}`, label: "Contact" },
+  ];
+
+  const isActive = (href: string) => activeItem === href;
+
   const handleLinkClick = (item: string) => {
-    setActiveItem(item)
+    setActiveItem(item);
     setIsOpen(false);
-  };
-
-  const getLinkStyles = (item: any) => {
-    const baseStyles = "text-sm font-medium transition-colors duration-300 flex items-center gap-1";
-    const isAdventure = item.type === "adventure";
-
-    if (isActive(item.href)) {
-      return `${baseStyles} ${isAdventure
-        ? 'text-green-600 dark:text-green-400'
-        : 'text-[var(--color-text-accent)] dark:text-[var(--color-text-accent)]'
-        }`;
-    }
-
-    return `${baseStyles} ${isAdventure
-      ? 'text-[var(--color-text-primary)] hover:text-green-600 dark:hover:text-green-400'
-      : 'text-[var(--color-text-primary)] hover:text-[var(--color-text-accent)] dark:hover:text-[var(--color-text-accent)]'
-      }`;
+    setShowAdventureDropdown(false);
   };
 
   return (
     <>
-      <header className="fixed top-0 w-full z-50 bg-[var(--color-bg-secondary)] border-b border-[var(--color-border)] backdrop-blur-sm">
+      <header className="fixed top-0 w-full z-50 bg-[var(--color-bg-secondary)] border-b border-[var(--color-border)]">
         <div className="container mx-auto px-4">
           <nav className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link href="/" className="text-xl font-bold text-[var(--color-text-primary)] dark:text-[var(--color-text-primary)]">
+              <Link href="/" className="text-xl font-bold text-[var(--color-text-primary)]">
                 Kyle Czajkowski
               </Link>
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-6 ml-auto">
-              {/* Main Navigation */}
-              <div className="flex items-center space-x-4">
-                {navItems.filter(item => item.type === 'main').map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={getLinkStyles(item)}
-                      onClick={() => handleLinkClick(item.href)}
-                    >
-                      {Icon && <Icon size={16} />}
-                      {item.label}
-                    </Link>
-                  );
-                })}
+            <div className="hidden md:flex items-center space-x-4 ml-auto">
+              {/* Main Navigation Items */}
+              {mainNavItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => handleLinkClick(item.href)}
+                  className={`text-sm font-medium transition-colors duration-300 flex items-center gap-1 ${
+                    isActive(item.href)
+                      ? 'text-[var(--color-text-accent)]'
+                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+                  }`}
+                >
+                  {item.icon && <item.icon size={16} />}
+                  {item.label}
+                </Link>
+              ))}
+
+              {/* Adventure Dropdown */}
+              <div 
+                className="relative"
+                onMouseEnter={() => setShowAdventureDropdown(true)}
+                onMouseLeave={() => setShowAdventureDropdown(false)}
+              >
+                <button className="text-sm font-medium transition-colors duration-300 flex items-center gap-1 text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">
+                  <Mountain size={16} />
+                  Adventures
+                  <ChevronDown size={14} className={`transition-transform ${showAdventureDropdown ? 'rotate-180' : ''}`} />
+                </button>
+
+                {/* Dropdown Menu */}
+                {showAdventureDropdown && (
+                  <div className="absolute top-full left-0 mt-2 w-72 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg overflow-hidden">
+                    <div className="py-2">
+                      {adventureItems.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          onClick={() => handleLinkClick(item.href)}
+                          className="block px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                        >
+                          <div className="font-medium text-gray-900 dark:text-gray-100">
+                            {item.label}
+                          </div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                            {item.description}
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
-              {/* Adventure Section Separator */}
-              <div className="h-6 w-px bg-[var(--color-border)]" />
+              {/* Other Navigation Items */}
+              {otherNavItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => handleLinkClick(item.href)}
+                  className={`text-sm font-medium transition-colors duration-300 ${
+                    isActive(item.href)
+                      ? 'text-[var(--color-text-accent)]'
+                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
 
-              {/* Adventure Navigation */}
-              <div className="flex items-center space-x-4">
-                {navItems.filter(item => item.type === 'adventure').map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={getLinkStyles(item)}
-                      onClick={() => handleLinkClick(item.href)}
-                    >
-                      {Icon && <Icon size={16} />}
-                      {item.label}
-                    </Link>
-                  );
-                })}
-              </div>
-
-              {/* Theme Toggle */}
-              <div className="ml-4">
-                <ToggleDarkMode />
-              </div>
+              <ToggleDarkMode />
             </div>
 
             {/* Mobile menu button */}
-            <div className="lg:hidden flex items-center space-x-4">
+            <div className="md:hidden flex items-center gap-2">
               <ToggleDarkMode />
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-[var(--color-text-primary)] hover:text-[var(--color-text-accent)] transition-colors"
+                className="inline-flex items-center justify-center p-2 rounded-md text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[var(--color-text-accent)]"
               >
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
             </div>
           </nav>
+        </div>
 
-          {/* Mobile Navigation */}
-          {isOpen && (
-            <div className="lg:hidden">
-              <div className="px-2 pt-2 pb-3 space-y-1 bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)]">
-                {/* Main Section */}
-                <div className="mb-4">
-                  <h3 className="px-3 py-2 text-xs font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider">
-                    Main
-                  </h3>
-                  {navItems.filter(item => item.type === 'main').map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className={`${getLinkStyles(item)} block px-3 py-2 rounded-md text-base`}
-                        onClick={() => handleLinkClick(item.href)}
-                      >
-                        {Icon && <Icon size={16} />}
-                        {item.label}
-                      </Link>
-                    );
-                  })}
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)]">
+              {/* Mobile Main Items */}
+              {mainNavItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => handleLinkClick(item.href)}
+                  className="block px-3 py-2 text-base font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] flex items-center gap-2"
+                >
+                  {item.icon && <item.icon size={16} />}
+                  {item.label}
+                </Link>
+              ))}
+              
+              {/* Mobile Adventure Section */}
+              <div className="px-3 py-2">
+                <div className="text-sm font-semibold text-green-600 dark:text-green-400 flex items-center gap-1 mb-2">
+                  <Mountain size={16} />
+                  Adventures
                 </div>
-
-                {/* Adventure Section */}
-                <div>
-                  <h3 className="px-3 py-2 text-xs font-semibold text-green-600 dark:text-green-400 uppercase tracking-wider flex items-center gap-1">
-                    <Mountain size={14} />
-                    Adventures
-                  </h3>
-                  {navItems.filter(item => item.type === 'adventure').map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className={`${getLinkStyles(item)} block px-3 py-2 rounded-md text-base`}
-                        onClick={() => handleLinkClick(item.href)}
-                      >
-                        {Icon && <Icon size={16} />}
-                        {item.label}
-                      </Link>
-                    );
-                  })}
+                <div className="pl-4 space-y-1">
+                  {adventureItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => handleLinkClick(item.href)}
+                      className="block py-2 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
                 </div>
               </div>
+
+              {/* Mobile Other Items */}
+              {otherNavItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => handleLinkClick(item.href)}
+                  className="block px-3 py-2 text-base font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </header>
     </>
   );
