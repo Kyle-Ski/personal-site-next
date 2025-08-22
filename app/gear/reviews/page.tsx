@@ -1,6 +1,7 @@
 import { SanityService, GearReview } from "@/lib/cmsProvider"
 import GearReviewsClient from "@/components/gear/GearReviewClient"
 import GearReviewsHero from "@/components/gear/GearReviewsHero"
+import { AdventureNav } from "@/components/navigation/AdventureNav"
 
 async function getGearReviewsData(): Promise<{
   reviews: GearReview[]
@@ -73,6 +74,7 @@ export default async function GearReviewsPage() {
       <section className="container mx-auto px-4 py-12">
         <GearReviewsClient reviews={reviews} />
       </section>
+      <AdventureNav currentPage="gear-reviews" />
     </div>
   )
 }

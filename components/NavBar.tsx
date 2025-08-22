@@ -5,8 +5,10 @@ import Link from "next/link";
 import { Menu, X, Mountain, Code, ChevronDown } from "lucide-react";
 import ToggleDarkMode from "./ToggleDarkMode";
 import { ABOUT_TITLE, FOOTER, PERSONAL_TIMELINE_ANCHOR, PROJECTS_TITLE, RESUME_ANCHOR, SKILLS_TITLE, STRAVA_TITLE } from "@/utils/constants";
+import { usePathname } from "next/navigation";
 
 const NavBar = () => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('');
   const [showAdventureDropdown, setShowAdventureDropdown] = useState(false);
@@ -32,7 +34,35 @@ const NavBar = () => {
     { href: `/#${FOOTER}`, label: "Contact" },
   ];
 
-  const isActive = (href: string) => activeItem === href;
+  const isActive = (href: string) => {
+  if (typeof window !== 'undefined') {
+    const currentPath = window.location.pathname;
+    const currentHash = window.location.hash;
+    
+    // Handle homepage sections with hashes
+    if (href.includes('#')) {
+      return `${currentPath}${currentHash}` === href;
+    }
+    
+    // Handle regular pages - check if current path starts with href
+    if (href === '/') {
+      return currentPath === '/';
+    }
+    
+    // For adventure pages, also check if we're on a sub-page
+    if (href === '/adventures') {
+      return currentPath.startsWith('/adventures');
+    }
+    
+    if (href === '/gear') {
+      return currentPath.startsWith('/gear');
+    }
+    
+    return currentPath.startsWith(href);
+  }
+  return activeItem === href;
+};
+
 
   const handleLinkClick = (item: string) => {
     setActiveItem(item);
