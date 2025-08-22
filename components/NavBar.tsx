@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Mountain, Code, ChevronDown } from "lucide-react";
+import { Menu, X, Mountain, FilePenLine, ChevronDown } from "lucide-react";
 import ToggleDarkMode from "./ToggleDarkMode";
 import { ABOUT_TITLE, FOOTER, PERSONAL_TIMELINE_ANCHOR, PROJECTS_TITLE, RESUME_ANCHOR, SKILLS_TITLE, STRAVA_TITLE } from "@/utils/constants";
 import { usePathname } from "next/navigation";
@@ -20,7 +20,7 @@ const NavBar = () => {
     { href: `/#${ABOUT_TITLE}`, label: "About" },
     { href: `/#${PERSONAL_TIMELINE_ANCHOR}`, label: "Timeline" },
     { href: `/#${PROJECTS_TITLE}`, label: "Projects" },
-    { href: `/blog`, label: "Blog" },
+    { href: `/blog`, label: "Blog", icon: FilePenLine },
     { href: `/#${SKILLS_TITLE}`, label: "Skills" },
     { href: `/#${RESUME_ANCHOR}`, label: "Resume" },
     { href: `/#${FOOTER}`, label: "Contact" },
