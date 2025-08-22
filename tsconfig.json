@@ -33,7 +33,7 @@
     "next-env.d.ts",
     "pages/_document.js",
     ".next/types/**/*.ts"
-  ],
+, "lib/stravaUtilities.ts"  ],
   "exclude": [
     "node_modules"
   ]

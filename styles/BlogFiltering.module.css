@@ -1,0 +1,384 @@
+/* Blog filtering styles following gear filtering patterns */
+
+.container {
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  max-width: 1200px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header Section */
+.header {
+  text-align: center;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--color-text-primary);
+}
+
+.subtitle {
+  color: var(--color-text-secondary);
+}
+
+/* Controls Section */
+.controlsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.controlBar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .controlBar {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Search Input */
+.searchWrapper {
+  position: relative;
+  flex: 1;
+  max-width: 24rem;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.5rem 0.75rem 0.5rem 2.5rem;
+  border: 1px solid var(--color-bg-tertiary);
+  border-radius: 0.5rem;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  ring: 2px solid var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary);
+}
+
+/* Filter Toggle Button */
+.filterToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-bg-tertiary);
+  border-radius: 0.5rem;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.filterToggle:hover {
+  background: var(--color-bg-secondary);
+}
+
+.filterToggle.active {
+  background: var(--color-primary);
+  color: var(--color-green-3);
+  border-color: var(--color-primary);
+}
+
+.filterBadge {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border-radius: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+}
+
+/* Filter Panel */
+.filterPanel {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-bg-tertiary);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filterGroupTitle {
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.filterButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid var(--color-bg-tertiary);
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+}
+
+.filterButton:hover {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+.filterButton.active {
+  background: var(--color-green-3);
+  color: white;
+  border-color: var(--color-green-3);
+}
+
+/* Outdoor-themed filter buttons */
+.filterButton.outdoor.active {
+  background: var(--color-green-3);
+  border-color: var(--color-green-3);
+  color: white;
+}
+
+.filterButton.tech.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: white;
+}
+
+/* Category badges in posts */
+.categoryBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid var(--color-bg-tertiary);
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+}
+
+.categoryBadge.outdoor {
+  background: var(--color-green-4);
+  color: var(--color-green-3);
+  border-color: var(--color-green-2);
+}
+
+.categoryBadge.tech {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+/* Clear filters */
+.clearFilters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-bg-tertiary);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.clearFilters:hover {
+  color: var(--color-text-primary);
+}
+
+/* Results count */
+.resultsCount {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+/* Posts grid */
+.postsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .postsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .postsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.postCard {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-bg-tertiary);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  height: 100%; /* Ensure all cards have same height */
+  display: flex;
+  flex-direction: column;
+}
+
+.postCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-color: var(--color-primary);
+}
+
+.postImage {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.postCard:hover .postImage {
+  transform: scale(1.05);
+}
+
+.postContent {
+  padding: 1.5rem;
+  flex: 1; /* Allow content to grow and fill remaining space */
+  display: flex;
+  flex-direction: column;
+}
+
+.postMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  flex-shrink: 0; /* Prevent meta from shrinking */
+}
+
+.postTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+  flex-shrink: 0; /* Prevent title from shrinking */
+}
+
+.postCategories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  flex-shrink: 0; /* Prevent categories from shrinking */
+}
+
+.postExcerpt {
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: auto; /* Push excerpt to bottom */
+}
+
+/* No results state */
+.noResults {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.noResultsText {
+  color: var(--color-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.noResultsAction {
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.noResultsAction:hover {
+  text-decoration: underline;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .filterButton.outdoor.active {
+  background: var(--color-orange);
+  color: #1a1a1a;
+  border-color: var(--color-orange);
+}
+
+[data-theme='dark'] .filterButton.tech.active {
+  background: #3b82f6;
+  color: #1a1a1a;
+  border-color: #3b82f6;
+}
+
+[data-theme='dark'] .categoryBadge.outdoor {
+  background: var(--color-orange-4);
+  color: var(--color-orange);
+  border-color: var(--color-orange-3);
+}
+
+[data-theme='dark'] .categoryBadge.tech {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+[data-theme='dark'] .postCard:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+  
+  .postsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .filterPanel {
+    padding: 1rem;
+  }
+}

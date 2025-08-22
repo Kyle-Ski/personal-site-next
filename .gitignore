@@ -36,3 +36,5 @@ yarn-error.log*
 
 #WebViewer PDF
 /public/webviewer*
+
+# /data/strava-activities.json

@@ -2,17 +2,23 @@
 
 import { useState, useMemo } from "react"
 import Image from "next/image"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { format } from "date-fns"
 import Link from "next/link"
 import { Search, Filter, X, Mountain, Code, Calendar } from "lucide-react"
 import { PortableTextBlock } from "@portabletext/types"
+import styles from '@/styles/BlogFiltering.module.css'
 
 export interface Author {
     _id: string
     name: string
     image: string
+}
+
+export interface Category {
+    title: string
+    color: string
+    isOutdoor: boolean
+    _id: string
 }
 
 export interface Post {
@@ -22,7 +28,7 @@ export interface Post {
     slug: string
     excerpt: string
     mainImage: string
-    categories: string[]
+    categories: Category[] // Updated to use Category objects
     author: Author
     content: any[]
     body: PortableTextBlock[]
@@ -34,33 +40,11 @@ const CATEGORY_GROUPS = {
         name: 'Adventure & Outdoors',
         icon: Mountain,
         color: 'green',
-        categories: [
-            'Trail Running',
-            'Backpacking', 
-            '14ers & Peaks',
-            'Backcountry Skiing',
-            'Hiking',
-            'Trip Reports',
-            'Gear Reviews',
-            'Route Beta',
-            'Winter Adventures',
-            'Safety & Techniques'
-        ]
     },
     tech: {
         name: 'Technology & Development',
         icon: Code,
         color: 'blue',
-        categories: [
-            'React',
-            'TypeScript',
-            'Node.js',
-            'Web Development',
-            'API Development',
-            'DevOps',
-            'Tech Tutorials',
-            'Project Updates'
-        ]
     }
 }
 
@@ -77,18 +61,22 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
     const filteredPosts = useMemo(() => {
         let filtered = posts
 
-        // Group filter
+        // Group filter - now using isOutdoor flag and color from CMS
         if (selectedGroup !== 'all') {
-            const groupCategories = CATEGORY_GROUPS[selectedGroup].categories
-            filtered = filtered.filter(post => 
-                post.categories.some(cat => groupCategories.includes(cat))
-            )
+            filtered = filtered.filter(post => {
+                if (selectedGroup === 'outdoor') {
+                    return post.categories.some(cat => cat.isOutdoor === true)
+                } else if (selectedGroup === 'tech') {
+                    return post.categories.some(cat => cat.color === 'blue' && !cat.isOutdoor)
+                }
+                return true
+            })
         }
 
-        // Category filter
+        // Category filter - now using actual category titles from CMS
         if (selectedCategory) {
-            filtered = filtered.filter(post => 
-                post.categories.includes(selectedCategory)
+            filtered = filtered.filter(post =>
+                post.categories.some(cat => cat.title === selectedCategory)
             )
         }
 
@@ -97,8 +85,8 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
             filtered = filtered.filter(post =>
                 post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 post.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                post.categories.some(cat => 
-                    cat.toLowerCase().includes(searchTerm.toLowerCase())
+                post.categories.some(cat =>
+                    cat.title.toLowerCase().includes(searchTerm.toLowerCase())
                 )
             )
         }
@@ -113,59 +101,70 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
     }
 
     const getAvailableCategories = () => {
+        let availableCategories: Category[] = []
+
         if (selectedGroup === 'all') {
-            return Array.from(new Set(posts.flatMap(post => post.categories)))
+            availableCategories = posts.flatMap(post => post.categories)
+        } else if (selectedGroup === 'outdoor') {
+            availableCategories = posts.flatMap(post =>
+                post.categories.filter(cat => cat.isOutdoor === true)
+            )
+        } else if (selectedGroup === 'tech') {
+            availableCategories = posts.flatMap(post =>
+                post.categories.filter(cat => cat.color === 'blue' && !cat.isOutdoor)
+            )
         }
-        return CATEGORY_GROUPS[selectedGroup].categories.filter(cat =>
-            posts.some(post => post.categories.includes(cat))
+
+        // Remove duplicates and return category titles
+        const uniqueCategories = availableCategories.filter((cat, index, self) =>
+            index === self.findIndex(c => c.title === cat.title)
         )
+
+        return uniqueCategories.map(cat => cat.title)
     }
 
-    const getCategoryBadgeVariant = (category: string) => {
-        if (CATEGORY_GROUPS.outdoor.categories.includes(category)) {
-            return 'outline' // Will be styled with green accent
+    const getCategoryClass = (category: Category) => {
+        if (category.isOutdoor) {
+            return 'outdoor'
         }
-        return 'secondary'
+        return 'tech'
     }
 
     const activeFiltersCount = [selectedCategory, selectedGroup !== 'all' ? selectedGroup : null].filter(Boolean).length
 
     return (
-        <div className="container mx-auto px-4 py-12">
-            <div className="space-y-8">
+        <div className={styles.container}>
+            <div className={styles.content}>
                 {/* Header Section */}
-                <div className="text-center">
-                    <h1 className="text-4xl font-bold mb-4">Blog Posts</h1>
-                    <p className="text-muted-foreground">Code, mountains, and everything in between</p>
+                <div className={styles.header}>
+                    <h1 className={styles.title}>Blog Posts</h1>
+                    <p className={styles.subtitle}>Code, mountains, and everything in between</p>
                 </div>
 
                 {/* Controls */}
-                <div className="flex flex-col gap-4">
+                <div className={styles.controlsWrapper}>
                     {/* Search and Filter Toggle */}
-                    <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                        <div className="relative flex-1 max-w-md">
-                            <Search size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+                    <div className={styles.controlBar}>
+                        <div className={styles.searchWrapper}>
+                            <Search size={20} className={styles.searchIcon} />
                             <input
                                 type="text"
                                 placeholder="Search posts..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full pl-10 pr-4 py-2 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                                className={styles.searchInput}
                             />
                         </div>
 
                         <button
                             onClick={() => setShowFilters(!showFilters)}
-                            className={`flex items-center gap-2 px-4 py-2 border rounded-lg transition-colors ${
-                                showFilters || activeFiltersCount > 0
-                                    ? 'bg-primary text-primary-foreground border-primary'
-                                    : 'bg-background border-border hover:bg-accent'
-                            }`}
+                            className={`${styles.filterToggle} ${showFilters || activeFiltersCount > 0 ? styles.active : ''
+                                }`}
                         >
                             <Filter size={18} />
                             <span>Filters</span>
                             {activeFiltersCount > 0 && (
-                                <span className="bg-background text-foreground rounded-full w-5 h-5 text-xs flex items-center justify-center">
+                                <span className={styles.filterBadge}>
                                     {activeFiltersCount}
                                 </span>
                             )}
@@ -174,18 +173,15 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
 
                     {/* Filter Panel */}
                     {showFilters && (
-                        <div className="bg-card border border-border rounded-lg p-6 space-y-4">
+                        <div className={styles.filterPanel}>
                             {/* Content Type Filter */}
-                            <div>
-                                <h3 className="font-medium mb-3">Content Type</h3>
-                                <div className="flex flex-wrap gap-2">
+                            <div className={styles.filterGroup}>
+                                <h3 className={styles.filterGroupTitle}>Content Type</h3>
+                                <div className={styles.filterButtons}>
                                     <button
                                         onClick={() => setSelectedGroup('all')}
-                                        className={`px-3 py-1 rounded-full text-sm transition-colors ${
-                                            selectedGroup === 'all'
-                                                ? 'bg-primary text-primary-foreground'
-                                                : 'bg-secondary text-secondary-foreground hover:bg-accent'
-                                        }`}
+                                        className={`${styles.filterButton} ${selectedGroup === 'all' ? styles.active : ''
+                                            }`}
                                     >
                                         All Posts
                                     </button>
@@ -195,13 +191,8 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
                                             <button
                                                 key={key}
                                                 onClick={() => setSelectedGroup(key as 'outdoor' | 'tech')}
-                                                className={`flex items-center gap-1 px-3 py-1 rounded-full text-sm transition-colors ${
-                                                    selectedGroup === key
-                                                        ? key === 'outdoor' 
-                                                            ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100'
-                                                            : 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100'
-                                                        : 'bg-secondary text-secondary-foreground hover:bg-accent'
-                                                }`}
+                                                className={`${styles.filterButton} ${selectedGroup === key ? `${styles.active} ${styles[key]}` : ''
+                                                    }`}
                                             >
                                                 <Icon size={14} />
                                                 {group.name}
@@ -212,36 +203,37 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
                             </div>
 
                             {/* Category Filter */}
-                            <div>
-                                <h3 className="font-medium mb-3">Categories</h3>
-                                <div className="flex flex-wrap gap-2">
-                                    {getAvailableCategories().map((category) => (
-                                        <button
-                                            key={category}
-                                            onClick={() => setSelectedCategory(
-                                                selectedCategory === category ? '' : category
-                                            )}
-                                            className={`px-3 py-1 rounded-full text-sm transition-colors ${
-                                                selectedCategory === category
-                                                    ? CATEGORY_GROUPS.outdoor.categories.includes(category)
-                                                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100'
-                                                        : 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100'
-                                                    : 'bg-secondary text-secondary-foreground hover:bg-accent'
-                                            }`}
-                                        >
-                                            {category}
-                                        </button>
-                                    ))}
+                            <div className={styles.filterGroup}>
+                                <h3 className={styles.filterGroupTitle}>Categories</h3>
+                                <div className={styles.filterButtons}>
+                                    {getAvailableCategories().map((category) => {
+                                        // Find the actual category object to determine its class
+                                        const categoryObj = posts.flatMap(post => post.categories)
+                                            .find(cat => cat.title === category)
+                                        const categoryClass = categoryObj ? getCategoryClass(categoryObj) : 'tech'
+
+                                        return (
+                                            <button
+                                                key={category}
+                                                onClick={() => setSelectedCategory(
+                                                    selectedCategory === category ? '' : category
+                                                )}
+                                                className={`${styles.filterButton} ${selectedCategory === category
+                                                    ? `${styles.active} ${styles[categoryClass]}`
+                                                    : ''
+                                                    }`}
+                                            >
+                                                {category}
+                                            </button>
+                                        )
+                                    })}
                                 </div>
                             </div>
 
                             {/* Clear Filters */}
                             {activeFiltersCount > 0 && (
-                                <div className="pt-2 border-t border-border">
-                                    <button
-                                        onClick={clearFilters}
-                                        className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-                                    >
+                                <div className={styles.clearFilters}>
+                                    <button onClick={clearFilters}>
                                         <X size={16} />
                                         Clear all filters
                                     </button>
@@ -252,7 +244,7 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
                 </div>
 
                 {/* Results Count */}
-                <div className="text-sm text-muted-foreground">
+                <div className={styles.resultsCount}>
                     {filteredPosts.length} {filteredPosts.length === 1 ? 'post' : 'posts'}
                     {selectedGroup !== 'all' && ` in ${CATEGORY_GROUPS[selectedGroup].name}`}
                     {selectedCategory && ` tagged with "${selectedCategory}"`}
@@ -260,76 +252,74 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
 
                 {/* Posts Grid */}
                 {filteredPosts && filteredPosts.length > 0 ? (
-                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    <div className={styles.postsGrid}>
                         {filteredPosts.map((post) => (
-                            <Link href={`/blog/${post.slug}`} key={post._id}>
-                                <Card className="group h-full overflow-hidden hover:shadow-lg transition-all duration-300 dark:hover:bg-gray-800/90 dark:bg-gray-800/50">
+                            <Link key={post._id} href={`/blog/${post.slug}`}>
+                                <article className={styles.postCard}>
                                     {/* Post Image */}
                                     {post.mainImage && (
-                                        <div className="aspect-video w-full overflow-hidden">
-                                            <Image
-                                                src={post.mainImage}
-                                                alt={post.title}
-                                                width={600}
-                                                height={400}
-                                                className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-                                                priority={false}
-                                            />
-                                        </div>
+                                        <Image
+                                            src={post.mainImage}
+                                            alt={post.title}
+                                            width={400}
+                                            height={225}
+                                            className={styles.postImage}
+                                        />
                                     )}
-                                    
-                                    <CardHeader className="pb-2">
-                                        <CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">
-                                            {post.title}
-                                        </CardTitle>
-                                        
-                                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+
+                                    <div className={styles.postContent}>
+                                        {/* Meta information */}
+                                        <div className={styles.postMeta}>
                                             <Calendar size={14} />
-                                            {format(new Date(post.publishedAt), 'MMM dd, yyyy')}
-                                        </div>
-                                    </CardHeader>
-                                    
-                                    <CardContent className="pt-0">
-                                        {/* Categories */}
-                                        <div className="flex flex-wrap gap-1 mb-3">
-                                            {post.categories.slice(0, 3).map((category) => (
-                                                <Badge 
-                                                    key={category} 
-                                                    variant={getCategoryBadgeVariant(category)}
-                                                    className={`text-xs ${
-                                                        CATEGORY_GROUPS.outdoor.categories.includes(category)
-                                                            ? 'border-green-200 text-green-800 dark:border-green-800 dark:text-green-200'
-                                                            : ''
-                                                    }`}
-                                                >
-                                                    {category}
-                                                </Badge>
-                                            ))}
-                                            {post.categories.length > 3 && (
-                                                <Badge variant="outline" className="text-xs">
-                                                    +{post.categories.length - 3}
-                                                </Badge>
+                                            <time dateTime={post.publishedAt}>
+                                                {format(new Date(post.publishedAt), 'MMM d, yyyy')}
+                                            </time>
+                                            {post.author && (
+                                                <>
+                                                    <span>•</span>
+                                                    <span>{post.author.name}</span>
+                                                </>
                                             )}
                                         </div>
-                                        
+
+                                        {/* Title */}
+                                        <h2 className={styles.postTitle}>{post.title}</h2>
+
+                                        {/* Categories */}
+                                        <div className={styles.postCategories}>
+                                            {post.categories.slice(0, 3).map((category) => (
+                                                <span
+                                                    key={category._id}
+                                                    className={`${styles.categoryBadge} ${styles[getCategoryClass(category)]}`}
+                                                >
+                                                    {category.title}
+                                                </span>
+                                            ))}
+                                            {post.categories.length > 3 && (
+                                                <span className={styles.categoryBadge}>
+                                                    +{post.categories.length - 3}
+                                                </span>
+                                            )}
+                                        </div>
+
                                         {/* Excerpt */}
                                         {post.excerpt && (
-                                            <CardDescription className="line-clamp-3">
+                                            <p className={styles.postExcerpt}>
                                                 {post.excerpt}
-                                            </CardDescription>
+                                            </p>
                                         )}
-                                    </CardContent>
-                                </Card>
+                                    </div>
+                                </article>
                             </Link>
                         ))}
                     </div>
                 ) : (
-                    <div className="text-center py-12">
-                        <p className="text-muted-foreground">No posts found matching your criteria.</p>
+                    <div className={styles.noResults}>
+                        <p className={styles.noResultsText}>No posts found matching your criteria.</p>
                         {activeFiltersCount > 0 && (
                             <button
                                 onClick={clearFilters}
-                                className="mt-2 text-primary hover:underline"
+                                className={styles.noResultsAction}
                             >
                                 Clear filters to see all posts
                             </button>

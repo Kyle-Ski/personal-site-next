@@ -88,10 +88,10 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <div className="flex gap-2">
                         {post.categories?.map((category) => (
                             <span
-                                key={category}
+                                key={category._id}
                                 className="px-3 py-1 rounded-full text-sm bg-primary/10 text-primary dark:bg-gray-700 dark:text-gray-100"
                             >
-                                {category}
+                                {category.title}
                             </span>
                         ))}
                     </div>

@@ -1,0 +1,461 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header Section */
+.header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--color-text-primary);
+}
+
+.subtitle {
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Controls Section */
+.controlsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.controlBar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+@media (min-width: 640px) {
+  .controlBar {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Search */
+.searchWrapper {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+  width: 100%;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+  border: 1px solid var(--color-bg-tertiary);
+  border-radius: 0.5rem;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-text-accent);
+  box-shadow: 0 0 0 3px rgba(85, 137, 60, 0.1);
+}
+
+/* Filter Toggle */
+.filterToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-bg-tertiary);
+  border-radius: 0.5rem;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.filterToggle:hover {
+  background: var(--color-bg-tertiary);
+}
+
+.filterToggle.active {
+  background: var(--color-text-accent);
+  color: white;
+  border-color: var(--color-text-accent);
+}
+
+.filterBadge {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* Filter Panel */
+.filterPanel {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-bg-tertiary);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filterGroupTitle {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.filterButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filterButton {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-bg-tertiary);
+  border-radius: 1.5rem;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.filterButton:hover {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+.filterButton.active {
+  background: var(--color-text-accent);
+  color: white;
+  border-color: var(--color-text-accent);
+}
+
+.clearFilters {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-bg-tertiary);
+}
+
+.clearFilters button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: color 0.2s ease;
+}
+
+.clearFilters button:hover {
+  color: var(--color-text-primary);
+}
+
+/* Results Count */
+.resultsCount {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Reviews Grid */
+.reviewsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .reviewsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .reviewsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Review Card */
+.reviewCard {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-bg-tertiary);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: var(--color-text-accent);
+}
+
+/* Image */
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.reviewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.reviewCard:hover .reviewImage {
+  transform: scale(1.05);
+}
+
+.ratingOverlay {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+/* Star Rating */
+.starRating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.starFilled {
+  color: #fbbf24;
+  fill: #fbbf24;
+}
+
+.starEmpty {
+  color: #6b7280;
+  fill: none;
+}
+
+.ratingText {
+  font-size: 0.75rem;
+  color: white;
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+/* Content */
+.reviewContent {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.gearInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.brand {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.gearName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.reviewTitle {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.tag.category {
+  background: rgba(85, 137, 60, 0.1);
+  color: var(--color-text-accent);
+  border: 1px solid rgba(85, 137, 60, 0.2);
+}
+
+.tag.activity {
+  background: rgba(171, 160, 34, 0.1);
+  color: var(--color-orange);
+  border: 1px solid rgba(171, 160, 34, 0.2);
+}
+
+/* Excerpt */
+.excerpt {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Meta */
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-bg-tertiary);
+}
+
+.price {
+  font-weight: 600;
+  color: var(--color-text-accent);
+}
+
+/* No Results */
+.noResults {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.noResultsText {
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.noResultsAction {
+  color: var(--color-text-accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
+}
+
+.noResultsAction:hover {
+  opacity: 0.8;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .ratingOverlay {
+    background: rgba(0, 0, 0, 0.9);
+  }
+  
+  .tag.category {
+    background: rgba(85, 137, 60, 0.2);
+    border-color: rgba(85, 137, 60, 0.3);
+  }
+  
+  .tag.activity {
+    background: rgba(171, 160, 34, 0.2);
+    border-color: rgba(171, 160, 34, 0.3);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .searchWrapper {
+    max-width: 100%;
+  }
+  
+  .reviewContent {
+    padding: 1rem;
+  }
+  
+  .filterPanel {
+    padding: 1rem;
+  }
+}

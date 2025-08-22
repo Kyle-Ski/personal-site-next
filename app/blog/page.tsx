@@ -8,6 +8,13 @@ export interface Author {
     image: string
 }
 
+export interface Category {
+    title: string
+    color: string
+    isOutdoor: boolean
+    _id: string
+}
+
 export interface Post {
     _id: string
     publishedAt: string
@@ -15,7 +22,7 @@ export interface Post {
     slug: string
     excerpt: string
     mainImage: string
-    categories: string[]
+    categories: Category[] // Updated to use Category objects
     author: Author
     content: any[]
     body: PortableTextBlock[]
