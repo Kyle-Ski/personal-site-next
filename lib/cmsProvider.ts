@@ -243,7 +243,12 @@ export class SanityService {
         excerpt,
         body,
         "mainImage": mainImage.asset->url,
-        "categories": categories[]->title,
+        "categories": categories[]->{
+        _id,
+        title,
+        color,
+        isOutdoor
+      },
         "author": author->{
           _id,
           name,
