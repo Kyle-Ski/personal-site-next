@@ -51,7 +51,7 @@ export default function GearReviewsHero({
                         <span className="block text-yellow-300">Gear Reviews</span>
                     </h1>
                     <p className="text-xl md:text-2xl text-green-100 mb-12 max-w-3xl mx-auto">
-                        Real-world testing in Colorado's backcountry. No fluff, just honest insights on gear that performs when it matters.
+                        Real-world testing in Colorado&apos;s backcountry. No fluff, just honest insights on gear that performs when it matters.
                     </p>
 
                     {/* Hero Stats */}
