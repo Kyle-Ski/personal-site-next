@@ -3,6 +3,7 @@ import TripReportCard from '@/components/adventure/TripReportCard'
 import { Mountain, MapPin, Calendar, Trophy, TrendingUp, ArrowUp } from 'lucide-react'
 import { SanityService, TripReport, AdventureStats } from '@/lib/cmsProvider'
 import Link from 'next/link'
+import { AdventureNav } from '@/components/navigation/AdventureNav'
 
 export const metadata = {
   title: 'Adventures | Kyle Czajkowski',
@@ -168,6 +169,7 @@ export default async function AdventuresPage() {
           </Link>
         </div>
       </section>
+      <AdventureNav currentPage="adventures" />
     </div>
   )
 }

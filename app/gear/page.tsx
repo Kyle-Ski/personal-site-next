@@ -3,6 +3,7 @@ import GearHero from '@/components/gear/GearHero'
 import GearFeatured from '@/components/gear/GearFeatured'
 import GearGrid from '@/components/gear/GearGrid'
 import GearStats from '@/components/gear/GearStats'
+import { AdventureNav } from '@/components/navigation/AdventureNav'
 
 export const metadata = {
   title: 'Gear Room | Kyle Czajkowski',
@@ -43,6 +44,7 @@ export default async function GearPage() {
           packLists={packLists}
         />
       </section>
+      <AdventureNav currentPage="gear" />
     </div>
   )
 }
