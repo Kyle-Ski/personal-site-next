@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 
 interface Props {
     params: { slug: string }
+    searchParams: { [key: string]: string | string[] | undefined }
 }
 
 async function getGearReview(slug: string): Promise<GearReview | null> {
@@ -24,7 +25,7 @@ async function getGearReview(slug: string): Promise<GearReview | null> {
 
 export async function generateMetadata({ params }: Props) {
     const review = await getGearReview(params.slug)
-    
+
     if (!review) {
         return {
             title: 'Gear Review Not Found - Kyle Czajkowski',
