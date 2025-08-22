@@ -33,25 +33,25 @@ const NavBar = () => {
       icon: Code
     },
     // Adventure section
-    {
-      href: `/adventures`,
-      label: "Adventures",
-      type: "adventure",
-      icon: Mountain
-    },
+    // {
+    //   href: `/adventures`,
+    //   label: "Adventures",
+    //   type: "adventure",
+    //   icon: Mountain
+    // },
     {
       href: `/gear`,
       label: "Gear Room",
       type: "adventure",
       icon: Mountain
     },
-    { href: `/gear/reviews`, label: "Gear Reviews", icon: Mountain  },
-    {
-      href: `/peaks`,
-      label: "Peak Tracker",
-      type: "adventure",
-      icon: Mountain
-    },
+    // { href: `/gear/reviews`, label: "Gear Reviews",type: "adventure", icon: Mountain },
+    // {
+    //   href: `/peaks`,
+    //   label: "Peak Tracker",
+    //   type: "adventure",
+    //   icon: Mountain
+    // },
     // Other sections
     {
       href: `/#${SKILLS_TITLE}`,
@@ -63,11 +63,11 @@ const NavBar = () => {
       label: "Resume",
       type: "main"
     },
-    {
-      href: `/#${STRAVA_TITLE}`,
-      label: "Training",
-      type: "adventure"
-    },
+    // {
+    //   href: `/#${STRAVA_TITLE}`,
+    //   label: "Training",
+    //   type: "adventure"
+    // },
     {
       href: `/#${FOOTER}`,
       label: "Contact",
