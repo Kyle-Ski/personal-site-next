@@ -8,6 +8,7 @@ import { Metadata } from "next";
 import { SanityService } from "@/lib/cmsProvider";
 import { portableTextComponents } from "@/utils/portableTextComponents";
 import TableOfContents from "@/components/tableOfContents"
+import AdventureHero from "@/components/adventure/AdventureHero"
 
 interface PageProps {
     params: Promise<{ id: string }>
@@ -81,12 +82,26 @@ export default async function BlogPostPage({ params }: PageProps) {
 
     const post = await sanityService.getPostBySlug(id);
 
+    function splitTitle(title: string): { part1: string; part2: string } {
+        const words = title.split(" ");
+        const mid = Math.ceil(words.length / 2);
+        return {
+            part1: words.slice(0, mid).join(" "),
+            part2: words.slice(mid).join(" "),
+        };
+    }
+    const { part1, part2 } = splitTitle(post.title);
     if (!post) {
         notFound();
     }
 
     return (
         <div>
+            <AdventureHero
+                backgroundImage={post.mainImage}
+                mainText1={part1}
+                mainText2={part2}
+            />
             <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 max-w-3xl" >
                 <Link
                     href="/blog"
@@ -95,17 +110,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <ChevronLeft size={20} />
                     Back to all posts
                 </Link>
-
-                {post.mainImage && (
-                    <div className="w-full h-96 relative mb-8">
-                        <img
-                            src={post.mainImage}
-                            alt={post.title}
-                            className="object-cover w-full h-full rounded-lg"
-                        />
-                    </div>
-                )
-                }
 
                 < div className="space-y-4" >
                     <h1 className="text-3xl sm:text-4xl font-bold">{post.title}</h1>
