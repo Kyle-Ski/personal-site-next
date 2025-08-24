@@ -63,7 +63,7 @@ export default function GearReviewsHero({
     ]
 
     return (
-        <section className="relative py-20 px-4 overflow-hidden min-h-screen flex items-center">
+        <section className="relative py-50 px-4 overflow-hidden h-[80vh] flex items-center" style={{ paddingTop: 'calc(4rem + 2rem)' }}>
             {/* Parallax Background Image */}
             <div className="absolute inset-0">
                 <Image
@@ -93,10 +93,6 @@ export default function GearReviewsHero({
                         <span className="block text-yellow-300">Gear Reviews</span>
                     </h1>
                     
-                    <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto">
-                        Real-world testing in Colorado's backcountry. No fluff, just honest insights on gear that performs when it matters.
-                    </p>
-
                     {/* Glassmorphism Stats Grid */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
                         {heroStats.map((stat, index) => (

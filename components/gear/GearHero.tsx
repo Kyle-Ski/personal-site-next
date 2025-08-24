@@ -1,10 +1,26 @@
 "use client"
 
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Mountain, MapPin, Award, Timer } from 'lucide-react'
-import styles from '@/styles/GearHero.module.css'
+import { imgStrToBase64, shimmer } from '@/utils/imageHelpers'
 
 const GearHero = () => {
+  const [offset, setOffset] = useState<number>(0)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const handleScroll = () => {
+        setOffset(window.pageYOffset)
+      }
+      window.addEventListener('scroll', handleScroll)
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [])
+
   const achievements = [
     { icon: Mountain, label: "60+ peaks above 13,000ft" },
     { icon: Award, label: "AIARE Certified" },
@@ -13,58 +29,73 @@ const GearHero = () => {
   ]
 
   return (
-    <section className={styles.hero}>
-      {/* Background Image */}
-      <div className={styles.heroBackground}>
+    <section className="relative py-20 px-4 overflow-hidden h-[80vh] flex items-center" style={{ paddingTop: 'calc(4rem + 2rem)' }}>
+      {/* Parallax Background Image */}
+      <div className="absolute inset-0">
         <Image
-          src="/Tent-Baker.jpg" // Using your existing hero image
-          alt="Mountain landscape"
+          id="gearHeroImg"
+          priority={true}
+          src="/Tent-Baker.jpg"
+          alt="Mountain camping with gear - gear testing environment"
           fill
-          priority
+          placeholder="blur"
+          blurDataURL={`data:image/svg+xml;base64,${imgStrToBase64(shimmer(1200, 800))}`}
           quality={100}
-          style={{ objectFit: "cover" }}
+          style={{
+            objectFit: "cover",
+            transform: `translateY(${offset * 0.5}px)`,
+          }}
         />
-        <div className={styles.overlay} />
+        {/* Subtle gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/40" />
       </div>
 
       {/* Content */}
-      <div className={styles.heroContent}>
-        <h1 className={styles.title}>Gear That Goes the Distance</h1>
-        <p className={styles.subtitle}>
-          Field-tested on 14ers, backcountry lines, and multi-day expeditions
-        </p>
+      <div className="container mx-auto text-center relative z-10">
+        <div className="max-w-4xl mx-auto">
+          {/* Main Title */}
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+            Gear That Goes
+            <span className="block text-yellow-300">the Distance</span>
+          </h1>
 
-        {/* Achievement Pills */}
-        {/* <div className={styles.achievements}>
-          {achievements.map((achievement, index) => {
-            const Icon = achievement.icon
-            return (
-              <div key={index} className={styles.achievementPill}>
-                <Icon size={18} />
-                <span>{achievement.label}</span>
-              </div>
-            )
-          })}
-        </div> */}
+          {/* Glassmorphism Achievement Pills */}
+          {/* 
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            {achievements.map((achievement, index) => {
+              const Icon = achievement.icon
+              return (
+                <div
+                  key={index}
+                  className="group relative"
+                >
+                  <div className="relative backdrop-blur-md bg-gradient-to-br from-white/15 to-white/5 border border-white/20 rounded-xl p-6 text-center shadow-xl transition-all duration-300 hover:shadow-2xl hover:backdrop-blur-lg hover:from-white/20 hover:to-white/10">
+                    <div className="absolute inset-0.5 bg-gradient-to-br from-white/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="relative z-10">
+                      <div className="flex justify-center mb-4">
+                        <div className="p-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                          <Icon size={24} className="text-yellow-300" />
+                        </div>
+                      </div>
+                      <div className="text-white/90 text-sm font-medium leading-tight">
+                        {achievement.label}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+          */}
 
-        {/* Expedition Highlights */}
-        {/* <div className={styles.expeditions}>
-          <h3 className={styles.expeditionTitle}>Notable Expeditions</h3>
-          <div className={styles.expeditionGrid}>
-            <div className={styles.expeditionItem}>
-              <strong>Multi-Day Adventures</strong>
-              <p>4-day Mt. Baker • Little Death Hollow • Lost Creek Wilderness • Pecos Wilderness</p>
-            </div>
-            <div className={styles.expeditionItem}>
-              <strong>Trail Racing</strong>
-              <p>Dead Horse Ultra 30K • Greenland Trail 30K • Silverton Mountain Duo</p>
+          {/* Scroll Indicator */}
+          <div className="mt-8 animate-bounce">
+            <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
             </div>
           </div>
-        </div> */}
-
-        {/* Scroll Indicator */}
-        <div className={styles.scrollIndicator}>
-          <span>↓ Explore the gear room ↓</span>
         </div>
       </div>
     </section>

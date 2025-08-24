@@ -2,31 +2,31 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { Mountain, MapPin, Calendar, Trophy, TrendingUp, ArrowUp } from 'lucide-react'
+import { Mountain, MapPin, Calendar, Trophy, TrendingUp, ArrowUp, Map } from 'lucide-react'
 import { imgStrToBase64, shimmer } from '@/utils/imageHelpers'
 
 interface AdventureHeroProps {
-    title: string
-    subtitle: string
+    title?: string
+    subtitle?: string
     backgroundImage?: string
     stats?: {
         label: string
         value: string
-        iconName: string // Changed from icon to iconName
+        iconName: string
     }[]
 }
 
-// Icon mapping inside the client component
 const iconMap: Record<string, React.ComponentType<any>> = {
     'Mountain': Mountain,
     'MapPin': MapPin,
     'Calendar': Calendar,
     'Trophy': Trophy,
     'TrendingUp': TrendingUp,
-    'ArrowUp': ArrowUp
+    'ArrowUp': ArrowUp,
+    'Map': Map
 }
 
-const AdventureHero = ({ title, subtitle, backgroundImage = "/mountain-trail.jpg", stats }: AdventureHeroProps) => {
+const AdventureHero = ({ backgroundImage = "/mountain-trail.jpg", stats }: AdventureHeroProps) => {
     const [offset, setOffset] = useState<number>(0)
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const AdventureHero = ({ title, subtitle, backgroundImage = "/mountain-trail.jpg
     }, [])
 
     return (
-        <section className="relative py-20 px-4 overflow-hidden h-[80vh] flex items-center">
+        <section className="relative py-20 px-4 overflow-hidden h-[80vh] flex items-center" style={{ paddingTop: 'calc(4rem + 2rem)' }}>
             {/* Parallax Background Image */}
             <div className="absolute inset-0">
                 <Image
@@ -70,12 +70,9 @@ const AdventureHero = ({ title, subtitle, backgroundImage = "/mountain-trail.jpg
 
                     {/* Main Title */}
                     <h1 className="text-4xl lg:text-6xl font-bold mb-6 text-white">
-                        {title}
+                        Trail Reports &
+                        <span className="block text-yellow-300">Route Intel</span>
                     </h1>
-
-                    <p className="text-xl lg:text-2xl mb-12 text-white/90 max-w-3xl mx-auto">
-                        {subtitle}
-                    </p>
 
                     {/* Glassmorphism Stats */}
                     {stats && (
