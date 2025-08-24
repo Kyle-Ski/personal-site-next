@@ -35,7 +35,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Google Tag Manager - As high in head as possible */}
         <Script
           id="google-tag-manager"
           strategy="beforeInteractive"
@@ -49,7 +48,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
       </head>
       <body>
-        {/* Google Tag Manager noscript - Immediately after opening body tag */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-MJR2GX3"
