@@ -7,8 +7,27 @@ import { AdventureNav } from '@/components/navigation/AdventureNav'
 
 export const metadata = {
   title: 'Gear Room | Kyle Czajkowski',
-  description: "Field-tested gear for alpine adventures, backcountry skiing, and multi-day expeditions",
-}
+  description: "Field-tested gear for alpine adventures, backcountry skiing, and multi-day expeditions. Curated gear lists and recommendations from 10+ years in the mountains.",
+  keywords: 'outdoor gear, alpine climbing, backcountry skiing, mountaineering gear, hiking equipment, field tested gear, gear reviews',
+  openGraph: {
+    title: 'Field-Tested Mountain Gear | Kyle Czajkowski',
+    description: 'Field-tested gear for alpine adventures, backcountry skiing, and multi-day expeditions. Curated gear lists and recommendations from 10+ years in the mountains.',
+    images: ['/Tent-Baker.jpg'], // Using the gear hero image  
+    url: 'https://kyle.czajkowski.tech/gear',
+    type: 'website',
+    siteName: 'Kyle Czajkowski',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    creator: '@SkiRoyJenkins',
+    title: 'Field-Tested Mountain Gear | Kyle Czajkowski',
+    description: 'Field-tested gear for alpine adventures, backcountry skiing, and multi-day expeditions.',
+    images: ['/Tent-Baker.jpg'],
+  },
+  alternates: {
+    canonical: 'https://kyle.czajkowski.tech/gear'
+  }
+};
 
 export default async function GearPage() {
   const allGear = await getAllGear()
@@ -21,7 +40,7 @@ export default async function GearPage() {
     <div className="min-h-screen">
       {/* Hero Section with Accomplishments */}
       <GearHero />
-      
+
       {/* Featured Gear Section */}
       <section className="container mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold mb-2 text-center">Gear Favorites</h2>
@@ -37,7 +56,7 @@ export default async function GearPage() {
       {/* Main Gear Grid with Filters */}
       <section className="container mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold mb-8 text-center">Gear Closet</h2>
-        <GearGrid 
+        <GearGrid
           gear={allGear}
           categories={categories}
           brands={brands}

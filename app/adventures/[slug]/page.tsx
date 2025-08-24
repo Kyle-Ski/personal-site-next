@@ -28,9 +28,62 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     const tripReport = await sanityService.getTripReportBySlug(slug);
 
+    if (!tripReport) {
+        return {
+            title: 'Trip Report Not Found - Kyle Czajkowski',
+        }
+    }
+
+    // Create descriptive title with location
+    const pageTitle = `${tripReport.title}${tripReport.location ? ` - ${tripReport.location}` : ''} | Adventures`;
+
+    // Create rich description using excerpt, location, and difficulty
+    let description = tripReport.excerpt || tripReport.routeNotes || '';
+
+    if (!description) {
+        // Fallback description using available data
+        const locationText = tripReport.location ? ` in ${tripReport.location}` : '';
+        const difficultyText = tripReport.difficulty ? ` (${tripReport.difficulty} difficulty)` : '';
+        const elevationText = tripReport.elevation ? ` reaching ${tripReport.elevation}ft` : '';
+        description = `Adventure report: ${tripReport.title}${locationText}${elevationText}${difficultyText}. Read about this outdoor adventure experience.`;
+    }
+
+    // Generate activity tags
+    const activityTags = tripReport.activities?.join(', ') || '';
+
     return {
-        title: tripReport?.title ? `${tripReport.title} | Adventures` : 'Adventure Report',
-        description: tripReport?.excerpt || 'Adventure and trip report details',
+        title: pageTitle,
+        description,
+        keywords: `${activityTags}, outdoor adventures, hiking, colorado, trip report, ${tripReport.location || ''}`,
+        openGraph: {
+            title: `${tripReport.title} - Adventure Report`,
+            description,
+            images: tripReport.mainImage ? [tripReport.mainImage] : [],
+            type: 'article',
+            publishedTime: tripReport.publishedAt,
+            authors: [tripReport.author?.name || 'Kyle Czajkowski'],
+            tags: tripReport.activities || [],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: `${tripReport.title} - Adventure Report`,
+            description,
+            images: tripReport.mainImage ? [tripReport.mainImage] : [],
+            creator: '@SkiRoyJenkins',
+        },
+        // Location-specific meta tags
+        other: {
+            'geo.placename': tripReport.location || '',
+            'geo.position': tripReport.coordinates ? `${tripReport.coordinates.lat};${tripReport.coordinates.lng}` : '',
+            'geo.region': 'Colorado, US', // Adjust based on your typical locations
+            'article:author': tripReport.author?.name || 'Kyle Czajkowski',
+            'article:published_time': tripReport.publishedAt,
+            'article:section': 'Trip Reports',
+            'adventure:difficulty': tripReport.difficulty || '',
+            'adventure:location': tripReport.location || '',
+            'adventure:elevation': tripReport.elevation?.toString() || '',
+            'adventure:distance': tripReport.distance?.toString() || '',
+        }
     }
 }
 
@@ -422,9 +475,9 @@ export default async function TripReportPage({ params }: PageProps) {
                 </div>
 
                 {/* Trip Report Navigation */}
-                <TripReportNavigation 
-                    previousReport={previousReport} 
-                    nextReport={nextReport} 
+                <TripReportNavigation
+                    previousReport={previousReport}
+                    nextReport={nextReport}
                 />
 
                 {/* Call to Action */}
