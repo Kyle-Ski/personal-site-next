@@ -11,6 +11,7 @@ import { urlFor } from "@/sanity/lib/image"
 import { AdventureNav } from "@/components/navigation/AdventureNav"
 import { TripReportTableOfContents } from "@/components/adventure/TripReportTableOfContents"
 import { TripReportNavigation } from "@/components/adventure/TripReportNavigation"
+import AdventureHero from "@/components/adventure/AdventureHero"
 
 interface PageProps {
     params: Promise<{ slug: string }>
@@ -177,6 +178,11 @@ export default async function TripReportPage({ params }: PageProps) {
     return (
         <div>
             {/* Table of Contents - Only shows on desktop */}
+            <AdventureHero
+                    backgroundImage={tripReport.mainImage}
+                    mainText1={tripReport.title}
+                    mainText2={tripReport.location || ""}
+                />
             <TripReportTableOfContents tripReport={tripReport} />
 
             <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 max-w-4xl">
@@ -188,17 +194,6 @@ export default async function TripReportPage({ params }: PageProps) {
                     <ChevronLeft size={20} />
                     Back to all adventures
                 </Link>
-
-                {/* Hero Image */}
-                {tripReport.mainImage && (
-                    <div className="w-full h-96 relative mb-8">
-                        <img
-                            src={tripReport.mainImage}
-                            alt={tripReport.title}
-                            className="object-cover w-full h-full rounded-lg"
-                        />
-                    </div>
-                )}
 
                 {/* Header with Explicit Achievement Callout */}
                 <div className="space-y-6 mb-8">
