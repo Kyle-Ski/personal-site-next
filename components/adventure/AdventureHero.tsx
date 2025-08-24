@@ -12,7 +12,7 @@ interface AdventureHeroProps {
     stats?: {
         label: string
         value: string
-        iconName: any
+        iconName: string
     }[]
 }
 
