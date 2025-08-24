@@ -28,13 +28,13 @@ export function AdventureNav({ currentPage }: AdventureNavProps) {
       icon: Star,
       key: 'gear-reviews'
     },
-    // {
-    //   href: '/peaks',
-    //   label: 'Peak Tracker',
-    //   description: 'Colorado summits & progress',
-    //   icon: MapPin,
-    //   key: 'peaks'
-    // }
+    {
+      href: '/peaks',
+      label: 'Peak Tracker',
+      description: 'Summit journeys',
+      icon: MapPin,
+      key: 'peaks'
+    }
   ]
 
   return (

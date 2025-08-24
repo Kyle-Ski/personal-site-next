@@ -1,32 +1,33 @@
-import PeakTracker from '@/components/adventure/PeakTracker'
+import MountainJournal from '@/components/adventure/MountainJournal'
 import AdventureHero from '@/components/adventure/AdventureHero'
-import { Mountain, TrendingUp, Target, Calendar } from 'lucide-react'
+import { Mountain, TrendingUp, Heart, Calendar } from 'lucide-react'
+import { AdventureNav } from '@/components/navigation/AdventureNav'
 
 export const metadata = {
-    title: 'Peak Tracker | Kyle Czajkowski',
-    description: "Tracking my progress on Colorado 14ers and other notable summits",
+    title: 'Mountain Journal | Kyle Czajkowski',
+    description: "Documenting my adventures across Colorado's peaks and ranges",
 }
 
 export default function PeaksPage() {
     const heroStats = [
         {
-            label: '14ers Completed',
-            value: '12/58',
+            label: 'Peaks Explored',
+            value: '40',
             iconName: 'Mountain'
         },
         {
-            label: 'Highest Summit',
-            value: '14,440\'',
+            label: 'Total Adventures',
+            value: '56',
             iconName: 'TrendingUp'
         },
         {
-            label: 'Goal This Year',
-            value: '8 more',
-            iconName: 'Target'
+            label: 'Favorite Peak',
+            value: 'Wetterhorn',
+            iconName: 'Heart'
         },
         {
-            label: 'Season Active',
-            value: 'Year-round',
+            label: '2015-2025',
+            value: '10 Years',
             iconName: 'Calendar'
         }
     ]
@@ -34,14 +35,18 @@ export default function PeaksPage() {
     return (
         <div className="min-h-screen">
             <AdventureHero
-                title="Peak Tracker"
-                subtitle="Documenting my journey through Colorado's highest summits"
+                title="Mountain Journal"
+                subtitle="A collection of peak experiences across Colorado's ranges"
                 stats={heroStats}
+                backgroundImage='/capitol-fall.jpg'
+                mainText1='Mountain'
+                mainText2='Journeys'
             />
 
             <section className="container mx-auto px-4 py-16">
-                <PeakTracker />
+                <MountainJournal />
             </section>
+            <AdventureNav currentPage='peaks'/>
         </div>
     )
 }

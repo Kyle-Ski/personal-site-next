@@ -9,6 +9,8 @@ interface AdventureHeroProps {
     title?: string
     subtitle?: string
     backgroundImage?: string
+    mainText1?: string
+    mainText2?: string
     stats?: {
         label: string
         value: string
@@ -26,7 +28,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
     'Map': Map
 }
 
-const AdventureHero = ({ backgroundImage = "/mountain-trail.JPG", stats }: AdventureHeroProps) => {
+const AdventureHero = ({ backgroundImage = "/mountain-trail.JPG", stats, mainText1 = "Trail Reports &", mainText2 = "Route Intel" }: AdventureHeroProps) => {
     const [offset, setOffset] = useState<number>(0)
 
     useEffect(() => {
@@ -70,8 +72,8 @@ const AdventureHero = ({ backgroundImage = "/mountain-trail.JPG", stats }: Adven
 
                     {/* Main Title */}
                     <h1 className="text-4xl lg:text-6xl font-bold mb-6 text-white">
-                        Trail Reports &
-                        <span className="block text-yellow-300">Route Intel</span>
+                        {mainText1}
+                        <span className="block text-yellow-300">{mainText2}</span>
                     </h1>
 
                     {/* Glassmorphism Stats */}
