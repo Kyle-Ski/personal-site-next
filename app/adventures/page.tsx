@@ -81,7 +81,7 @@ export default async function AdventuresPage() {
       <AdventureHero
         title="Adventures in the Great Outdoors"
         subtitle="Exploring as many peaks, trails, and backcountry lines as I can"
-        backgroundImage="/mountain-trail.jpg"
+        backgroundImage="/mountain-trail.JPG"
         stats={heroStats}
       />
 

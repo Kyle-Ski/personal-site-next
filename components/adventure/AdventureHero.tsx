@@ -26,7 +26,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
     'Map': Map
 }
 
-const AdventureHero = ({ backgroundImage = "/mountain-trail.jpg", stats }: AdventureHeroProps) => {
+const AdventureHero = ({ backgroundImage = "/mountain-trail.JPG", stats }: AdventureHeroProps) => {
     const [offset, setOffset] = useState<number>(0)
 
     useEffect(() => {
