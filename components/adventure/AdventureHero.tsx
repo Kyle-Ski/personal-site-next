@@ -12,7 +12,7 @@ interface AdventureHeroProps {
     stats?: {
         label: string
         value: string
-        iconName: string
+        iconName: any
     }[]
 }
 
@@ -43,7 +43,7 @@ const AdventureHero = ({ backgroundImage = "/mountain-trail.jpg", stats }: Adven
     }, [])
 
     return (
-        <section className="relative py-20 px-4 overflow-hidden h-[80vh] flex items-center" style={{ paddingTop: 'calc(4rem + 2rem)' }}>
+        <section className="relative px-4 overflow-hidden h-[80vh] flex items-center pt-20">
             {/* Parallax Background Image */}
             <div className="absolute inset-0">
                 <Image

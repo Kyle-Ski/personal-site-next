@@ -12,22 +12,22 @@ export default function PeaksPage() {
         {
             label: '14ers Completed',
             value: '12/58',
-            icon: Mountain
+            iconName: Mountain
         },
         {
             label: 'Highest Summit',
             value: '14,440\'',
-            icon: TrendingUp
+            iconName: TrendingUp
         },
         {
             label: 'Goal This Year',
             value: '8 more',
-            icon: Target
+            iconName: Target
         },
         {
             label: 'Season Active',
             value: 'Year-round',
-            icon: Calendar
+            iconName: Calendar
         }
     ]
 

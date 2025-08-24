@@ -29,7 +29,7 @@ const GearHero = () => {
   ]
 
   return (
-    <section className="relative py-20 px-4 overflow-hidden h-[80vh] flex items-center" style={{ paddingTop: 'calc(4rem + 2rem)' }}>
+    <section className="relative px-4 overflow-hidden h-[80vh] flex items-center pt-20">
       {/* Parallax Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -58,7 +58,6 @@ const GearHero = () => {
             Gear That Goes
             <span className="block text-yellow-300">the Distance</span>
           </h1>
-
           {/* Glassmorphism Achievement Pills */}
           {/* 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">

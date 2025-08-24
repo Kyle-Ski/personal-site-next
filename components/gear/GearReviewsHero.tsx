@@ -63,7 +63,7 @@ export default function GearReviewsHero({
     ]
 
     return (
-        <section className="relative py-50 px-4 overflow-hidden h-[80vh] flex items-center" style={{ paddingTop: 'calc(4rem + 2rem)' }}>
+        <section className="relative px-4 overflow-hidden h-[80vh] flex items-center pt-20">
             {/* Parallax Background Image */}
             <div className="absolute inset-0">
                 <Image
@@ -92,7 +92,6 @@ export default function GearReviewsHero({
                         Field-Tested
                         <span className="block text-yellow-300">Gear Reviews</span>
                     </h1>
-                    
                     {/* Glassmorphism Stats Grid */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
                         {heroStats.map((stat, index) => (
@@ -102,10 +101,10 @@ export default function GearReviewsHero({
                             >
                                 {/* Etched Glass Effect Container */}
                                 <div className="relative backdrop-blur-md bg-gradient-to-br from-white/15 to-white/5 border border-white/20 rounded-xl p-6 text-center shadow-xl transition-all duration-300 hover:shadow-2xl hover:backdrop-blur-lg hover:from-white/20 hover:to-white/10">
-                                    
+
                                     {/* Subtle inner glow effect */}
                                     <div className="absolute inset-0.5 bg-gradient-to-br from-white/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                    
+
                                     <div className="relative z-10">
                                         {/* Icon */}
                                         <div className="flex justify-center mb-4">
@@ -113,12 +112,12 @@ export default function GearReviewsHero({
                                                 <stat.icon size={24} className="text-yellow-300" />
                                             </div>
                                         </div>
-                                        
+
                                         {/* Value */}
                                         <div className="text-2xl font-bold text-white mb-2">
                                             {stat.value}
                                         </div>
-                                        
+
                                         {/* Label */}
                                         <div className="text-white/80 text-sm font-medium">
                                             {stat.label}
