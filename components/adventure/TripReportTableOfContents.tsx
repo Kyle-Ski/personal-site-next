@@ -49,15 +49,6 @@ export function TripReportTableOfContents({ tripReport }: TripReportTOCProps) {
       })
     }
 
-    if (tripReport.elevation || tripReport.distance || tripReport.elevationGain) {
-      items.push({
-        id: 'trip-stats',
-        title: 'Trip Statistics',
-        level: 'section',
-        icon: BarChart
-      })
-    }
-
     // Don't add the generic "Trip Report" section - it interferes with content highlighting
     // Instead, let the actual H2/H3 headings be the main navigation points
 

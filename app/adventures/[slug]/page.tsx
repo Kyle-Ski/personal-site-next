@@ -367,45 +367,7 @@ export default async function TripReportPage({ params }: PageProps) {
                         </CardContent>
                     </Card>
                 )}
-
-                {/* Quick Stats Summary with ID for TOC */}
-                {(tripReport.elevation || tripReport.distance || tripReport.elevationGain) && (
-                    <Card id="trip-stats" className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 mb-8">
-                        <CardContent className="p-4">
-                            <h3 className="font-medium text-green-800 dark:text-green-200 mb-3 flex items-center gap-2">
-                                <BarChart className="h-5 w-5" />
-                                Trip Statistics
-                            </h3>
-                            <div className="grid grid-cols-3 gap-4 text-center">
-                                {tripReport.elevation && (
-                                    <div>
-                                        <div className="text-2xl font-bold text-green-700 dark:text-green-300">
-                                            {tripReport.elevation.toLocaleString()}
-                                        </div>
-                                        <div className="text-sm text-green-600 dark:text-green-400">ft elevation</div>
-                                    </div>
-                                )}
-                                {tripReport.distance && (
-                                    <div>
-                                        <div className="text-2xl font-bold text-green-700 dark:text-green-300">
-                                            {tripReport.distance}
-                                        </div>
-                                        <div className="text-sm text-green-600 dark:text-green-400">miles</div>
-                                    </div>
-                                )}
-                                {tripReport.elevationGain && (
-                                    <div>
-                                        <div className="text-2xl font-bold text-green-700 dark:text-green-300">
-                                            {tripReport.elevationGain.toLocaleString()}
-                                        </div>
-                                        <div className="text-sm text-green-600 dark:text-green-400">ft gain</div>
-                                    </div>
-                                )}
-                            </div>
-                        </CardContent>
-                    </Card>
-                )}
-
+                
                 {/* Main Content with Image Support and ID for TOC */}
                 <div id="main-content" className="prose prose-lg max-w-none adventure-content dark:prose-invert">
                     {tripReport.body && tripReport.body.length > 0 ? (
