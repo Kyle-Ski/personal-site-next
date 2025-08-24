@@ -148,10 +148,10 @@ const MountainJournal = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Mountain className="h-5 w-5 text-green-600" />
-            Colorado Mountain Journal
+            Mountain Journal
           </CardTitle>
           <CardDescription>
-            A collection of peak experiences across Colorado&apos;s ranges
+            A collection of peak experiences from many places
           </CardDescription>
         </CardHeader>
         <CardContent>
