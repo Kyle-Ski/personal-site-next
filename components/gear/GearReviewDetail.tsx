@@ -21,6 +21,7 @@ import {
 import { PortableText } from '@portabletext/react'
 import { GearReview } from "@/lib/cmsProvider"
 import styles from '@/styles/GearReviewDetail.module.css'
+import { AdventureNav } from "../navigation/AdventureNav"
 
 interface GearReviewDetailProps {
     review: GearReview
