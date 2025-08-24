@@ -2,6 +2,7 @@ import { SanityService, GearReview } from "@/lib/cmsProvider"
 import GearReviewDetail from "@/components/gear/GearReviewDetail"
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
+import { AdventureNav } from "@/components/navigation/AdventureNav"
 
 interface PageProps {
     params: Promise<{ slug: string }>
@@ -72,5 +73,5 @@ export default async function GearReviewPage({ params }: PageProps) {
         notFound()
     }
 
-    return <GearReviewDetail review={review} />
+    return <div><GearReviewDetail review={review} /><AdventureNav currentPage="gear-reviews" /></div>
 }

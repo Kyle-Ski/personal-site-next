@@ -465,7 +465,7 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                     </div>
                 </div>
             </div>
-            <AdventureNav currentPage="gear-reviews" />
+            
         </div>
     )
 }

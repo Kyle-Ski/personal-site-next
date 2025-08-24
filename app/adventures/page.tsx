@@ -51,32 +51,27 @@ async function getAdventureData(): Promise<{
 export default async function AdventuresPage() {
   const { tripReports, stats } = await getAdventureData();
 
-  // Build hero stats from real data - now with 5 stats including elevation gained
+  // Build hero stats with icon NAMES as strings (not the actual components)
   const heroStats = [
     {
       label: 'Peaks Summited',
       value: stats.totalPeaks > 0 ? `${stats.totalPeaks}+` : 'Getting Started',
-      icon: Mountain
+      iconName: 'Mountain' // Changed from icon: Mountain
     },
     {
       label: 'Miles Adventured',
       value: stats.totalMiles > 0 ? `${stats.totalMiles.toLocaleString()}+` : 'Counting...',
-      icon: MapPin
+      iconName: 'MapPin' // Changed from icon: MapPin
     },
     {
       label: 'Elevation Gained',
       value: stats.totalElevationGain > 0 ? `${Math.round(stats.totalElevationGain / 1000).toLocaleString()}k ft` : 'Climbing...',
-      icon: ArrowUp
+      iconName: 'ArrowUp' // Changed from icon: ArrowUp
     },
-    // {
-    //   label: 'This Year',
-    //   value: `${stats.completedThisYear} Adventures`,
-    //   icon: Calendar
-    // },
     {
       label: 'Highest Summit',
       value: '19,341 ft',
-      icon: TrendingUp
+      iconName: 'TrendingUp' // Changed from icon: TrendingUp
     }
   ];
 
@@ -86,7 +81,7 @@ export default async function AdventuresPage() {
       <AdventureHero
         title="Adventures in the Great Outdoors"
         subtitle="Exploring as many peaks, trails, and backcountry lines as I can"
-        backgroundImage="/images/adventure-hero.jpg"
+        backgroundImage="/mountain-trail.JPG"
         stats={heroStats}
       />
 
