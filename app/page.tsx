@@ -7,6 +7,7 @@ import { getAllBlockData } from '../utils/notion';
 import { AboutData, WebsiteData } from '../interfaces';
 import StravaFeed from '../components/StravaFeed';
 import ResumeViewer from '../components/ResumeViewer';
+import RecentPosts from '@/components/RecentContent';
 
 
 export default async function Page() {
@@ -25,6 +26,7 @@ export default async function Page() {
       <main>
         <ParallaxHero />
         <About about={about} />
+        <RecentPosts />
         <PersonalTimeLine timeline={personalTimeline} />
         <Projects />
         <ResumeViewer/>

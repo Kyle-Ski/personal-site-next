@@ -28,6 +28,49 @@ export const tripReportType = defineType({
             rows: 3
         }),
         defineField({
+            name: 'achievement',
+            type: 'object',
+            title: 'Special Achievement',
+            description: 'Mark if this trip represents a special milestone or achievement',
+            fields: [
+                {
+                    name: 'type',
+                    type: 'string',
+                    title: 'Achievement Type',
+                    options: {
+                        list: [
+                            { title: 'Final Peak in Series', value: 'final-peak' },
+                            { title: 'First Peak/Route', value: 'first-peak' },
+                            { title: 'Personal Record', value: 'personal-record' },
+                            { title: 'Anniversary Climb', value: 'anniversary' },
+                            { title: 'Milestone Distance', value: 'milestone-distance' },
+                            { title: 'Highest Peak Achieved', value: 'highest-peak' },
+                            { title: 'Technical Achievement', value: 'technical-achievement' },
+                            { title: 'Group/Family Milestone', value: 'group-achievement' },
+                            { title: 'Weather Challenge', value: 'weather-challenge' },
+                            { title: 'Multi-Day Record', value: 'multi-day-record' },
+                            { title: 'Comeback/Return', value: 'comeback' },
+                            { title: 'Other', value: 'other' }
+                        ]
+                    }
+                },
+                {
+                    name: 'title',
+                    type: 'string',
+                    title: 'Achievement Title',
+                    description: 'e.g., "All 58 Colorado 14ers Complete!", "First Technical Alpine Route"',
+                    validation: Rule => Rule.max(100)
+                },
+                {
+                    name: 'description',
+                    type: 'text',
+                    title: 'Achievement Details',
+                    description: 'Optional: Additional context about this achievement',
+                    rows: 2
+                }
+            ]
+        }),
+        defineField({
             name: 'mainImage',
             type: 'image',
             title: 'Hero Image',

@@ -49,7 +49,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
     return (
         <div>
-            <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-3xl" >
+            <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 max-w-3xl" >
                 <Link
                     href="/blog"
                     className="flex items-center gap-2 text-muted-foreground hover:text-primary mb-8"
