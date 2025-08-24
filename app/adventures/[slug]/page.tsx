@@ -9,6 +9,9 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { urlFor } from "@/sanity/lib/image"
 import { AdventureNav } from "@/components/navigation/AdventureNav"
+import { TripReportTableOfContents } from "@/components/adventure/TripReportTableOfContents"
+import { TripReportNavigation } from "@/components/adventure/TripReportNavigation"
+
 interface PageProps {
     params: Promise<{ slug: string }>
 }
@@ -102,6 +105,9 @@ export default async function TripReportPage({ params }: PageProps) {
         notFound();
     }
 
+    // Get adjacent trip reports for navigation
+    const { previousReport, nextReport } = await sanityService.getAdjacentTripReports(slug);
+
     const getDifficultyColor = (difficulty: string) => {
         switch (difficulty) {
             case 'easy': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100'
@@ -117,6 +123,9 @@ export default async function TripReportPage({ params }: PageProps) {
 
     return (
         <div>
+            {/* Table of Contents - Only shows on desktop */}
+            <TripReportTableOfContents tripReport={tripReport} />
+
             <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 max-w-4xl">
                 {/* Back Navigation */}
                 <Link
@@ -208,7 +217,7 @@ export default async function TripReportPage({ params }: PageProps) {
                             </Card>
                         )}
 
-                        {/* NEW: Elevation Gain */}
+                        {/* Elevation Gain */}
                         {tripReport.elevationGain && tripReport.elevationGain > 0 && (
                             <Card className="adventure-card">
                                 <CardContent className="p-4 text-center">
@@ -237,7 +246,7 @@ export default async function TripReportPage({ params }: PageProps) {
                     </div>
                 )}
 
-                {/* NEW: Enhanced Weather Widget */}
+                {/* Enhanced Weather Widget */}
                 {tripReport.weather && (
                     <Card className="weather-widget mb-8">
                         <CardContent className="p-4">
@@ -262,9 +271,9 @@ export default async function TripReportPage({ params }: PageProps) {
                     </Card>
                 )}
 
-                {/* Route Notes - Enhanced */}
+                {/* Route Notes - Enhanced with ID for TOC */}
                 {tripReport.routeNotes && (
-                    <Card className="adventure-card mb-8">
+                    <Card id="route-notes" className="adventure-card mb-8">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Compass className="h-5 w-5 text-green-600" />
@@ -273,7 +282,6 @@ export default async function TripReportPage({ params }: PageProps) {
                         </CardHeader>
                         <CardContent>
                             <div className="whitespace-pre-wrap text-muted-foreground">
-                                {/* Format route notes with better structure */}
                                 {tripReport.routeNotes.split('\n\n').map((section, index) => (
                                     <div key={index} className="mb-4 last:mb-0">
                                         {section.startsWith('CRITICAL') || section.startsWith('WARNING') ? (
@@ -290,9 +298,9 @@ export default async function TripReportPage({ params }: PageProps) {
                     </Card>
                 )}
 
-                {/* Gear Used - Enhanced */}
+                {/* Gear Used - Enhanced with ID for TOC */}
                 {tripReport.gearUsed && tripReport.gearUsed.length > 0 && (
-                    <Card className="adventure-card mb-8">
+                    <Card id="gear-used" className="adventure-card mb-8">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Backpack className="h-5 w-5 text-green-600" />
@@ -312,9 +320,9 @@ export default async function TripReportPage({ params }: PageProps) {
                     </Card>
                 )}
 
-                {/* NEW: Quick Stats Summary */}
+                {/* Quick Stats Summary with ID for TOC */}
                 {(tripReport.elevation || tripReport.distance || tripReport.elevationGain) && (
-                    <Card className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 mb-8">
+                    <Card id="trip-stats" className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 mb-8">
                         <CardContent className="p-4">
                             <h3 className="font-medium text-green-800 dark:text-green-200 mb-3 flex items-center gap-2">
                                 <BarChart className="h-5 w-5" />
@@ -350,13 +358,12 @@ export default async function TripReportPage({ params }: PageProps) {
                     </Card>
                 )}
 
-                {/* Main Content with Image Support */}
-                <div className="prose prose-lg max-w-none adventure-content dark:prose-invert">
+                {/* Main Content with Image Support and ID for TOC */}
+                <div id="main-content" className="prose prose-lg max-w-none adventure-content dark:prose-invert">
                     {tripReport.body && tripReport.body.length > 0 ? (
                         <PortableText
                             value={tripReport.body}
                             components={{
-                                /* Enhanced styling for headers, lists, etc. */
                                 block: {
                                     h2: ({ children }) => (
                                         <h2 className="text-2xl font-bold mt-8 mb-4 text-green-800 dark:text-green-200 border-b border-green-200 dark:border-green-800 pb-2">
@@ -413,6 +420,12 @@ export default async function TripReportPage({ params }: PageProps) {
                         </div>
                     )}
                 </div>
+
+                {/* Trip Report Navigation */}
+                <TripReportNavigation 
+                    previousReport={previousReport} 
+                    nextReport={nextReport} 
+                />
 
                 {/* Call to Action */}
                 <section className="container mx-auto px-4 py-16 text-center">

@@ -28,6 +28,16 @@ interface ProcessedActivity {
   startCoordinates: [number, number] | null;
 }
 
+interface AdjacentTripReport {
+  _id: string;
+  title: string;
+  slug: string;
+  location: string;
+  date: string;
+  difficulty: 'easy' | 'moderate' | 'difficult' | 'expert';
+  mainImage?: string;
+}
+
 export interface TripReport {
   _id: string;
   title: string;
@@ -436,6 +446,103 @@ export class SanityService {
     `, { limit });
   }
 
+
+  async getAdjacentTripReports(currentSlug: string): Promise<{
+    previousReport?: AdjacentTripReport;
+    nextReport?: AdjacentTripReport;
+  }> {
+    try {
+      // Get current report's date to find adjacent reports
+      const [currentReport] = await this.client.fetch(`
+      *[_type == "tripReport" && slug.current == $currentSlug] {
+        date,
+        publishedAt
+      }
+    `, { currentSlug });
+
+      if (!currentReport) {
+        return {};
+      }
+
+      // Use date if available, otherwise fall back to publishedAt
+      const currentDate = currentReport.date || currentReport.publishedAt;
+
+      if (!currentDate) {
+        return {};
+      }
+
+      // Get previous report (older than current) - simplified approach
+      const previousReports = await this.client.fetch(`
+      *[_type == "tripReport" && slug.current != $currentSlug && defined(date) && date < $currentDate] 
+      | order(date desc) [0...1] {
+        _id,
+        title,
+        "slug": slug.current,
+        location,
+        date,
+        difficulty,
+        "mainImage": mainImage.asset->url
+      }
+    `, { currentSlug, currentDate });
+
+      // Get next report (newer than current) - simplified approach  
+      const nextReports = await this.client.fetch(`
+      *[_type == "tripReport" && slug.current != $currentSlug && defined(date) && date > $currentDate] 
+      | order(date asc) [0...1] {
+        _id,
+        title,
+        "slug": slug.current,
+        location,
+        date,
+        difficulty,
+        "mainImage": mainImage.asset->url
+      }
+    `, { currentSlug, currentDate });
+
+      // If no reports found by date, fall back to publishedAt
+      let previousReport = previousReports[0];
+      let nextReport = nextReports[0];
+
+      if (!previousReport || !nextReport) {
+        const publishedAtFallback = await this.client.fetch(`
+        *[_type == "tripReport" && slug.current != $currentSlug] 
+        | order(publishedAt desc) {
+          _id,
+          title,
+          "slug": slug.current,
+          location,
+          "date": coalesce(date, publishedAt),
+          difficulty,
+          "mainImage": mainImage.asset->url,
+          publishedAt
+        }
+      `, { currentSlug });
+
+        // Find current report index in the publishedAt sorted list
+        const currentIndex = publishedAtFallback.findIndex((report: any) =>
+          (currentReport.date || currentReport.publishedAt) === (report.date || report.publishedAt)
+        );
+
+        if (currentIndex !== -1) {
+          if (!previousReport && currentIndex > 0) {
+            previousReport = publishedAtFallback[currentIndex - 1];
+          }
+          if (!nextReport && currentIndex < publishedAtFallback.length - 1) {
+            nextReport = publishedAtFallback[currentIndex + 1];
+          }
+        }
+      }
+
+      return {
+        previousReport: previousReport || undefined,
+        nextReport: nextReport || undefined
+      };
+    } catch (error) {
+      console.error('Error fetching adjacent trip reports:', error);
+      return {};
+    }
+  }
+  
   // Trip Report methods
   async getAllTripReports(): Promise<TripReport[]> {
     try {
