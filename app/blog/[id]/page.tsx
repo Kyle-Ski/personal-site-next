@@ -82,6 +82,15 @@ export default async function BlogPostPage({ params }: PageProps) {
 
     const post = await sanityService.getPostBySlug(id);
 
+    function splitTitle(title: string): { part1: string; part2: string } {
+        const words = title.split(" ");
+        const mid = Math.ceil(words.length / 2);
+        return {
+            part1: words.slice(0, mid).join(" "),
+            part2: words.slice(mid).join(" "),
+        };
+    }
+    const { part1, part2 } = splitTitle(post.title);
     if (!post) {
         notFound();
     }
@@ -89,9 +98,9 @@ export default async function BlogPostPage({ params }: PageProps) {
     return (
         <div>
             <AdventureHero
-            backgroundImage={post.mainImage}
-            mainText1={post.title}
-            mainText2=""
+                backgroundImage={post.mainImage}
+                mainText1={part1}
+                mainText2={part2}
             />
             <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 max-w-3xl" >
                 <Link
