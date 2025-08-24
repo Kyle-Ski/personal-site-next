@@ -17,7 +17,7 @@ const GearHero = () => {
       {/* Background Image */}
       <div className={styles.heroBackground}>
         <Image
-          src="/CrestonesAtSunrise.jpeg" // Using your existing hero image
+          src="/Tent-Baker.jpg" // Using your existing hero image
           alt="Mountain landscape"
           fill
           priority
