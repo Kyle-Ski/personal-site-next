@@ -40,6 +40,30 @@ async function getPosts(): Promise<Post[]> {
     return posts
 }
 
+export const metadata = {
+    title: 'Blog | Kyle Czajkowski',
+    description: 'Web development tutorials, outdoor adventure stories, tech insights, and programming tips. Covering React, TypeScript, Node.js, and mountain adventures in Colorado.',
+    keywords: 'web development blog, react tutorials, typescript, node.js, outdoor adventures, tech blog, programming tutorials, colorado hiking',
+    openGraph: {
+        title: 'Tech Blog & Adventure Stories | Kyle Czajkowski',
+        description: 'Web development tutorials, outdoor adventure stories, tech insights, and programming tips. Covering React, TypeScript, Node.js, and mountain adventures in Colorado.',
+        images: ['/CrestonesAtSunrise.jpeg'], // Using home hero image as fallback since blog doesn't have a specific hero
+        url: 'https://kyle.czajkowski.tech/blog',
+        type: 'website',
+        siteName: 'Kyle Czajkowski',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        creator: '@SkiRoyJenkins',
+        title: 'Tech Blog & Adventure Stories | Kyle Czajkowski',
+        description: 'Web development tutorials, outdoor adventure stories, tech insights, and programming tips.',
+        images: ['/CrestonesAtSunrise.jpeg'],
+    },
+    alternates: {
+        canonical: 'https://kyle.czajkowski.tech/blog'
+    }
+};
+
 export default async function BlogPage() {
     const posts = await getPosts()
     return <BlogPageClient posts={posts} />

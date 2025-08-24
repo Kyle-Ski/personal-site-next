@@ -7,8 +7,27 @@ import { AdventureNav } from '@/components/navigation/AdventureNav'
 
 export const metadata = {
   title: 'Adventures | Kyle Czajkowski',
-  description: "Trail running, backpacking, skiing, and peak bagging adventures across Colorado and beyond",
-}
+  description: "Trail running, backpacking, skiing, and peak bagging adventures across Colorado's 14ers and beyond. Real trail conditions, route information, and adventure reports.",
+  keywords: 'colorado 14ers, trail running, backpacking, skiing, peak bagging, mountain adventures, trail reports, route conditions',
+  openGraph: {
+    title: 'Adventure Reports & Trail Intel | Kyle Czajkowski',
+    description: 'Trail running, backpacking, skiing, and peak bagging adventures across Colorado\'s 14ers and beyond. Real trail conditions, route information, and adventure reports.',
+    images: ['/mountain-trail.JPG'], // Using the adventures hero image
+    url: 'https://kyle.czajkowski.tech/adventures',
+    type: 'website',
+    siteName: 'Kyle Czajkowski',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    creator: '@SkiRoyJenkins',
+    title: 'Adventure Reports & Trail Intel | Kyle Czajkowski',
+    description: 'Trail running, backpacking, skiing, and peak bagging adventures across Colorado\'s 14ers and beyond.',
+    images: ['/mountain-trail.JPG'],
+  },
+  alternates: {
+    canonical: 'https://kyle.czajkowski.tech/adventures'
+  }
+};
 
 // Get trip reports and stats from Sanity
 async function getAdventureData(): Promise<{
@@ -32,18 +51,18 @@ async function getAdventureData(): Promise<{
   } catch (error) {
     console.error('Error fetching adventure data:', error);
     // Return fallback data
-    return { 
-      tripReports: [], 
-      stats: { 
-        totalPeaks: 0, 
-        totalMiles: 0, 
-        highestElevation: 0, 
+    return {
+      tripReports: [],
+      stats: {
+        totalPeaks: 0,
+        totalMiles: 0,
+        highestElevation: 0,
         completedThisYear: 0,
         totalElevationGain: 0,
         stravaActivities: 0,
         tripReports: 0,
         duplicatesRemoved: 0
-      } 
+      }
     };
   }
 }
@@ -90,7 +109,7 @@ export default async function AdventuresPage() {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4 adventure-heading">Recent Trip Reports</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            {tripReports.length > 0 
+            {tripReports.length > 0
               ? "Detailed accounts of recent adventures, complete with route info, conditions, and lessons learned for fellow adventurers."
               : "Adventure reports coming soon! Check back for detailed trip accounts and route information."
             }

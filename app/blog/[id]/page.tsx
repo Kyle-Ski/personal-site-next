@@ -25,9 +25,47 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     const post = await sanityService.getPostBySlug(id);
 
+    if (!post) {
+        return {
+            title: 'Blog Post Not Found - Kyle Czajkowski',
+        }
+    }
+
+    // Create a more descriptive title
+    const pageTitle = `${post.title} | Kyle Czajkowski`;
+
+    // Use excerpt or create a fallback description
+    const description = post.excerpt || `Read ${post.title} on Kyle Czajkowski's blog covering web development, outdoor adventures, and tech insights.`;
+
+    // Generate category tags for better SEO
+    const categoryTags = post.categories?.map(cat => cat.title).join(', ') || '';
+
     return {
-        title: post?.title,
-        description: post?.excerpt,
+        title: pageTitle,
+        description,
+        keywords: `${categoryTags}, web development, react, typescript, outdoor adventures`,
+        openGraph: {
+            title: post.title,
+            description,
+            images: post.mainImage ? [post.mainImage] : [],
+            type: 'article',
+            publishedTime: post.publishedAt,
+            authors: [post.author?.name || 'Kyle Czajkowski'],
+            tags: post.categories?.map(cat => cat.title) || [],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: post.title,
+            description,
+            images: post.mainImage ? [post.mainImage] : [],
+            creator: '@SkiRoyJenkins',
+        },
+        // Additional meta tags for better SEO
+        other: {
+            'article:author': post.author?.name || 'Kyle Czajkowski',
+            'article:published_time': post.publishedAt,
+            'article:section': categoryTags,
+        }
     }
 }
 
