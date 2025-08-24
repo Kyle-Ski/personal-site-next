@@ -62,8 +62,12 @@ export interface TripReport {
     image?: string;
   };
   tags?: string[];
+  achievement?: {
+    type: string;
+    title: string;
+    description?: string;
+  };
 }
-
 export interface GearReview {
   _id: string
   title: string
@@ -163,7 +167,7 @@ export class SanityService {
   /**
    * Convert Strava activity to stats format
    */
-   private convertStravaToStats(activity: ProcessedActivity) {
+  private convertStravaToStats(activity: ProcessedActivity) {
     return {
       title: activity.name,
       date: activity.date,
@@ -437,7 +441,7 @@ export class SanityService {
     try {
       // First try to fetch from dedicated tripReport schema
       const tripReports = await this.client.fetch(`
-        *[_type == "tripReport"] | order(date desc) {
+        *[_type == "tripReport"] | order(publishedAt desc) {
           _id,
           title,
           "slug": slug.current,
@@ -455,7 +459,7 @@ export class SanityService {
           weather,
           gearUsed,
           routeNotes,
-          body,
+          achievement,
           "author": author->{
             _id,
             name,
@@ -521,6 +525,7 @@ export class SanityService {
           gearUsed,
           routeNotes,
           body,
+          achievement,
           "author": author->{
             _id,
             name,

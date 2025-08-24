@@ -1,14 +1,14 @@
 import { PortableText } from "@portabletext/react"
-import { ChevronLeft, Mountain, MapPin, Calendar, TrendingUp, Thermometer, Clock, Compass } from "lucide-react"
+import { Trophy, ArrowUp, BarChart, Backpack, Cloud, Award, Target, Calendar, TrendingUp, Mountain, ChevronLeft, MapPin, Compass } from 'lucide-react'
 import Link from "next/link"
 import { format } from "date-fns"
 import { notFound } from "next/navigation"
 import { Metadata } from "next";
 import { SanityService, TripReport } from "@/lib/cmsProvider";
-import { portableTextComponents } from "@/utils/portableTextComponents";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
+import { urlFor } from "@/sanity/lib/image"
+import { AdventureNav } from "@/components/navigation/AdventureNav"
 interface PageProps {
     params: Promise<{ slug: string }>
 }
@@ -28,6 +28,62 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {
         title: tripReport?.title ? `${tripReport.title} | Adventures` : 'Adventure Report',
         description: tripReport?.excerpt || 'Adventure and trip report details',
+    }
+}
+
+function getAchievementIcon(type: string) {
+    switch (type) {
+        case 'final-peak': return Trophy
+        case 'first-peak': return Award
+        case 'personal-record': return Target
+        case 'anniversary': return Calendar
+        case 'milestone-distance': return TrendingUp
+        case 'highest-peak': return Mountain
+        case 'technical-achievement': return Mountain
+        case 'group-achievement': return Award
+        case 'weather-challenge': return Cloud
+        case 'multi-day-record': return Calendar
+        case 'comeback': return Trophy
+        default: return Award
+    }
+}
+
+function getAchievementStyling(type: string) {
+    switch (type) {
+        case 'final-peak':
+        case 'highest-peak':
+            return {
+                bgColor: 'bg-green-100 dark:bg-green-900/20 border-green-200 dark:border-green-800',
+                textColor: 'text-green-800 dark:text-green-200'
+            }
+        case 'first-peak':
+        case 'technical-achievement':
+            return {
+                bgColor: 'bg-blue-100 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800',
+                textColor: 'text-blue-800 dark:text-blue-200'
+            }
+        case 'personal-record':
+        case 'milestone-distance':
+            return {
+                bgColor: 'bg-purple-100 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800',
+                textColor: 'text-purple-800 dark:text-purple-200'
+            }
+        case 'anniversary':
+        case 'group-achievement':
+            return {
+                bgColor: 'bg-yellow-100 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800',
+                textColor: 'text-yellow-800 dark:text-yellow-200'
+            }
+        case 'weather-challenge':
+            return {
+                bgColor: 'bg-gray-100 dark:bg-gray-900/20 border-gray-200 dark:border-gray-800',
+                textColor: 'text-gray-800 dark:text-gray-200'
+            }
+        default:
+            return {
+                bgColor: 'bg-green-100 dark:bg-green-900/20 border-green-200 dark:border-green-800',
+                textColor: 'text-green-800 dark:text-green-200'
+            }
     }
 }
 
@@ -61,7 +117,8 @@ export default async function TripReportPage({ params }: PageProps) {
 
     return (
         <div>
-            <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-4xl">
+            <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 max-w-4xl">
+                {/* Back Navigation */}
                 <Link
                     href="/adventures"
                     className="flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 adventure-content"
@@ -81,17 +138,36 @@ export default async function TripReportPage({ params }: PageProps) {
                     </div>
                 )}
 
-                {/* Header */}
+                {/* Header with Explicit Achievement Callout */}
                 <div className="space-y-6 mb-8">
                     <div className="flex items-start justify-between">
-                        <h1 className="text-3xl sm:text-4xl font-bold flex-1">{tripReport.title}</h1>
+                        <div className="flex-1">
+                            <h1 className="text-3xl sm:text-4xl font-bold mb-2">{tripReport.title}</h1>
+                            {/* Explicit Achievement Callout from Sanity */}
+                            {tripReport.achievement && (
+                                <div className={`border rounded-lg p-3 mb-4 ${getAchievementStyling(tripReport.achievement.type).bgColor}`}>
+                                    <div className={`flex items-center gap-2 ${getAchievementStyling(tripReport.achievement.type).textColor}`}>
+                                        {(() => {
+                                            const IconComponent = getAchievementIcon(tripReport.achievement.type)
+                                            return <IconComponent className="h-5 w-5" />
+                                        })()}
+                                        <span className="font-medium">{tripReport.achievement.title}</span>
+                                    </div>
+                                    {tripReport.achievement.description && (
+                                        <p className={`text-sm mt-1 ml-7 ${getAchievementStyling(tripReport.achievement.type).textColor} opacity-90`}>
+                                            {tripReport.achievement.description}
+                                        </p>
+                                    )}
+                                </div>
+                            )}
+                        </div>
                         <Badge className={getDifficultyColor(tripReport.difficulty)}>
                             {tripReport.difficulty}
                         </Badge>
                     </div>
 
-                    {/* Trip Meta Information */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {/* Enhanced Trip Meta Grid - Add Elevation Gain */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                         {/* Location */}
                         <Card className="adventure-card">
                             <CardContent className="p-4 text-center">
@@ -115,7 +191,7 @@ export default async function TripReportPage({ params }: PageProps) {
                             <Card className="adventure-card">
                                 <CardContent className="p-4 text-center">
                                     <Mountain className="h-6 w-6 text-green-600 mx-auto mb-2" />
-                                    <div className="font-medium">{tripReport.elevation.toLocaleString()}&apos;</div>
+                                    <div className="font-medium">{tripReport.elevation.toLocaleString()}'</div>
                                     <div className="text-sm text-muted-foreground">Elevation</div>
                                 </CardContent>
                             </Card>
@@ -131,60 +207,54 @@ export default async function TripReportPage({ params }: PageProps) {
                                 </CardContent>
                             </Card>
                         )}
+
+                        {/* NEW: Elevation Gain */}
+                        {tripReport.elevationGain && tripReport.elevationGain > 0 && (
+                            <Card className="adventure-card">
+                                <CardContent className="p-4 text-center">
+                                    <ArrowUp className="h-6 w-6 text-green-600 mx-auto mb-2" />
+                                    <div className="font-medium">{tripReport.elevationGain.toLocaleString()}'</div>
+                                    <div className="text-sm text-muted-foreground">Elevation Gain</div>
+                                </CardContent>
+                            </Card>
+                        )}
                     </div>
-
-                    {/* Activities */}
-                    {tripReport.activities && tripReport.activities.length > 0 && (
-                        <div>
-                            <h3 className="font-medium mb-2">Activities</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {tripReport.activities.map((activity) => (
-                                    <Badge key={activity} variant="outline" className="border-green-200 text-green-800 dark:border-green-800 dark:text-green-200">
-                                        {activity}
-                                    </Badge>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Tags as fallback */}
-                    {(!tripReport.activities || tripReport.activities.length === 0) && tripReport.tags && tripReport.tags.length > 0 && (
-                        <div>
-                            <h3 className="font-medium mb-2">Tags</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {tripReport.tags.map((tag) => (
-                                    <Badge key={tag} variant="outline" className="border-green-200 text-green-800 dark:border-green-800 dark:text-green-200">
-                                        {tag}
-                                    </Badge>
-                                ))}
-                            </div>
-                        </div>
-                    )}
                 </div>
 
-                {/* Weather Conditions */}
+                {/* Activities & Tags Row */}
+                {(tripReport.activities || tripReport.tags) && (
+                    <div className="flex flex-wrap gap-2 mb-8">
+                        {tripReport.activities?.map((activity) => (
+                            <Badge key={activity} variant="outline" className="border-green-200 text-green-800 dark:border-green-800 dark:text-green-200">
+                                {activity}
+                            </Badge>
+                        ))}
+                        {tripReport.tags?.slice(0, 3).map((tag) => (
+                            <Badge key={tag} variant="secondary">
+                                {tag}
+                            </Badge>
+                        ))}
+                    </div>
+                )}
+
+                {/* NEW: Enhanced Weather Widget */}
                 {tripReport.weather && (
-                    <Card className="adventure-card mb-8">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Thermometer className="h-5 w-5 text-green-600" />
-                                Weather Conditions
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                {tripReport.weather.conditions && (
+                    <Card className="weather-widget mb-8">
+                        <CardContent className="p-4">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                    <Cloud className="h-8 w-8" />
                                     <div>
-                                        <div className="font-medium">Conditions</div>
-                                        <div className="text-muted-foreground capitalize">{tripReport.weather.conditions}</div>
+                                        <div className="font-medium capitalize">{tripReport.weather.conditions?.replace('-', ' ')}</div>
+                                        <div className="text-sm opacity-90">Weather Conditions</div>
                                     </div>
-                                )}
+                                </div>
                                 {tripReport.weather.temperature && (
-                                    <div>
-                                        <div className="font-medium">Temperature</div>
-                                        <div className="text-muted-foreground">
-                                            {tripReport.weather.temperature.low}°F - {tripReport.weather.temperature.high}°F
+                                    <div className="text-right">
+                                        <div className="text-2xl font-bold">
+                                            {tripReport.weather.temperature.low}° - {tripReport.weather.temperature.high}°F
                                         </div>
+                                        <div className="text-sm opacity-90">Temperature Range</div>
                                     </div>
                                 )}
                             </div>
@@ -192,36 +262,27 @@ export default async function TripReportPage({ params }: PageProps) {
                     </Card>
                 )}
 
-                {/* Route Notes */}
+                {/* Route Notes - Enhanced */}
                 {tripReport.routeNotes && (
                     <Card className="adventure-card mb-8">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Compass className="h-5 w-5 text-green-600" />
-                                Route Notes
+                                Route Notes & Navigation
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <p className="text-muted-foreground whitespace-pre-wrap">{tripReport.routeNotes}</p>
-                        </CardContent>
-                    </Card>
-                )}
-
-                {/* Gear Used */}
-                {tripReport.gearUsed && tripReport.gearUsed.length > 0 && (
-                    <Card className="adventure-card mb-8">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Mountain className="h-5 w-5 text-green-600" />
-                                Key Gear Used
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                {tripReport.gearUsed.map((gear, index) => (
-                                    <div key={index} className="flex items-center gap-2">
-                                        <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-                                        <span className="text-muted-foreground">{gear}</span>
+                            <div className="whitespace-pre-wrap text-muted-foreground">
+                                {/* Format route notes with better structure */}
+                                {tripReport.routeNotes.split('\n\n').map((section, index) => (
+                                    <div key={index} className="mb-4 last:mb-0">
+                                        {section.startsWith('CRITICAL') || section.startsWith('WARNING') ? (
+                                            <div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-400 p-3 rounded">
+                                                <p className="text-red-800 dark:text-red-200 font-medium">{section}</p>
+                                            </div>
+                                        ) : (
+                                            <p>{section}</p>
+                                        )}
                                     </div>
                                 ))}
                             </div>
@@ -229,58 +290,148 @@ export default async function TripReportPage({ params }: PageProps) {
                     </Card>
                 )}
 
-                {/* Main Content */}
+                {/* Gear Used - Enhanced */}
+                {tripReport.gearUsed && tripReport.gearUsed.length > 0 && (
+                    <Card className="adventure-card mb-8">
+                        <CardHeader>
+                            <CardTitle className="flex items-center gap-2">
+                                <Backpack className="h-5 w-5 text-green-600" />
+                                Essential Gear Used
+                            </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                {tripReport.gearUsed.map((gear, index) => (
+                                    <div key={index} className="flex items-center gap-2 p-2 rounded border border-gray-200 dark:border-gray-700">
+                                        <div className="w-2 h-2 bg-green-600 rounded-full flex-shrink-0"></div>
+                                        <span className="text-sm">{gear}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </CardContent>
+                    </Card>
+                )}
+
+                {/* NEW: Quick Stats Summary */}
+                {(tripReport.elevation || tripReport.distance || tripReport.elevationGain) && (
+                    <Card className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 mb-8">
+                        <CardContent className="p-4">
+                            <h3 className="font-medium text-green-800 dark:text-green-200 mb-3 flex items-center gap-2">
+                                <BarChart className="h-5 w-5" />
+                                Trip Statistics
+                            </h3>
+                            <div className="grid grid-cols-3 gap-4 text-center">
+                                {tripReport.elevation && (
+                                    <div>
+                                        <div className="text-2xl font-bold text-green-700 dark:text-green-300">
+                                            {tripReport.elevation.toLocaleString()}
+                                        </div>
+                                        <div className="text-sm text-green-600 dark:text-green-400">ft elevation</div>
+                                    </div>
+                                )}
+                                {tripReport.distance && (
+                                    <div>
+                                        <div className="text-2xl font-bold text-green-700 dark:text-green-300">
+                                            {tripReport.distance}
+                                        </div>
+                                        <div className="text-sm text-green-600 dark:text-green-400">miles</div>
+                                    </div>
+                                )}
+                                {tripReport.elevationGain && (
+                                    <div>
+                                        <div className="text-2xl font-bold text-green-700 dark:text-green-300">
+                                            {tripReport.elevationGain.toLocaleString()}
+                                        </div>
+                                        <div className="text-sm text-green-600 dark:text-green-400">ft gain</div>
+                                    </div>
+                                )}
+                            </div>
+                        </CardContent>
+                    </Card>
+                )}
+
+                {/* Main Content with Image Support */}
                 <div className="prose prose-lg max-w-none adventure-content dark:prose-invert">
                     {tripReport.body && tripReport.body.length > 0 ? (
                         <PortableText
                             value={tripReport.body}
-                            components={portableTextComponents}
+                            components={{
+                                /* Enhanced styling for headers, lists, etc. */
+                                block: {
+                                    h2: ({ children }) => (
+                                        <h2 className="text-2xl font-bold mt-8 mb-4 text-green-800 dark:text-green-200 border-b border-green-200 dark:border-green-800 pb-2">
+                                            {children}
+                                        </h2>
+                                    ),
+                                    h3: ({ children }) => (
+                                        <h3 className="text-xl font-semibold mt-6 mb-3 text-green-700 dark:text-green-300">
+                                            {children}
+                                        </h3>
+                                    ),
+                                },
+                                types: {
+                                    image: ({ value }) => {
+                                        return (
+                                            <figure className="my-8">
+                                                <div className="relative w-full h-auto">
+                                                    <img
+                                                        src={value.asset?.url || value.asset?._ref ? `${value.asset.url || urlFor(value.asset).url()}` : ''}
+                                                        alt={value.alt || 'Trip photo'}
+                                                        className="w-full h-auto object-cover rounded-lg shadow-lg"
+                                                        loading="lazy"
+                                                    />
+                                                </div>
+                                                {value.alt && (
+                                                    <figcaption className="mt-2 text-sm text-center text-muted-foreground italic">
+                                                        {value.alt}
+                                                    </figcaption>
+                                                )}
+                                            </figure>
+                                        )
+                                    }
+                                },
+                                marks: {
+                                    link: ({ children, value }) => {
+                                        const target = (value?.href || '').startsWith('http') ? '_blank' : undefined
+                                        return (
+                                            <a
+                                                href={value?.href}
+                                                target={target}
+                                                rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+                                                className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 underline"
+                                            >
+                                                {children}
+                                            </a>
+                                        )
+                                    }
+                                }
+                            }}
                         />
                     ) : (
-                        <div className="text-center py-12 text-muted-foreground">
-                            <p>Detailed trip report coming soon...</p>
+                        <div className="text-muted-foreground italic text-center py-12">
+                            Trip report content coming soon...
                         </div>
                     )}
                 </div>
 
-                {/* Author Info */}
-                {tripReport.author && (
-                    <div className="border-t border-border pt-8 mt-12">
-                        <div className="flex items-center gap-4">
-                            {tripReport.author.image && (
-                                <img
-                                    src={tripReport.author.image}
-                                    alt={tripReport.author.name}
-                                    className="w-12 h-12 rounded-full"
-                                />
-                            )}
-                            <div>
-                                <div className="font-medium">{tripReport.author.name}</div>
-                                <div className="text-sm text-muted-foreground">Adventure Author</div>
-                            </div>
-                        </div>
+                {/* Call to Action */}
+                <section className="container mx-auto px-4 py-16 text-center">
+                    <h3 className="text-2xl font-bold mb-4">Enjoyed this adventure report?</h3>
+                    <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+                        Whether you&apos;re planning your first 14er or looking for gear recommendations, I love to help fellow adventurers get outside safely.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <Link href="/gear" className="btn-adventure">
+                            Browse My Gear Setup
+                        </Link>
+                        <Link href="/#contact" className="px-6 py-3 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors">
+                            Get In Touch
+                        </Link>
                     </div>
-                )}
+                </section>
 
-                {/* Navigation */}
-                <div className="mt-12 pt-8 border-t border-border">
-                    <div className="flex justify-between items-center">
-                        <Link
-                            href="/adventures"
-                            className="flex items-center gap-2 text-green-600 dark:text-green-400 hover:underline"
-                        >
-                            <ChevronLeft size={16} />
-                            More Adventures
-                        </Link>
-                        <Link
-                            href="/gear"
-                            className="text-green-600 dark:text-green-400 hover:underline"
-                        >
-                            Check Out My Gear →
-                        </Link>
-                    </div>
-                </div>
             </article>
+            <AdventureNav currentPage="adventures" />
         </div>
     )
 }
