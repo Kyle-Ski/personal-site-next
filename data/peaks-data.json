@@ -1,0 +1,811 @@
+{
+  "metadata": {
+    "lastUpdated": "2025-08-23",
+    "totalPeaks": 44,
+    "totalAscents": 60,
+    "firstPeak": "Mt. Princeton",
+    "favoritePeak": "Wetterhorn Peak",
+    "climbedPeaks": 44,
+    "regions": {
+      "Colorado": {
+        "peaksCount": 40,
+        "ascentsCount": 56
+      },
+      "Washington": {
+        "peaksCount": 1,
+        "ascentsCount": 1
+      },
+      "California": {
+        "peaksCount": 2,
+        "ascentsCount": 2
+      },
+      "International": {
+        "peaksCount": 1,
+        "ascentsCount": 1
+      }
+    }
+  },
+  "peaks": [
+    {
+      "name": "Mt. Baker",
+      "region": "Washington", 
+      "range": "Cascade Range",
+      "elevation": 10781,
+      "country": "USA",
+      "state": "Washington",
+      "experiences": [
+        {"date": "2023-06-18", "conditions": "Foggy, Overcast, Sunny, Light Rain", "companions": "Kylie, Nikki, Rocco", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Whitney",
+      "region": "California",
+      "range": "Sierra Nevada",
+      "elevation": 14505,
+      "country": "USA",
+      "state": "California",
+      "experiences": [
+        {"date": "2022-08-22", "conditions": "Sunny", "companions": "Kylie, Luis", "notes": "Kylie's B-day week!", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Langley",
+      "region": "California",
+      "range": "Sierra Nevada",
+      "elevation": 14032,
+      "country": "USA",
+      "state": "California",
+      "experiences": [
+        {"date": "2022-08-24", "conditions": "Sunny", "companions": "Kylie, Luis", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Kilimanjaro",
+      "region": "International",
+      "range": "Kilimanjaro",
+      "elevation": 19341,
+      "country": "Tanzania",
+      "state": null,
+      "experiences": [
+        {"date": "2023-09-03", "conditions": "Sunny", "companions": "Kylie, Matt, Daniel", "notes": "", "season": "Summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Grays Peak",
+      "region": "Colorado",
+      "range": "Front Range",
+      "elevation": 14270,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2020-08-13", "conditions": "Sunny", "companions": "Kylie", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Torreys Peak",
+      "region": "Colorado",
+      "range": "Front Range",
+      "elevation": 14267,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2019-07-04", "conditions": "Sunny", "companions": "Kylie", "notes": "Kylie's 1st 14er", "season": "summer"},
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"},
+        {"date": "2021-07-08", "conditions": "Sunny", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 3,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Blue Sky",
+      "region": "Colorado",
+      "range": "Front Range",
+      "elevation": 14130,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2021-09-12", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2021-09-12",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Longs Peak",
+      "region": "Colorado",
+      "range": "Front Range",
+      "elevation": 14259,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2020-08-18", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2020-08-18",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Bierstadt",
+      "region": "Colorado",
+      "range": "Front Range",
+      "elevation": 14060,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "winter"},
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"},
+        {"date": "2021-06-10", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 3,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": true,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Quandary Peak",
+      "region": "Colorado",
+      "range": "Tenmile Range",
+      "elevation": 14265,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"},
+        {"date": "2022-05-16", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 2,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Lincoln",
+      "region": "Colorado",
+      "range": "Mosquito Range",
+      "elevation": 14286,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"},
+        {"date": "2019-07-14", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 2,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Cameron",
+      "region": "Colorado",
+      "range": "Mosquito Range",
+      "elevation": 14238,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"},
+        {"date": "2019-07-14", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 2,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Bross",
+      "region": "Colorado",
+      "range": "Mosquito Range",
+      "elevation": 14172,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"},
+        {"date": "2019-07-14", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 2,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Democrat",
+      "region": "Colorado",
+      "range": "Mosquito Range",
+      "elevation": 14148,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"},
+        {"date": "2019-07-14", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 2,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Sherman",
+      "region": "Colorado",
+      "range": "Mosquito Range",
+      "elevation": 14036,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"},
+        {"date": "2022-05-26", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 2,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Elbert",
+      "region": "Colorado",
+      "range": "Sawatch Range",
+      "elevation": 14440,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"},
+        {"date": "2019-10-05", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 2,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Massive",
+      "region": "Colorado",
+      "range": "Sawatch Range",
+      "elevation": 14421,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"},
+        {"date": "2019-07-14", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 2,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Harvard",
+      "region": "Colorado",
+      "range": "Collegiate Peaks",
+      "elevation": 14420,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2021-07-17", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2021-07-17",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "La Plata Peak",
+      "region": "Colorado",
+      "range": "Sawatch Range",
+      "elevation": 14336,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2021-03-06", "conditions": "", "companions": "", "notes": "", "season": "winter"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2021-03-06",
+      "favorite": false,
+      "winterAscent": true,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Antero",
+      "region": "Colorado",
+      "range": "Sawatch Range",
+      "elevation": 14269,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2022-09-05", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2022-09-05",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Shavano",
+      "region": "Colorado",
+      "range": "Sawatch Range",
+      "elevation": 14229,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2018-08-11", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2018-08-11",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Belford",
+      "region": "Colorado",
+      "range": "Collegiate Peaks",
+      "elevation": 14197,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"},
+        {"date": "2022-06-03", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 2,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Princeton",
+      "region": "Colorado",
+      "range": "Collegiate Peaks",
+      "elevation": 14197,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"},
+        {"date": "2022-05-28", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 2,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Yale",
+      "region": "Colorado",
+      "range": "Collegiate Peaks",
+      "elevation": 14196,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Oxford",
+      "region": "Colorado",
+      "range": "Collegiate Peaks",
+      "elevation": 14153,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2022-06-03", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2022-06-03",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Tabeguache Peak",
+      "region": "Colorado",
+      "range": "Sawatch Range",
+      "elevation": 14155,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2018-08-11", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2018-08-11",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. of the Holy Cross",
+      "region": "Colorado",
+      "range": "Sawatch Range",
+      "elevation": 14005,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2023-07-04", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2023-07-04",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Huron Peak",
+      "region": "Colorado",
+      "range": "Sawatch Range",
+      "elevation": 14003,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2022-06-05", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2022-06-05",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Pyramid Peak",
+      "region": "Colorado",
+      "range": "Elk Mountains",
+      "elevation": 14018,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2021-07-13", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2021-07-13",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Uncompahgre Peak",
+      "region": "Colorado",
+      "range": "San Juan Mountains",
+      "elevation": 14309,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2022-09-03", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2022-09-03",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Sneffels",
+      "region": "Colorado",
+      "range": "San Juan Mountains",
+      "elevation": 14150,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2021-07-23", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2021-07-23",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Windom Peak",
+      "region": "Colorado",
+      "range": "Needle Mountains",
+      "elevation": 14087,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2022-08-06", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2022-08-06",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Eolus",
+      "region": "Colorado",
+      "range": "Needle Mountains",
+      "elevation": 14083,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2022-08-06", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2022-08-06",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Sunlight Peak",
+      "region": "Colorado",
+      "range": "Needle Mountains",
+      "elevation": 14059,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2022-08-06", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2022-08-06",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Handies Peak",
+      "region": "Colorado",
+      "range": "San Juan Mountains",
+      "elevation": 14048,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2021-07-04", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2021-07-04",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "North Eolus",
+      "region": "Colorado",
+      "range": "Needle Mountains",
+      "elevation": 14039,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2022-08-06", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2022-08-06",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Redcloud Peak",
+      "region": "Colorado",
+      "range": "San Juan Mountains",
+      "elevation": 14034,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"},
+        {"date": "2021-07-03", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 2,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Wetterhorn Peak",
+      "region": "Colorado",
+      "range": "San Juan Mountains",
+      "elevation": 14015,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2021-07-21", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2021-07-21",
+      "favorite": true,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Wilson Peak",
+      "region": "Colorado",
+      "range": "San Juan Mountains",
+      "elevation": 14017,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2022-07-01", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2022-07-01",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Sunshine Peak",
+      "region": "Colorado",
+      "range": "San Juan Mountains",
+      "elevation": 14001,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2021-07-03", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2021-07-03",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Blanca Peak",
+      "region": "Colorado",
+      "range": "Sangre de Cristo Range",
+      "elevation": 14345,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "", "conditions": "", "companions": "", "notes": "", "season": "summer"},
+        {"date": "2025-08-16", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 2,
+      "firstAscent": "",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Humboldt Peak",
+      "region": "Colorado",
+      "range": "Sangre de Cristo Range",
+      "elevation": 14064,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2022-11-01", "conditions": "", "companions": "", "notes": "", "season": "fall"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2022-11-01",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Ellingwood Point",
+      "region": "Colorado",
+      "range": "Sangre de Cristo Range",
+      "elevation": 14042,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2025-08-16", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2025-08-16",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Mt. Lindsey",
+      "region": "Colorado",
+      "range": "Sangre de Cristo Range",
+      "elevation": 14042,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2021-08-06", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2021-08-06",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    },
+    {
+      "name": "Little Bear Peak",
+      "region": "Colorado",
+      "range": "Sangre de Cristo Range",
+      "elevation": 14037,
+      "country": "USA",
+      "state": "Colorado",
+      "experiences": [
+        {"date": "2022-07-15", "conditions": "", "companions": "", "notes": "", "season": "summer"}
+      ],
+      "totalAscents": 1,
+      "firstAscent": "2022-07-15",
+      "favorite": false,
+      "winterAscent": false,
+      "skiDescent": false,
+      "tripReport": false
+    }
+  ]
+}

@@ -30,7 +30,7 @@ const NavBar = () => {
     { href: `/adventures`, label: "Trip Reports", description: "Recent adventures & route info" },
     { href: `/gear`, label: "Gear Room", description: "My complete gear collection" },
     { href: `/gear/reviews`, label: "Gear Reviews", description: "Field-tested gear insights" },
-    // { href: `/peaks`, label: "Peak Tracker", description: "Colorado 14ers & summits" },
+    { href: `/peaks`, label: "Peak Tracker", description: "Colorado 14ers & summits" },
   ];
 
   const isActive = (href: string) => {
