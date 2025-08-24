@@ -88,9 +88,9 @@ export default function GearReviewsHero({
             <div className="container mx-auto text-center relative z-10">
                 <div className="max-w-4xl mx-auto">
                     {/* Main Title */}
-                    <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+                    <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
                         Field-Tested
-                        <span className="block text-yellow-300">Gear Reviews</span>
+                        <span className="block text-yellow-300" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>Gear Reviews</span>
                     </h1>
                     {/* Glassmorphism Stats Grid */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
@@ -109,17 +109,17 @@ export default function GearReviewsHero({
                                         {/* Icon */}
                                         <div className="flex justify-center mb-4">
                                             <div className="p-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-                                                <stat.icon size={24} className="text-yellow-300" />
+                                                <stat.icon size={24} className="text-yellow-300" style={{ filter: 'drop-shadow(1px 1px 1px rgba(0,0,0,0.8))' }} />
                                             </div>
                                         </div>
 
                                         {/* Value */}
-                                        <div className="text-2xl font-bold text-white mb-2">
+                                        <div className="text-2xl font-bold text-white mb-2" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
                                             {stat.value}
                                         </div>
 
                                         {/* Label */}
-                                        <div className="text-white/80 text-sm font-medium">
+                                        <div className="text-white/80 text-sm font-medium" style={{ textShadow: '1px 1px 1px rgba(0,0,0,0.7)' }}>
                                             {stat.label}
                                         </div>
                                     </div>
@@ -131,7 +131,7 @@ export default function GearReviewsHero({
                     {/* Scroll Indicator */}
                     <div className="mt-16 animate-bounce">
                         <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ filter: 'drop-shadow(1px 1px 1px rgba(0,0,0,0.8))' }}>
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                             </svg>
                         </div>

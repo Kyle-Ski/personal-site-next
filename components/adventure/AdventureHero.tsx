@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { Mountain, MapPin, Calendar, Trophy, TrendingUp, ArrowUp, Map } from 'lucide-react'
+import { Mountain, MapPin, Calendar, Trophy, TrendingUp, ArrowUp, Map, Heart } from 'lucide-react'
 import { imgStrToBase64, shimmer } from '@/utils/imageHelpers'
 
 interface AdventureHeroProps {
@@ -25,7 +25,8 @@ const iconMap: Record<string, React.ComponentType<any>> = {
     'Trophy': Trophy,
     'TrendingUp': TrendingUp,
     'ArrowUp': ArrowUp,
-    'Map': Map
+    'Map': Map,
+    'Heart': Heart
 }
 
 const AdventureHero = ({ backgroundImage = "/mountain-trail.JPG", stats, mainText1 = "Trail Reports &", mainText2 = "Route Intel" }: AdventureHeroProps) => {
@@ -71,9 +72,9 @@ const AdventureHero = ({ backgroundImage = "/mountain-trail.JPG", stats, mainTex
                 <div className="max-w-4xl mx-auto">
 
                     {/* Main Title */}
-                    <h1 className="text-4xl lg:text-6xl font-bold mb-6 text-white">
+                    <h1 className="text-4xl lg:text-6xl font-bold mb-6 text-white" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
                         {mainText1}
-                        <span className="block text-yellow-300">{mainText2}</span>
+                        <span className="block text-yellow-300" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>{mainText2}</span>
                     </h1>
 
                     {/* Glassmorphism Stats */}
@@ -91,29 +92,23 @@ const AdventureHero = ({ backgroundImage = "/mountain-trail.JPG", stats, mainTex
                                 return (
                                     <div
                                         key={index}
-                                        className="group relative"
+                                        className="relative group"
                                     >
-                                        {/* Etched Glass Effect Container */}
-                                        <div className="relative backdrop-blur-md bg-gradient-to-br from-white/15 to-white/5 border border-white/20 rounded-xl p-6 text-center shadow-xl transition-all duration-300 hover:shadow-2xl hover:backdrop-blur-lg hover:from-white/20 hover:to-white/10">
-
-                                            {/* Subtle inner glow effect */}
-                                            <div className="absolute inset-0.5 bg-gradient-to-br from-white/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                                            <div className="relative z-10">
+                                        {/* Glassmorphism container */}
+                                        <div className="relative backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105">
+                                            <div className="flex flex-col items-center text-center space-y-3">
                                                 {/* Icon */}
-                                                <div className="flex justify-center mb-3">
-                                                    <div className="p-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-                                                        <IconComponent size={24} className="text-yellow-300" />
-                                                    </div>
+                                                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/30">
+                                                    <IconComponent className="w-6 h-6 text-yellow-300" style={{ filter: 'drop-shadow(1px 1px 1px rgba(0,0,0,0.8))' }} />
                                                 </div>
 
                                                 {/* Value */}
-                                                <div className="text-2xl font-bold text-white mb-2">
+                                                <div className="text-2xl font-bold text-white mb-2" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
                                                     {stat.value}
                                                 </div>
 
                                                 {/* Label */}
-                                                <div className="text-white/80 text-sm font-medium">
+                                                <div className="text-white/80 text-sm font-medium" style={{ textShadow: '1px 1px 1px rgba(0,0,0,0.7)' }}>
                                                     {stat.label}
                                                 </div>
                                             </div>
@@ -127,7 +122,7 @@ const AdventureHero = ({ backgroundImage = "/mountain-trail.JPG", stats, mainTex
                     {/* Scroll Indicator */}
                     <div className="mt-16 animate-bounce">
                         <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ filter: 'drop-shadow(1px 1px 1px rgba(0,0,0,0.8))' }}>
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                             </svg>
                         </div>

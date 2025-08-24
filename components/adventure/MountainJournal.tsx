@@ -44,7 +44,7 @@ const MountainJournal = () => {
   const [viewMode, setViewMode] = useState<'ranges' | 'timeline' | 'favorites'>('ranges')
 
   // Use imported data directly
-  const { metadata, peaks } = peaksData as MountainJournalData
+  const { peaks } = peaksData as MountainJournalData
   
   // Get unique ranges for filtering
   const ranges = ['all', ...Array.from(new Set(peaks.map(peak => peak.range)))]
@@ -80,68 +80,6 @@ const MountainJournal = () => {
 
   return (
     <div className="space-y-6">
-      {/* Journal Header Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="adventure-card">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Peaks Explored</CardTitle>
-            <Mountain className="h-4 w-4 text-green-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-green-700 dark:text-green-400">
-              {metadata.climbedPeaks}
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Unique summits experienced
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="adventure-card">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Adventures</CardTitle>
-            <TrendingUp className="h-4 w-4 text-green-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-green-700 dark:text-green-400">
-              {metadata.totalAscents}
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Mountain experiences
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="adventure-card">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">First Summit</CardTitle>
-            <Star className="h-4 w-4 text-green-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-lg font-bold text-green-700 dark:text-green-400">
-              {metadata.firstPeak}
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Where it all began
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="adventure-card">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Favorite Peak</CardTitle>
-            <Heart className="h-4 w-4 text-green-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-lg font-bold text-green-700 dark:text-green-400">
-              {metadata.favoritePeak}
-            </div>
-            <p className="text-xs text-muted-foreground">
-              The one that stands out
-            </p>
-          </CardContent>
-        </Card>
-      </div>
 
       {/* View Mode Toggles */}
       <Card className="adventure-card">

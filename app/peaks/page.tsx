@@ -1,7 +1,7 @@
 import MountainJournal from '@/components/adventure/MountainJournal'
 import AdventureHero from '@/components/adventure/AdventureHero'
-import { Mountain, TrendingUp, Heart, Calendar } from 'lucide-react'
 import { AdventureNav } from '@/components/navigation/AdventureNav'
+import peaksData from '@/data/peaks-data.json'
 
 export const metadata = {
     title: 'Mountain Journal | Kyle Czajkowski',
@@ -9,20 +9,29 @@ export const metadata = {
 }
 
 export default function PeaksPage() {
+    // Get dynamic stats from peaks data
+    const { metadata } = peaksData as {
+        metadata: {
+            climbedPeaks: number
+            totalAscents: number
+            favoritePeak: string
+        }
+    }
+
     const heroStats = [
         {
-            label: 'Peaks Explored',
-            value: '40',
+            label: 'Unique Peaks',
+            value: metadata.climbedPeaks.toString(),
             iconName: 'Mountain'
         },
         {
             label: 'Total Adventures',
-            value: '56',
+            value: metadata.totalAscents.toString(),
             iconName: 'TrendingUp'
         },
         {
             label: 'Favorite Peak',
-            value: 'Wetterhorn',
+            value: metadata.favoritePeak,
             iconName: 'Heart'
         },
         {
