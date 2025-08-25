@@ -47,7 +47,7 @@ export const metadata = {
     openGraph: {
         title: 'Tech Blog & Adventure Stories | Kyle Czajkowski',
         description: 'Web development tutorials, outdoor adventure stories, tech insights, and programming tips. Covering React, TypeScript, Node.js, and mountain adventures in Colorado.',
-        images: ['/CrestonesAtSunrise.jpeg'], // Using home hero image as fallback since blog doesn't have a specific hero
+        images: ['/longs.jpg'],
         url: 'https://kyle.czajkowski.tech/blog',
         type: 'website',
         siteName: 'Kyle Czajkowski',
@@ -57,7 +57,7 @@ export const metadata = {
         creator: '@SkiRoyJenkins',
         title: 'Tech Blog & Adventure Stories | Kyle Czajkowski',
         description: 'Web development tutorials, outdoor adventure stories, tech insights, and programming tips.',
-        images: ['/CrestonesAtSunrise.jpeg'],
+        images: ['/longs.jpg'],
     },
     alternates: {
         canonical: 'https://kyle.czajkowski.tech/blog'
