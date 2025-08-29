@@ -249,7 +249,7 @@ export default function AdventureClient({ adventures, stats }: AdventureClientPr
                     <div className={styles.header}>
                         <h1 className={styles.title}>Adventure Reports</h1>
                         <p className={styles.subtitle}>
-                            Detailed trip reports, route conditions, and trail intel from Colorado's peaks and beyond
+                            Detailed trip reports, route conditions, and trail intel from Colorado&apos;s peaks and beyond
                         </p>
                     </div>
 
