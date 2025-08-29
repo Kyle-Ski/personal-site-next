@@ -22,6 +22,20 @@ export const tripReportType = defineType({
             validation: Rule => Rule.required()
         }),
         defineField({
+            name: 'contentType',
+            type: 'string',
+            options: {
+                list: [
+                    { title: 'Trip Report', value: 'trip-report' },
+                    { title: 'Route Guide', value: 'route-guide' },
+                    { title: 'Gear Guide', value: 'gear-guide' },
+                    { title: 'Planning Guide', value: 'planning-guide' },
+                    { title: 'Skills Guide', value: 'skills-guide' },
+                    { title: 'Conditions Report', value: 'conditions-report' },                    
+                ]
+            }
+        }),
+        defineField({
             name: 'excerpt',
             type: 'text',
             title: 'Brief Description',

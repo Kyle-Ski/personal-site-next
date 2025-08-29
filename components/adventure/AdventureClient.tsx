@@ -8,9 +8,21 @@ import AdventureHero from "@/components/adventure/AdventureHero"
 import { AdventureNav } from "@/components/navigation/AdventureNav"
 import styles from '@/styles/GearReviews.module.css'
 
-// Extend TripReport to include guides when implemented
+// Hard-coded content types for type safety and predictable filtering
+const CONTENT_TYPES = {
+    'trip-report': 'Trip Reports',
+    'route-guide': 'Route Guides',
+    'gear-guide': 'Gear Guides',
+    'planning-guide': 'Planning Guides',
+    'skills-guide': 'Skills Guides',
+    'conditions-report': 'Conditions Reports'
+} as const
+
+type ContentTypeKey = keyof typeof CONTENT_TYPES
+
+// Extend TripReport to include content types
 export interface AdventureContent extends TripReport {
-    contentType?: 'trip-report' | 'guide'  // For future guide support
+    contentType?: ContentTypeKey
 }
 
 interface AdventureStats {
@@ -169,11 +181,14 @@ export default function AdventureClient({ adventures, stats }: AdventureClientPr
     }, [adventures])
 
     const getAvailableContentTypes = useCallback(() => {
-        const types = new Set<string>()
+        const typesInData = new Set<ContentTypeKey>()
         adventures.forEach(adventure => {
-            types.add(adventure.contentType || 'trip-report')
+            const contentType = (adventure.contentType || 'trip-report') as ContentTypeKey
+            if (contentType in CONTENT_TYPES) {
+                typesInData.add(contentType)
+            }
         })
-        return Array.from(types).sort()
+        return Array.from(typesInData).sort()
     }, [adventures])
 
     const getAvailableDifficulties = useCallback(() => {
@@ -208,7 +223,7 @@ export default function AdventureClient({ adventures, stats }: AdventureClientPr
         dateRange.start || dateRange.end ? 'date' : null
     ].filter(Boolean).length
 
-    // Build hero stats for AdventureHero
+    // Build hero stats for AdventureHero - restored to original format
     const heroStats = [
         {
             label: 'Peaks Summited',
@@ -249,7 +264,7 @@ export default function AdventureClient({ adventures, stats }: AdventureClientPr
                     <div className={styles.header}>
                         <h1 className={styles.title}>Adventure Reports</h1>
                         <p className={styles.subtitle}>
-                            Detailed trip reports, route conditions, and trail intel from Colorado&apos;s peaks and beyond
+                            Detailed trip reports, route conditions, and trail intel from Colorado's peaks and beyond
                         </p>
                     </div>
 
@@ -297,9 +312,7 @@ export default function AdventureClient({ adventures, stats }: AdventureClientPr
                                                 )}
                                                 className={`${styles.filterButton} ${selectedContentType === type ? styles.active : ''}`}
                                             >
-                                                {type === 'trip-report' ? 'Trip Reports' :
-                                                    type === 'guide' ? 'Guides' :
-                                                        type.charAt(0).toUpperCase() + type.slice(1).replace('-', ' ')}
+                                                {CONTENT_TYPES[type]}
                                             </button>
                                         ))}
                                     </div>
@@ -438,7 +451,7 @@ export default function AdventureClient({ adventures, stats }: AdventureClientPr
                         {filteredAdventures.length} {filteredAdventures.length === 1 ? 'adventure' : 'adventures'}
                         {selectedActivity && ` for ${selectedActivity.replace('-', ' ')}`}
                         {selectedDifficulty && ` with ${selectedDifficulty} difficulty`}
-                        {selectedContentType && ` (${selectedContentType.replace('-', ' ')})`}
+                        {selectedContentType && ` (${CONTENT_TYPES[selectedContentType as ContentTypeKey]})`}
                     </div>
 
                     {/* Adventures Grid */}
