@@ -1,12 +1,11 @@
-// components/adventure/GPXRouteSection.tsx
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Download, Mountain, Loader2, AlertCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import ElevationChart from './ElevationChart';
-import RouteMap from './RouteMap';
+import RouteMap, { RouteMapRef } from './RouteMap';
 import { fetchAndParseGPX, GPXData } from '@/lib/gpxParser';
 
 interface GPXRouteSectionProps {
@@ -23,6 +22,13 @@ export default function GPXRouteSection({ gpxFile, routeName }: GPXRouteSectionP
     const [gpxData, setGpxData] = useState<GPXData | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+
+    // NEW: State for hover integration
+    const [hoveredElevationIndex, setHoveredElevationIndex] = useState<number | null>(null);
+    const [hoveredGpxPointIndex, setHoveredGpxPointIndex] = useState<number | null>(null);
+
+    // NEW: Ref for the map component
+    const routeMapRef = useRef<RouteMapRef>(null);
 
     useEffect(() => {
         async function loadGPXData() {
@@ -44,6 +50,53 @@ export default function GPXRouteSection({ gpxFile, routeName }: GPXRouteSectionP
         }
     }, [gpxFile.asset.url]);
 
+    // NEW: Function to find closest GPX point to elevation profile point
+    const findClosestGpxPointIndex = useCallback((elevationIndex: number): number | null => {
+        if (!gpxData || !gpxData.elevationProfile[elevationIndex]) return null;
+
+        const elevationPoint = gpxData.elevationProfile[elevationIndex];
+        const targetDistance = elevationPoint.distance; // Distance in miles
+
+        let closestIndex = 0;
+        let closestDistanceDiff = Infinity;
+
+        // Find GPX point with distance closest to the elevation profile point's distance
+        for (let i = 0; i < gpxData.points.length; i++) {
+            const gpxPoint = gpxData.points[i];
+            if (gpxPoint.distance !== undefined) {
+                const distanceDiff = Math.abs(gpxPoint.distance - targetDistance);
+                if (distanceDiff < closestDistanceDiff) {
+                    closestDistanceDiff = distanceDiff;
+                    closestIndex = i;
+                }
+            }
+        }
+
+        return closestIndex;
+    }, [gpxData]);
+
+    // NEW: Handle elevation chart hover events
+    const handleElevationHover = useCallback((elevationIndex: number | null) => {
+        setHoveredElevationIndex(elevationIndex);
+
+        if (elevationIndex !== null) {
+            const gpxPointIndex = findClosestGpxPointIndex(elevationIndex);
+            setHoveredGpxPointIndex(gpxPointIndex);
+
+            // Tell the map to highlight this point
+            if (routeMapRef.current) {
+                routeMapRef.current.highlightPoint(gpxPointIndex);
+            }
+        } else {
+            setHoveredGpxPointIndex(null);
+
+            // Clear map highlight
+            if (routeMapRef.current) {
+                routeMapRef.current.highlightPoint(null);
+            }
+        }
+    }, [findClosestGpxPointIndex]);
+
     const handleDownload = () => {
         const link = document.createElement('a');
         link.href = gpxFile.asset.url;
@@ -52,6 +105,9 @@ export default function GPXRouteSection({ gpxFile, routeName }: GPXRouteSectionP
         link.click();
         document.body.removeChild(link);
     };
+
+    // Generate clean filename for display
+    const downloadFilename = gpxFile.asset.originalFilename || `${routeName.replace(/\s+/g, '-')}.gpx`;
 
     return (
         <div className="space-y-6">
@@ -80,10 +136,17 @@ export default function GPXRouteSection({ gpxFile, routeName }: GPXRouteSectionP
             {/* Elevation Chart & Route Map */}
             {gpxData && gpxData.elevationProfile.length > 0 && (
                 <div className="space-y-6">
-                    {/* Interactive Route Map */}
-                    <RouteMap gpxData={gpxData} title="Interactive Route Map" />
+                    {/* Interactive Route Map with Download Button */}
+                    <RouteMap
+                        ref={routeMapRef}
+                        gpxData={gpxData}
+                        title="Interactive Route Map"
+                        hoveredPointIndex={hoveredGpxPointIndex}
+                        onDownload={handleDownload}
+                        downloadFilename={downloadFilename}
+                    />
 
-                    {/* Elevation Chart */}
+                    {/* Elevation Chart with Hover Integration */}
                     <ElevationChart
                         data={gpxData.elevationProfile}
                         totalDistance={gpxData.totalDistance}
@@ -91,27 +154,18 @@ export default function GPXRouteSection({ gpxFile, routeName }: GPXRouteSectionP
                         maxElevation={gpxData.maxElevation}
                         minElevation={gpxData.minElevation}
                         title="Route Elevation Profile"
+                        onHoverPoint={handleElevationHover}
                     />
 
-                    {/* Download Button - positioned under the chart */}
-                    <div className="flex justify-center">
-                        <Button
-                            onClick={handleDownload}
-                            variant="outline"
-                            className="gap-2"
-                        >
-                            <Download className="h-4 w-4" />
-                            Download GPX File
-                        </Button>
-                    </div>
-
-                    {/* Usage instructions */}
-                    <div className="text-sm text-muted-foreground text-center space-y-1">
-                        <p>Import this route into your GPS device or favorite mapping app</p>
-                        <p className="text-xs">
-                            Compatible with: Garmin devices • AllTrails • Gaia GPS • Strava • Most phone apps
-                        </p>
-                    </div>
+                    {/* Debug info (remove in production) */}
+                    {process.env.NODE_ENV === 'development' && hoveredElevationIndex !== null && (
+                        <div className="text-xs text-muted-foreground bg-muted p-2 rounded">
+                            Debug: Elevation Index: {hoveredElevationIndex}, GPX Point Index: {hoveredGpxPointIndex}
+                            {gpxData.elevationProfile[hoveredElevationIndex] && (
+                                <span> | Distance: {gpxData.elevationProfile[hoveredElevationIndex].distance}mi</span>
+                            )}
+                        </div>
+                    )}
                 </div>
             )}
 
