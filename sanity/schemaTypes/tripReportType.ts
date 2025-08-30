@@ -31,7 +31,7 @@ export const tripReportType = defineType({
                     { title: 'Gear Guide', value: 'gear-guide' },
                     { title: 'Planning Guide', value: 'planning-guide' },
                     { title: 'Skills Guide', value: 'skills-guide' },
-                    { title: 'Conditions Report', value: 'conditions-report' },                    
+                    { title: 'Conditions Report', value: 'conditions-report' },
                 ]
             }
         }),
@@ -203,8 +203,49 @@ export const tripReportType = defineType({
             name: 'gearUsed',
             type: 'array',
             title: 'Key Gear Used',
-            of: [{ type: 'string' }],
-            description: 'List the most important gear for this trip'
+            of: [{
+                type: 'object',
+                fields: [
+                    {
+                        name: 'name',
+                        type: 'string',
+                        title: 'Gear Name',
+                        validation: Rule => Rule.required()
+                    },
+                    {
+                        name: 'category',
+                        type: 'string',
+                        title: 'Category',
+                        options: {
+                            list: [
+                                { title: '⛺ Shelter & Sleep System', value: 'shelter' },
+                                { title: '👕 Clothing & Layers', value: 'clothing' },
+                                { title: '🧭 Navigation & Safety', value: 'navigation' },
+                                { title: '🍳 Food & Cooking', value: 'food' },
+                                { title: '💧 Water & Hydration', value: 'water' },
+                                { title: '🎒 Pack & Organization', value: 'pack' },
+                                { title: '🔧 Tools & Repair', value: 'tools' },
+                                { title: '📦 Other Gear', value: 'other' }
+                            ]
+                        },
+                        validation: Rule => Rule.required()
+                    },
+                    {
+                        name: 'description',
+                        type: 'text',
+                        title: 'Why you liked it',
+                        description: 'Short explanation of why this gear was valuable',
+                        rows: 2
+                    }
+                ],
+                preview: {
+                    select: {
+                        title: 'name',
+                        subtitle: 'category'
+                    }
+                }
+            }],
+            description: 'List the most important gear for this trip with categories and notes'
         }),
         defineField({
             name: 'routeNotes',

@@ -29,7 +29,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
     'Heart': Heart
 }
 
-const AdventureHero = ({ backgroundImage = "/mountain-trail.JPG", stats, mainText1 = "Trail Reports &", mainText2 = "Route Intel" }: AdventureHeroProps) => {
+const AdventureHero = ({ backgroundImage = "/mountain-trail.JPG", stats, mainText1 = "Field Reports &", mainText2 = "Mountain Intel" }: AdventureHeroProps) => {
     const [offset, setOffset] = useState<number>(0)
 
     useEffect(() => {
