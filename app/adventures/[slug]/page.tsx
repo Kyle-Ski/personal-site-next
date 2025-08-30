@@ -14,6 +14,7 @@ import { TripReportNavigation } from "@/components/adventure/TripReportNavigatio
 import AdventureHero from "@/components/adventure/AdventureHero"
 import { GearUsedSection } from "@/components/adventure/GearUsedSection"
 import { MobileTOC } from "@/components/MobileTOC"
+import GPXRouteSection from "@/components/adventure/GPXRouteSection"
 
 interface PageProps {
     params: Promise<{ slug: string }>
@@ -284,6 +285,7 @@ export default async function TripReportPage({ params }: PageProps) {
                     </div>
                 </div>
 
+
                 {/* Activities & Tags Row */}
                 {(tripReport.activities || tripReport.tags) && (
                     <div className="flex flex-wrap gap-2 mb-8">
@@ -299,7 +301,15 @@ export default async function TripReportPage({ params }: PageProps) {
                         ))}
                     </div>
                 )}
-
+                {tripReport.gpxFile && (
+                    <section className="adventure-content" id="route-data">
+                        <h2 className="text-2xl font-bold mb-4">Route & Elevation</h2>
+                        <GPXRouteSection
+                            gpxFile={tripReport.gpxFile}
+                            routeName={tripReport.title}
+                        />
+                    </section>
+                )}
                 {/* Enhanced Weather Widget */}
                 {tripReport.weather && (
                     <Card className="weather-widget mb-8">
