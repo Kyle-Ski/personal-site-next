@@ -36,6 +36,15 @@ export const tripReportType = defineType({
             }
         }),
         defineField({
+            name: 'gpxFile',
+            title: 'GPX Route File',
+            type: 'file',
+            options: {
+                accept: '.gpx'
+            },
+            description: 'Upload GPX file for route tracking and elevation profile'
+        }),
+        defineField({
             name: 'excerpt',
             type: 'text',
             title: 'Brief Description',
