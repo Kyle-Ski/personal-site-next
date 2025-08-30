@@ -362,29 +362,8 @@ export default async function TripReportPage({ params }: PageProps) {
                     </Card>
                 )}
 
-                {/* Gear Used - Enhanced with ID for TOC */}
-                {/* Gear Used - New Component */}
+                {/* Gear Used */}
                 <GearUsedSection gearUsed={tripReport.gearUsed} />
-                {/* {tripReport.gearUsed && tripReport.gearUsed.length > 0 && (
-                    <Card id="gear-used" className="adventure-card mb-8">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Backpack className="h-5 w-5 text-green-600" />
-                                Essential Gear Used
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                                {tripReport.gearUsed.map((gear, index) => (
-                                    <div key={index} className="flex items-center gap-2 p-2 rounded border border-gray-200 dark:border-gray-700">
-                                        <div className="w-2 h-2 bg-green-600 rounded-full flex-shrink-0"></div>
-                                        <span className="text-sm">{gear}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </CardContent>
-                    </Card>
-                )} */}
 
                 {/* Main Content with Image Support and ID for TOC */}
                 <div id="main-content" className="prose prose-lg max-w-none adventure-content dark:prose-invert">
