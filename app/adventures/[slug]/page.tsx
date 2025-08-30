@@ -14,6 +14,7 @@ import { TripReportNavigation } from "@/components/adventure/TripReportNavigatio
 import AdventureHero from "@/components/adventure/AdventureHero"
 import { GearUsedSection } from "@/components/adventure/GearUsedSection"
 import { MobileTOC } from "@/components/MobileTOC"
+import GPXRouteSection from "@/components/adventure/GPXRouteSection"
 
 interface PageProps {
     params: Promise<{ slug: string }>
@@ -284,6 +285,7 @@ export default async function TripReportPage({ params }: PageProps) {
                     </div>
                 </div>
 
+
                 {/* Activities & Tags Row */}
                 {(tripReport.activities || tripReport.tags) && (
                     <div className="flex flex-wrap gap-2 mb-8">
@@ -299,7 +301,15 @@ export default async function TripReportPage({ params }: PageProps) {
                         ))}
                     </div>
                 )}
-
+                {tripReport.gpxFile && (
+                    <section className="adventure-content" id="route-data">
+                        <h2 className="text-2xl font-bold mb-4">Route & Elevation</h2>
+                        <GPXRouteSection
+                            gpxFile={tripReport.gpxFile}
+                            routeName={tripReport.title}
+                        />
+                    </section>
+                )}
                 {/* Enhanced Weather Widget */}
                 {tripReport.weather && (
                     <Card className="weather-widget mb-8">
@@ -352,29 +362,8 @@ export default async function TripReportPage({ params }: PageProps) {
                     </Card>
                 )}
 
-                {/* Gear Used - Enhanced with ID for TOC */}
-                {/* Gear Used - New Component */}
+                {/* Gear Used */}
                 <GearUsedSection gearUsed={tripReport.gearUsed} />
-                {/* {tripReport.gearUsed && tripReport.gearUsed.length > 0 && (
-                    <Card id="gear-used" className="adventure-card mb-8">
-                        <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                                <Backpack className="h-5 w-5 text-green-600" />
-                                Essential Gear Used
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                                {tripReport.gearUsed.map((gear, index) => (
-                                    <div key={index} className="flex items-center gap-2 p-2 rounded border border-gray-200 dark:border-gray-700">
-                                        <div className="w-2 h-2 bg-green-600 rounded-full flex-shrink-0"></div>
-                                        <span className="text-sm">{gear}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </CardContent>
-                    </Card>
-                )} */}
 
                 {/* Main Content with Image Support and ID for TOC */}
                 <div id="main-content" className="prose prose-lg max-w-none adventure-content dark:prose-invert">

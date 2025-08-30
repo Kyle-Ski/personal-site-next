@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from 'react'
-import { ChevronLeft, ChevronRight, List, Compass, Backpack, X } from 'lucide-react'
+import { ChevronLeft, ChevronRight, List, Compass, Backpack, X, MapIcon } from 'lucide-react'
 import { GearItem } from '@/lib/cmsProvider'
 
 interface TOCItem {
@@ -17,6 +17,7 @@ interface MobileTOCProps {
         routeNotes?: string
         gearUsed?: GearItem[]
         body?: any[]
+        gpxFile?: any
     }
     // For blog posts
     content?: any[]
@@ -57,6 +58,20 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
                     icon: Backpack
                 })
             }
+            // if (
+            //     tripReport.gpxFile &&
+            //     typeof tripReport.gpxFile === 'object' &&
+            //     'asset' in tripReport.gpxFile &&
+            //     tripReport.gpxFile.asset &&
+            //     typeof tripReport.gpxFile.asset.url === 'string'
+            // ) {
+            //     items.push({
+            //         id: 'route-data',
+            //         title: 'Route & Elevation',
+            //         level: 'section',
+            //         icon: MapIcon
+            //     });
+            // }
         }
 
         // Scan for dynamic headings in content

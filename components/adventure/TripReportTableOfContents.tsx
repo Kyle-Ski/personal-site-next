@@ -14,6 +14,12 @@ interface TOCItem {
 interface TripReportTOCProps {
   tripReport: {
     routeNotes?: string
+    gpxFile?: {
+      asset: {
+        url: string;
+        originalFilename?: string;
+      }
+    };
     gearUsed?: GearItem[];
     elevation?: number
     distance?: number
@@ -50,34 +56,34 @@ export function TripReportTableOfContents({ tripReport }: TripReportTOCProps) {
       })
     }
 
-    // Don't add the generic "Trip Report" section - it interferes with content highlighting
-    // Instead, let the actual H2/H3 headings be the main navigation points
+      // Don't add the generic "Trip Report" section - it interferes with content highlighting
+      // Instead, let the actual H2/H3 headings be the main navigation points
 
-    // Scan for headings in the actual DOM after content renders
-    setTimeout(() => {
-      const headings = document.querySelectorAll('.adventure-content h2, .adventure-content h3')
-      const contentItems: TOCItem[] = []
-      
-      headings.forEach((heading, index) => {
-        const level = heading.tagName.toLowerCase() as 'h2' | 'h3'
-        const text = heading.textContent || `Heading ${index + 1}`
-        const id = `heading-${index}`
-        
-        // Add ID to heading if it doesn't have one
-        if (!heading.id) {
-          heading.id = id
-        }
-        
-        contentItems.push({
-          id: heading.id,
-          title: text,
-          level
+      // Scan for headings in the actual DOM after content renders
+      setTimeout(() => {
+        const headings = document.querySelectorAll('.adventure-content h2, .adventure-content h3')
+        const contentItems: TOCItem[] = []
+
+        headings.forEach((heading, index) => {
+          const level = heading.tagName.toLowerCase() as 'h2' | 'h3'
+          const text = heading.textContent || `Heading ${index + 1}`
+          const id = `heading-${index}`
+
+          // Add ID to heading if it doesn't have one
+          if (!heading.id) {
+            heading.id = id
+          }
+
+          contentItems.push({
+            id: heading.id,
+            title: text,
+            level
+          })
         })
-      })
-      
-      // Merge structured sections with content headings
-      setTocItems([...items, ...contentItems])
-    }, 100)
+
+        // Merge structured sections with content headings
+        setTocItems([...items, ...contentItems])
+      }, 100)
   }, [tripReport])
 
   useEffect(() => {
@@ -87,14 +93,14 @@ export function TripReportTableOfContents({ tripReport }: TripReportTOCProps) {
         if (userClicked) return
 
         const intersectingEntries = entries.filter(entry => entry.isIntersecting)
-        
+
         if (intersectingEntries.length > 0) {
           // Find the entry that's closest to the top of the viewport
           // This prevents the "next section" from being highlighted when we just scrolled to current
           const topMostEntry = intersectingEntries.reduce((closest, entry) => {
             const closestTop = closest.boundingClientRect.top
             const entryTop = entry.boundingClientRect.top
-            
+
             // Prefer elements that are closer to the top of the viewport
             // But still within the visible area (positive top value, but small)
             if (entryTop >= 0 && entryTop < closestTop) {
@@ -102,11 +108,11 @@ export function TripReportTableOfContents({ tripReport }: TripReportTOCProps) {
             }
             return closest
           })
-          
+
           setActiveId(topMostEntry.target.id)
         }
       },
-      { 
+      {
         rootMargin: '-10% 0px -70% 0px', // More restrictive margins
         threshold: [0, 0.1, 0.2] // Multiple thresholds for better detection
       }
@@ -150,7 +156,7 @@ export function TripReportTableOfContents({ tripReport }: TripReportTOCProps) {
       // Set clicked state to temporarily disable intersection observer updates
       setUserClicked(true)
       setActiveId(id) // Immediately set the clicked item as active
-      
+
       const headerOffset = 100 // Account for fixed header
       const elementPosition = element.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset
@@ -178,20 +184,20 @@ export function TripReportTableOfContents({ tripReport }: TripReportTOCProps) {
             Contents
           </span>
         </div>
-        
+
         <nav className="space-y-1 max-h-96 overflow-y-auto scrollbar-thin">
           {tocItems.map((item) => {
             const isActive = activeId === item.id
             const IconComponent = item.icon
-            
+
             return (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
                 className={`
                   w-full text-left px-2 py-1.5 rounded text-xs flex items-center gap-2 transition-all duration-200
-                  ${isActive 
-                    ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-l-2 border-green-500 font-medium' 
+                  ${isActive
+                    ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-l-2 border-green-500 font-medium'
                     : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700'
                   }
                   ${item.level === 'h3' ? 'ml-4' : ''}
