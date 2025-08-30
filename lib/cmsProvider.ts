@@ -43,6 +43,12 @@ export interface TripReport {
   title: string;
   slug: string;
   contentType?: string;
+  gpxFile?: {
+    asset: {
+      url: string;
+      originalFilename?: string;
+    }
+  };
   excerpt?: string;
   mainImage?: string;
   publishedAt: string;
@@ -641,6 +647,12 @@ export class SanityService {
           "slug": slug.current,
           excerpt,
           contentType,
+          "gpxFile": gpxFile {
+            "asset": asset-> {
+              url,
+              originalFilename
+            }
+          },
           "mainImage": mainImage.asset->url,
           publishedAt,
           date,
