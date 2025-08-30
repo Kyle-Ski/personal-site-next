@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -46,6 +46,8 @@ interface ElevationChartProps {
     maxElevation: number;
     minElevation: number;
     title?: string;
+    // NEW: Hover callback prop
+    onHoverPoint?: (pointIndex: number | null) => void;
 }
 
 export default function ElevationChart({
@@ -54,13 +56,17 @@ export default function ElevationChart({
     totalElevationGain,
     maxElevation,
     minElevation,
-    title = "Elevation Profile"
+    title = "Elevation Profile",
+    onHoverPoint
 }: ElevationChartProps) {
 
     // Unit toggle states
     const [useMetric, setUseMetric] = useState(false);
     const [isDark, setIsDark] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+
+    // NEW: Debounce ref for hover events
+    const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     // Check for dark mode and mobile
     useEffect(() => {
@@ -113,6 +119,28 @@ export default function ElevationChart({
     // Distance and elevation units
     const distanceUnit = useMetric ? 'km' : 'mi';
     const elevationUnit = useMetric ? 'm' : 'ft';
+
+    // NEW: Debounced hover handler
+    const handleHover = useCallback((event: any, activeElements: any[], chart: any) => {
+        if (!onHoverPoint) return;
+
+        // Clear existing timeout
+        if (hoverTimeoutRef.current) {
+            clearTimeout(hoverTimeoutRef.current);
+        }
+
+        // Debounce the hover event (75ms delay)
+        hoverTimeoutRef.current = setTimeout(() => {
+            if (activeElements && activeElements.length > 0) {
+                // Get the index of the hovered point
+                const pointIndex = activeElements[0].index;
+                onHoverPoint(pointIndex);
+            } else {
+                // No point is being hovered
+                onHoverPoint(null);
+            }
+        }, 75);
+    }, [onHoverPoint]);
 
     // Helper function to abbreviate numbers on mobile
     const formatNumber = (value: number, isMobile: boolean = false) => {
@@ -170,6 +198,8 @@ export default function ElevationChart({
     const options = {
         responsive: true,
         maintainAspectRatio: false,
+        // NEW: Add hover callback
+        onHover: handleHover,
         layout: {
             padding: {
                 left: isMobile ? 5 : 10,   // Reduce left padding on mobile
@@ -313,11 +343,11 @@ export default function ElevationChart({
                         <div>
                             <div className="font-medium text-card-foreground">
                                 {isMobile ?
-                                    formatNumber(currentElevationGain, true) :
-                                    currentElevationGain.toLocaleString()
-                                }{elevationUnit}
+                                    `${formatNumber(currentElevationGain, true)}${elevationUnit}` :
+                                    `${currentElevationGain.toLocaleString()}${elevationUnit}`
+                                }
                             </div>
-                            <div className="text-muted-foreground text-xs">Elev Gain</div>
+                            <div className="text-muted-foreground text-xs">Elevation Gain</div>
                         </div>
                     </div>
 
@@ -326,58 +356,46 @@ export default function ElevationChart({
                         <div>
                             <div className="font-medium text-card-foreground">
                                 {isMobile ?
-                                    formatNumber(currentMaxElevation, true) :
-                                    currentMaxElevation.toLocaleString()
-                                }{elevationUnit}
+                                    `${formatNumber(currentMaxElevation, true)}${elevationUnit}` :
+                                    `${currentMaxElevation.toLocaleString()}${elevationUnit}`
+                                }
                             </div>
-                            <div className="text-muted-foreground text-xs">Max Elev</div>
+                            <div className="text-muted-foreground text-xs">Max Elevation</div>
                         </div>
                     </div>
 
                     <div className="flex items-center gap-2 text-sm">
-                        <div className="h-4 w-4" /> {/* spacer */}
+                        <Target className="h-4 w-4 text-muted-foreground" />
                         <div>
                             <div className="font-medium text-card-foreground">
                                 {isMobile ?
-                                    formatNumber(currentMinElevation, true) :
-                                    currentMinElevation.toLocaleString()
-                                }{elevationUnit}
+                                    `${formatNumber(currentMinElevation, true)}${elevationUnit}` :
+                                    `${currentMinElevation.toLocaleString()}${elevationUnit}`
+                                }
                             </div>
-                            <div className="text-muted-foreground text-xs">Min Elev</div>
+                            <div className="text-muted-foreground text-xs">Min Elevation</div>
                         </div>
                     </div>
                 </div>
-
-                {/* Unit conversion helper text */}
-                {!isMobile && (
-                    <div className="text-xs text-muted-foreground mt-2">
-                        {useMetric ? (
-                            <span>
-                                {totalDistance}mi • {totalElevationGain.toLocaleString()}ft max
-                            </span>
-                        ) : (
-                            <span>
-                                {Math.round(totalDistanceKm * 10) / 10}km • {totalElevationGainM.toLocaleString()}m max
-                            </span>
-                        )}
-                    </div>
-                )}
             </CardHeader>
 
             <CardContent>
+                {/* Chart Container */}
                 <div className="h-64 w-full">
                     <Line data={chartData} options={options} />
                 </div>
 
-                {/* Additional info row */}
-                <div className="mt-4 text-xs text-muted-foreground border-t border-border pt-3 flex items-center justify-between">
-                    <p>{isMobile ? 'Tap chart for details' : 'Hover over the chart to see elevation at specific distances'}</p>
+                {/* Chart Instructions */}
+                <div className="flex items-center justify-between pt-2 text-xs text-muted-foreground">
+                    <p>{isMobile ?
+                        'Tap chart for details' : 'Hover over the chart to see elevation at specific distances'}</p>
                     <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => setUseMetric(!useMetric)}
                         className="text-xs h-auto p-1 text-muted-foreground hover:text-card-foreground"
                     >
+                        Switch to {useMetric ? 'Imperial' : 'Metric'}
                     </Button>
                 </div>
             </CardContent>
