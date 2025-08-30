@@ -9,6 +9,7 @@ import { SanityService } from "@/lib/cmsProvider";
 import { portableTextComponents } from "@/utils/portableTextComponents";
 import TableOfContents from "@/components/tableOfContents"
 import AdventureHero from "@/components/adventure/AdventureHero"
+import { MobileTOC } from "@/components/MobileTOC"
 
 interface PageProps {
     params: Promise<{ id: string }>
@@ -101,6 +102,10 @@ export default async function BlogPostPage({ params }: PageProps) {
                 backgroundImage={post.mainImage}
                 mainText1={part1}
                 mainText2={part2}
+            />
+            <MobileTOC
+                content={post.body}
+                contentType="blog"
             />
             <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 max-w-3xl" >
                 <Link

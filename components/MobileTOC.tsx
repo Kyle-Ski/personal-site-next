@@ -32,6 +32,7 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
     const [userClicked, setUserClicked] = useState(false)
 
     const expandedRef = useRef<HTMLDivElement>(null)
+    const scrollRef = useRef<HTMLDivElement>(null)
     const touchStartY = useRef<number>(0)
 
     // Build TOC items (reusing your existing logic)
@@ -195,6 +196,34 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
         }
     }
 
+    // Scroll boundary prevention - this is the key fix!
+    const handleScrollableTouch = (e: React.TouchEvent) => {
+        const target = e.currentTarget
+        const startY = e.touches[0].clientY
+
+        const preventScroll = (event: TouchEvent) => {
+            const currentY = event.touches[0].clientY
+            const deltaY = startY - currentY
+
+            // Check if we're at scroll boundaries
+            const isAtTop = target.scrollTop <= 0
+            const isAtBottom = target.scrollTop + target.clientHeight >= target.scrollHeight - 1
+
+            // Prevent scroll if at boundary and trying to scroll further
+            if ((isAtTop && deltaY < 0) || (isAtBottom && deltaY > 0)) {
+                event.preventDefault()
+            }
+        }
+
+        const cleanup = () => {
+            document.removeEventListener('touchmove', preventScroll)
+            document.removeEventListener('touchend', cleanup)
+        }
+
+        document.addEventListener('touchmove', preventScroll, { passive: false })
+        document.addEventListener('touchend', cleanup)
+    }
+
     // Don't render if no items or not visible
     if (tocItems.length <= 1 || !isVisible) return null
 
@@ -214,28 +243,36 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
                         <button
                             onClick={() => previousItem && scrollToSection(previousItem.id)}
                             disabled={!previousItem}
-                            className={`flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors ${previousItem
-                                    ? 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                                    : 'text-gray-300 dark:text-gray-600 cursor-not-allowed'
+                            className={`flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors flex-shrink-0 ${previousItem
+                                ? 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                                : 'text-gray-300 dark:text-gray-600 cursor-not-allowed'
                                 }`}
+                            title={previousItem?.title} // Tooltip for full title
                         >
                             <ChevronLeft size={14} />
-                            <span className="hidden sm:inline truncate max-w-[80px]">
-                                {previousItem?.title}
+                            <span className="hidden sm:inline truncate max-w-[60px]">
+                                {previousItem?.title && previousItem.title.length > 12
+                                    ? `${previousItem.title.substring(0, 12)}...`
+                                    : previousItem?.title
+                                }
                             </span>
                         </button>
 
                         {/* Current Section (Tappable) */}
                         <button
                             onClick={() => setIsExpanded(true)}
-                            className="flex-1 mx-2 px-3 py-1.5 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-full text-center"
+                            className="flex-1 mx-2 px-3 py-1.5 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-full text-center min-w-0"
+                            title={currentItem?.title} // Tooltip for full title
                         >
-                            <div className="flex items-center justify-center gap-2">
+                            <div className="flex items-center justify-center gap-2 min-w-0">
                                 {currentItem?.icon && (
-                                    <currentItem.icon className="h-3 w-3 text-green-600 dark:text-green-400" />
+                                    <currentItem.icon className="h-3 w-3 text-green-600 dark:text-green-400 flex-shrink-0" />
                                 )}
                                 <span className="font-medium text-sm text-green-700 dark:text-green-300 truncate">
-                                    {currentItem?.title || 'Select Section'}
+                                    {currentItem?.title && currentItem.title.length > 25
+                                        ? `${currentItem.title.substring(0, 25)}...`
+                                        : currentItem?.title || 'Select Section'
+                                    }
                                 </span>
                                 <List size={12} className="text-green-600 dark:text-green-400 flex-shrink-0" />
                             </div>
@@ -245,13 +282,17 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
                         <button
                             onClick={() => nextItem && scrollToSection(nextItem.id)}
                             disabled={!nextItem}
-                            className={`flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors ${nextItem
-                                    ? 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                                    : 'text-gray-300 dark:text-gray-600 cursor-not-allowed'
+                            className={`flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors flex-shrink-0 ${nextItem
+                                ? 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                                : 'text-gray-300 dark:text-gray-600 cursor-not-allowed'
                                 }`}
+                            title={nextItem?.title} // Tooltip for full title
                         >
-                            <span className="hidden sm:inline truncate max-w-[80px]">
-                                {nextItem?.title}
+                            <span className="hidden sm:inline truncate max-w-[60px]">
+                                {nextItem?.title && nextItem.title.length > 12
+                                    ? `${nextItem.title.substring(0, 12)}...`
+                                    : nextItem?.title
+                                }
                             </span>
                             <ChevronRight size={14} />
                         </button>
@@ -271,12 +312,12 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
                     {/* Expanded Content */}
                     <div
                         ref={expandedRef}
-                        className="absolute top-16 left-4 right-4 bottom-20 bg-white dark:bg-gray-900 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+                        className="absolute top-16 left-4 right-4 bottom-20 bg-white dark:bg-gray-900 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col"
                         onTouchStart={handleTouchStart}
                         onTouchEnd={handleTouchEnd}
                     >
                         {/* Header */}
-                        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+                        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex-shrink-0">
                             <div className="flex items-center gap-2">
                                 <List className="h-4 w-4 text-green-600" />
                                 <span className="font-medium text-sm">Table of Contents</span>
@@ -289,57 +330,82 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
                             </button>
                         </div>
 
-                        {/* Scrollable Content */}
-                        <div className="flex-1 overflow-y-auto p-2">
-                            {tocItems.map((item, index) => {
-                                const isActive = activeId === item.id
-                                const IconComponent = item.icon
+                        {/* Scrollable Content - This is the main fix */}
+                        <div
+                            ref={scrollRef}
+                            className="flex-1 overflow-y-auto p-2 relative"
+                            onTouchStart={handleScrollableTouch}
+                            style={{
+                                WebkitOverflowScrolling: 'touch',
+                                overscrollBehavior: 'contain'
+                            }}
+                        >
+                            {/* Visual scroll indicators for long content */}
+                            {tocItems.length > 8 && (
+                                <>
+                                    {/* Top fade */}
+                                    <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-white dark:from-gray-900 to-transparent pointer-events-none z-10" />
+                                    {/* Bottom fade */}
+                                    <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white dark:from-gray-900 to-transparent pointer-events-none z-10" />
+                                </>
+                            )}
 
-                                return (
-                                    <button
-                                        key={item.id}
-                                        onClick={() => scrollToSection(item.id)}
-                                        className={`w-full text-left p-3 rounded-lg mb-1 transition-all duration-200 flex items-center gap-3 ${isActive
+                            <div className="space-y-1">
+                                {tocItems.map((item, index) => {
+                                    const isActive = activeId === item.id
+                                    const IconComponent = item.icon
+
+                                    return (
+                                        <button
+                                            key={item.id}
+                                            onClick={() => scrollToSection(item.id)}
+                                            className={`w-full text-left p-3 rounded-lg transition-all duration-200 flex items-center gap-3 ${isActive
                                                 ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800 shadow-sm'
                                                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'
-                                            }`}
-                                    >
-                                        {/* Icon */}
-                                        {IconComponent && item.level === 'section' ? (
-                                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center">
-                                                <IconComponent className="h-4 w-4 text-green-600 dark:text-green-400" />
-                                            </div>
-                                        ) : (
-                                            <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center">
-                                                <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
-                                                    }`} />
-                                            </div>
-                                        )}
-
-                                        {/* Content */}
-                                        <div className="flex-1 min-w-0">
-                                            <div className={`font-medium text-sm ${item.level === 'h3' ? 'ml-4' : ''
-                                                }`}>
-                                                {item.title}
-                                            </div>
-                                            {isActive && (
-                                                <div className="text-xs text-green-600 dark:text-green-400 mt-0.5">
-                                                    Current section
+                                                }`}
+                                        >
+                                            {/* Icon */}
+                                            {IconComponent && item.level === 'section' ? (
+                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center">
+                                                    <IconComponent className="h-4 w-4 text-green-600 dark:text-green-400" />
+                                                </div>
+                                            ) : (
+                                                <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center">
+                                                    <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
+                                                        }`} />
                                                 </div>
                                             )}
-                                        </div>
 
-                                        {/* Active Indicator */}
-                                        {isActive && (
-                                            <div className="flex-shrink-0 w-1 h-8 bg-green-500 rounded-full" />
-                                        )}
-                                    </button>
-                                )
-                            })}
+                                            {/* Content */}
+                                            <div className="flex-1 min-w-0">
+                                                <div className={`font-medium text-sm ${item.level === 'h3' ? 'ml-4' : ''
+                                                    }`}
+                                                    title={item.title} // Tooltip for full title
+                                                >
+                                                    {item.title.length > 45
+                                                        ? `${item.title.substring(0, 45)}...`
+                                                        : item.title
+                                                    }
+                                                </div>
+                                                {isActive && (
+                                                    <div className="text-xs text-green-600 dark:text-green-400 mt-0.5">
+                                                        Current section
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            {/* Active Indicator */}
+                                            {isActive && (
+                                                <div className="flex-shrink-0 w-1 h-8 bg-green-500 rounded-full" />
+                                            )}
+                                        </button>
+                                    )
+                                })}
+                            </div>
                         </div>
 
                         {/* Footer with swipe hint */}
-                        <div className="p-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+                        <div className="p-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex-shrink-0">
                             <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
                                 <ChevronUp size={12} />
                                 <span>Swipe up to close</span>
