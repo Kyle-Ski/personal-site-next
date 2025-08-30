@@ -42,6 +42,7 @@ export interface TripReport {
   _id: string;
   title: string;
   slug: string;
+  contentType?: string;
   excerpt?: string;
   mainImage?: string;
   publishedAt: string;
@@ -552,6 +553,7 @@ export class SanityService {
           _id,
           title,
           "slug": slug.current,
+          contentType,
           excerpt,
           "mainImage": mainImage.asset->url,
           publishedAt,
@@ -589,6 +591,7 @@ export class SanityService {
         _id,
         title,
         "slug": slug.current,
+        "contentType": "trip-report",
         excerpt,
         "mainImage": mainImage.asset->url,
         publishedAt,
@@ -618,6 +621,7 @@ export class SanityService {
           title,
           "slug": slug.current,
           excerpt,
+          contentType,
           "mainImage": mainImage.asset->url,
           publishedAt,
           date,
@@ -655,6 +659,7 @@ export class SanityService {
         _id,
         title,
         "slug": slug.current,
+        "contentType": "trip-report",
         excerpt,
         "mainImage": mainImage.asset->url,
         publishedAt,
