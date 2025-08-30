@@ -6,6 +6,7 @@ import { Download, Mountain, Loader2, AlertCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import ElevationChart from './ElevationChart';
+import RouteMap from './RouteMap';
 import { fetchAndParseGPX, GPXData } from '@/lib/gpxParser';
 
 interface GPXRouteSectionProps {
@@ -76,9 +77,13 @@ export default function GPXRouteSection({ gpxFile, routeName }: GPXRouteSectionP
                 </Card>
             )}
 
-            {/* Elevation Chart */}
+            {/* Elevation Chart & Route Map */}
             {gpxData && gpxData.elevationProfile.length > 0 && (
-                <div className="space-y-4">
+                <div className="space-y-6">
+                    {/* Interactive Route Map */}
+                    <RouteMap gpxData={gpxData} title="Interactive Route Map" />
+
+                    {/* Elevation Chart */}
                     <ElevationChart
                         data={gpxData.elevationProfile}
                         totalDistance={gpxData.totalDistance}
@@ -103,6 +108,9 @@ export default function GPXRouteSection({ gpxFile, routeName }: GPXRouteSectionP
                     {/* Usage instructions */}
                     <div className="text-sm text-muted-foreground text-center space-y-1">
                         <p>Import this route into your GPS device or favorite mapping app</p>
+                        <p className="text-xs">
+                            Compatible with: Garmin devices • AllTrails • Gaia GPS • Strava • Most phone apps
+                        </p>
                     </div>
                 </div>
             )}
