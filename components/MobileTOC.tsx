@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from 'react'
-import { ChevronLeft, ChevronRight, ChevronUp, List, Compass, Backpack, X } from 'lucide-react'
+import { ChevronLeft, ChevronRight, List, Compass, Backpack, X } from 'lucide-react'
 import { GearItem } from '@/lib/cmsProvider'
 
 interface TOCItem {
@@ -33,7 +33,6 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
 
     const expandedRef = useRef<HTMLDivElement>(null)
     const scrollRef = useRef<HTMLDivElement>(null)
-    const touchStartY = useRef<number>(0)
 
     // Build TOC items (reusing your existing logic)
     useEffect(() => {
@@ -181,21 +180,6 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
     }
     const getCurrentItem = () => tocItems.find(item => item.id === activeId)
 
-    // Touch gestures for closing expanded view
-    const handleTouchStart = (e: React.TouchEvent) => {
-        touchStartY.current = e.touches[0].clientY
-    }
-
-    const handleTouchEnd = (e: React.TouchEvent) => {
-        const touchEndY = e.changedTouches[0].clientY
-        const deltaY = touchStartY.current - touchEndY
-
-        // Swipe up to close (deltaY > 50 means swipe up)
-        if (deltaY > 50) {
-            setIsExpanded(false)
-        }
-    }
-
     // Scroll boundary prevention - this is the key fix!
     const handleScrollableTouch = (e: React.TouchEvent) => {
         const target = e.currentTarget
@@ -312,9 +296,7 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
                     {/* Expanded Content */}
                     <div
                         ref={expandedRef}
-                        className="absolute top-16 left-4 right-4 bottom-20 bg-white dark:bg-gray-900 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col"
-                        onTouchStart={handleTouchStart}
-                        onTouchEnd={handleTouchEnd}
+                        className="absolute top-16 left-4 right-4 bottom-8 bg-white dark:bg-gray-900 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col"
                     >
                         {/* Header */}
                         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex-shrink-0">
@@ -401,14 +383,6 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
                                         </button>
                                     )
                                 })}
-                            </div>
-                        </div>
-
-                        {/* Footer with swipe hint */}
-                        <div className="p-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex-shrink-0">
-                            <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
-                                <ChevronUp size={12} />
-                                <span>Swipe up to close</span>
                             </div>
                         </div>
                     </div>
