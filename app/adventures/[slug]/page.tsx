@@ -13,6 +13,7 @@ import { TripReportTableOfContents } from "@/components/adventure/TripReportTabl
 import { TripReportNavigation } from "@/components/adventure/TripReportNavigation"
 import AdventureHero from "@/components/adventure/AdventureHero"
 import { GearUsedSection } from "@/components/adventure/GearUsedSection"
+import { MobileTOC } from "@/components/MobileTOC"
 
 interface PageProps {
     params: Promise<{ slug: string }>
@@ -180,10 +181,14 @@ export default async function TripReportPage({ params }: PageProps) {
         <div>
             {/* Table of Contents - Only shows on desktop */}
             <AdventureHero
-                    backgroundImage={tripReport.mainImage}
-                    mainText1={tripReport.title}
-                    mainText2={tripReport.location || ""}
-                />
+                backgroundImage={tripReport.mainImage}
+                mainText1={tripReport.title}
+                mainText2={tripReport.location || ""}
+            />
+            <MobileTOC
+                tripReport={tripReport}
+                contentType="adventure"
+            />
             <TripReportTableOfContents tripReport={tripReport} />
 
             <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 max-w-4xl">
@@ -349,7 +354,7 @@ export default async function TripReportPage({ params }: PageProps) {
 
                 {/* Gear Used - Enhanced with ID for TOC */}
                 {/* Gear Used - New Component */}
-                    <GearUsedSection gearUsed={tripReport.gearUsed} />
+                <GearUsedSection gearUsed={tripReport.gearUsed} />
                 {/* {tripReport.gearUsed && tripReport.gearUsed.length > 0 && (
                     <Card id="gear-used" className="adventure-card mb-8">
                         <CardHeader>
@@ -370,7 +375,7 @@ export default async function TripReportPage({ params }: PageProps) {
                         </CardContent>
                     </Card>
                 )} */}
-                
+
                 {/* Main Content with Image Support and ID for TOC */}
                 <div id="main-content" className="prose prose-lg max-w-none adventure-content dark:prose-invert">
                     {tripReport.body && tripReport.body.length > 0 ? (
