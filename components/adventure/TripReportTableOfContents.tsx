@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { List, Compass, Backpack, BarChart, MapPin } from 'lucide-react'
+import { GearItem } from '@/lib/cmsProvider'
 
 interface TOCItem {
   id: string
@@ -13,7 +14,7 @@ interface TOCItem {
 interface TripReportTOCProps {
   tripReport: {
     routeNotes?: string
-    gearUsed?: string[]
+    gearUsed?: GearItem[];
     elevation?: number
     distance?: number
     elevationGain?: number
