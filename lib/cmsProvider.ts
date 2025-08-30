@@ -64,7 +64,7 @@ export interface TripReport {
       high: number;
     };
   };
-  gearUsed?: string[];
+  gearUsed?: GearItem[];
   routeNotes?: string;
   body?: any[];
   author?: {
@@ -138,6 +138,21 @@ export interface AdventureStats {
   tripReports: number;
   duplicatesRemoved: number;
 }
+
+export type LegacyGearItem = string
+
+export type NewGearItem = {
+    name: string
+    category: 'shelter' | 'clothing' | 'navigation' | 'food' | 'water' | 'pack' | 'tools' | 'other'
+    description?: string
+}
+
+export type GearItem = LegacyGearItem | NewGearItem
+
+export function isNewGearItem(item: GearItem): item is NewGearItem {
+    return typeof item === 'object' && 'name' in item && 'category' in item
+}
+
 export class SanityService {
   private client;
 
@@ -566,7 +581,11 @@ export class SanityService {
           difficulty,
           activities,
           weather,
-          gearUsed,
+          gearUsed[]{
+            name,
+            category,
+            description
+          },
           routeNotes,
           achievement,
           "author": author->{
@@ -633,7 +652,11 @@ export class SanityService {
           difficulty,
           activities,
           weather,
-          gearUsed,
+          gearUsed[]{
+            name,
+            category,
+            description
+          },
           routeNotes,
           body,
           achievement,

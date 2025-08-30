@@ -12,6 +12,7 @@ import { AdventureNav } from "@/components/navigation/AdventureNav"
 import { TripReportTableOfContents } from "@/components/adventure/TripReportTableOfContents"
 import { TripReportNavigation } from "@/components/adventure/TripReportNavigation"
 import AdventureHero from "@/components/adventure/AdventureHero"
+import { GearUsedSection } from "@/components/adventure/GearUsedSection"
 
 interface PageProps {
     params: Promise<{ slug: string }>
@@ -347,7 +348,9 @@ export default async function TripReportPage({ params }: PageProps) {
                 )}
 
                 {/* Gear Used - Enhanced with ID for TOC */}
-                {tripReport.gearUsed && tripReport.gearUsed.length > 0 && (
+                {/* Gear Used - New Component */}
+                    <GearUsedSection gearUsed={tripReport.gearUsed} />
+                {/* {tripReport.gearUsed && tripReport.gearUsed.length > 0 && (
                     <Card id="gear-used" className="adventure-card mb-8">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
@@ -366,7 +369,7 @@ export default async function TripReportPage({ params }: PageProps) {
                             </div>
                         </CardContent>
                     </Card>
-                )}
+                )} */}
                 
                 {/* Main Content with Image Support and ID for TOC */}
                 <div id="main-content" className="prose prose-lg max-w-none adventure-content dark:prose-invert">
