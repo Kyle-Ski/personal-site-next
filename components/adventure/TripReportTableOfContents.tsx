@@ -110,47 +110,58 @@ export function TripReportTableOfContents({ tripReport }: TripReportTOCProps) {
   }, [tripReport])
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Don't update active state if user just clicked (give it time to settle)
-        if (userClicked) return
+    const handleScroll = () => {
+      // Don't update if user just clicked
+      if (userClicked) return
 
-        const intersectingEntries = entries.filter(entry => entry.isIntersecting)
+      // Get all section elements with their positions
+      const sections = tocItems.map(item => {
+        const element = document.getElementById(item.id)
+        if (!element) return null
 
-        if (intersectingEntries.length > 0) {
-          // Find the entry that's closest to the top of the viewport
-          // This prevents the "next section" from being highlighted when we just scrolled to current
-          const topMostEntry = intersectingEntries.reduce((closest, entry) => {
-            const closestTop = closest.boundingClientRect.top
-            const entryTop = entry.boundingClientRect.top
-
-            // Prefer elements that are closer to the top of the viewport
-            // But still within the visible area (positive top value, but small)
-            if (entryTop >= 0 && entryTop < closestTop) {
-              return entry
-            }
-            return closest
-          })
-
-          setActiveId(topMostEntry.target.id)
+        const rect = element.getBoundingClientRect()
+        return {
+          id: item.id,
+          top: rect.top + window.scrollY,
+          bottom: rect.bottom + window.scrollY,
+          element
         }
-      },
-      {
-        rootMargin: '-10% 0px -70% 0px', // More restrictive margins
-        threshold: [0, 0.1, 0.2] // Multiple thresholds for better detection
-      }
-    )
+      }).filter((section): section is NonNullable<typeof section> => section !== null)
 
-    // Observe all sections and headings
-    tocItems.forEach(item => {
-      const element = document.getElementById(item.id)
-      if (element) {
-        observer.observe(element)
-      }
-    })
+      // Find the section that's currently most visible
+      const viewportTop = window.scrollY + 100 // Account for header
+      let activeSection = sections[0]?.id || ''
 
-    return () => observer.disconnect()
-  }, [tocItems, userClicked])
+      for (const section of sections) {
+        if (viewportTop >= section.top - 100) { // 100px before section starts
+          activeSection = section.id
+        } else {
+          break
+        }
+      }
+
+      if (activeSection !== activeId) {
+        setActiveId(activeSection)
+      }
+    }
+
+    // Throttle scroll events for performance
+    let ticking = false
+    const throttledScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', throttledScroll, { passive: true })
+    handleScroll() // Set initial state
+
+    return () => window.removeEventListener('scroll', throttledScroll)
+  }, [tocItems, activeId, userClicked])
 
   // Reset click state on manual scroll
   useEffect(() => {
@@ -176,23 +187,20 @@ export function TripReportTableOfContents({ tripReport }: TripReportTOCProps) {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
-      // Set clicked state to temporarily disable intersection observer updates
+      // Set clicked state to temporarily disable scroll listener
       setUserClicked(true)
       setActiveId(id) // Immediately set the clicked item as active
 
-      const headerOffset = 100 // Account for fixed header
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
+      // Use element.scrollIntoView for more reliable scrolling
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
       })
 
-      // Re-enable intersection observer after scroll animation completes
+      // Re-enable scroll detection after animation completes
       setTimeout(() => {
         setUserClicked(false)
-      }, 1000) // Give enough time for smooth scroll to complete
+      }, 800) // Shorter timeout
     }
   }
 

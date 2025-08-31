@@ -116,43 +116,62 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
         }, 200)
     }, [tripReport, content, contentType])
 
-    // Intersection Observer (reusing your logic)
+    // Scroll-based active section detection
     useEffect(() => {
-        if (tocItems.length === 0 || userClicked) return
+        if (tocItems.length === 0) return
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                const intersectingEntries = entries.filter(entry => entry.isIntersecting)
+        const handleScroll = () => {
+            // Don't update if user just clicked
+            if (userClicked) return
 
-                if (intersectingEntries.length > 0) {
-                    const topMostEntry = intersectingEntries.reduce((closest, entry) => {
-                        const closestTop = closest.boundingClientRect.top
-                        const entryTop = entry.boundingClientRect.top
+            // Get all section elements with their positions
+            const sections = tocItems.map(item => {
+                const element = document.getElementById(item.id)
+                if (!element) return null
 
-                        if (entryTop >= 0 && entryTop < closestTop) {
-                            return entry
-                        }
-                        return closest
-                    })
-
-                    setActiveId(topMostEntry.target.id)
+                const rect = element.getBoundingClientRect()
+                return {
+                    id: item.id,
+                    top: rect.top + window.scrollY,
+                    bottom: rect.bottom + window.scrollY,
+                    element
                 }
-            },
-            {
-                rootMargin: '-10% 0px -70% 0px',
-                threshold: [0, 0.1, 0.2]
-            }
-        )
+            }).filter((section): section is NonNullable<typeof section> => section !== null)
 
-        tocItems.forEach(item => {
-            const element = document.getElementById(item.id)
-            if (element) {
-                observer.observe(element)
-            }
-        })
+            // Find the section that's currently most visible
+            const viewportTop = window.scrollY + 80 // Account for mobile header
+            let activeSection = sections[0]?.id || ''
 
-        return () => observer.disconnect()
-    }, [tocItems, userClicked])
+            for (const section of sections) {
+                if (viewportTop >= section.top - 80) { // 80px before section starts
+                    activeSection = section.id
+                } else {
+                    break
+                }
+            }
+
+            if (activeSection !== activeId) {
+                setActiveId(activeSection)
+            }
+        }
+
+        // Throttle scroll events for performance
+        let ticking = false
+        const throttledScroll = () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    handleScroll()
+                    ticking = false
+                })
+                ticking = true
+            }
+        }
+
+        window.addEventListener('scroll', throttledScroll, { passive: true })
+        handleScroll() // Set initial state
+
+        return () => window.removeEventListener('scroll', throttledScroll)
+    }, [tocItems, activeId, userClicked])
 
     // Show/hide TOC based on scroll position (after hero)
     useEffect(() => {
@@ -183,16 +202,14 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
             setActiveId(id)
             setIsExpanded(false) // Close expanded view
 
-            const headerOffset = 80 // Account for mobile nav + TOC
-            const elementPosition = element.getBoundingClientRect().top
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
+            // Use element.scrollIntoView for more reliable scrolling
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
             })
 
-            setTimeout(() => setUserClicked(false), 1000)
+            // Re-enable scroll detection after animation completes
+            setTimeout(() => setUserClicked(false), 800)
         }
     }
 
