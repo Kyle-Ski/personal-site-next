@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react'
-import { List, Compass, Backpack, BarChart, Map, BookOpen, AlertTriangle, CloudSnow, Wrench } from 'lucide-react'
+import { List, Compass, Backpack, Map } from 'lucide-react'
 import { GearItem } from '@/lib/cmsProvider'
 
 interface TOCItem {
@@ -30,6 +30,7 @@ interface TripReportTOCProps {
 }
 
 // Section registry - maps section IDs to their display info and priority order
+// Only includes sections that actually exist in current trip reports
 const SECTION_REGISTRY = {
   'route-data': {
     title: 'Route & Elevation',
@@ -41,40 +42,10 @@ const SECTION_REGISTRY = {
     icon: Compass,
     order: 2
   },
-  'conditions-report': {
-    title: 'Current Conditions',
-    icon: CloudSnow,
-    order: 3
-  },
   'gear-used': {
     title: 'Essential Gear Used',
     icon: Backpack,
-    order: 4
-  },
-  'gear-recommendations': {
-    title: 'Gear Recommendations',
-    icon: Wrench,
-    order: 5
-  },
-  'route-guide': {
-    title: 'Route Guide',
-    icon: Map,
-    order: 6
-  },
-  'planning-guide': {
-    title: 'Planning Guide',
-    icon: BookOpen,
-    order: 7
-  },
-  'skills-guide': {
-    title: 'Skills Guide',
-    icon: BookOpen,
-    order: 8
-  },
-  'safety-considerations': {
-    title: 'Safety Considerations',
-    icon: AlertTriangle,
-    order: 9
+    order: 3
   }
 } as const
 
