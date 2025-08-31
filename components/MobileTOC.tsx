@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from 'react'
-import { ChevronLeft, ChevronRight, List, Compass, Backpack, X, MapIcon } from 'lucide-react'
+import { ChevronLeft, ChevronRight, List, Compass, Backpack, X, Map } from 'lucide-react'
 import { GearItem } from '@/lib/cmsProvider'
 
 interface TOCItem {
@@ -9,6 +9,7 @@ interface TOCItem {
     title: string
     level: 'section' | 'h2' | 'h3'
     icon?: React.ComponentType<{ className?: string }>
+    order: number
 }
 
 interface MobileTOCProps {
@@ -25,6 +26,26 @@ interface MobileTOCProps {
     contentType?: 'adventure' | 'blog'
 }
 
+// Same section registry as desktop TOC for consistency
+// Only includes sections that actually exist in current trip reports
+const SECTION_REGISTRY = {
+    'route-data': {
+        title: 'Route & Elevation',
+        icon: Map,
+        order: 1
+    },
+    'route-notes': {
+        title: 'Route Notes & Navigation',
+        icon: Compass,
+        order: 2
+    },
+    'gear-used': {
+        title: 'Essential Gear Used',
+        icon: Backpack,
+        order: 3
+    }
+} as const
+
 export function MobileTOC({ tripReport, content, contentType = 'adventure' }: MobileTOCProps) {
     const [tocItems, setTocItems] = useState<TOCItem[]>([])
     const [activeId, setActiveId] = useState<string>('')
@@ -35,72 +56,63 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
     const expandedRef = useRef<HTMLDivElement>(null)
     const scrollRef = useRef<HTMLDivElement>(null)
 
-    // Build TOC items (reusing your existing logic)
+    // Build TOC items using dynamic section registry
     useEffect(() => {
-        const items: TOCItem[] = []
-
-        // Add predefined sections for adventure posts
-        if (contentType === 'adventure' && tripReport) {
-            if (tripReport.routeNotes) {
-                items.push({
-                    id: 'route-notes',
-                    title: 'Route Notes & Navigation',
-                    level: 'section',
-                    icon: Compass
-                })
-            }
-
-            if (tripReport.gearUsed && tripReport.gearUsed.length > 0) {
-                items.push({
-                    id: 'gear-used',
-                    title: 'Essential Gear Used',
-                    level: 'section',
-                    icon: Backpack
-                })
-            }
-            // if (
-            //     tripReport.gpxFile &&
-            //     typeof tripReport.gpxFile === 'object' &&
-            //     'asset' in tripReport.gpxFile &&
-            //     tripReport.gpxFile.asset &&
-            //     typeof tripReport.gpxFile.asset.url === 'string'
-            // ) {
-            //     items.push({
-            //         id: 'route-data',
-            //         title: 'Route & Elevation',
-            //         level: 'section',
-            //         icon: MapIcon
-            //     });
-            // }
-        }
-
-        // Scan for dynamic headings in content
+        // Scan the DOM for what sections actually exist
         setTimeout(() => {
+            const foundSections: TOCItem[] = []
+            const foundHeadings: TOCItem[] = []
+
+            // 1. Scan for registered sections that exist in DOM
+            Object.entries(SECTION_REGISTRY).forEach(([sectionId, sectionInfo]) => {
+                const element = document.getElementById(sectionId)
+                if (element) {
+                    foundSections.push({
+                        id: sectionId,
+                        title: sectionInfo.title,
+                        level: 'section',
+                        icon: sectionInfo.icon,
+                        order: sectionInfo.order
+                    })
+                }
+            })
+
+            // 2. Scan for H2/H3 headings in content
             const selector = contentType === 'adventure'
                 ? '.adventure-content h2, .adventure-content h3'
                 : '.prose h1, .prose h2, .prose h3'
 
             const headings = document.querySelectorAll(selector)
-            const contentItems: TOCItem[] = []
-
             headings.forEach((heading, index) => {
                 const level = heading.tagName.toLowerCase() as 'h2' | 'h3'
                 const text = heading.textContent || `Section ${index + 1}`
                 const id = heading.id || `heading-${index}`
+
+                // Skip headings that are already handled by registered sections
+                const isRegisteredSection = Object.values(SECTION_REGISTRY).some(
+                    section => section.title === text
+                )
+
+                if (isRegisteredSection) {
+                    return
+                }
 
                 // Add ID to heading if it doesn't have one
                 if (!heading.id) {
                     heading.id = id
                 }
 
-                contentItems.push({
+                foundHeadings.push({
                     id: heading.id,
                     title: text,
-                    level
+                    level,
+                    order: 1000 + index // High number to put content headings after sections
                 })
             })
 
-            setTocItems([...items, ...contentItems])
+            // 3. Combine and sort by order, then set state
+            const allItems = [...foundSections, ...foundHeadings].sort((a, b) => a.order - b.order)
+            setTocItems(allItems)
         }, 200)
     }, [tripReport, content, contentType])
 
@@ -197,34 +209,49 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
 
     // Scroll boundary prevention - this is the key fix!
     const handleScrollableTouch = (e: React.TouchEvent) => {
-        const target = e.currentTarget
-        const startY = e.touches[0].clientY
+        const element = scrollRef.current
+        if (!element) return
 
-        const preventScroll = (event: TouchEvent) => {
-            const currentY = event.touches[0].clientY
-            const deltaY = startY - currentY
+        const { scrollTop, scrollHeight, clientHeight } = element
+        const atTop = scrollTop === 0
+        const atBottom = scrollTop + clientHeight >= scrollHeight
 
-            // Check if we're at scroll boundaries
-            const isAtTop = target.scrollTop <= 0
-            const isAtBottom = target.scrollTop + target.clientHeight >= target.scrollHeight - 1
+        // Get touch details
+        const touch = e.touches[0]
+        const deltaY = touch.clientY - (element.dataset.touchStartY ? parseFloat(element.dataset.touchStartY) : touch.clientY)
 
-            // Prevent scroll if at boundary and trying to scroll further
-            if ((isAtTop && deltaY < 0) || (isAtBottom && deltaY > 0)) {
-                event.preventDefault()
+        // Prevent bounce when:
+        // - At top and scrolling up
+        // - At bottom and scrolling down
+        if ((atTop && deltaY > 0) || (atBottom && deltaY < 0)) {
+            e.preventDefault()
+        }
+
+        // Store touch position for next event
+        element.dataset.touchStartY = touch.clientY.toString()
+    }
+
+    // Close expanded view when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (expandedRef.current && !expandedRef.current.contains(event.target as Node)) {
+                setIsExpanded(false)
             }
         }
 
-        const cleanup = () => {
-            document.removeEventListener('touchmove', preventScroll)
-            document.removeEventListener('touchend', cleanup)
+        if (isExpanded) {
+            document.addEventListener('mousedown', handleClickOutside)
+            document.body.style.overflow = 'hidden' // Prevent background scrolling
         }
 
-        document.addEventListener('touchmove', preventScroll, { passive: false })
-        document.addEventListener('touchend', cleanup)
-    }
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+            document.body.style.overflow = 'unset'
+        }
+    }, [isExpanded])
 
-    // Don't render if no items or not visible
-    if (tocItems.length <= 1 || !isVisible) return null
+    // Don't show if no items
+    if (tocItems.length <= 1) return null
 
     const currentItem = getCurrentItem()
     const previousItem = getPreviousItem()
@@ -232,12 +259,10 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
 
     return (
         <>
-            {/* Smart Breadcrumb Bar */}
-            <div className={`fixed top-16 left-0 right-0 z-30 transition-all duration-300 ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
-                } md:hidden`}>
-                <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-4 py-2">
-                    <div className="flex items-center justify-between max-w-full">
-
+            {/* Mobile TOC Bar */}
+            {isVisible && !isExpanded && (
+                <div className="xl:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 p-3 shadow-lg">
+                    <div className="flex items-center justify-between max-w-screen-xl mx-auto">
                         {/* Previous Button */}
                         <button
                             onClick={() => previousItem && scrollToSection(previousItem.id)}
@@ -297,24 +322,17 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
                         </button>
                     </div>
                 </div>
-            </div>
+            )}
 
-            {/* Expanded Vertical List */}
+            {/* Expanded Mobile TOC */}
             {isExpanded && (
-                <div className="fixed inset-0 z-50 md:hidden">
-                    {/* Backdrop */}
-                    <div
-                        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-                        onClick={() => setIsExpanded(false)}
-                    />
-
-                    {/* Expanded Content */}
+                <div className="xl:hidden fixed inset-0 z-50 bg-black/50 flex items-end">
                     <div
                         ref={expandedRef}
-                        className="absolute top-16 left-4 right-4 bottom-8 bg-white dark:bg-gray-900 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col"
+                        className="w-full bg-white dark:bg-gray-900 rounded-t-xl shadow-2xl max-h-[80vh] flex flex-col"
                     >
                         {/* Header */}
-                        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex-shrink-0">
+                        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
                             <div className="flex items-center gap-2">
                                 <List className="h-4 w-4 text-green-600" />
                                 <span className="font-medium text-sm">Table of Contents</span>
@@ -384,17 +402,7 @@ export function MobileTOC({ tripReport, content, contentType = 'adventure' }: Mo
                                                         : item.title
                                                     }
                                                 </div>
-                                                {isActive && (
-                                                    <div className="text-xs text-green-600 dark:text-green-400 mt-0.5">
-                                                        Current section
-                                                    </div>
-                                                )}
                                             </div>
-
-                                            {/* Active Indicator */}
-                                            {isActive && (
-                                                <div className="flex-shrink-0 w-1 h-8 bg-green-500 rounded-full" />
-                                            )}
                                         </button>
                                     )
                                 })}
