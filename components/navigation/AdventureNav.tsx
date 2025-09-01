@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Mountain, Package, Star, MapPin, BookIcon } from 'lucide-react'
 
 interface AdventureNavProps {
-  currentPage: 'reports' | 'gear' | 'gear-reviews' | 'peaks'
+  currentPage: 'reports' | 'gear' | 'gear-reviews' | 'peaks' | 'guides'
 }
 
 export function AdventureNav({ currentPage }: AdventureNavProps) {
@@ -28,13 +28,13 @@ export function AdventureNav({ currentPage }: AdventureNavProps) {
       icon: Star,
       key: 'gear-reviews'
     },
-    {
-      href: '/guides',
-      label: 'Route Guides',
-      description: 'Planning & route guides',
-      icon: BookIcon,
-      key: 'guides'
-    },
+    // {
+    //   href: '/guides',
+    //   label: 'Guides',
+    //   description: 'Planning & route guides',
+    //   icon: BookIcon,
+    //   key: 'guides'
+    // },
     {
       href: '/peaks',
       label: 'Peak Tracker',
