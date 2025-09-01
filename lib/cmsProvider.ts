@@ -988,4 +988,42 @@ export class SanityService {
     return allGuides.slice(0, limit);
   }
 
+  async getTechPosts(): Promise<Post[]> {
+    return this.client.fetch(`
+    *[_type == "post" && count(categories[@->isOutdoor == true]) == 0] | order(publishedAt desc) {
+      _id,
+      publishedAt,
+      title,
+      "slug": slug.current,
+      excerpt,
+      "mainImage": mainImage.asset->url,
+      "categories": categories[]->{
+        title,
+        color,
+        isOutdoor,
+        _id
+      },
+      "author": author->{
+        _id,
+        name,
+        "image": image.asset->url
+      },
+      body
+    }
+  `);
+  }
+
+  // Get tech categories only (for filtering)
+  async getTechCategories(): Promise<Category[]> {
+    return this.client.fetch(`
+    *[_type == "category" && isOutdoor != true] | order(title asc) {
+      title,
+      color,
+      isOutdoor,
+      _id
+    }
+  `);
+  }
+
+
 }
