@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const pageTitle = `${post.title} | Kyle Czajkowski`;
 
     // Use excerpt or create a fallback description
-    const description = post.excerpt || `Read ${post.title} on Kyle Czajkowski's blog covering web development, outdoor adventures, and tech insights.`;
+    const description = post.excerpt || `Read ${post.title} on Kyle Czajkowski's tech blog covering web development, programming tutorials, and development insights.`;
 
     // Generate category tags for better SEO
     const categoryTags = post.categories?.map(cat => cat.title).join(', ') || '';
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {
         title: pageTitle,
         description,
-        keywords: `${categoryTags}, web development, react, typescript, outdoor adventures`,
+        keywords: `${categoryTags}, web development, react, typescript, programming, tech blog, tutorial`,
         openGraph: {
             title: post.title,
             description,

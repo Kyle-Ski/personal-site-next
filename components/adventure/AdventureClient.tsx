@@ -477,7 +477,7 @@ export default function AdventureClient({ adventures, stats }: AdventureClientPr
                 </div>
             </div>
 
-            <AdventureNav currentPage="adventures" />
+            <AdventureNav currentPage="reports" />
         </div>
     )
 }

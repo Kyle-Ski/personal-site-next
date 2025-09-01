@@ -52,6 +52,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: 'weekly',
         priority: 0.7,
       },
+      {
+        url: `${baseUrl}/guides`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      },
     ]
 
     // Blog posts
@@ -64,7 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Trip reports
     const tripReportPages: MetadataRoute.Sitemap = tripReports.map(tripReport => ({
-      url: `${baseUrl}/adventures/${tripReport.slug}`,
+      url: `${baseUrl}/reports/${tripReport.slug}`,
       lastModified: new Date(tripReport.publishedAt),
       changeFrequency: 'monthly' as const,
       priority: 0.6,
@@ -80,15 +86,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Combine all pages
     return [
-      ...staticPages, 
-      ...blogPages, 
-      ...tripReportPages, 
+      ...staticPages,
+      ...blogPages,
+      ...tripReportPages,
       ...gearReviewPages
     ];
 
   } catch (error) {
     console.error('Error generating sitemap:', error);
-    
+
     // Fallback to basic sitemap if there's an error
     return [
       {
@@ -110,7 +116,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       },
       {
-        url: `${baseUrl}/adventures`,
+        url: `${baseUrl}/reports`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      },
+      {
+        url: `${baseUrl}/guides`,  // Add guides
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.8,

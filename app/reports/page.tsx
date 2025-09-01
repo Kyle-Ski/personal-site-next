@@ -2,14 +2,14 @@ import { SanityService, TripReport, AdventureStats } from '@/lib/cmsProvider'
 import AdventureClient, { AdventureContent } from '@/components/adventure/AdventureClient'
 
 export const metadata = {
-  title: 'Adventures | Kyle Czajkowski',
+  title: 'Adventure Reports | Kyle Czajkowski',
   description: "Trail running, backpacking, skiing, and peak bagging adventures across Colorado's 14ers and beyond. Real trail conditions, route information, and adventure reports.",
   keywords: 'colorado 14ers, trail running, backpacking, skiing, peak bagging, mountain adventures, trail reports, route conditions',
   openGraph: {
     title: 'Adventure Reports & Trail Intel | Kyle Czajkowski',
     description: 'Trail running, backpacking, skiing, and peak bagging adventures across Colorado\'s 14ers and beyond. Real trail conditions, route information, and adventure reports.',
     images: ['/mountain-trail.JPG'],
-    url: 'https://kyle.czajkowski.tech/adventures',
+    url: 'https://kyle.czajkowski.tech/reports',
     type: 'website',
     siteName: 'Kyle Czajkowski',
   },
@@ -21,7 +21,7 @@ export const metadata = {
     images: ['/mountain-trail.JPG'],
   },
   alternates: {
-    canonical: 'https://kyle.czajkowski.tech/adventures'
+    canonical: 'https://kyle.czajkowski.tech/reports'
   }
 };
 

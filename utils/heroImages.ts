@@ -10,7 +10,7 @@ export const HERO_IMAGES: Record<string, HeroImageConfig> = {
     alt: 'Crestone Peaks at sunrise in Colorado',
     title: 'Developer & Adventurer'
   },
-  adventures: {
+  routes: {
     src: '/mountain-trail.JPG', 
     alt: 'Mountain trail adventure scene',
     title: 'Adventure Reports & Trail Intel'
@@ -19,6 +19,11 @@ export const HERO_IMAGES: Record<string, HeroImageConfig> = {
     src: '/Tent-Baker.jpg',
     alt: 'Mountain camping with gear - gear testing environment', 
     title: 'Field-Tested Mountain Gear'
+  },
+  guides: {
+    src: '/mountain-trail.JPG',
+    alt: 'Mountain trail guide scene', 
+    title: 'Adventure Guides & Route Planning'
   },
   gearReviews: {
     src: '/blue-tent.jpg',

@@ -105,7 +105,7 @@ function getContentTypeInfo(contentType: string) {
         icon: Mountain,
         color: 'green',
         label: 'Trip Report',
-        urlPrefix: '/adventures',
+        urlPrefix: '/reports',
         bgColor: 'bg-green-100 dark:bg-green-900/30',
         textColor: 'text-green-800 dark:text-green-300'
       };
@@ -260,7 +260,7 @@ export default async function RecentContent() {
           </Link>
 
           <Link 
-            href="/adventures"
+            href="/reports"
             className="group p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800 hover:shadow-lg transition-all duration-300"
           >
             <Mountain size={24} className="mx-auto mb-3 text-green-600 dark:text-green-400" />

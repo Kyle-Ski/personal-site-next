@@ -16,9 +16,10 @@ interface AdjacentTripReport {
 interface TripReportNavigationProps {
   previousReport?: AdjacentTripReport
   nextReport?: AdjacentTripReport
+  basePath?: string
 }
 
-export function TripReportNavigation({ previousReport, nextReport }: TripReportNavigationProps) {
+export function TripReportNavigation({ previousReport, nextReport, basePath = '/reports' }: TripReportNavigationProps) {
   // Don't render if no adjacent reports
   if (!previousReport && !nextReport) return null
 
@@ -45,7 +46,7 @@ export function TripReportNavigation({ previousReport, nextReport }: TripReportN
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {/* Previous Report */}
           {previousReport ? (
-            <Link href={`/adventures/${previousReport.slug}`}>
+            <Link href={`${basePath}/${previousReport.slug}`}>
               <Card className="h-full hover:shadow-md transition-shadow border-gray-200 dark:border-gray-700 hover:border-green-200 dark:hover:border-green-700 group">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
@@ -93,7 +94,7 @@ export function TripReportNavigation({ previousReport, nextReport }: TripReportN
 
           {/* Next Report */}
           {nextReport ? (
-            <Link href={`/adventures/${nextReport.slug}`}>
+            <Link href={`${basePath}/${nextReport.slug}`}>
               <Card className="h-full hover:shadow-md transition-shadow border-gray-200 dark:border-gray-700 hover:border-green-200 dark:hover:border-green-700 group">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">

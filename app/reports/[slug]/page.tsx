@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
 
     // Create descriptive title with location
-    const pageTitle = `${tripReport.title}${tripReport.location ? ` - ${tripReport.location}` : ''} | Adventures`;
+    const pageTitle = `${tripReport.title}${tripReport.location ? ` - ${tripReport.location}` : ''} | Reports`;
 
     // Create rich description using excerpt, location, and difficulty
     let description = tripReport.excerpt || tripReport.routeNotes || '';
@@ -451,7 +451,7 @@ export default async function TripReportPage({ params }: PageProps) {
                 </section>
 
             </article>
-            <AdventureNav currentPage="adventures" />
+            <AdventureNav currentPage="reports" />
         </div>
     )
 }

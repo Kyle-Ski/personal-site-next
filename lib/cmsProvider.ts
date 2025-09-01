@@ -148,15 +148,15 @@ export interface AdventureStats {
 export type LegacyGearItem = string
 
 export type NewGearItem = {
-    name: string
-    category: 'shelter' | 'clothing' | 'navigation' | 'food' | 'water' | 'pack' | 'tools' | 'other'
-    description?: string
+  name: string
+  category: 'shelter' | 'clothing' | 'navigation' | 'food' | 'water' | 'pack' | 'tools' | 'other'
+  description?: string
 }
 
 export type GearItem = LegacyGearItem | NewGearItem
 
 export function isNewGearItem(item: GearItem): item is NewGearItem {
-    return typeof item === 'object' && 'name' in item && 'category' in item
+  return typeof item === 'object' && 'name' in item && 'category' in item
 }
 
 export class SanityService {
@@ -564,7 +564,7 @@ export class SanityService {
       return {};
     }
   }
-  
+
   // Trip Report methods
   async getAllTripReports(): Promise<TripReport[]> {
     try {
@@ -838,4 +838,192 @@ export class SanityService {
       }
     `);
   }
+
+  // Get all guides (contentType contains 'guide')
+  async getAllGuides(): Promise<TripReport[]> {
+    try {
+      const guides = await this.client.fetch(`
+      *[_type == "tripReport" && contentType match "*guide*"] | order(publishedAt desc) {
+        _id,
+        title,
+        "slug": slug.current,
+        contentType,
+        excerpt,
+        "mainImage": mainImage.asset->url,
+        publishedAt,
+        date,
+        location,
+        coordinates,
+        elevation,
+        distance,
+        elevationGain,
+        difficulty,
+        activities,
+        weather,
+        gearUsed[]{
+          name,
+          category,
+          description
+        },
+        routeNotes,
+        achievement,
+        body,
+        "author": author->{
+          _id,
+          name,
+          "image": image.asset->url
+        },
+        "tags": tags[]->title
+      }
+    `);
+
+      return guides || [];
+    } catch (error) {
+      console.error('Error fetching guides:', error);
+      return [];
+    }
+  }
+
+  // Get a specific guide by slug (contentType contains 'guide')
+  async getGuideBySlug(slug: string): Promise<TripReport | null> {
+    try {
+      const [guide] = await this.client.fetch(`
+      *[_type == "tripReport" && slug.current == $slug && contentType match "*guide*"] {
+        _id,
+        title,
+        "slug": slug.current,
+        excerpt,
+        contentType,
+        "gpxFile": gpxFile {
+          "asset": asset-> {
+            url,
+            originalFilename
+          }
+        },
+        "mainImage": mainImage.asset->url,
+        publishedAt,
+        date,
+        location,
+        coordinates,
+        elevation,
+        distance,
+        elevationGain,
+        difficulty,
+        activities,
+        weather,
+        gearUsed[]{
+          name,
+          category,
+          description
+        },
+        routeNotes,
+        body,
+        achievement,
+        "author": author->{
+          _id,
+          name,
+          "image": image.asset->url
+        },
+        "tags": tags[]->title
+      }
+    `, { slug });
+
+      return guide || null;
+    } catch (error) {
+      console.error('Error fetching guide by slug:', error);
+      return null;
+    }
+  }
+
+  // Get adjacent guides for navigation
+  async getAdjacentGuides(currentSlug: string): Promise<{
+    previousGuide?: TripReport;
+    nextGuide?: TripReport;
+  }> {
+    try {
+      const currentGuide = await this.getGuideBySlug(currentSlug);
+      if (!currentGuide) return {};
+
+      const currentDate = currentGuide.date || currentGuide.publishedAt;
+
+      // Get previous guide (published before current)
+      const [previousGuide] = await this.client.fetch(`
+      *[_type == "tripReport" && contentType match "*guide*" && (date < $currentDate || (!defined(date) && publishedAt < $currentDate))] | order(coalesce(date, publishedAt) desc) [0..0] {
+        _id,
+        title,
+        "slug": slug.current,
+        location,
+        "date": coalesce(date, publishedAt),
+        difficulty,
+        "mainImage": mainImage.asset->url
+      }
+    `, { currentDate });
+
+      // Get next guide (published after current)
+      const [nextGuide] = await this.client.fetch(`
+      *[_type == "tripReport" && contentType match "*guide*" && (date > $currentDate || (!defined(date) && publishedAt > $currentDate))] | order(coalesce(date, publishedAt) asc) [0..0] {
+        _id,
+        title,
+        "slug": slug.current,
+        location,
+        "date": coalesce(date, publishedAt),
+        difficulty,
+        "mainImage": mainImage.asset->url
+      }
+    `, { currentDate });
+
+      return {
+        previousGuide: previousGuide || undefined,
+        nextGuide: nextGuide || undefined
+      };
+    } catch (error) {
+      console.error('Error fetching adjacent guides:', error);
+      return {};
+    }
+  }
+
+  // Get recent guides for homepage/featured (if needed)
+  async getRecentGuides(limit: number = 6): Promise<TripReport[]> {
+    const allGuides = await this.getAllGuides();
+    return allGuides.slice(0, limit);
+  }
+
+  async getTechPosts(): Promise<Post[]> {
+    return this.client.fetch(`
+    *[_type == "post" && count(categories[@->isOutdoor == true]) == 0] | order(publishedAt desc) {
+      _id,
+      publishedAt,
+      title,
+      "slug": slug.current,
+      excerpt,
+      "mainImage": mainImage.asset->url,
+      "categories": categories[]->{
+        title,
+        color,
+        isOutdoor,
+        _id
+      },
+      "author": author->{
+        _id,
+        name,
+        "image": image.asset->url
+      },
+      body
+    }
+  `);
+  }
+
+  // Get tech categories only (for filtering)
+  async getTechCategories(): Promise<Category[]> {
+    return this.client.fetch(`
+    *[_type == "category" && isOutdoor != true] | order(title asc) {
+      title,
+      color,
+      isOutdoor,
+      _id
+    }
+  `);
+  }
+
+
 }

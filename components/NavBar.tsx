@@ -15,7 +15,7 @@ const NavBar = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Reordered navigation - Adventures moved to last
+  // Reordered navigation
   const mainNavItems = [
     { href: `/#${ABOUT_TITLE}`, label: "About" },
     { href: `/#${PERSONAL_TIMELINE_ANCHOR}`, label: "Timeline" },
@@ -27,9 +27,10 @@ const NavBar = () => {
   ];
 
   const adventureItems = [
-    { href: `/adventures`, label: "Trip Reports", description: "Recent adventures & route info" },
+    { href: `/reports`, label: "Trip Reports", description: "Recent adventures & route info" },
     { href: `/gear`, label: "Gear Room", description: "My complete gear collection" },
     { href: `/gear/reviews`, label: "Gear Reviews", description: "Field-tested gear insights" },
+    // { href: `/guides`, label: "Adventure Guides", description: "Route guides & planning resources" },
     { href: `/peaks`, label: "Peak Tracker", description: "Colorado 14ers & summits" },
   ];
 
@@ -48,13 +49,17 @@ const NavBar = () => {
         return currentPath === '/';
       }
 
-      // For adventure pages, also check if we're on a sub-page
-      if (href === '/adventures') {
+      // For reports pages, also check if we're on a sub-page
+      if (href === '/reports') {
         return currentPath.startsWith('/adventures');
       }
 
       if (href === '/gear') {
         return currentPath.startsWith('/gear');
+      }
+
+      if (href === '/guides') {
+        return currentPath.startsWith('/guides');
       }
 
       return currentPath.startsWith(href);
@@ -66,7 +71,8 @@ const NavBar = () => {
   const isAdventureActive = () => {
     if (typeof window !== 'undefined') {
       const currentPath = window.location.pathname;
-      return currentPath.startsWith('/adventures') ||
+      return currentPath.startsWith('/reports') ||
+        currentPath.startsWith('/guides') ||
         currentPath.startsWith('/gear') ||
         currentPath.startsWith('/peaks');
     }
@@ -134,8 +140,8 @@ const NavBar = () => {
                   href={item.href}
                   onClick={() => handleLinkClick(item.href)}
                   className={`text-sm font-medium transition-colors duration-300 flex items-center gap-1 ${isActive(item.href)
-                      ? 'text-[var(--color-text-accent)]'
-                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+                    ? 'text-[var(--color-text-accent)]'
+                    : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
                     }`}
                 >
                   {item.icon && <item.icon size={16} />}
@@ -152,13 +158,13 @@ const NavBar = () => {
               >
                 <button
                   className={`text-sm font-medium transition-colors duration-300 flex items-center gap-1 ${isAdventureActive()
-                      ? 'text-green-600 dark:text-green-400'
-                      : 'text-green-700 dark:text-green-300 hover:text-green-600 dark:hover:text-green-400'
+                    ? 'text-green-600 dark:text-green-400'
+                    : 'text-green-700 dark:text-green-300 hover:text-green-600 dark:hover:text-green-400'
                     }`}
                   onClick={() => setShowAdventureDropdown(!showAdventureDropdown)}
                 >
                   <Mountain size={16} />
-                  Adventures
+                  Alpine
                   <ChevronDown size={14} className={`transition-transform duration-200 ${showAdventureDropdown ? 'rotate-180' : ''}`} />
                 </button>
 
@@ -179,8 +185,8 @@ const NavBar = () => {
                             }`}
                         >
                           <div className={`font-medium ${isActive(item.href)
-                              ? 'text-green-600 dark:text-green-400'
-                              : 'text-gray-900 dark:text-gray-100'
+                            ? 'text-green-600 dark:text-green-400'
+                            : 'text-gray-900 dark:text-gray-100'
                             }`}>
                             {item.label}
                           </div>
@@ -221,8 +227,8 @@ const NavBar = () => {
                   href={item.href}
                   onClick={() => handleLinkClick(item.href)}
                   className={`block px-3 py-2 text-base font-medium flex items-center gap-2 ${isActive(item.href)
-                      ? 'text-[var(--color-text-accent)]'
-                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+                    ? 'text-[var(--color-text-accent)]'
+                    : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
                     }`}
                 >
                   {item.icon && <item.icon size={16} />}
@@ -234,7 +240,7 @@ const NavBar = () => {
               <div className="px-3 py-2">
                 <div className="text-sm font-semibold text-green-600 dark:text-green-400 flex items-center gap-1 mb-2">
                   <Mountain size={16} />
-                  Adventures
+                  Alpine
                 </div>
                 <div className="pl-4 space-y-1">
                   {adventureItems.map((item) => (
@@ -243,8 +249,8 @@ const NavBar = () => {
                       href={item.href}
                       onClick={() => handleLinkClick(item.href)}
                       className={`block py-2 text-sm ${isActive(item.href)
-                          ? 'text-green-600 dark:text-green-400 font-medium'
-                          : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+                        ? 'text-green-600 dark:text-green-400 font-medium'
+                        : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
                         }`}
                     >
                       {item.label}

@@ -22,7 +22,7 @@ export interface Post {
     slug: string
     excerpt: string
     mainImage: string
-    categories: Category[] // Updated to use Category objects
+    categories: Category[]
     author: Author
     content: any[]
     body: PortableTextBlock[]
@@ -36,17 +36,18 @@ async function getPosts(): Promise<Post[]> {
         useCdn: true
     })
 
-    const posts = await sanityService.getAllPosts()
+    // Use new tech-only method instead of getAllPosts()
+    const posts = await sanityService.getTechPosts()
     return posts
 }
 
 export const metadata = {
-    title: 'Blog | Kyle Czajkowski',
-    description: 'Web development tutorials, outdoor adventure stories, tech insights, and programming tips. Covering React, TypeScript, Node.js, and mountain adventures in Colorado.',
-    keywords: 'web development blog, react tutorials, typescript, node.js, outdoor adventures, tech blog, programming tutorials, colorado hiking',
+    title: 'Tech Blog | Kyle Czajkowski',
+    description: 'Web development tutorials, tech insights, and programming tips. Covering React, TypeScript, Node.js, Next.js, and full-stack development.',
+    keywords: 'web development blog, react tutorials, typescript, node.js, nextjs, tech blog, programming tutorials, javascript, full stack development',
     openGraph: {
-        title: 'Tech Blog & Adventure Stories | Kyle Czajkowski',
-        description: 'Web development tutorials, outdoor adventure stories, tech insights, and programming tips. Covering React, TypeScript, Node.js, and mountain adventures in Colorado.',
+        title: 'Tech Blog & Development Insights | Kyle Czajkowski',
+        description: 'Web development tutorials, tech insights, and programming tips. Covering React, TypeScript, Node.js, Next.js, and full-stack development.',
         images: ['/longs.jpg'],
         url: 'https://kyle.czajkowski.tech/blog',
         type: 'website',
@@ -55,8 +56,8 @@ export const metadata = {
     twitter: {
         card: 'summary_large_image',
         creator: '@SkiRoyJenkins',
-        title: 'Tech Blog & Adventure Stories | Kyle Czajkowski',
-        description: 'Web development tutorials, outdoor adventure stories, tech insights, and programming tips.',
+        title: 'Tech Blog & Development Insights | Kyle Czajkowski',
+        description: 'Web development tutorials, tech insights, and programming tips. Covering React, TypeScript, Node.js, and more.',
         images: ['/longs.jpg'],
     },
     alternates: {
@@ -66,5 +67,5 @@ export const metadata = {
 
 export default async function BlogPage() {
     const posts = await getPosts()
-    return <BlogPageClient posts={posts} />
+    return <BlogPageClient posts={posts} techOnly={true} />
 }
