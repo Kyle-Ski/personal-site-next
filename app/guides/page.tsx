@@ -1,6 +1,8 @@
 import { SanityService } from '@/lib/cmsProvider'
 import { AdventureNav } from '@/components/navigation/AdventureNav'
-import { Mountain, MapPin, Backpack, Compass, TrendingUp, Calendar } from 'lucide-react'
+import AdventureHero from '@/components/adventure/AdventureHero'
+import GuideCard from '@/components/adventure/GuideCard'
+import { Mountain, MapPin, Backpack, TrendingUp, Calendar, Compass } from 'lucide-react'
 import Link from 'next/link'
 
 export const metadata = {
@@ -27,7 +29,7 @@ export const metadata = {
     }
 };
 
-// Check for actual guides content from Sanity (Phase 2)
+// Check for actual guides content from Sanity
 async function getGuidesData() {
     const sanityService = new SanityService({
         projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
@@ -37,9 +39,8 @@ async function getGuidesData() {
     });
 
     try {
-        // This query would check for guide content types in Phase 2
-        // For now, return empty array as placeholder
-        return [];
+        const guides = await sanityService.getAllGuides();
+        return guides;
     } catch (error) {
         console.error('Error fetching guides:', error);
         return [];
@@ -49,97 +50,193 @@ async function getGuidesData() {
 export default async function GuidesPage() {
     const guides = await getGuidesData();
 
-    return (
-        <div className="min-h-screen bg-gradient-to-b from-green-50 to-white dark:from-green-900/20 dark:to-gray-900">
-            {/* Hero Section */}
-            <section className="py-16 md:py-24">
-                <div className="container mx-auto px-4 text-center">
-                    <div className="inline-flex items-center gap-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                        <Compass size={16} />
-                        Adventure Guides
-                    </div>
-                    <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-                        Guide Your Next
-                        <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent"> Adventure</span>
-                    </h1>
-                    <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
-                        Comprehensive route guides, planning resources, and essential skills for safe alpine adventures in Colorado and beyond.
-                    </p>
-                </div>
-            </section>
+    // Calculate guide type counts for hero stats
+    const guideTypeCounts = guides.reduce((acc, guide) => {
+        const type = guide.contentType || 'guide';
+        acc[type] = (acc[type] || 0) + 1;
+        return acc;
+    }, {} as Record<string, number>);
 
-            {/* Coming Soon Content */}
-            <section className="py-16">
-                <div className="container mx-auto px-4">
-                    <div className="max-w-4xl mx-auto">
-                        {guides.length === 0 ? (
-                            <div className="text-center mb-12">
-                                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-8">
-                                    <Calendar size={48} className="mx-auto mb-4 text-green-600 dark:text-green-400" />
-                                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                                        Comprehensive Guides Coming Soon
-                                    </h2>
-                                    <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                        I&apos;m working on detailed route guides, planning resources, and skills tutorials based on years of mountain experience.
-                                        These guides will help you plan safer, more successful adventures.
-                                    </p>
+    // Dynamic hero stats based on actual content
+    const heroStats = guides.length > 0 ? [
+        {
+            label: 'Route Guides',
+            value: guideTypeCounts['route-guide'] ? `${guideTypeCounts['route-guide']}` : '0',
+            iconName: 'Mountain'
+        },
+        {
+            label: 'Planning Guides',
+            value: guideTypeCounts['planning-guide'] ? `${guideTypeCounts['planning-guide']}` : '0',
+            iconName: 'MapPin'
+        },
+        {
+            label: 'Skills Guides',
+            value: guideTypeCounts['skills-guide'] ? `${guideTypeCounts['skills-guide']}` : '0',
+            iconName: 'TrendingUp'
+        },
+        {
+            label: 'Total Guides',
+            value: `${guides.length}`,
+            iconName: 'Calendar'
+        }
+    ] : [
+        {
+            label: 'Route Guides',
+            value: 'Coming Soon',
+            iconName: 'Mountain'
+        },
+        {
+            label: 'Planning Resources',
+            value: 'In Development',
+            iconName: 'MapPin'
+        },
+        {
+            label: 'Skills Tutorials',
+            value: 'In Progress',
+            iconName: 'TrendingUp'
+        },
+        {
+            label: 'Years Experience',
+            value: '10+',
+            iconName: 'Calendar'
+        }
+    ];
+
+    return (
+        <div className="min-h-screen">
+            {/* Hero Section */}
+            <AdventureHero
+                backgroundImage="/mountain-trail.JPG"
+                mainText1="Adventure"
+                mainText2="Guides"
+                // stats={heroStats}
+            />
+
+            {/* Main Content - Show guides if they exist, otherwise coming soon */}
+            {guides.length > 0 ? (
+                /* Actual Guides Content */
+                <section className="container mx-auto px-4 py-12">
+                    <h2 className="text-3xl font-bold mb-2 text-center">Adventure Guides</h2>
+                    <p className="text-center text-gray-600 dark:text-gray-400 mb-8">
+                        Comprehensive resources for planning your next adventure
+                    </p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        {guides.map(guide => (
+                            <GuideCard
+                                key={guide._id}
+                                guide={guide}
+                            />
+                        ))}
+                    </div>
+                </section>
+            ) : (
+                /* Coming Soon Content */
+                <>
+                    <section className="container mx-auto px-4 py-12">
+                        <h2 className="text-3xl font-bold mb-2 text-center">Comprehensive Guides Coming Soon</h2>
+                        <p className="text-center text-gray-600 dark:text-gray-400 mb-8">
+                            Detailed planning resources and route intelligence
+                        </p>
+
+                        <div className="max-w-4xl mx-auto">
+                            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-8">
+                                <Mountain size={48} className="mx-auto mb-4 text-green-600 dark:text-green-400" />
+                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 text-center">
+                                    Route Guides & Planning Resources
+                                </h3>
+                                <p className="text-gray-600 dark:text-gray-300 mb-6 text-center">
+                                    I&apos;m working on detailed route guides, planning resources, and skills tutorials based on years of mountain experience.
+                                    These guides will help you plan safer, more successful adventures.
+                                </p>
+                                <div className="flex justify-center">
                                     <div className="inline-flex items-center gap-2 text-green-600 dark:text-green-400">
                                         <TrendingUp size={16} />
                                         <span className="font-medium">In Development</span>
                                     </div>
                                 </div>
-
-                                {/* Planned Content Types */}
-                                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                                    {[
-                                        {
-                                            icon: Mountain,
-                                            title: 'Route Guides',
-                                            description: 'Detailed trail descriptions, waypoints, and conditions for popular Colorado routes',
-                                            color: 'green'
-                                        },
-                                        {
-                                            icon: MapPin,
-                                            title: 'Planning Guides',
-                                            description: 'Trip planning essentials, logistics, and preparation checklists',
-                                            color: 'blue'
-                                        },
-                                        {
-                                            icon: Backpack,
-                                            title: 'Skills & Safety',
-                                            description: 'Essential outdoor skills, safety protocols, and risk management',
-                                            color: 'orange'
-                                        }
-                                    ].map((item) => (
-                                        <div key={item.title} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
-                                            <item.icon size={32} className={`mx-auto mb-4 text-${item.color}-600 dark:text-${item.color}-400`} />
-                                            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{item.title}</h3>
-                                            <p className="text-sm text-gray-600 dark:text-gray-300">{item.description}</p>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {/* CTA */}
-                                <div className="text-center">
-                                    <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                        Want to be notified when guides are published? Check out my current trip reports for route insights.
-                                    </p>
-                                    <Link
-                                        href="/reports"
-                                        className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-                                    >
-                                        <Mountain size={16} />
-                                        Browse Trip Reports
-                                    </Link>
-                                </div>
                             </div>
-                        ) : (
-                            // Phase 2: Actual guides content would be rendered here
-                            <div>
-                                {/* Future: Render actual guides */}
-                            </div>
-                        )}
-                    </div>
+                        </div>
+                    </section>
+
+                    {/* Planned Content Types */}
+                    <section className="container mx-auto px-4 py-12">
+                        <h2 className="text-3xl font-bold mb-8 text-center">Planned Guide Types</h2>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                            {[
+                                {
+                                    icon: Mountain,
+                                    title: 'Route Guides',
+                                    description: 'Detailed trail descriptions, waypoints, and conditions for popular Colorado routes',
+                                    color: 'green'
+                                },
+                                {
+                                    icon: MapPin,
+                                    title: 'Planning Guides',
+                                    description: 'Trip planning essentials, logistics, and preparation checklists',
+                                    color: 'blue'
+                                },
+                                {
+                                    icon: Backpack,
+                                    title: 'Skills & Safety',
+                                    description: 'Essential outdoor skills, safety protocols, and risk management',
+                                    color: 'orange'
+                                },
+                                {
+                                    icon: Compass,
+                                    title: 'Navigation',
+                                    description: 'GPS, map reading, and route finding techniques',
+                                    color: 'purple'
+                                },
+                                {
+                                    icon: Calendar,
+                                    title: 'Seasonal Guides',
+                                    description: 'Best times to visit, weather patterns, and seasonal considerations',
+                                    color: 'yellow'
+                                },
+                                {
+                                    icon: TrendingUp,
+                                    title: 'Training Guides',
+                                    description: 'Physical preparation and conditioning for mountain activities',
+                                    color: 'red'
+                                }
+                            ].map((item) => (
+                                <div key={item.title} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                                    <item.icon size={32} className={`mx-auto mb-4 text-${item.color}-600 dark:text-${item.color}-400`} />
+                                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-center">{item.title}</h3>
+                                    <p className="text-sm text-gray-600 dark:text-gray-300 text-center">{item.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                </>
+            )}
+
+            {/* CTA Section - Always show, but adjust content based on guides existence */}
+            <section className="container mx-auto px-4 py-16 text-center">
+                <h3 className="text-2xl font-bold mb-4">
+                    {guides.length > 0 ? 'Ready for Your Next Adventure?' : 'Ready to Explore?'}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
+                    {guides.length > 0
+                        ? 'Get the gear and see real trip reports from the routes covered in these guides.'
+                        : 'While guides are in development, check out my current trip reports for route insights and real-world conditions.'
+                    }
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Link
+                        href="/reports"
+                        className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                    >
+                        <Mountain size={16} />
+                        Browse Trip Reports
+                    </Link>
+                    <Link
+                        href="/gear"
+                        className="px-6 py-3 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors"
+                    >
+                        View Gear Collection
+                    </Link>
                 </div>
             </section>
 
