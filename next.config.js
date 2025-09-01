@@ -31,7 +31,21 @@ const nextConfig = {
   },
   env: {
     UPDATED_RESUME_LINK: process.env.UPDATED_RESUME_LINK
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/adventures',
+        destination: '/reports',
+        permanent: true, // 301 redirect
+      },
+      {
+        source: '/adventures/:slug*',
+        destination: '/reports/:slug*',
+        permanent: true, // 301 redirect  
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
