@@ -80,7 +80,7 @@ export default async function GuidesPage() {
                                         Comprehensive Guides Coming Soon
                                     </h2>
                                     <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                        I'm working on detailed route guides, planning resources, and skills tutorials based on years of mountain experience.
+                                        I&apos;m working on detailed route guides, planning resources, and skills tutorials based on years of mountain experience.
                                         These guides will help you plan safer, more successful adventures.
                                     </p>
                                     <div className="inline-flex items-center gap-2 text-green-600 dark:text-green-400">
