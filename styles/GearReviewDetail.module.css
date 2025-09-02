@@ -184,6 +184,9 @@
 .mainImage {
   width: 100%;
   height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  background: var(--color-bg-primary);
   border-radius: 0.5rem;
   display: block;
 }
@@ -197,13 +200,196 @@
   font-style: italic;
 }
 
+/* ============ ENHANCED GALLERY ADDITIONS ============ */
+
+/* Enhanced thumbnail container */
+.thumbnailsContainer {
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+/* Enhanced thumbnails - Updated existing .thumbnails class */
 .thumbnails {
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
   padding: 0.5rem 0;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-text-accent) var(--color-bg-tertiary);
 }
 
+/* Custom scrollbar for webkit browsers */
+.thumbnails::-webkit-scrollbar {
+  height: 6px;
+}
+
+.thumbnails::-webkit-scrollbar-track {
+  background: var(--color-bg-tertiary);
+  border-radius: 3px;
+}
+
+.thumbnails::-webkit-scrollbar-thumb {
+  background: var(--color-text-accent);
+  border-radius: 3px;
+}
+
+.thumbnails::-webkit-scrollbar-thumb:hover {
+  background: var(--color-green-0);
+}
+
+/* Gradient fade effects */
+.thumbnailsContainer::before,
+.thumbnailsContainer::after {
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 20px;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.thumbnailsContainer::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-bg-secondary), transparent);
+}
+
+.thumbnailsContainer::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-bg-secondary), transparent);
+}
+
+/* Hide gradients when not needed */
+.thumbnailsContainer.noLeftScroll::before {
+  opacity: 0;
+}
+
+.thumbnailsContainer.noRightScroll::after {
+  opacity: 0;
+}
+
+/* Image counter */
+.imageCounter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.imageCounter .dots {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-bg-tertiary);
+  transition: background 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: var(--color-text-accent);
+}
+
+.dot:hover {
+  background: var(--color-text-accent);
+  opacity: 0.8;
+}
+
+/* Scroll buttons */
+.scrollButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.thumbnailsContainer:hover .scrollButton {
+  opacity: 1;
+}
+
+.scrollButton:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.scrollButton.left {
+  left: 0.5rem;
+}
+
+.scrollButton.right {
+  right: 0.5rem;
+}
+
+.scrollButton:disabled {
+  opacity: 0 !important;
+  cursor: not-allowed;
+}
+
+/* Loading states for smooth image transitions */
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.imageWrapper:hover {
+  transform: scale(1.02);
+}
+
+.imageWrapper.loading .mainImage {
+  opacity: 0.7;
+}
+
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+}
+
+.loadingSpinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--color-bg-tertiary);
+  border-top: 2px solid var(--color-text-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Thumbnail loading indicators - SIMPLIFIED */
 .thumbnail {
   flex-shrink: 0;
   border: 2px solid transparent;
@@ -212,6 +398,7 @@
   transition: border-color 0.2s ease;
   background: none;
   padding: 0;
+  position: relative;
 }
 
 .thumbnail:hover {
@@ -229,6 +416,211 @@
   border-radius: 0.25rem;
   display: block;
 }
+
+/* Expand Button */
+.expandButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.imageWrapper:hover .expandButton {
+  opacity: 1;
+}
+
+.expandButton:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* Modal Styles - FIXED SIZING */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1.5rem;
+}
+
+.modalContent {
+  background: var(--color-bg-secondary);
+  border-radius: 0.5rem;
+  max-width: 95vw;
+  max-height: 95vh;
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--color-bg-tertiary);
+  flex-shrink: 0;
+  min-height: 60px;
+}
+
+.modalCounter {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.closeButton {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: none;
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.closeButton:hover {
+  background: var(--color-text-accent);
+  color: white;
+}
+
+.modalImageContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-primary);
+  padding: 1rem;
+  min-height: 300px;
+  height: calc(90vh - 140px); /* Account for header, caption, thumbnails */
+  overflow: hidden;
+}
+
+.modalImageWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalImage {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.25rem;
+}
+
+.modalNavButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  z-index: 1;
+}
+
+.modalNavButton:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.modalPrev {
+  left: 1rem;
+}
+
+.modalNext {
+  right: 1rem;
+}
+
+.modalCaption {
+  padding: 1rem 1.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  background: var(--color-bg-primary);
+  border-top: 1px solid var(--color-bg-tertiary);
+  flex-shrink: 0;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+.modalThumbnails {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: var(--color-bg-primary);
+  border-top: 1px solid var(--color-bg-tertiary);
+  overflow-x: auto;
+  justify-content: center;
+  flex-shrink: 0;
+  max-height: 100px;
+}
+
+.modalThumbnail {
+  flex-shrink: 0;
+  border: 2px solid transparent;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  background: none;
+  padding: 0;
+}
+
+.modalThumbnail:hover {
+  border-color: var(--color-bg-tertiary);
+}
+
+.modalThumbnail.active {
+  border-color: var(--color-text-accent);
+}
+
+.modalThumbnailImage {
+  width: 60px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 0.125rem;
+  display: block;
+}
+
+/* ============ END ENHANCED GALLERY ADDITIONS ============ */
 
 /* Quick Info */
 .quickInfo {
@@ -387,12 +779,14 @@
   }
 }
 
-.pros, .cons {
+.pros,
+.cons {
   display: flex;
   flex-direction: column;
 }
 
-.prosTitle, .consTitle {
+.prosTitle,
+.consTitle {
   font-size: 1rem;
   font-weight: 600;
   margin: 0 0 0.75rem 0;
@@ -417,13 +811,15 @@
   color: #dc2626;
 }
 
-.prosList, .consList {
+.prosList,
+.consList {
   margin: 0;
   padding-left: 1rem;
   list-style: none;
 }
 
-.prosList li, .consList li {
+.prosList li,
+.consList li {
   margin-bottom: 0.5rem;
   line-height: 1.4;
   color: var(--color-text-primary);
@@ -717,15 +1113,44 @@
     background: rgba(85, 137, 60, 0.2);
     border-color: rgba(85, 137, 60, 0.3);
   }
-  
+
   .tag.activity {
     background: rgba(171, 160, 34, 0.2);
     border-color: rgba(171, 160, 34, 0.3);
   }
-  
+
   .tag.season {
     background: rgba(59, 130, 246, 0.2);
     border-color: rgba(59, 130, 246, 0.3);
+  }
+}
+
+/* Enhanced responsive adjustments for modal */
+@media (max-width: 768px) {
+  .modal {
+    padding: 0.5rem;
+  }
+  
+  .modalContent {
+    max-height: 98vh;
+  }
+  
+  .modalImageContainer {
+    padding: 0.5rem;
+  }
+  
+  .modalThumbnails {
+    padding: 0.75rem;
+  }
+  
+  .modalNavButton {
+    width: 36px;
+    height: 36px;
+  }
+
+  .expandButton {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.75rem;
   }
 }
 
@@ -734,7 +1159,7 @@
   .gearName {
     font-size: 2rem;
   }
-  
+
   .headerMeta {
     gap: 0.75rem;
   }
@@ -744,36 +1169,36 @@
   .container {
     padding: 1rem 0.5rem;
   }
-  
+
   .header {
     padding: 1.5rem;
   }
-  
+
   .gearName {
     font-size: 1.8rem;
   }
-  
+
   .reviewTitle {
     font-size: 1rem;
   }
-  
+
   .metaInfo {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
-  
+
   .specItem {
     grid-template-columns: 1fr;
     gap: 0.5rem;
   }
-  
+
   .ratingItem {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
-  
+
   .ratingItem span:first-child {
     min-width: auto;
   }

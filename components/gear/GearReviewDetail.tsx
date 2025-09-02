@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { format } from "date-fns"
@@ -21,7 +21,7 @@ import {
 import { PortableText } from '@portabletext/react'
 import { GearReview } from "@/lib/cmsProvider"
 import styles from '@/styles/GearReviewDetail.module.css'
-import { AdventureNav } from "../navigation/AdventureNav"
+import EnhancedImageGallery from "./EnhancedImageGallery"
 
 interface GearReviewDetailProps {
     review: GearReview
@@ -29,6 +29,9 @@ interface GearReviewDetailProps {
 
 export default function GearReviewDetail({ review }: GearReviewDetailProps) {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0)
+    const [loadingImageIndex, setLoadingImageIndex] = useState<number | null>(null)
+    const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set([0]))
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const renderStars = (rating: number, size: 'small' | 'medium' | 'large' = 'medium') => {
         const starSize = size === 'small' ? 14 : size === 'medium' ? 18 : 24
@@ -44,6 +47,41 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                 <span className={styles.ratingText}>({rating}/5)</span>
             </div>
         )
+    }
+
+    const optimizeImageUrl = (url: string, width = 600) => {
+        if (url.includes('cdn.sanity.io')) {
+            return `${url}?w=${width}&auto=format&q=75`
+        }
+        return url
+    }
+
+    const handleImageSelect = (index: number) => {
+        if (index === selectedImageIndex) return
+
+        setLoadingImageIndex(index)
+
+        // Only update selection after image is loaded
+        if (loadedImages.has(index)) {
+            setSelectedImageIndex(index)
+            setLoadingImageIndex(null)
+        } else {
+            // Preload the image
+            const img = new window.Image()
+            img.src = optimizeImageUrl(allImages[index].url)
+            img.onload = () => {
+                setLoadedImages(prev => new Set(prev).add(index))
+                setSelectedImageIndex(index)
+                setLoadingImageIndex(null)
+            }
+            img.onerror = () => {
+                // Fallback after timeout
+                setTimeout(() => {
+                    setSelectedImageIndex(index)
+                    setLoadingImageIndex(null)
+                }, 1000)
+            }
+        }
     }
 
     const getRatingColor = (rating: number) => {
@@ -73,6 +111,23 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
             caption: img.caption || ''
         }))
     ].filter(img => img.url)
+
+    useEffect(() => {
+        const preloadImage = (index: number) => {
+            if (index >= 0 && index < allImages.length && !loadedImages.has(index)) {
+                const img = new window.Image()
+                img.src = optimizeImageUrl(allImages[index].url)
+                img.onload = () => {
+                    setLoadedImages(prev => new Set(prev).add(index))
+                }
+            }
+        }
+
+        // Preload current, next, and previous images
+        preloadImage(selectedImageIndex)
+        preloadImage(selectedImageIndex + 1)
+        preloadImage(selectedImageIndex - 1)
+    }, [selectedImageIndex, allImages, loadedImages])
 
     return (
         <div className={styles.container}>
@@ -122,15 +177,37 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                         {/* Image Gallery */}
                         {allImages.length > 0 && (
                             <div className={styles.imageGallery}>
+                                {/* Main Image with Expand Button */}
                                 <div className={styles.mainImageContainer}>
-                                    <Image
-                                        src={allImages[selectedImageIndex].url}
-                                        alt={allImages[selectedImageIndex].alt}
-                                        width={600}
-                                        height={400}
-                                        className={styles.mainImage}
-                                        priority
-                                    />
+                                    <div
+                                        className={styles.imageWrapper}
+                                        onClick={() => setIsModalOpen(true)}
+                                    >
+                                        <Image
+                                            src={optimizeImageUrl(allImages[selectedImageIndex].url)}
+                                            alt={allImages[selectedImageIndex].alt}
+                                            width={600}
+                                            height={400}
+                                            className={styles.mainImage}
+                                            priority={selectedImageIndex === 0}
+                                        />
+
+                                        {/* Expand Button Pill */}
+                                        <button
+                                            className={styles.expandButton}
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                setIsModalOpen(true)
+                                            }}
+                                            aria-label="Expand image"
+                                        >
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+                                            </svg>
+                                            Expand
+                                        </button>
+                                    </div>
+
                                     {allImages[selectedImageIndex].caption && (
                                         <p className={styles.imageCaption}>
                                             {allImages[selectedImageIndex].caption}
@@ -138,26 +215,15 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                                     )}
                                 </div>
 
-                                {allImages.length > 1 && (
-                                    <div className={styles.thumbnails}>
-                                        {allImages.map((image, index) => (
-                                            <button
-                                                key={index}
-                                                onClick={() => setSelectedImageIndex(index)}
-                                                className={`${styles.thumbnail} ${index === selectedImageIndex ? styles.active : ''
-                                                    }`}
-                                            >
-                                                <Image
-                                                    src={image.url}
-                                                    alt={image.alt}
-                                                    width={80}
-                                                    height={60}
-                                                    className={styles.thumbnailImage}
-                                                />
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
+                                <EnhancedImageGallery
+                                    allImages={allImages}
+                                    selectedImageIndex={selectedImageIndex}
+                                    handleImageSelect={handleImageSelect}
+                                    isModalOpen={isModalOpen}
+                                    setIsModalOpen={setIsModalOpen}
+                                    optimizeImageUrl={optimizeImageUrl}
+                                    gearName={review.gearName}
+                                />
                             </div>
                         )}
 
@@ -465,7 +531,7 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                     </div>
                 </div>
             </div>
-            
+
         </div>
     )
 }
