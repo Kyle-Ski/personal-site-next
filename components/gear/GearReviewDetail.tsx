@@ -31,6 +31,7 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0)
     const [loadingImageIndex, setLoadingImageIndex] = useState<number | null>(null)
     const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set([0]))
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const renderStars = (rating: number, size: 'small' | 'medium' | 'large' = 'medium') => {
         const starSize = size === 'small' ? 14 : size === 'medium' ? 18 : 24
@@ -176,9 +177,12 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                         {/* Image Gallery */}
                         {allImages.length > 0 && (
                             <div className={styles.imageGallery}>
-                                {/* Enhanced Main Image with Loading State */}
+                                {/* Main Image with Expand Button */}
                                 <div className={styles.mainImageContainer}>
-                                    <div className={`${styles.imageWrapper} ${loadingImageIndex !== null ? styles.loading : ''}`}>
+                                    <div
+                                        className={styles.imageWrapper}
+                                        onClick={() => setIsModalOpen(true)}
+                                    >
                                         <Image
                                             src={optimizeImageUrl(allImages[selectedImageIndex].url)}
                                             alt={allImages[selectedImageIndex].alt}
@@ -186,19 +190,25 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                                             height={400}
                                             className={styles.mainImage}
                                             priority={selectedImageIndex === 0}
-                                            placeholder="blur"
-                                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                                         />
 
-                                        {loadingImageIndex !== null && (
-                                            <div className={styles.loadingOverlay}>
-                                                <div className={styles.loadingSpinner}></div>
-                                            </div>
-                                        )}
+                                        {/* Expand Button Pill */}
+                                        <button
+                                            className={styles.expandButton}
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                setIsModalOpen(true)
+                                            }}
+                                            aria-label="Expand image"
+                                        >
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+                                            </svg>
+                                            Expand
+                                        </button>
                                     </div>
 
-                                    {/* Only show caption when not loading */}
-                                    {loadingImageIndex === null && allImages[selectedImageIndex].caption && (
+                                    {allImages[selectedImageIndex].caption && (
                                         <p className={styles.imageCaption}>
                                             {allImages[selectedImageIndex].caption}
                                         </p>
@@ -209,8 +219,8 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                                     allImages={allImages}
                                     selectedImageIndex={selectedImageIndex}
                                     handleImageSelect={handleImageSelect}
-                                    loadingImageIndex={loadingImageIndex}
-                                    loadedImages={loadedImages}
+                                    isModalOpen={isModalOpen}
+                                    setIsModalOpen={setIsModalOpen}
                                     optimizeImageUrl={optimizeImageUrl}
                                     gearName={review.gearName}
                                 />
