@@ -51,7 +51,7 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
 
     const optimizeImageUrl = (url: string, width = 600) => {
         if (url.includes('cdn.sanity.io')) {
-            return `${url}?w=${width}&h=${Math.round(width * 0.67)}&fit=crop&auto=format&q=80`
+            return `${url}?w=${width}&auto=format&q=75`
         }
         return url
     }

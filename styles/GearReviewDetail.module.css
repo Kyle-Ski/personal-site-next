@@ -385,13 +385,8 @@
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Thumbnail loading indicators - SIMPLIFIED */
@@ -524,8 +519,7 @@
   background: var(--color-bg-primary);
   padding: 1rem;
   min-height: 300px;
-  height: calc(90vh - 140px);
-  /* Account for header, caption, thumbnails */
+  height: calc(90vh - 140px); /* Account for header, caption, thumbnails */
   overflow: hidden;
 }
 
@@ -1136,19 +1130,19 @@
   .modal {
     padding: 0.5rem;
   }
-
+  
   .modalContent {
     max-height: 98vh;
   }
-
+  
   .modalImageContainer {
     padding: 0.5rem;
   }
-
+  
   .modalThumbnails {
     padding: 0.75rem;
   }
-
+  
   .modalNavButton {
     width: 36px;
     height: 36px;
