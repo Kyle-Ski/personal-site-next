@@ -43,6 +43,141 @@
   max-width: 800px;
 }
 
+.thumbnailsContainer {
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.thumbnails {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-text-accent) var(--color-bg-tertiary);
+}
+
+/* Custom scrollbar for webkit browsers */
+.thumbnails::-webkit-scrollbar {
+  height: 6px;
+}
+
+.thumbnails::-webkit-scrollbar-track {
+  background: var(--color-bg-tertiary);
+  border-radius: 3px;
+}
+
+.thumbnails::-webkit-scrollbar-thumb {
+  background: var(--color-text-accent);
+  border-radius: 3px;
+}
+
+.thumbnails::-webkit-scrollbar-thumb:hover {
+  background: var(--color-green-0);
+}
+
+/* Gradient fade effects */
+.thumbnailsContainer::before,
+.thumbnailsContainer::after {
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 20px;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.thumbnailsContainer::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-bg-secondary), transparent);
+}
+
+.thumbnailsContainer::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-bg-secondary), transparent);
+}
+
+/* Hide gradients when not needed */
+.thumbnailsContainer.noLeftScroll::before {
+  opacity: 0;
+}
+
+.thumbnailsContainer.noRightScroll::after {
+  opacity: 0;
+}
+
+/* Image counter */
+.imageCounter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.imageCounter .dots {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-bg-tertiary);
+  transition: background 0.2s ease;
+}
+
+.dot.active {
+  background: var(--color-text-accent);
+}
+
+/* Scroll buttons (optional - only show on hover) */
+.scrollButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.thumbnailsContainer:hover .scrollButton {
+  opacity: 1;
+}
+
+.scrollButton:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.scrollButton.left {
+  left: 0.5rem;
+}
+
+.scrollButton.right {
+  right: 0.5rem;
+}
+
+.scrollButton:disabled {
+  opacity: 0 !important;
+  cursor: not-allowed;
+}
+
 .brandInfo {
   display: flex;
   align-items: center;
@@ -387,12 +522,14 @@
   }
 }
 
-.pros, .cons {
+.pros,
+.cons {
   display: flex;
   flex-direction: column;
 }
 
-.prosTitle, .consTitle {
+.prosTitle,
+.consTitle {
   font-size: 1rem;
   font-weight: 600;
   margin: 0 0 0.75rem 0;
@@ -417,13 +554,15 @@
   color: #dc2626;
 }
 
-.prosList, .consList {
+.prosList,
+.consList {
   margin: 0;
   padding-left: 1rem;
   list-style: none;
 }
 
-.prosList li, .consList li {
+.prosList li,
+.consList li {
   margin-bottom: 0.5rem;
   line-height: 1.4;
   color: var(--color-text-primary);
@@ -717,12 +856,12 @@
     background: rgba(85, 137, 60, 0.2);
     border-color: rgba(85, 137, 60, 0.3);
   }
-  
+
   .tag.activity {
     background: rgba(171, 160, 34, 0.2);
     border-color: rgba(171, 160, 34, 0.3);
   }
-  
+
   .tag.season {
     background: rgba(59, 130, 246, 0.2);
     border-color: rgba(59, 130, 246, 0.3);
@@ -734,7 +873,7 @@
   .gearName {
     font-size: 2rem;
   }
-  
+
   .headerMeta {
     gap: 0.75rem;
   }
@@ -744,36 +883,36 @@
   .container {
     padding: 1rem 0.5rem;
   }
-  
+
   .header {
     padding: 1.5rem;
   }
-  
+
   .gearName {
     font-size: 1.8rem;
   }
-  
+
   .reviewTitle {
     font-size: 1rem;
   }
-  
+
   .metaInfo {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
-  
+
   .specItem {
     grid-template-columns: 1fr;
     gap: 0.5rem;
   }
-  
+
   .ratingItem {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
-  
+
   .ratingItem span:first-child {
     min-width: auto;
   }

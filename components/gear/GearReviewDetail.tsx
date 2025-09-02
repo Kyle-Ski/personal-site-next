@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { format } from "date-fns"
@@ -21,7 +21,7 @@ import {
 import { PortableText } from '@portabletext/react'
 import { GearReview } from "@/lib/cmsProvider"
 import styles from '@/styles/GearReviewDetail.module.css'
-import { AdventureNav } from "../navigation/AdventureNav"
+import EnhancedImageGallery from "./EnhancedImageGallery"
 
 interface GearReviewDetailProps {
     review: GearReview
@@ -29,6 +29,8 @@ interface GearReviewDetailProps {
 
 export default function GearReviewDetail({ review }: GearReviewDetailProps) {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0)
+    const [loadingImageIndex, setLoadingImageIndex] = useState<number | null>(null)
+    const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set([0]))
 
     const renderStars = (rating: number, size: 'small' | 'medium' | 'large' = 'medium') => {
         const starSize = size === 'small' ? 14 : size === 'medium' ? 18 : 24
@@ -44,6 +46,41 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                 <span className={styles.ratingText}>({rating}/5)</span>
             </div>
         )
+    }
+
+    const optimizeImageUrl = (url: string, width = 600) => {
+        if (url.includes('cdn.sanity.io')) {
+            return `${url}?w=${width}&h=${Math.round(width * 0.67)}&fit=crop&auto=format&q=80`
+        }
+        return url
+    }
+
+    const handleImageSelect = (index: number) => {
+        if (index === selectedImageIndex) return
+
+        setLoadingImageIndex(index)
+
+        // Only update selection after image is loaded
+        if (loadedImages.has(index)) {
+            setSelectedImageIndex(index)
+            setLoadingImageIndex(null)
+        } else {
+            // Preload the image
+            const img = new window.Image()
+            img.src = optimizeImageUrl(allImages[index].url)
+            img.onload = () => {
+                setLoadedImages(prev => new Set(prev).add(index))
+                setSelectedImageIndex(index)
+                setLoadingImageIndex(null)
+            }
+            img.onerror = () => {
+                // Fallback after timeout
+                setTimeout(() => {
+                    setSelectedImageIndex(index)
+                    setLoadingImageIndex(null)
+                }, 1000)
+            }
+        }
     }
 
     const getRatingColor = (rating: number) => {
@@ -73,6 +110,23 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
             caption: img.caption || ''
         }))
     ].filter(img => img.url)
+
+    useEffect(() => {
+        const preloadImage = (index: number) => {
+            if (index >= 0 && index < allImages.length && !loadedImages.has(index)) {
+                const img = new window.Image()
+                img.src = optimizeImageUrl(allImages[index].url)
+                img.onload = () => {
+                    setLoadedImages(prev => new Set(prev).add(index))
+                }
+            }
+        }
+
+        // Preload current, next, and previous images
+        preloadImage(selectedImageIndex)
+        preloadImage(selectedImageIndex + 1)
+        preloadImage(selectedImageIndex - 1)
+    }, [selectedImageIndex, allImages, loadedImages])
 
     return (
         <div className={styles.container}>
@@ -122,42 +176,44 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                         {/* Image Gallery */}
                         {allImages.length > 0 && (
                             <div className={styles.imageGallery}>
+                                {/* Enhanced Main Image with Loading State */}
                                 <div className={styles.mainImageContainer}>
-                                    <Image
-                                        src={allImages[selectedImageIndex].url}
-                                        alt={allImages[selectedImageIndex].alt}
-                                        width={600}
-                                        height={400}
-                                        className={styles.mainImage}
-                                        priority
-                                    />
-                                    {allImages[selectedImageIndex].caption && (
+                                    <div className={`${styles.imageWrapper} ${loadingImageIndex !== null ? styles.loading : ''}`}>
+                                        <Image
+                                            src={optimizeImageUrl(allImages[selectedImageIndex].url)}
+                                            alt={allImages[selectedImageIndex].alt}
+                                            width={600}
+                                            height={400}
+                                            className={styles.mainImage}
+                                            priority={selectedImageIndex === 0}
+                                            placeholder="blur"
+                                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                                        />
+
+                                        {loadingImageIndex !== null && (
+                                            <div className={styles.loadingOverlay}>
+                                                <div className={styles.loadingSpinner}></div>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Only show caption when not loading */}
+                                    {loadingImageIndex === null && allImages[selectedImageIndex].caption && (
                                         <p className={styles.imageCaption}>
                                             {allImages[selectedImageIndex].caption}
                                         </p>
                                     )}
                                 </div>
 
-                                {allImages.length > 1 && (
-                                    <div className={styles.thumbnails}>
-                                        {allImages.map((image, index) => (
-                                            <button
-                                                key={index}
-                                                onClick={() => setSelectedImageIndex(index)}
-                                                className={`${styles.thumbnail} ${index === selectedImageIndex ? styles.active : ''
-                                                    }`}
-                                            >
-                                                <Image
-                                                    src={image.url}
-                                                    alt={image.alt}
-                                                    width={80}
-                                                    height={60}
-                                                    className={styles.thumbnailImage}
-                                                />
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
+                                <EnhancedImageGallery
+                                    allImages={allImages}
+                                    selectedImageIndex={selectedImageIndex}
+                                    handleImageSelect={handleImageSelect}
+                                    loadingImageIndex={loadingImageIndex}
+                                    loadedImages={loadedImages}
+                                    optimizeImageUrl={optimizeImageUrl}
+                                    gearName={review.gearName}
+                                />
                             </div>
                         )}
 
@@ -465,7 +521,7 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                     </div>
                 </div>
             </div>
-            
+
         </div>
     )
 }
