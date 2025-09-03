@@ -43,6 +43,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             title: `${review.brand} ${review.gearName} Review`,
             description: review.excerpt,
             images: review.mainImage ? [review.mainImage] : [],
+            url: `https://kyle.czajkowski.tech/gear/reviews/${slug}`,
             type: 'article',
             publishedTime: review.publishedAt,
             modifiedTime: review.updatedAt || review.publishedAt,

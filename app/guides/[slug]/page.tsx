@@ -16,6 +16,7 @@ import { GearUsedSection } from "@/components/adventure/GearUsedSection"
 import { MobileTOC } from "@/components/MobileTOC"
 import GPXRouteSection from "@/components/adventure/GPXRouteSection"
 import { portableTextComponents } from "@/utils/portableTextComponents"
+import SocialShare from "@/components/SocialShare"
 
 interface PageProps {
     params: Promise<{ slug: string }>
@@ -199,7 +200,11 @@ export default async function GuidePage({ params }: PageProps) {
                             {guide.difficulty || 'All Levels'}
                         </Badge>
                     </div>
-
+                    <SocialShare
+                        url={`https://kyle.czajkowski.tech/gear/guides/${guide.slug}`}
+                        title={`${guide.title}`}
+                        variant="buttons"
+                    />
                     {/* Guide Meta Grid */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {/* Guide Type */}
