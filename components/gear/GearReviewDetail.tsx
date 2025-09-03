@@ -22,6 +22,7 @@ import { PortableText } from '@portabletext/react'
 import { GearReview } from "@/lib/cmsProvider"
 import styles from '@/styles/GearReviewDetail.module.css'
 import EnhancedImageGallery from "./EnhancedImageGallery"
+import SocialShare from "../SocialShare"
 
 interface GearReviewDetailProps {
     review: GearReview
@@ -167,6 +168,11 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                                     </div>
                                 )}
                             </div>
+                            <SocialShare
+                                url={`https://kyle.czajkowski.tech/gear/reviews/${review.slug}`}
+                                title={`${review.brand} ${review.gearName} Review`}
+                                variant="buttons"
+                            />
                         </div>
                     </div>
                 </header>

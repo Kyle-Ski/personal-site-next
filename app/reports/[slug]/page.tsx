@@ -15,6 +15,7 @@ import AdventureHero from "@/components/adventure/AdventureHero"
 import { GearUsedSection } from "@/components/adventure/GearUsedSection"
 import { MobileTOC } from "@/components/MobileTOC"
 import GPXRouteSection from "@/components/adventure/GPXRouteSection"
+import SocialShare from "@/components/SocialShare"
 
 interface PageProps {
     params: Promise<{ slug: string }>
@@ -63,6 +64,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             title: `${tripReport.title} - Adventure Report`,
             description,
             images: tripReport.mainImage ? [tripReport.mainImage] : [],
+            url: `https://kyle.czajkowski.tech/reports/${slug}`,
             type: 'article',
             publishedTime: tripReport.publishedAt,
             authors: [tripReport.author?.name || 'Kyle Czajkowski'],
@@ -207,6 +209,11 @@ export default async function TripReportPage({ params }: PageProps) {
                     <div className="flex items-start justify-between">
                         <div className="flex-1">
                             <h1 className="text-3xl sm:text-4xl font-bold mb-2">{tripReport.title}</h1>
+                            <SocialShare
+                                url={`https://kyle.czajkowski.tech/reports/${tripReport.slug}`}
+                                title={`${tripReport.title} - Adventure Report`}
+                                size="md"
+                            />
                             {/* Explicit Achievement Callout from Sanity */}
                             {tripReport.achievement && (
                                 <div className={`border rounded-lg p-3 mb-4 ${getAchievementStyling(tripReport.achievement.type).bgColor}`}>

@@ -10,6 +10,7 @@ import { portableTextComponents } from "@/utils/portableTextComponents";
 import TableOfContents from "@/components/tableOfContents"
 import AdventureHero from "@/components/adventure/AdventureHero"
 import { MobileTOC } from "@/components/MobileTOC"
+import SocialShare from "@/components/SocialShare"
 
 interface PageProps {
     params: Promise<{ id: string }>
@@ -50,6 +51,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             title: post.title,
             description,
             images: post.mainImage ? [post.mainImage] : [],
+            url: `https://kyle.czajkowski.tech/blog/${id}`,
             type: 'article',
             publishedTime: post.publishedAt,
             authors: [post.author?.name || 'Kyle Czajkowski'],
@@ -118,7 +120,12 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                 < div className="space-y-4" >
                     <h1 className="text-3xl sm:text-4xl font-bold">{post.title}</h1>
-
+                    <SocialShare
+                        url={`https://kyle.czajkowski.tech/blog/${post.slug}`}
+                        variant="buttons"
+                        size="md"
+                        className="mb-6 pb-6 border-b border-border"
+                    />
                     <div className="flex items-center gap-4">
                         <Avatar>
                             <AvatarImage src={post.author?.image} />
