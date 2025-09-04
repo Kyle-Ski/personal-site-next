@@ -42,7 +42,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         openGraph: {
             title: `${review.brand} ${review.gearName} Review`,
             description: review.excerpt,
-            images: review.mainImage ? [review.mainImage] : [],
+            images: review.mainImage ? [{
+                url: review.mainImage,
+                width: 1200,
+                height: 630,
+                alt: review.title
+            }] : [],
             url: `https://kyle.czajkowski.tech/gear/reviews/${slug}`,
             type: 'article',
             publishedTime: review.publishedAt,

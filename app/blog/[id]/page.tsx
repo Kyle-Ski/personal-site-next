@@ -50,7 +50,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         openGraph: {
             title: post.title,
             description,
-            images: post.mainImage ? [post.mainImage] : [],
+            images: post.mainImage ? [{
+                url: post.mainImage,
+                width: 1200,
+                height: 630,
+                alt: post.title
+            }] : [],
             url: `https://kyle.czajkowski.tech/blog/${id}`,
             type: 'article',
             publishedTime: post.publishedAt,

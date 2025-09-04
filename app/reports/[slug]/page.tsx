@@ -74,7 +74,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             card: 'summary_large_image',
             title: `${tripReport.title} - Adventure Report`,
             description,
-            images: tripReport.mainImage ? [tripReport.mainImage] : [],
+            images: tripReport.mainImage ? [{
+                url: tripReport.mainImage,
+                width: 1200,
+                height: 630,
+                alt: tripReport.title
+            }] : [],
             creator: '@SkiRoyJenkins',
         },
         alternates: {
