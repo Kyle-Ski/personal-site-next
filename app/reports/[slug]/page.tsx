@@ -77,6 +77,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             images: tripReport.mainImage ? [tripReport.mainImage] : [],
             creator: '@SkiRoyJenkins',
         },
+        alternates: {
+            canonical: `https://kyle.czajkowski.tech/reports/${slug}`
+        },
         // Location-specific meta tags
         other: {
             'geo.placename': tripReport.location || '',

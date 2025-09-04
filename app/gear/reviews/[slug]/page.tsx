@@ -27,7 +27,7 @@ async function getGearReview(slug: string): Promise<GearReview | null> {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug } = await params;
     const review = await getGearReview(slug)
-    
+
     if (!review) {
         return {
             title: 'Gear Review Not Found - Kyle Czajkowski',
@@ -54,6 +54,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             title: `${review.brand} ${review.gearName} Review`,
             description: review.excerpt,
             images: review.mainImage ? [review.mainImage] : [],
+        },
+        alternates: {
+            canonical: `https://kyle.czajkowski.tech/gear/reviews/${slug}`
         },
         other: {
             'product:brand': review.brand,

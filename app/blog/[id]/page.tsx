@@ -64,6 +64,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             images: post.mainImage ? [post.mainImage] : [],
             creator: '@SkiRoyJenkins',
         },
+        alternates: {
+            canonical: `https://kyle.czajkowski.tech/blog/${id}`
+        },
         // Additional meta tags for better SEO
         other: {
             'article:author': post.author?.name || 'Kyle Czajkowski',
