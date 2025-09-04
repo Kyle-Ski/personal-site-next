@@ -264,6 +264,13 @@ export const tripReportType = defineType({
             rows: 4
         }),
         defineField({
+            name: 'includeInRSS',
+            type: 'boolean',
+            title: 'Include in RSS Feed',
+            description: 'Toggle this when ready to notify RSS subscribers',
+            initialValue: false
+        }),
+        defineField({
             name: 'body',
             type: 'blockContent',
             title: 'Trip Report Content'

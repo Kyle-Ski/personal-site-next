@@ -320,6 +320,13 @@ export const gearReviewType = defineType({
             description: 'Similar products worth considering'
         }),
 
+        defineField({
+            name: 'includeInRSS',
+            type: 'boolean',
+            title: 'Include in RSS Feed',
+            description: 'Toggle this when ready to notify RSS subscribers',
+            initialValue: false
+        }),
         // Standard blog fields
         defineField({
             name: 'body',
