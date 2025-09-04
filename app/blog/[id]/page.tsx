@@ -54,7 +54,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
                 url: post.mainImage,
                 width: 1200,
                 height: 630,
-                alt: post.title
+                alt: post.title,
+                type: 'image/jpeg'
             }] : [],
             url: `https://kyle.czajkowski.tech/blog/${id}`,
             type: 'article',
@@ -77,6 +78,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             'article:author': post.author?.name || 'Kyle Czajkowski',
             'article:published_time': post.publishedAt,
             'article:section': categoryTags,
+            'image': post.mainImage,
+            'twitter:image': post.mainImage,
         }
     }
 }
