@@ -122,17 +122,6 @@ export default async function HomePage() {
               </p>
             </div>
           </div>
-
-          <div className="text-center mt-8">
-            <Link
-              href="/about"
-              className="inline-flex items-center gap-2 text-lg font-medium hover:opacity-80"
-              style={{ color: 'var(--color-text-accent)' }}
-            >
-              Learn more about my background
-              <ArrowRight size={18} />
-            </Link>
-          </div>
         </section>
 
         {/* Recent Content */}
