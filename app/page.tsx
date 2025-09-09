@@ -1,17 +1,20 @@
-import ParallaxHero from '../components/ParallaxHero';
 import RecentPosts from '@/components/RecentContent';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Mountain, Code, Award, Users, ArrowRight, Mail } from 'lucide-react';
 import { imgStrToBase64, shimmer } from '../utils/imageHelpers';
+import AdventureHero from '@/components/adventure/AdventureHero';
 
 export default async function HomePage() {
   return (
     <div>
       <main>
         {/* Hero Section */}
-        <ParallaxHero />
-        
+        <AdventureHero
+          backgroundImage="/CrestonesAtSunrise.jpeg"
+          mainText1="Kyle"
+          mainText2="Czajkowski"
+        />
         {/* Condensed About Section */}
         <section className="py-16 px-4 max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -20,18 +23,18 @@ export default async function HomePage() {
                 Hey! I&apos;m <span style={{ color: 'var(--color-text-accent)' }}>Kyle</span>
               </h2>
               <p className="text-lg mb-6 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
-                I&apos;m an outdoor enthusiast with a unique combination of backcountry experience, 
-                technical skills, and a deep commitment to conservation. After years in software 
-                development, I&apos;ve pivoted to realign with my core values and pursue 
+                I&apos;m an outdoor enthusiast with a unique combination of backcountry experience,
+                technical skills, and a deep commitment to conservation. After years in software
+                development, I&apos;ve pivoted to realign with my core values and pursue
                 opportunities in the outdoor industry.
               </p>
               <p className="text-lg mb-8 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
-                Whether you&apos;re looking for technical expertise, outdoor guidance, or someone who 
+                Whether you&apos;re looking for technical expertise, outdoor guidance, or someone who
                 understands both worlds, I&apos;d love to connect.
               </p>
-              
+
               <div className="flex flex-wrap gap-4">
-                <Link 
+                <Link
                   href="/about"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-white font-medium transition-colors hover:opacity-90"
                   style={{ backgroundColor: 'var(--color-text-accent)' }}
@@ -39,12 +42,12 @@ export default async function HomePage() {
                   My Full Story
                   <ArrowRight size={18} />
                 </Link>
-                <Link 
+                <Link
                   href="/resume"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium border transition-colors hover:opacity-80"
-                  style={{ 
-                    borderColor: 'var(--color-text-accent)', 
-                    color: 'var(--color-text-accent)' 
+                  style={{
+                    borderColor: 'var(--color-text-accent)',
+                    color: 'var(--color-text-accent)'
                   }}
                 >
                   View Resume
@@ -52,7 +55,7 @@ export default async function HomePage() {
                 </Link>
               </div>
             </div>
-            
+
             <div className="flex justify-center">
               <div className="relative">
                 <Image
@@ -77,7 +80,7 @@ export default async function HomePage() {
           <h2 className="text-3xl font-bold mb-12 text-center" style={{ color: 'var(--color-text-primary)' }}>
             What I Bring
           </h2>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="text-center p-6 rounded-xl" style={{ backgroundColor: 'var(--color-bg-secondary)' }}>
               <Mountain className="mx-auto mb-4" size={32} style={{ color: 'var(--color-text-accent)' }} />
@@ -119,9 +122,9 @@ export default async function HomePage() {
               </p>
             </div>
           </div>
-          
+
           <div className="text-center mt-8">
-            <Link 
+            <Link
               href="/about"
               className="inline-flex items-center gap-2 text-lg font-medium hover:opacity-80"
               style={{ color: 'var(--color-text-accent)' }}
@@ -144,11 +147,11 @@ export default async function HomePage() {
               Let&apos;s Connect
             </h2>
             <p className="text-lg mb-8 max-w-2xl mx-auto" style={{ color: 'var(--color-text-secondary)' }}>
-              Whether you&apos;re an outdoor company looking for someone who understands both technical 
-              systems and mountain systems, or just another outdoor enthusiast looking to connect, 
+              Whether you&apos;re an outdoor company looking for someone who understands both technical
+              systems and mountain systems, or just another outdoor enthusiast looking to connect,
               I&apos;d love to hear from you.
             </p>
-            
+
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="mailto:kyle@czajkowski.tech"
@@ -158,12 +161,12 @@ export default async function HomePage() {
                 <Mail size={20} />
                 Get In Touch
               </a>
-              <Link 
+              <Link
                 href="/projects"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium border transition-colors hover:opacity-80"
-                style={{ 
-                  borderColor: 'var(--color-text-accent)', 
-                  color: 'var(--color-text-accent)' 
+                style={{
+                  borderColor: 'var(--color-text-accent)',
+                  color: 'var(--color-text-accent)'
                 }}
               >
                 View My Work

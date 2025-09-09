@@ -6,6 +6,7 @@ import PersonalTimeLine from '../../components/PersonalTimeLine';
 import { getAllBlockData } from '../../utils/notion';
 import { AboutData, WebsiteData } from '../../interfaces';
 import { Download, Mail, Phone, MapPin, Globe, Github, Linkedin } from "lucide-react";
+import AdventureHero from "@/components/adventure/AdventureHero";
 
 export const metadata = {
     title: 'Resume | Kyle Czajkowski - Full-Stack Developer & Outdoor Professional',
@@ -42,15 +43,43 @@ export default async function ResumePage() {
 
     const { personalTimeline, skills } = websiteData;
     const resumeLink = "/Kyle_Czajkowski_2025.pdf";
+    const resumeStats = [
+        {
+            label: 'Years Experience',
+            value: '5+',
+            iconName: 'Trophy'
+        },
+        {
+            label: 'Peak Summits',
+            value: '75+',
+            iconName: 'Mountain'
+        },
+        {
+            label: 'Certifications',
+            value: '4+',
+            iconName: 'ArrowUp'
+        },
+        {
+            label: 'Tech Stack',
+            value: 'Full-Stack',
+            iconName: 'Map'
+        }
+    ];
 
     return (
-        <div className="min-h-screen py-16 mt-4">
-            <div className="container mx-auto px-4 max-w-7xl">
+        <div className="min-h-screen py-16">
+            <AdventureHero
+                // backgroundImage="/professional-summit.jpg" // Professional outdoor setting
+                mainText1="Experience &"
+                mainText2="Expertise"
+                stats={resumeStats}
+            />
+            <div className="container mx-auto px-4 mt-4 max-w-7xl">
 
                 {/* Header */}
                 <div className="text-center mb-16">
                     <h1 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: 'var(--color-text-primary)' }}>
-                        Resume & <span style={{ color: 'var(--color-text-accent)' }}>Experience</span>
+                        Resume & <span style={{ color: 'var(--color-text-accent)' }}>Journey</span>
                     </h1>
                     <p className="text-xl max-w-3xl mx-auto leading-relaxed mb-8" style={{ color: 'var(--color-text-secondary)' }}>
                         Full-stack developer with 5+ years of experience building scalable applications.

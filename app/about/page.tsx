@@ -2,6 +2,7 @@ import About from '../../components/About';
 import PersonalTimeLine from '../../components/PersonalTimeLine';
 import { getAllBlockData } from '../../utils/notion';
 import { AboutData, WebsiteData } from '../../interfaces';
+import AdventureHero from '@/components/adventure/AdventureHero';
 
 export const metadata = {
     title: 'About Kyle | Outdoor Enthusiast & Software Developer',
@@ -41,6 +42,11 @@ export default async function AboutPage() {
     return (
         <div>
             <main>
+                <AdventureHero
+                    // backgroundImage="/Me.jpg" // Use your personal mountain photo
+                    mainText1="From Code to"
+                    mainText2="Peaks"
+                />
                 {/* Full About Story */}
                 <About about={about} />
 

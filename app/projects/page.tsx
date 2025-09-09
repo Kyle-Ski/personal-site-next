@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, Code2, Zap, MailIcon } from "lucide-react";
+import AdventureHero from "@/components/adventure/AdventureHero";
 
 export const metadata = {
     title: 'Projects | Kyle Czajkowski - Full-Stack Developer',
@@ -78,7 +79,8 @@ export default function ProjectsPage() {
             technologies: ["React", "Node.js", "MongoDB", "Express", "Collaboration"],
             link: "https://github.com/kale-stew/climb-log",
             status: "Collaborative",
-            category: "Outdoor Tech"
+            category: "Outdoor Tech",
+            demoLink: "https://www.kylies.photos/climb-log"
         },
         {
             title: "Personal Website",
@@ -124,14 +126,19 @@ export default function ProjectsPage() {
     };
 
     return (
-        <div className="min-h-screen py-16 mt-4">
+        <div className="min-h-screen py-16">
+            <AdventureHero
+                // backgroundImage="/coding-mountains.jpg" // Tech + outdoors image
+                mainText1="Projects &"
+                mainText2="Code"
+            />
             <div className="container mx-auto px-4 max-w-7xl">
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <h1 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: 'var(--color-text-primary)' }}>
+                    {/* <h1 className="text-4xl lg:text-5xl font-bold mb-6  mt-4" style={{ color: 'var(--color-text-primary)' }}>
                         Projects & <span style={{ color: 'var(--color-text-accent)' }}>Code</span>
-                    </h1>
-                    <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
+                    </h1> */}
+                    <p className="text-xl max-w-3xl mx-auto mt-4 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
                         A collection of web development projects showcasing my expertise in React, TypeScript,
                         API integrations, and outdoor technology solutions. From NPM packages used by developers
                         to specialized outdoor apps.
