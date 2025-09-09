@@ -1,41 +1,3 @@
-// import About from '../components/About';
-// import ParallaxHero from '../components/ParallaxHero';
-// import PersonalTimeLine from '../components/PersonalTimeLine';
-// import Projects from '../components/Projects';
-// import Skills from '../components/Skills';
-// import { getAllBlockData } from '../utils/notion';
-// import { AboutData, WebsiteData } from '../interfaces';
-// import StravaFeed from '../components/StravaFeed';
-// import ResumeViewer from '../components/ResumeViewer';
-// import RecentPosts from '@/components/RecentContent';
-
-
-// export default async function Page() {
-//   const response = await getAllBlockData(process.env?.NODE_ENV === 'production');
-//   const websiteData: WebsiteData = response?.about ? response : {
-//     about: {} as AboutData,
-//     personalTimeline: [],
-//     projects: [],
-//     skills: [],
-//   };
-
-//   const { about, personalTimeline, skills } = websiteData;
-  
-//   return (
-//     <div>
-//       <main>
-//         <ParallaxHero />
-//         <About about={about} />
-//         <RecentPosts />
-//         <PersonalTimeLine timeline={personalTimeline} />
-//         <Projects />
-//         <ResumeViewer/>
-//         <Skills skills={skills} />
-//         <StravaFeed />
-//       </main>
-//     </div>
-//   );
-// }
 import ParallaxHero from '../components/ParallaxHero';
 import RecentPosts from '@/components/RecentContent';
 import Link from 'next/link';
@@ -55,17 +17,17 @@ export default async function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl lg:text-4xl font-bold mb-6" style={{ color: 'var(--color-text-primary)' }}>
-                Hey! I'm <span style={{ color: 'var(--color-text-accent)' }}>Kyle</span>
+                Hey! I&apos;m <span style={{ color: 'var(--color-text-accent)' }}>Kyle</span>
               </h2>
               <p className="text-lg mb-6 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
-                I'm an outdoor enthusiast with a unique combination of backcountry experience, 
+                I&apos;m an outdoor enthusiast with a unique combination of backcountry experience, 
                 technical skills, and a deep commitment to conservation. After years in software 
-                development, I've pivoted to realign with my core values and pursue 
+                development, I&apos;ve pivoted to realign with my core values and pursue 
                 opportunities in the outdoor industry.
               </p>
               <p className="text-lg mb-8 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
-                Whether you're looking for technical expertise, outdoor guidance, or someone who 
-                understands both worlds, I'd love to connect.
+                Whether you&apos;re looking for technical expertise, outdoor guidance, or someone who 
+                understands both worlds, I&apos;d love to connect.
               </p>
               
               <div className="flex flex-wrap gap-4">
@@ -179,12 +141,12 @@ export default async function HomePage() {
         <section className="py-16 px-4 max-w-6xl mx-auto">
           <div className="text-center p-12 rounded-2xl" style={{ backgroundColor: 'var(--color-bg-secondary)' }}>
             <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--color-text-primary)' }}>
-              Let's Connect
+              Let&apos;s Connect
             </h2>
             <p className="text-lg mb-8 max-w-2xl mx-auto" style={{ color: 'var(--color-text-secondary)' }}>
-              Whether you're an outdoor company looking for someone who understands both technical 
+              Whether you&apos;re an outdoor company looking for someone who understands both technical 
               systems and mountain systems, or just another outdoor enthusiast looking to connect, 
-              I'd love to hear from you.
+              I&apos;d love to hear from you.
             </p>
             
             <div className="flex flex-wrap justify-center gap-4">
