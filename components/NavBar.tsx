@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Mountain, FilePenLine, ChevronDown, FileBadgeIcon, GitBranchPlusIcon, UserCircle2Icon } from "lucide-react";
+import { Menu, X, Mountain, FilePenLine, ChevronDown, FileBadgeIcon, GitBranchPlusIcon, UserCircle2Icon, HomeIcon } from "lucide-react";
 import ToggleDarkMode from "./ToggleDarkMode";
 import { usePathname } from "next/navigation";
 
@@ -15,7 +15,7 @@ const NavBar = () => {
 
   // Reordered navigation
   const mainNavItems = [
-    { href: `/`, label: "Home" },
+    { href: `/`, label: "Home", icon: HomeIcon },
     { href: `/about`, label: "About", icon: UserCircle2Icon },
     { href: `/projects`, label: "Projects", icon: GitBranchPlusIcon },
     { href: `/blog`, label: "Blog", icon: FilePenLine },
@@ -143,7 +143,7 @@ const NavBar = () => {
               >
                 <button
                   className={`text-sm font-medium transition-colors duration-300 flex items-center gap-1 ${isAdventureActive()
-                    ? 'text-green-600 dark:text-green-400'
+                    ? 'text-[var(--color-text-accent)]'
                     : ''
                     }`}
                   onClick={() => setShowAdventureDropdown(!showAdventureDropdown)}
@@ -170,7 +170,7 @@ const NavBar = () => {
                             }`}
                         >
                           <div className={`font-medium ${isActive(item.href)
-                            ? 'text-green-600 dark:text-green-400'
+                            ? 'text-[var(--color-text-accent)]'
                             : 'text-gray-900 dark:text-gray-100'
                             }`}>
                             {item.label}
@@ -223,7 +223,10 @@ const NavBar = () => {
 
               {/* Mobile Adventure Section */}
               <div className="px-3 py-2">
-                <div className="text-sm font-semibold text-green-600 dark:text-green-400 flex items-center gap-1 mb-2">
+                <div className={`text-sm font-semibold flex items-center gap-1 mb-2 ${isAdventureActive()
+                    ? 'text-[var(--color-text-accent)]'
+                    : ''
+                    }`}>
                   <Mountain size={16} />
                   Alpine
                 </div>
@@ -235,7 +238,7 @@ const NavBar = () => {
                       onClick={() => handleLinkClick(item.href)}
                       className={`block py-2 text-sm ${isActive(item.href)
                         ? 'text-green-600 dark:text-green-400 font-medium'
-                        : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+                        : ''
                         }`}
                     >
                       {item.label}

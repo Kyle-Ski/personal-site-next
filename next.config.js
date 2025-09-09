@@ -21,6 +21,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: '**.media-amazon.com',
+      },
+      {
+        protocol: 'https',
         hostname: '**.notion.so',
       },
       {
