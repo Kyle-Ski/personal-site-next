@@ -8,9 +8,9 @@ const VALID_FEED_TYPES = ['all', 'blog', 'trip-reports', 'guides', 'gear-reviews
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { type: string } }
+  { params }: { params: Promise<{ type: string }> }
 ) {
-  const feedType = params.type
+  const { type: feedType } = await params
   
   // Validate feed type
   if (!VALID_FEED_TYPES.includes(feedType)) {
