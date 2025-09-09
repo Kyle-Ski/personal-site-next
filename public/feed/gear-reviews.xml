@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title><![CDATA[Kyle Czajkowski's Content Feed - Gear Reviews]]></title>
+    <description><![CDATA[In-depth reviews of outdoor gear and equipment]]></description>
+    <link>https://kyle.czajkowski.tech/gear</link>
+    <atom:link href="https://kyle.czajkowski.tech/feed/gear-reviews.xml" rel="self" type="application/rss+xml"/>
+    <language>en-US</language>
+    <managingEditor>Kyle Czajkowski</managingEditor>
+    <webMaster>Kyle Czajkowski</webMaster>
+    <lastBuildDate>Tue, 09 Sep 2025 21:19:53 GMT</lastBuildDate>
+    <generator>Next.js RSS Generator</generator>
+  </channel>
+</rss>

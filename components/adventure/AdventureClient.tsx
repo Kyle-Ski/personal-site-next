@@ -7,6 +7,7 @@ import TripReportCard from "@/components/adventure/TripReportCard"
 import AdventureHero from "@/components/adventure/AdventureHero"
 import { AdventureNav } from "@/components/navigation/AdventureNav"
 import styles from '@/styles/GearReviews.module.css'
+import RSSSubscribe from "../RSSSubscribe"
 
 // Hard-coded content types for type safety and predictable filtering
 const CONTENT_TYPES = {
@@ -444,6 +445,7 @@ export default function AdventureClient({ adventures, stats }: AdventureClientPr
                                 )}
                             </div>
                         )}
+                        <RSSSubscribe variant="compact" />
                     </div>
 
                     {/* Results Count */}
