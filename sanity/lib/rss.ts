@@ -17,7 +17,7 @@ interface RSSConfig {
 }
 
 const SITE_CONFIG = {
-    title: 'Your Adventure Blog',
+    title: 'Kyle Czajkowski\'s Content Feed',
     description: 'Trip reports, guides, gear reviews, and outdoor adventures',
     baseUrl: 'https://kyle.czajkowski.tech',
     author: 'Kyle Czajkowski',
