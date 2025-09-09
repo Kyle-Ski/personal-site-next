@@ -352,6 +352,141 @@
   border-radius: 8px;
 }
 
+/* Share Button Styles */
+.shareButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.gearCard:hover .shareButton {
+  opacity: 1;
+}
+
+.shareButton:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* Updated CSS for inline share button and toast */
+
+/* Link container for View Product and Share */
+.linkContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4A6FA5;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  flex: 1;
+}
+
+.link:hover {
+  color: #2D5A3D;
+  text-decoration: underline;
+}
+
+.shareLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  border: 1px solid var(--color-bg-tertiary);
+  border-radius: 0.375rem;
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.shareLink:hover {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  border-color: var(--color-text-secondary);
+}
+
+/* Toast notification */
+.toast {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+}
+
+.toastContent {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-bg-tertiary);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+/* Toast animation */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .toastContent {
+  background: rgba(42, 42, 42, 0.95);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .toast {
+    top: 1rem;
+    right: 1rem;
+    left: 1rem;
+  }
+  
+  .linkContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  
+  .shareLink {
+    justify-content: center;
+  }
+}
+
 /* Dark mode adjustments */
 [data-theme='dark'] .imageWrapper {
   background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);

@@ -35,6 +35,7 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
   const [showRetired, setShowRetired] = useState(false)
   const [sortBy, setSortBy] = useState<'name' | 'weight' | 'cost' | 'date'>('name')
   const [showFilters, setShowFilters] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
 
   // Update URL when filters change (excluding search)
   const updateUrl = (newFilters: any) => {
@@ -145,10 +146,12 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
     const url = `${window.location.origin}${getItemShareLink(item)}`
     try {
       await navigator.clipboard.writeText(url)
-      // You could add a toast notification here
-      console.log('Link copied to clipboard!')
+      setToastMessage(`Link copied for ${item.title}`)
+      setTimeout(() => setToastMessage(''), 3000) // Hide toast after 3 seconds
     } catch (err) {
       console.error('Failed to copy link:', err)
+      setToastMessage('Failed to copy link')
+      setTimeout(() => setToastMessage(''), 3000)
     }
   }
 
@@ -327,7 +330,7 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
         <p>Showing {filteredGear.length} items</p>
       </div>
 
-      {/* Gear Grid */}
+      {/* Gear Grid - Using your original structure */}
       <div ref={gearGridRef} className={styles.gearGrid}>
         {filteredGear.map((item) => {
           const itemSlug = createGearSlug(item.title)
@@ -342,24 +345,24 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
                   <Image
                     src={getImageSrc(item)!}
                     alt={item.title}
-                    width={300}
+                    width={200}
                     height={200}
+                    loading="lazy"
+                    placeholder="empty"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
                     className={styles.image}
                   />
                 ) : (
                   <div className={styles.imagePlaceholder}>
-                    <Package size={48} />
+                    <Package size={40} />
                   </div>
                 )}
                 
-                {/* Share button */}
-                <button
-                  onClick={() => copyItemLink(item)}
-                  className={styles.shareButton}
-                  title="Copy link to this item"
-                >
-                  <Share2 size={16} />
-                </button>
+                {item.isRetired && (
+                  <div className={styles.retiredBadge}>Retired</div>
+                )}
               </div>
 
               <CardContent className={styles.content}>
@@ -372,15 +375,16 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
                   </Badge>
                 )}
 
-                <div className={styles.metaInfo}>
+                <div className={styles.specs}>
                   {item.weight_oz && (
-                    <div className={styles.metaItem}>
+                    <div className={styles.spec}>
                       <Weight size={14} />
                       <span>{item.weight_oz} oz</span>
                     </div>
                   )}
                   {item.cost && (
-                    <div className={styles.metaItem}>
+                    <div className={styles.spec}>
+                      <DollarSign size={14} />
                       <span>${item.cost}</span>
                     </div>
                   )}
@@ -388,30 +392,44 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
 
                 {item.packLists.length > 0 && (
                   <div className={styles.packLists}>
-                    {item.packLists.slice(0, 2).map(list => (
-                      <span key={list} className={styles.packListTag}>
-                        {list}
-                      </span>
-                    ))}
-                    {item.packLists.length > 2 && (
-                      <span className={styles.packListTag}>
-                        +{item.packLists.length - 2}
-                      </span>
-                    )}
+                    <p className={styles.packListLabel}>Used in:</p>
+                    <div className={styles.packListTags}>
+                      {item.packLists.slice(0, 2).map((list, index) => (
+                        <span key={index} className={styles.packListTag}>
+                          {list}
+                        </span>
+                      ))}
+                      {item.packLists.length > 2 && (
+                        <span className={styles.packListTag}>
+                          +{item.packLists.length - 2}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 )}
 
-                {item.url && (
-                  <Link
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.link}
+                <div className={styles.linkContainer}>
+                  {item.url && (
+                    <Link
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.link}
+                    >
+                      <span>View Product</span>
+                      <ExternalLink size={14} />
+                    </Link>
+                  )}
+                  
+                  <button
+                    onClick={() => copyItemLink(item)}
+                    className={styles.shareLink}
+                    title="Copy link to this item"
                   >
-                    <span>View Product</span>
-                    <ExternalLink size={14} />
-                  </Link>
-                )}
+                    <Share2 size={14} />
+                    <span>Share</span>
+                  </button>
+                </div>
               </CardContent>
             </Card>
           )
@@ -425,6 +443,16 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
           <button onClick={clearFilters} className={styles.clearButton}>
             Clear Filters
           </button>
+        </div>
+      )}
+
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className={styles.toast}>
+          <div className={styles.toastContent}>
+            <Share2 size={16} />
+            <span>{toastMessage}</span>
+          </div>
         </div>
       )}
     </div>
