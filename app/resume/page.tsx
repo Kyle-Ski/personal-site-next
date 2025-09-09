@@ -2,7 +2,6 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { AiOutlineDownload } from "react-icons/ai";
 import { Tooltip } from "@nextui-org/react";
 import Skills from '../../components/Skills';
-import PersonalTimeLine from '../../components/PersonalTimeLine';
 import { getAllBlockData } from '../../utils/notion';
 import { AboutData, WebsiteData } from '../../interfaces';
 import { Download, Mail, Phone, MapPin, Globe, Github, Linkedin } from "lucide-react";
@@ -202,11 +201,6 @@ export default async function ResumePage() {
                             </CardContent>
                         </Card>
                     </div>
-                </div>
-
-                {/* Experience Timeline */}
-                <div className="mb-16">
-                    <PersonalTimeLine timeline={personalTimeline} />
                 </div>
 
                 {/* Certifications & Training */}
