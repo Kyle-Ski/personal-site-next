@@ -140,13 +140,13 @@ const About = ({ about }: Props) => {
           <div className="grid lg:grid-cols-3 gap-8 items-start">
             <div className="lg:col-span-2 prose prose-lg" style={{ color: 'var(--color-text-secondary)' }}>
               <p>
-                I want to help people find their way to enjoy the outdoors safely. Whether that's
+                I want to help people find their way to enjoy the outdoors safely. Whether that&apos;s
                 helping someone choose the right gear for their first backpacking trip, teaching
                 avalanche safety, or guiding groups through technical terrain, my goal is to make
                 outdoor experiences accessible and meaningful.
               </p>
               <p>
-                My approach is empathetic. I'm good at putting myself in the shoes of someone new
+                My approach is empathetic. I&apos;m good at putting myself in the shoes of someone new
                 to the outdoors and understanding the struggles they might be having. I like being
                 able to address those concerns while helping people get the most out of their experience.
               </p>

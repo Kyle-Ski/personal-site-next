@@ -2,28 +2,24 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Mountain, FilePenLine, ChevronDown } from "lucide-react";
+import { Menu, X, Mountain, FilePenLine, ChevronDown, FileBadgeIcon, GitBranchPlusIcon, UserCircle2Icon } from "lucide-react";
 import ToggleDarkMode from "./ToggleDarkMode";
-import { ABOUT_TITLE, FOOTER, PERSONAL_TIMELINE_ANCHOR, PROJECTS_TITLE, RESUME_ANCHOR, SKILLS_TITLE, STRAVA_TITLE } from "@/utils/constants";
 import { usePathname } from "next/navigation";
 
 const NavBar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState('');
   const [showAdventureDropdown, setShowAdventureDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Reordered navigation
   const mainNavItems = [
-    { href: `/#${ABOUT_TITLE}`, label: "About" },
-    { href: `/#${PERSONAL_TIMELINE_ANCHOR}`, label: "Timeline" },
-    { href: `/#${PROJECTS_TITLE}`, label: "Projects" },
+    { href: `/`, label: "Home" },
+    { href: `/about`, label: "About", icon: UserCircle2Icon },
+    { href: `/projects`, label: "Projects", icon: GitBranchPlusIcon },
     { href: `/blog`, label: "Blog", icon: FilePenLine },
-    { href: `/#${SKILLS_TITLE}`, label: "Skills" },
-    { href: `/#${RESUME_ANCHOR}`, label: "Resume" },
-    { href: `/#${FOOTER}`, label: "Contact" },
+    { href: `/resume`, label: "Resume", icon: FileBadgeIcon },
   ];
 
   const adventureItems = [
@@ -35,52 +31,41 @@ const NavBar = () => {
   ];
 
   const isActive = (href: string) => {
-    if (typeof window !== 'undefined') {
-      const currentPath = window.location.pathname;
-      const currentHash = window.location.hash;
-
-      // Handle homepage sections with hashes
-      if (href.includes('#')) {
-        return `${currentPath}${currentHash}` === href;
+    if (href.includes('#')) {
+      if (typeof window !== 'undefined') {
+        return `${pathname}${window.location.hash}` === href;
       }
-
-      // Handle regular pages - check if current path starts with href
-      if (href === '/') {
-        return currentPath === '/';
-      }
-
-      // For reports pages, also check if we're on a sub-page
-      if (href === '/reports') {
-        return currentPath.startsWith('/adventures');
-      }
-
-      if (href === '/gear') {
-        return currentPath.startsWith('/gear');
-      }
-
-      if (href === '/guides') {
-        return currentPath.startsWith('/guides');
-      }
-
-      return currentPath.startsWith(href);
+      return false;
     }
-    return activeItem === href;
+
+    if (href === '/') {
+      return pathname === '/';
+    }
+
+    // For nested pages
+    if (href === '/reports') {
+      return pathname.startsWith('/reports');
+    }
+
+    if (href === '/gear') {
+      return pathname.startsWith('/gear');
+    }
+
+    if (href === '/guides') {
+      return pathname.startsWith('/guides');
+    }
+
+    return pathname.startsWith(href);
   };
 
-  // Check if any adventure page is active
   const isAdventureActive = () => {
-    if (typeof window !== 'undefined') {
-      const currentPath = window.location.pathname;
-      return currentPath.startsWith('/reports') ||
-        currentPath.startsWith('/guides') ||
-        currentPath.startsWith('/gear') ||
-        currentPath.startsWith('/peaks');
-    }
-    return false;
+    return pathname.startsWith('/reports') ||
+      pathname.startsWith('/guides') ||
+      pathname.startsWith('/gear') ||
+      pathname.startsWith('/peaks');
   };
 
   const handleLinkClick = (item: string) => {
-    setActiveItem(item);
     setIsOpen(false);
     setShowAdventureDropdown(false);
   };
@@ -159,7 +144,7 @@ const NavBar = () => {
                 <button
                   className={`text-sm font-medium transition-colors duration-300 flex items-center gap-1 ${isAdventureActive()
                     ? 'text-green-600 dark:text-green-400'
-                    : 'text-green-700 dark:text-green-300 hover:text-green-600 dark:hover:text-green-400'
+                    : ''
                     }`}
                   onClick={() => setShowAdventureDropdown(!showAdventureDropdown)}
                 >
