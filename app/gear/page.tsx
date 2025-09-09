@@ -4,6 +4,7 @@ import GearFeatured from '@/components/gear/GearFeatured'
 import GearGrid from '@/components/gear/GearGrid'
 import GearStats from '@/components/gear/GearStats'
 import { AdventureNav } from '@/components/navigation/AdventureNav'
+import { Suspense } from 'react'
 
 export const metadata = {
   title: 'Gear Room | Kyle Czajkowski',
@@ -28,6 +29,25 @@ export const metadata = {
     canonical: 'https://kyle.czajkowski.tech/gear'
   }
 };
+
+// Wrapper component to handle search params
+function GearGridWrapper({ gear, categories, brands, packLists }: {
+  gear: any[]
+  categories: string[]
+  brands: string[]
+  packLists: string[]
+}) {
+  return (
+    <Suspense fallback={<div>Loading filters...</div>}>
+      <GearGrid
+        gear={gear}
+        categories={categories}
+        brands={brands}
+        packLists={packLists}
+      />
+    </Suspense>
+  )
+}
 
 export default async function GearPage() {
   const allGear = await getAllGear()
@@ -56,7 +76,7 @@ export default async function GearPage() {
       {/* Main Gear Grid with Filters */}
       <section className="container mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold mb-8 text-center">Gear Closet</h2>
-        <GearGrid
+        <GearGridWrapper
           gear={allGear}
           categories={categories}
           brands={brands}
