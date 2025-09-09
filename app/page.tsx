@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Mountain, Code, Award, Users, ArrowRight, Mail } from 'lucide-react';
 import { imgStrToBase64, shimmer } from '../utils/imageHelpers';
 import AdventureHero from '@/components/adventure/AdventureHero';
-import StravaFeed from '@components/StravaFeed'
+import StravaFeed from '@/components/StravaFeed'
 
 export default async function HomePage() {
   return (
