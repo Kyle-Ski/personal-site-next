@@ -28,6 +28,115 @@ interface GearReviewDetailProps {
     review: GearReview
 }
 
+// Utility function to create unified tags with consistent formatting
+const createUnifiedTags = (review: GearReview) => {
+    const categoryActivityTags: Array<{ text: string; original: string }> = []
+    const seasonTags: Array<{ text: string; original: string }> = []
+
+    // Add categories
+    if (review.gearCategories?.length > 0) {
+        review.gearCategories.forEach(category => {
+            categoryActivityTags.push({
+                text: category.title,
+                original: category.title
+            })
+        })
+    }
+
+    // Add activities
+    if (review.activities && review.activities?.length > 0) {
+        review.activities.forEach(activity => {
+            categoryActivityTags.push({
+                text: activity.replace('-', ' '),
+                original: activity
+            })
+        })
+    }
+
+    // Add seasons
+    if (review.seasons && review.seasons?.length > 0) {
+        review.seasons.forEach(season => {
+            seasonTags.push({
+                text: season,
+                original: season
+            })
+        })
+    }
+
+    // Remove duplicates and normalize capitalization for each group
+    const uniqueCategoryActivityTags = categoryActivityTags
+        .filter((tag, index, self) => {
+            const normalizedText = tag.text.toLowerCase().trim()
+            return index === self.findIndex(t => t.text.toLowerCase().trim() === normalizedText)
+        })
+        .map(tag => ({
+            ...tag,
+            text: tag.text.charAt(0).toUpperCase() + tag.text.slice(1).toLowerCase() // Title case
+        }))
+        .sort((a, b) => a.text.localeCompare(b.text))
+
+    const uniqueSeasonTags = seasonTags
+        .filter((tag, index, self) => {
+            const normalizedText = tag.text.toLowerCase().trim()
+            return index === self.findIndex(t => t.text.toLowerCase().trim() === normalizedText)
+        })
+        .map(tag => ({
+            ...tag,
+            text: tag.text.charAt(0).toUpperCase() + tag.text.slice(1).toLowerCase() // Title case
+        }))
+        .sort((a, b) => a.text.localeCompare(b.text))
+
+    return {
+        categoryActivityTags: uniqueCategoryActivityTags,
+        seasonTags: uniqueSeasonTags
+    }
+}
+
+// Unified tags component
+const UnifiedTagsSection = ({ review }: { review: GearReview }) => {
+    const { categoryActivityTags, seasonTags } = createUnifiedTags(review)
+
+    if (categoryActivityTags.length === 0 && seasonTags.length === 0) return null
+
+    return (
+        <div className={styles.tagsSection}>
+            {/* Categories & Activities */}
+            {categoryActivityTags.length > 0 && (
+                <div className={styles.tagGroup}>
+                    <h4>Categories & Activities</h4>
+                    <div className={styles.tags}>
+                        {categoryActivityTags.map((tag, index) => (
+                            <span
+                                key={`category-activity-${tag.original}-${index}`}
+                                className={`${styles.tag} ${styles.category}`}
+                            >
+                                {tag.text}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Seasons */}
+            {seasonTags.length > 0 && (
+                <div className={styles.tagGroup}>
+                    <h4>Seasons</h4>
+                    <div className={styles.tags}>
+                        {seasonTags.map((tag, index) => (
+                            <span
+                                key={`season-${tag.original}-${index}`}
+                                className={`${styles.tag} ${styles.season}`}
+                            >
+                                {tag.text}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </div>
+    )
+}
+
 export default function GearReviewDetail({ review }: GearReviewDetailProps) {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0)
     const [loadingImageIndex, setLoadingImageIndex] = useState<number | null>(null)
@@ -163,7 +272,6 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                                 </div>
                                 {review.price && (
                                     <div className={styles.metaItem}>
-                                        <DollarSign size={16} />
                                         <span className={styles.price}>${review.price}</span>
                                     </div>
                                 )}
@@ -269,47 +377,8 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                             </div>
                         </div>
 
-                        {/* Categories and Activities */}
-                        <div className={styles.tagsSection}>
-                            {review.gearCategories.length > 0 && (
-                                <div className={styles.tagGroup}>
-                                    <h4>Categories</h4>
-                                    <div className={styles.tags}>
-                                        {review.gearCategories.map(category => (
-                                            <span key={category._id} className={`${styles.tag} ${styles.category}`}>
-                                                {category.title}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {review.activities && review.activities.length > 0 && (
-                                <div className={styles.tagGroup}>
-                                    <h4>Activities</h4>
-                                    <div className={styles.tags}>
-                                        {review.activities.map(activity => (
-                                            <span key={activity} className={`${styles.tag} ${styles.activity}`}>
-                                                {activity.replace('-', ' ')}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {review.seasons && review.seasons.length > 0 && (
-                                <div className={styles.tagGroup}>
-                                    <h4>Seasons</h4>
-                                    <div className={styles.tags}>
-                                        {review.seasons.map(season => (
-                                            <span key={season} className={`${styles.tag} ${styles.season}`}>
-                                                {season}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-                        </div>
+                        {/* Unified Tags Section */}
+                        <UnifiedTagsSection review={review} />
                     </div>
 
                     {/* Right Column - Review Content */}

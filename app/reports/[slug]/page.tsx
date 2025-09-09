@@ -309,11 +309,11 @@ export default async function TripReportPage({ params }: PageProps) {
                                 {activity}
                             </Badge>
                         ))}
-                        {tripReport.tags?.slice(0, 3).map((tag) => (
+                        {/* {tripReport.tags?.slice(0, 3).map((tag) => (
                             <Badge key={tag} variant="secondary">
                                 {tag}
                             </Badge>
-                        ))}
+                        ))} */}
                     </div>
                 )}
                 {tripReport.gpxFile && (

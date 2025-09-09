@@ -45,9 +45,11 @@ export function AdventureNav({ currentPage }: AdventureNavProps) {
   ]
 
   return (
-    <div className="bg-green-50 dark:bg-green-900/10 border-t border-green-200 dark:border-green-800">
+    <div className="border-t-2 border-[var(--color-text-accent)]" style={{
+      background: 'linear-gradient(135deg, var(--color-green)/15 0%, var(--color-orange)/12 30%, var(--color-green-1)/20 70%, var(--color-orange-1)/15 100%)'
+    }}>
       <div className="container mx-auto px-4 py-8">
-        <h3 className="text-lg font-semibold text-center mb-6 text-green-800 dark:text-green-200">
+        <h3 className="text-lg font-semibold text-center mb-6 text-[var(--color-text-primary)]">
           Explore More Adventures
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -55,24 +57,30 @@ export function AdventureNav({ currentPage }: AdventureNavProps) {
             <Link
               key={page.key}
               href={page.href}
-              className={`group p-4 rounded-lg border transition-all duration-200 ${currentPage === page.key
-                  ? 'border-green-500 bg-green-100 dark:bg-green-900/30'
-                  : 'border-green-200 dark:border-green-700 hover:border-green-400 hover:bg-green-50 dark:hover:bg-green-900/20'
+              className={`group p-4 rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${currentPage === page.key
+                ? 'bg-[var(--color-bg-secondary)] border-[var(--color-text-accent)] shadow-lg'
+                : 'bg-[var(--color-bg-secondary)]/80 backdrop-blur-sm border-[var(--color-bg-tertiary)] hover:border-[var(--color-text-accent)] hover:bg-[var(--color-bg-secondary)] hover:shadow-md'
                 }`}
             >
               <div className="flex items-center gap-3 mb-2">
                 <page.icon
                   size={20}
-                  className={`${currentPage === page.key
-                      ? 'text-green-600 dark:text-green-400'
-                      : 'text-green-500 group-hover:text-green-600'
+                  className={`transition-all duration-200 ${currentPage === page.key
+                    ? 'text-[var(--color-text-accent)] scale-110'
+                    : 'text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-accent)] group-hover:scale-105'
                     }`}
                 />
-                <h4 className="font-medium text-gray-900 dark:text-gray-100">
+                <h4 className={`font-medium transition-colors duration-200 ${currentPage === page.key
+                  ? 'text-[var(--color-text-accent)] font-semibold'
+                  : 'text-[var(--color-text-primary)] group-hover:text-[var(--color-text-accent)]'
+                  }`}>
                   {page.label}
                 </h4>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className={`text-sm transition-colors duration-200 ${currentPage === page.key
+                ? 'text-[var(--color-text-primary)]'
+                : 'text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)]'
+                }`}>
                 {page.description}
               </p>
             </Link>
