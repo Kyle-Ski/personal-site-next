@@ -77,10 +77,7 @@ export default async function ResumePage() {
 
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <h1 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: 'var(--color-text-primary)' }}>
-                        Resume & <span style={{ color: 'var(--color-text-accent)' }}>Journey</span>
-                    </h1>
-                    <p className="text-xl max-w-3xl mx-auto leading-relaxed mb-8" style={{ color: 'var(--color-text-secondary)' }}>
+                    <p className="text-xl max-w-3xl mx-auto leading-relaxed mb-8 mt-4" style={{ color: 'var(--color-text-secondary)' }}>
                         Full-stack developer with 5+ years of experience building scalable applications.
                         Currently seeking to combine technical expertise with outdoor industry passion.
                     </p>
