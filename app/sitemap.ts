@@ -20,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       sanityService.getAllGearReviews()
     ]);
 
-    // Static pages
+    // Static pages - Updated for new structure
     const staticPages: MetadataRoute.Sitemap = [
       {
         url: baseUrl,
@@ -28,6 +28,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: 'weekly',
         priority: 1,
       },
+      // NEW: Dedicated pages from restructuring
+      {
+        url: `${baseUrl}/about`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.9,
+      },
+      {
+        url: `${baseUrl}/projects`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.9,
+      },
+      {
+        url: `${baseUrl}/resume`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.9,
+      },
+      // Existing content pages
       {
         url: `${baseUrl}/blog`,
         lastModified: new Date(),
@@ -41,22 +61,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       },
       {
-        url: `${baseUrl}/adventures`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.8,
-      },
-      {
         url: `${baseUrl}/gear/reviews`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.7,
       },
       {
+        url: `${baseUrl}/reports`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      },
+      {
         url: `${baseUrl}/guides`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.8,
+      },
+      {
+        url: `${baseUrl}/peaks`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
       },
     ]
 
@@ -104,6 +130,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 1,
       },
       {
+        url: `${baseUrl}/about`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.9,
+      },
+      {
+        url: `${baseUrl}/projects`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.9,
+      },
+      {
+        url: `${baseUrl}/resume`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.9,
+      },
+      {
         url: `${baseUrl}/blog`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
@@ -122,7 +166,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       },
       {
-        url: `${baseUrl}/guides`,  // Add guides
+        url: `${baseUrl}/guides`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.8,

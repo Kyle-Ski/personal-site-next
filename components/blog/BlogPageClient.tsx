@@ -8,6 +8,7 @@ import { Search, Filter, X, Calendar, User } from "lucide-react"
 import { PortableTextBlock } from "@portabletext/types"
 import styles from '@/styles/BlogFiltering.module.css'
 import AdventureHero from "../adventure/AdventureHero"
+import RSSSubscribe from "../RSSSubscribe"
 
 export interface Author {
     _id: string
@@ -132,6 +133,7 @@ export default function BlogPageClient({ posts, techOnly = false }: BlogPageClie
                                     </span>
                                 )}
                             </button>
+                            <RSSSubscribe variant="compact" />
                         </div>
 
                         {/* Simplified Filter Panel */}

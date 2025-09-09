@@ -7,6 +7,7 @@ import Link from "next/link"
 import { Search, Filter, X, Star, Mountain, Tent, Compass } from "lucide-react"
 import { GearReview } from "@/lib/cmsProvider"
 import styles from '@/styles/GearReviews.module.css'
+import RSSSubscribe from "../RSSSubscribe"
 
 // Activity icons mapping
 const ACTIVITY_ICONS = {
@@ -222,6 +223,7 @@ export default function GearReviewsClient({ reviews }: GearReviewsClientProps) {
                             )}
                         </div>
                     )}
+                    <RSSSubscribe variant="compact" />
                 </div>
 
                 {/* Results Count */}

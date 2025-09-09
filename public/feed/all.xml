@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title><![CDATA[Kyle Czajkowski's Content Feed - All Posts]]></title>
+    <description><![CDATA[All trip reports, guides, gear reviews, and blog posts]]></description>
+    <link>https://kyle.czajkowski.tech</link>
+    <atom:link href="https://kyle.czajkowski.tech/feed/all.xml" rel="self" type="application/rss+xml"/>
+    <language>en-US</language>
+    <managingEditor>Kyle Czajkowski</managingEditor>
+    <webMaster>Kyle Czajkowski</webMaster>
+    <lastBuildDate>Thu, 21 Aug 2025 18:30:00 GMT</lastBuildDate>
+    <generator>Next.js RSS Generator</generator>
+    <item>
+      <title><![CDATA[Finishing Kylie's CO 14ers]]></title>
+      <description><![CDATA[An awesome 2-day adventure completing Kylie's final Colorado 14er! Technical traverse between peaks, dramatic rockfall events, and an unforgettable celebration at 14,350 feet. This route has real rockfall potential and requires group coordination, but offers incredible rewards for experienced climbers.]]></description>
+      <link>https://kyle.czajkowski.tech/reports/[object Object]</link>
+      <guid isPermaLink="true">https://kyle.czajkowski.tech/reports/[object Object]</guid>
+      <pubDate>Thu, 21 Aug 2025 18:30:00 GMT</pubDate>
+      <category><![CDATA[Trip Report]]></category>
+    </item>
+  </channel>
+</rss>
