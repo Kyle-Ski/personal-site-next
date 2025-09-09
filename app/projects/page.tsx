@@ -124,7 +124,7 @@ export default function ProjectsPage() {
     };
 
     return (
-        <div className="min-h-screen py-16">
+        <div className="min-h-screen py-16 mt-4">
             <div className="container mx-auto px-4 max-w-7xl">
                 {/* Header */}
                 <div className="text-center mb-16">
@@ -223,7 +223,7 @@ export default function ProjectsPage() {
                         Interested in collaborating?
                     </h2>
                     <p className="text-lg mb-6" style={{ color: 'var(--color-text-secondary)' }}>
-                        I'm always open to new projects and interesting challenges. Let's build something great together!
+                        I&apos;m always open to new projects and interesting challenges. Let&apos;s build something great together!
                     </p>
                     <a
                         href="mailto:kyle@czajkowski.tech"

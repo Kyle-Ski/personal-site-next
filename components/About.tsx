@@ -11,7 +11,7 @@ interface Props {
 
 const About = ({ about }: Props) => {
   return (
-    <section id={ABOUT_TITLE} className="py-16 px-4 max-w-7xl mx-auto">
+    <section id={ABOUT_TITLE} className="py-16 px-4 max-w-7xl mx-auto mt-4">
       {/* Hero Section */}
       <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
         <div className="order-2 lg:order-1">
@@ -121,7 +121,7 @@ const About = ({ about }: Props) => {
                 className="transition-colors font-medium hover:opacity-80"
                 style={{ color: 'var(--color-text-accent)' }}
               >
-                my wife's
+                my wife&apos;s
               </Link>{' '}
               support, I took an extended sabbatical to reflect on what I really wanted to do
               with my life. This time allowed for personal growth and helped me realign with my

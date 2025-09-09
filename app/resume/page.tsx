@@ -44,7 +44,7 @@ export default async function ResumePage() {
     const resumeLink = "/Kyle_Czajkowski_2025.pdf";
 
     return (
-        <div className="min-h-screen py-16">
+        <div className="min-h-screen py-16 mt-4">
             <div className="container mx-auto px-4 max-w-7xl">
 
                 {/* Header */}
@@ -274,7 +274,7 @@ export default async function ResumePage() {
                         Ready to Connect?
                     </h2>
                     <p className="text-lg mb-6" style={{ color: 'var(--color-text-secondary)' }}>
-                        Whether you're looking for technical expertise or outdoor industry experience, I'd love to discuss how we can work together.
+                        Whether you&apos;re looking for technical expertise or outdoor industry experience, I&apos;d love to discuss how we can work together.
                     </p>
                     <div className="flex flex-wrap justify-center gap-4">
                         <a
