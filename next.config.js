@@ -39,14 +39,62 @@ const nextConfig = {
   },
   experimental: {    
     // Optimize bundle size
-    optimizePackageImports: ['lucide-react']
+    optimizePackageImports: [
+      'lucide-react',
+      '@radix-ui/react-avatar',
+      '@radix-ui/react-slot',
+      'react-icons',
+      'chart.js',
+      'react-chartjs-2'
+    ],
   },
+  esmExternals: true,
+  serverComponentsExternalPackages: ['sharp'],
   compiler: {
     // Remove console logs in production
     removeConsole: process.env.NODE_ENV === 'production',
   },
   poweredByHeader: false,
   compress: true,
+    // Enhanced bundle analyzer and optimization
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    // Optimize chunks
+    if (!dev && !isServer) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+              enforce: true,
+            },
+            common: {
+              name: 'common',
+              minChunks: 2,
+              chunks: 'all',
+              enforce: true,
+            },
+          },
+        },
+      }
+    }
+
+    // Bundle analyzer (only in development)
+    if (!dev && process.env.ANALYZE === 'true') {
+      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+      config.plugins.push(
+        new BundleAnalyzerPlugin({
+          analyzerMode: 'static',
+          openAnalyzer: false,
+        })
+      )
+    }
+
+    return config
+  },
   async headers() {
     return [
       {
@@ -64,6 +112,51 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Link',
+            value: '</CrestonesAtSunrise.jpeg>; rel=preload; as=image',
+          },
+        ],
+      },
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Link',
+            value: '</blue-tent.jpg>; rel=preload; as=image',
+          },
+        ],
+      },
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Link',
+            value: '</capitol-fall.jpg>; rel=preload; as=image',
+          },
+        ],
+      },
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Link',
+            value: '</longs.jpg>; rel=preload; as=image',
+          },
+        ],
+      },
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Link',
+            value: '</mountain-trail.JPG>; rel=preload; as=image',
           },
         ],
       },
