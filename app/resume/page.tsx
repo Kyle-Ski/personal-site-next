@@ -1,10 +1,9 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { AiOutlineDownload } from "react-icons/ai";
 import { Tooltip } from "@nextui-org/react";
 import Skills from '../../components/Skills';
 import { getAllBlockData } from '../../utils/notion';
 import { AboutData, WebsiteData } from '../../interfaces';
-import { Download, Mail, Phone, MapPin, Globe, Github, Linkedin } from "lucide-react";
+import { Download, Mail, MapPin, Globe, Github } from "lucide-react";
 import AdventureHero from "@/components/adventure/AdventureHero";
 
 export const metadata = {
@@ -41,7 +40,7 @@ export default async function ResumePage() {
     };
 
     const { personalTimeline, skills } = websiteData;
-    const resumeLink = "/Kyle_Czajkowski_2025.pdf";
+    const resumeLink = "/Outdoor_Recreation_Professional_Kyle_Czajkowski.pdf";
     const resumeStats = [
         {
             label: 'Years Experience',
