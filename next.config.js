@@ -134,7 +134,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/',
+        source: '/peaks',
         headers: [
           {
             key: 'Link',
