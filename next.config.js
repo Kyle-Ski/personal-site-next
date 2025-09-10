@@ -152,7 +152,34 @@ const nextConfig = {
         ],
       },
       {
-        source: ['/reports', '/about', '/projects', '/resume'],
+        source: '/reports',
+        headers: [
+          {
+            key: 'Link',
+            value: '</mountain-trail.JPG>; rel=preload; as=image',
+          },
+        ],
+      },
+      {
+        source: '/resume',
+        headers: [
+          {
+            key: 'Link',
+            value: '</mountain-trail.JPG>; rel=preload; as=image',
+          },
+        ],
+      },
+      {
+        source: '/projects',
+        headers: [
+          {
+            key: 'Link',
+            value: '</mountain-trail.JPG>; rel=preload; as=image',
+          },
+        ],
+      },
+      {
+        source: '/about',
         headers: [
           {
             key: 'Link',
