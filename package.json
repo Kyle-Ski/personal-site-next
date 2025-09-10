@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "analyze": "ANALYZE=true next build",
     "start": "next start",
     "lint": "next lint",
+    "optimize-images": "node scripts/optimize-images.js",
     "format": "prettier --ignore-path .gitignore .next \"**/*.{ts,tsx,md}\" --write .",
     "fetch-strava": "node scripts/fetch-strava-data.js",
     "check-miles": "node scripts/check-miles.js"
@@ -49,6 +51,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
+    "webpack-bundle-analyzer": "^4.9.0",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "autoprefixer": "^10.4.17",
@@ -56,6 +59,7 @@
     "eslint-config-next": "^15.0.0",
     "postcss": "^8.4.33",
     "prettier": "^3.2.0",
+    "sharp": "^0.34.3",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   }
