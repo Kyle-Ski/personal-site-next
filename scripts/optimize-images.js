@@ -1,3 +1,85 @@
+const sharp = require('sharp');
+const fs = require('fs');
+const path = require('path');
+
+async function optimizeHeroImages() {
+    const publicDir = path.join(process.cwd(), 'public');
+    const outputDir = path.join(publicDir, 'optimized');
+
+    // Create optimized directory if it doesn't exist
+    if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+    }
+
+    // Common hero image extensions
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp'];
+
+    // Get all image files from public directory
+    const files = fs.readdirSync(publicDir)
+        .filter(file => imageExtensions.includes(path.extname(file).toLowerCase()))
+        .filter(file => {
+            const stats = fs.statSync(path.join(publicDir, file));
+            return stats.size > 500 * 1024; // Only optimize files > 500KB
+        });
+
+    console.log(`Found ${files.length} large images to optimize...`);
+
+    for (const file of files) {
+        const inputPath = path.join(publicDir, file);
+        const fileName = path.parse(file).name;
+
+        try {
+            // Generate multiple optimized versions
+            const variants = [
+                { suffix: '-hero', width: 1920, quality: 85 },
+                { suffix: '-tablet', width: 1024, quality: 80 },
+                { suffix: '-mobile', width: 640, quality: 75 },
+                { suffix: '-blur', width: 40, quality: 20 } // For blur placeholder
+            ];
+
+            for (const variant of variants) {
+                // WebP version
+                await sharp(inputPath)
+                    .resize(variant.width, null, {
+                        withoutEnlargement: true,
+                        fit: 'cover'
+                    })
+                    .webp({ quality: variant.quality })
+                    .toFile(path.join(outputDir, `${fileName}${variant.suffix}.webp`));
+
+                // AVIF version (even more optimized)
+                await sharp(inputPath)
+                    .resize(variant.width, null, {
+                        withoutEnlargement: true,
+                        fit: 'cover'
+                    })
+                    .avif({ quality: variant.quality })
+                    .toFile(path.join(outputDir, `${fileName}${variant.suffix}.avif`));
+
+                // Fallback JPEG
+                await sharp(inputPath)
+                    .resize(variant.width, null, {
+                        withoutEnlargement: true,
+                        fit: 'cover'
+                    })
+                    .jpeg({ quality: variant.quality, progressive: true })
+                    .toFile(path.join(outputDir, `${fileName}${variant.suffix}.jpg`));
+            }
+
+            console.log(`✅ Optimized: ${file}`);
+        } catch (error) {
+            console.error(`❌ Failed to optimize ${file}:`, error.message);
+        }
+    }
+
+    console.log('\n🎉 Image optimization complete!');
+    console.log('💡 Tip: Update your components to use the optimized versions');
+}
+
+// Run the optimization
+optimizeHeroImages().catch(console.error);
+
+// Enhanced AdventureHero with smart image selection
 "use client"
 
 import { useEffect, useState, useCallback } from 'react'
@@ -18,15 +100,37 @@ interface AdventureHeroProps {
     }[]
 }
 
-const iconMap: Record<string, React.ComponentType<any>> = {
-    'Mountain': Mountain,
-    'MapPin': MapPin,
-    'Calendar': Calendar,
-    'Trophy': Trophy,
-    'TrendingUp': TrendingUp,
-    'ArrowUp': ArrowUp,
-    'Map': Map,
-    'Heart': Heart
+// Smart image source selection based on device capabilities
+const getOptimalImageSrc = (baseSrc: string): string => {
+    // Remove extension to work with optimized versions
+    const pathParts = baseSrc.split('.');
+    const baseName = pathParts.slice(0, -1).join('.');
+
+    // Check if we have optimized versions
+    const optimizedPath = `/optimized/${baseName.replace('/', '')}-hero`;
+
+    // Feature detection for modern formats
+    if (typeof window !== 'undefined') {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Check AVIF support
+        if (canvas.toDataURL('image/avif').indexOf('data:image/avif') === 0) {
+            return `${optimizedPath}.avif`;
+        }
+
+        // Check WebP support  
+        if (canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0) {
+            return `${optimizedPath}.webp`;
+        }
+    }
+
+    // Fallback to optimized JPEG or original
+    return `${optimizedPath}.jpg`;
+}
+
+const generateResponsiveSizes = () => {
+    return `(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1920px`;
 }
 
 const AdventureHero = ({
@@ -35,9 +139,15 @@ const AdventureHero = ({
     mainText1 = "Field Reports &",
     mainText2 = "Mountain Intel"
 }: AdventureHeroProps) => {
-    const [offset, setOffset] = useState<number>(0)
+    const [offset, setOffset] = useState < number > (0)
     const [imageLoaded, setImageLoaded] = useState(false)
     const [imageError, setImageError] = useState(false)
+    const [optimalSrc, setOptimalSrc] = useState(backgroundImage)
+
+    // Get optimal image source on mount
+    useEffect(() => {
+        setOptimalSrc(getOptimalImageSrc(backgroundImage))
+    }, [backgroundImage])
 
     // Optimized scroll handler
     const handleScroll = useCallback(() => {
@@ -68,14 +178,23 @@ const AdventureHero = ({
 
     const handleImageError = useCallback(() => {
         setImageError(true)
-    }, [])
+        // Fallback to original image if optimized version fails
+        if (optimalSrc !== backgroundImage) {
+            setOptimalSrc(backgroundImage)
+            setImageError(false)
+        }
+    }, [optimalSrc, backgroundImage])
 
-    // Enhanced responsive sizes that tell Next.js exactly what to load when
-    const responsiveSizes = `
-        (max-width: 640px) 640px,
-        (max-width: 1024px) 1024px, 
-        1920px
-    `
+    const iconMap: Record<string, React.ComponentType<any>> = {
+        'Mountain': Mountain,
+        'MapPin': MapPin,
+        'Calendar': Calendar,
+        'Trophy': Trophy,
+        'TrendingUp': TrendingUp,
+        'ArrowUp': ArrowUp,
+        'Map': Map,
+        'Heart': Heart
+    }
 
     return (
         <section className="relative px-4 overflow-hidden h-[80vh] flex items-center pt-20">
@@ -84,7 +203,7 @@ const AdventureHero = ({
                 <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center z-20">
                     <div className="text-center text-white">
                         <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4" />
-                        <p className="text-sm font-medium">Loading image...</p>
+                        <p className="text-sm font-medium">Loading adventure...</p>
                     </div>
                 </div>
             )}
@@ -104,10 +223,10 @@ const AdventureHero = ({
                 <Image
                     id="adventureHeroImg"
                     priority={true}
-                    src={backgroundImage}
+                    src={optimalSrc}
                     alt="Mountain trail adventure scene"
                     fill
-                    sizes={responsiveSizes}
+                    sizes={generateResponsiveSizes()}
                     placeholder="blur"
                     blurDataURL={`data:image/svg+xml;base64,${imgStrToBase64(shimmer(1200, 800))}`}
                     quality={85}
