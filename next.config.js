@@ -37,7 +37,7 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
-  experimental: {    
+  experimental: {
     // Optimize bundle size
     optimizePackageImports: [
       'lucide-react',
@@ -56,7 +56,7 @@ const nextConfig = {
   },
   poweredByHeader: false,
   compress: true,
-    // Enhanced bundle analyzer and optimization
+  // Enhanced bundle analyzer and optimization
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // Optimize chunks
     if (!dev && !isServer) {
@@ -125,7 +125,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/',
+        source: '/gear/reviews',
         headers: [
           {
             key: 'Link',
@@ -143,7 +143,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/',
+        source: '/blog',
         headers: [
           {
             key: 'Link',
@@ -152,13 +152,20 @@ const nextConfig = {
         ],
       },
       {
-        source: '/',
+        source: ['/reports', '/about', '/projects', '/resume'],
         headers: [
           {
             key: 'Link',
             value: '</mountain-trail.JPG>; rel=preload; as=image',
           },
         ],
+      },
+      {
+        source: '/gear',
+        headers: [{
+          key: 'Link',
+          value: '</Tent-Baker.jpg>; rel=preload; as=image'
+        }],
       },
     ]
   },
