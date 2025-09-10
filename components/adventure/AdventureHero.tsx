@@ -18,15 +18,37 @@ interface AdventureHeroProps {
     }[]
 }
 
-const iconMap: Record<string, React.ComponentType<any>> = {
-    'Mountain': Mountain,
-    'MapPin': MapPin,
-    'Calendar': Calendar,
-    'Trophy': Trophy,
-    'TrendingUp': TrendingUp,
-    'ArrowUp': ArrowUp,
-    'Map': Map,
-    'Heart': Heart
+// Smart image source selection based on device capabilities
+const getOptimalImageSrc = (baseSrc: string): string => {
+    // Remove extension to work with optimized versions
+    const pathParts = baseSrc.split('.');
+    const baseName = pathParts.slice(0, -1).join('.');
+
+    // Check if we have optimized versions
+    const optimizedPath = `/optimized/${baseName.replace('/', '')}-hero`;
+
+    // Feature detection for modern formats
+    if (typeof window !== 'undefined') {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Check AVIF support
+        if (canvas.toDataURL('image/avif').indexOf('data:image/avif') === 0) {
+            return `${optimizedPath}.avif`;
+        }
+
+        // Check WebP support  
+        if (canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0) {
+            return `${optimizedPath}.webp`;
+        }
+    }
+
+    // Fallback to optimized JPEG or original
+    return `${optimizedPath}.jpg`;
+}
+
+const generateResponsiveSizes = () => {
+    return `(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1920px`;
 }
 
 const AdventureHero = ({
@@ -38,6 +60,12 @@ const AdventureHero = ({
     const [offset, setOffset] = useState<number>(0)
     const [imageLoaded, setImageLoaded] = useState(false)
     const [imageError, setImageError] = useState(false)
+    const [optimalSrc, setOptimalSrc] = useState(backgroundImage)
+
+    // Get optimal image source on mount
+    useEffect(() => {
+        setOptimalSrc(getOptimalImageSrc(backgroundImage))
+    }, [backgroundImage])
 
     // Optimized scroll handler
     const handleScroll = useCallback(() => {
@@ -68,14 +96,23 @@ const AdventureHero = ({
 
     const handleImageError = useCallback(() => {
         setImageError(true)
-    }, [])
+        // Fallback to original image if optimized version fails
+        if (optimalSrc !== backgroundImage) {
+            setOptimalSrc(backgroundImage)
+            setImageError(false)
+        }
+    }, [optimalSrc, backgroundImage])
 
-    // Enhanced responsive sizes that tell Next.js exactly what to load when
-    const responsiveSizes = `
-        (max-width: 640px) 640px,
-        (max-width: 1024px) 1024px, 
-        1920px
-    `
+    const iconMap: Record<string, React.ComponentType<any>> = {
+        'Mountain': Mountain,
+        'MapPin': MapPin,
+        'Calendar': Calendar,
+        'Trophy': Trophy,
+        'TrendingUp': TrendingUp,
+        'ArrowUp': ArrowUp,
+        'Map': Map,
+        'Heart': Heart
+    }
 
     return (
         <section className="relative px-4 overflow-hidden h-[80vh] flex items-center pt-20">
@@ -104,10 +141,10 @@ const AdventureHero = ({
                 <Image
                     id="adventureHeroImg"
                     priority={true}
-                    src={backgroundImage}
+                    src={optimalSrc}
                     alt="Mountain trail adventure scene"
                     fill
-                    sizes={responsiveSizes}
+                    sizes={generateResponsiveSizes()}
                     placeholder="blur"
                     blurDataURL={`data:image/svg+xml;base64,${imgStrToBase64(shimmer(1200, 800))}`}
                     quality={85}
