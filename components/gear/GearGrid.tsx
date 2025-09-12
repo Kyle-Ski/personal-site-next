@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge'
 import { GearItem } from '@/utils/notionGear'
 import { createGearSlug, buildGearUrl, parseGearFilters, findGearBySlug } from '@/lib/gearUrlUtils'
 import styles from '@/styles/GearGrid.module.css'
+import { getGearCardImageSizes, getProxiedImageUrl, isNotionImage } from '@/utils/imageHelpers'
 
 interface GearGridProps {
   gear: GearItem[]
@@ -27,7 +28,7 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
 
   // Parse initial state from URL
   const initialFilters = parseGearFilters(searchParams)
-  
+
   const [searchTerm, setSearchTerm] = useState('') // Search stays local, not from URL
   const [selectedCategory, setSelectedCategory] = useState(initialFilters.category)
   const [selectedBrand, setSelectedBrand] = useState(initialFilters.brand)
@@ -98,7 +99,7 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
   useEffect(() => {
     const itemSlug = searchParams.get('item')
     const hasFilters = selectedCategory || selectedBrand || selectedPackList // removed searchTerm
-    
+
     if (itemSlug) {
       // Reset scroll flag for item-specific scrolling
       hasScrolledRef.current = false
@@ -106,8 +107,8 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
       setTimeout(() => {
         const element = itemRefs.current[itemSlug]
         if (element) {
-          element.scrollIntoView({ 
-            behavior: 'smooth', 
+          element.scrollIntoView({
+            behavior: 'smooth',
             block: 'center'
           })
           // Add a subtle highlight effect
@@ -218,9 +219,9 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
   // Development placeholder image
   const getImageSrc = (item: GearItem) => {
     if (process.env.NODE_ENV === 'development') {
-      return '/gear-placeholder.svg' 
+      return '/gear-placeholder.svg'
     }
-    return item.imageUrl
+    return item.imageUrl ? getProxiedImageUrl(item.imageUrl) : item.imageUrl
   }
 
   return (
@@ -344,22 +345,26 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
                 {getImageSrc(item) ? (
                   <Image
                     src={getImageSrc(item)!}
-                    alt={item.title}
+                    alt={`${item.brand} ${item.title}` || item.title}
                     width={200}
                     height={200}
+                    sizes={getGearCardImageSizes()}
                     loading="lazy"
                     placeholder="empty"
                     onError={(e) => {
+                      console.error('Gear image failed to load:', item.imageUrl)
                       e.currentTarget.style.display = 'none';
                     }}
                     className={styles.image}
+                    // Add unoptimized flag for problematic Notion images as fallback
+                    unoptimized={item.imageUrl ? isNotionImage(item.imageUrl) : undefined}
                   />
                 ) : (
                   <div className={styles.imagePlaceholder}>
                     <Package size={40} />
                   </div>
                 )}
-                
+
                 {item.isRetired && (
                   <div className={styles.retiredBadge}>Retired</div>
                 )}
@@ -420,7 +425,7 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
                       <ExternalLink size={14} />
                     </Link>
                   )}
-                  
+
                   <button
                     onClick={() => copyItemLink(item)}
                     className={styles.shareLink}
