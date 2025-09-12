@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { GearItem } from '@/utils/notionGear'
 import styles from '@/styles/GearFeatured.module.css'
+import { getGearCardImageSizes, getProxiedImageUrl, isNotionImage } from '@/utils/imageHelpers'
 
 interface GearFeaturedProps {
     items: GearItem[]
@@ -34,11 +35,20 @@ const GearFeatured = ({ items }: GearFeaturedProps) => {
                         <div className={styles.imageWrapper}>
                             {item.imageUrl ? (
                                 <Image
-                                    src={item.imageUrl}
-                                    alt={item.title}
+                                    src={getProxiedImageUrl(item.imageUrl)}
+                                    alt={`${item.brand} ${item.title}` || item.title}
                                     width={200}
                                     height={200}
+                                    sizes={getGearCardImageSizes()}
+                                    loading="lazy"
+                                    placeholder="empty"
+                                    onError={(e) => {
+                                        console.error('Featured gear image failed to load:', item.imageUrl)
+                                        e.currentTarget.style.display = 'none';
+                                    }}
                                     className={styles.image}
+                                    // Add unoptimized flag for problematic Notion images as fallback
+                                    unoptimized={isNotionImage(item.imageUrl)}
                                 />
                             ) : (
                                 <div className={styles.imagePlaceholder}>
