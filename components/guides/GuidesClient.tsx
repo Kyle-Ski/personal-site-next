@@ -253,7 +253,6 @@ export default function GuidesClient({ guides }: GuidesClientProps) {
                 <div className={styles.content}>
                     {/* Header */}
                     <div className={styles.header}>
-                        <h1 className={styles.title}>Adventure Guides</h1>
                         <p className={styles.subtitle}>
                             Comprehensive resources for planning your next adventure
                         </p>
