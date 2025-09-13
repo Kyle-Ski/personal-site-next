@@ -26,7 +26,7 @@ const NavBar = () => {
     { href: `/reports`, label: "Trip Reports", description: "Recent adventures & route info" },
     { href: `/gear`, label: "Gear Room", description: "My complete gear collection" },
     { href: `/gear/reviews`, label: "Gear Reviews", description: "Field-tested gear insights" },
-    // { href: `/guides`, label: "Adventure Guides", description: "Route guides & planning resources" },
+    { href: `/guides`, label: "Adventure Guides", description: "Route guides & planning resources" },
     { href: `/peaks`, label: "Peak Tracker", description: "Colorado 14ers & summits" },
   ];
 

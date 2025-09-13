@@ -207,14 +207,6 @@ export default async function GuidePage({ params }: PageProps) {
                     />
                     {/* Guide Meta Grid */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {/* Guide Type */}
-                        <Card className="adventure-card">
-                            <CardContent className="p-4 text-center">
-                                <ContentTypeIcon className="h-6 w-6 text-green-600 mx-auto mb-2" />
-                                <div className="font-medium">{contentTypeInfo.label}</div>
-                                <div className="text-sm text-muted-foreground">Guide Type</div>
-                            </CardContent>
-                        </Card>
 
                         {/* Location */}
                         {guide.location && (

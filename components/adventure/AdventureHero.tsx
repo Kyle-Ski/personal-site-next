@@ -20,7 +20,7 @@ interface AdventureHeroProps {
 
 // Smart image source selection based on device capabilities
 const getOptimalImageSrc = (baseSrc: string): string => {
-    return baseSrc
+    // return baseSrc
     // Remove extension to work with optimized versions
     const pathParts = baseSrc.split('.');
     const baseName = pathParts.slice(0, -1).join('.');
