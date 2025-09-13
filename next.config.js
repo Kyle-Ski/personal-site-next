@@ -152,6 +152,15 @@ const nextConfig = {
         ],
       },
       {
+        source: '/guides',
+        headers: [
+          {
+            key: 'Link',
+            value: '</guide-hero.jpg>; rel=preload; as=image',
+          },
+        ],
+      },
+      {
         source: '/reports',
         headers: [
           {
