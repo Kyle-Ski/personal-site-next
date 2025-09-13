@@ -27,11 +27,10 @@ export const guideType = defineType({
             title: 'Guide Type',
             options: {
                 list: [
-                    { title: 'Route Guide', value: 'route' },
-                    { title: 'Gear Guide', value: 'gear' },
-                    { title: 'Planning Guide', value: 'planning' },
-                    { title: 'Skills Guide', value: 'skills' },
-                    { title: 'Conditions Report', value: 'conditions' },
+                    { title: 'Route Guide', value: 'route-guide' },
+                    { title: 'Gear Guide', value: 'gear-guide' },
+                    { title: 'Planning Guide', value: 'planning-guide' },
+                    { title: 'Skills Guide', value: 'skills-guide' },
                 ]
             },
             validation: Rule => Rule.required()
@@ -70,13 +69,51 @@ export const guideType = defineType({
             title: 'Body',
         }),
 
-        // Route-specific fields (conditional)
+        // Universal fields for all guide types
+        defineField({
+            name: 'activities',
+            type: 'array',
+            title: 'Activities',
+            description: 'Activities this guide covers',
+            of: [{
+                type: 'string',
+                options: {
+                    list: [
+                        { title: 'Hiking', value: 'hiking' },
+                        { title: 'Backpacking', value: 'backpacking' },
+                        { title: 'Trail Running', value: 'trail-running' },
+                        { title: 'Backcountry Skiing', value: 'backcountry-skiing' },
+                        { title: 'Alpine Climbing', value: 'alpine-climbing' },
+                        { title: 'Rock Climbing', value: 'rock-climbing' },
+                        { title: 'Mountaineering', value: 'mountaineering' },
+                        { title: 'Ski Touring', value: 'ski-touring' },
+                        { title: 'Winter Hiking', value: 'winter-hiking' }
+                    ]
+                }
+            }]
+        }),
+        defineField({
+            name: 'tags',
+            type: 'array',
+            title: 'Tags',
+            description: 'Tags for categorization and search',
+            of: [{ type: 'reference', to: { type: 'category' } }]
+        }),
+        defineField({
+            name: 'routeNotes',
+            type: 'text',
+            title: 'Planning Notes',
+            description: 'Key information, tips, warnings, or planning notes',
+            rows: 4
+        }),
+
+        // Route-specific fields (for route guides)
         defineField({
             name: 'routeInfo',
             type: 'object',
             title: 'Route Information',
-            description: 'Only fill this out for route guides',
-            hidden: ({ document }) => document?.guideType !== 'route',
+            description: 'Fill this out for route guides',
+            hidden: ({ document }) => document?.guideType !== 'route-guide',
             fields: [
                 {
                     name: 'location',
@@ -91,10 +128,26 @@ export const guideType = defineType({
                     description: 'Specific starting point'
                 },
                 {
+                    name: 'coordinates',
+                    type: 'object',
+                    title: 'GPS Coordinates',
+                    description: 'Trailhead or key location coordinates',
+                    fields: [
+                        { name: 'lat', type: 'number', title: 'Latitude' },
+                        { name: 'lng', type: 'number', title: 'Longitude' }
+                    ]
+                },
+                {
                     name: 'distance',
                     type: 'number',
                     title: 'Distance (miles)',
                     description: 'Total trip distance in miles'
+                },
+                {
+                    name: 'elevation',
+                    type: 'number',
+                    title: 'Peak Elevation (ft)',
+                    description: 'Highest point elevation in feet'
                 },
                 {
                     name: 'elevationGain',
@@ -116,37 +169,10 @@ export const guideType = defineType({
                     }
                 },
                 {
-                    name: 'activities',
-                    type: 'array',
-                    title: 'Activities',
-                    of: [{
-                        type: 'string',
-                        options: {
-                            list: [
-                                { title: 'Hiking', value: 'hiking' },
-                                { title: 'Backpacking', value: 'backpacking' },
-                                { title: 'Trail Running', value: 'trail-running' },
-                                { title: 'Backcountry Skiing', value: 'backcountry-skiing' },
-                                { title: 'Alpine Climbing', value: 'alpine-climbing' },
-                                { title: 'Rock Climbing', value: 'rock-climbing' },
-                                { title: 'Mountaineering', value: 'mountaineering' }
-                            ]
-                        }
-                    }]
-                },
-                {
-                    name: 'gpxFile',
-                    title: 'GPX Route File',
-                    type: 'file',
-                    options: {
-                        accept: '.gpx'
-                    },
-                    description: 'Upload GPX file for route tracking and elevation profile'
-                },
-                {
-                    name: 'seasonality',
+                    name: 'seasons',
                     type: 'array',
                     title: 'Best Seasons',
+                    description: 'When is this route best?',
                     of: [{
                         type: 'string',
                         options: {
@@ -162,12 +188,59 @@ export const guideType = defineType({
             ]
         }),
 
-        // Future gear linking
+        // GPX file for route guides
         defineField({
-            name: 'recommendedGear',
+            name: 'gpxFile',
+            title: 'GPX Route File',
+            type: 'file',
+            description: 'Upload GPX file for route tracking and elevation profile',
+            hidden: ({ document }) => document?.guideType !== 'route-guide',
+            options: {
+                accept: '.gpx'
+            }
+        }),
+
+        // Weather info for route guides
+        defineField({
+            name: 'weather',
+            type: 'object',
+            title: 'Weather Information',
+            description: 'Typical weather conditions and considerations',
+            hidden: ({ document }) => document?.guideType !== 'route-guide',
+            fields: [
+                {
+                    name: 'conditions',
+                    type: 'string',
+                    title: 'Typical Conditions',
+                    options: {
+                        list: [
+                            { title: 'Clear', value: 'clear' },
+                            { title: 'Partly Cloudy', value: 'partly-cloudy' },
+                            { title: 'Variable', value: 'variable' },
+                            { title: 'Afternoon Storms', value: 'afternoon-storms' },
+                            { title: 'High Winds', value: 'high-winds' },
+                            { title: 'Snow Possible', value: 'snow-possible' }
+                        ]
+                    }
+                },
+                {
+                    name: 'temperature',
+                    type: 'object',
+                    title: 'Temperature Range',
+                    fields: [
+                        { name: 'low', type: 'number', title: 'Typical Low (°F)' },
+                        { name: 'high', type: 'number', title: 'Typical High (°F)' }
+                    ]
+                }
+            ]
+        }),
+
+        // Gear recommendations (universal - renamed from recommendedGear to match expected gearUsed)
+        defineField({
+            name: 'gearUsed',
             type: 'array',
-            title: 'Recommended Gear',
-            description: 'Link to specific gear items (future: will link to gear database)',
+            title: 'Key Gear & Equipment',
+            description: 'Essential and recommended gear for this guide',
             of: [{
                 type: 'object',
                 fields: [
@@ -192,9 +265,18 @@ export const guideType = defineType({
                                 { title: 'Cooking', value: 'cooking' },
                                 { title: 'Hydration', value: 'hydration' },
                                 { title: 'Electronics', value: 'electronics' },
-                                { title: 'Climbing', value: 'climbing' }
+                                { title: 'Climbing', value: 'climbing' },
+                                { title: 'Ski Gear', value: 'ski-gear' },
+                                { title: 'Winter Gear', value: 'winter-gear' }
                             ]
                         }
+                    },
+                    {
+                        name: 'description',
+                        type: 'text',
+                        title: 'Description/Notes',
+                        description: 'Why this gear is recommended or usage notes',
+                        rows: 2
                     },
                     {
                         name: 'essential',
@@ -202,17 +284,52 @@ export const guideType = defineType({
                         title: 'Essential Item',
                         description: 'Mark if this gear is absolutely necessary',
                         initialValue: false
-                    },
-                    {
-                        name: 'notes',
-                        type: 'text',
-                        title: 'Notes',
-                        description: 'Why this gear is recommended or usage notes',
-                        rows: 2
                     }
-                    // Future field: gearReference (reference to gear document)
                 ]
             }]
+        }),
+
+        // Achievement field (optional)
+        defineField({
+            name: 'achievement',
+            type: 'object',
+            title: 'Special Achievement',
+            description: 'Mark if this guide represents a special milestone or achievement',
+            fields: [
+                {
+                    name: 'type',
+                    type: 'string',
+                    title: 'Achievement Type',
+                    options: {
+                        list: [
+                            { title: 'Final Peak in Series', value: 'final-peak' },
+                            { title: 'First Peak/Route', value: 'first-peak' },
+                            { title: 'Personal Record', value: 'personal-record' },
+                            { title: 'Technical Achievement', value: 'technical-achievement' },
+                            { title: 'Milestone Route', value: 'milestone-route' }
+                        ]
+                    }
+                },
+                {
+                    name: 'title',
+                    type: 'string',
+                    title: 'Achievement Title'
+                },
+                {
+                    name: 'description',
+                    type: 'text',
+                    title: 'Description',
+                    rows: 2
+                }
+            ]
+        }),
+
+        // Author field
+        defineField({
+            name: 'author',
+            type: 'reference',
+            title: 'Author',
+            to: [{ type: 'author' }]
         }),
 
         // SEO and RSS fields
@@ -234,11 +351,10 @@ export const guideType = defineType({
         prepare(selection) {
             const { title, guideType } = selection
             const guideTypeLabels: Record<string, string> = {
-                'route': 'Route Guide',
-                'gear': 'Gear Guide',
-                'planning': 'Planning Guide',
-                'skills': 'Skills Guide',
-                'conditions': 'Conditions Report'
+                'route-guide': 'Route Guide',
+                'gear-guide': 'Gear Guide',
+                'planning-guide': 'Planning Guide',
+                'skills-guide': 'Skills Guide'
             }
 
             return {

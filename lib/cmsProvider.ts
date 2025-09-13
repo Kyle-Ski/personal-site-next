@@ -38,6 +38,35 @@ interface AdjacentTripReport {
   mainImage?: string;
 }
 
+export interface Guide {
+  _id: string;
+  title: string;
+  slug: string;
+  guideType: 'route' | 'gear' | 'planning' | 'skills' | 'conditions';
+  excerpt: string;
+  mainImage?: string;
+  publishedAt: string;
+  body?: any[];
+  author?: {
+    _id: string;
+    name: string;
+    image?: string;
+  };
+  // Route-specific fields from routeInfo
+  location?: string;
+  trailhead?: string;
+  distance?: number;
+  elevationGain?: number;
+  difficulty?: 'easy' | 'moderate' | 'difficult' | 'expert';
+  // Recommended gear
+  recommendedGear?: Array<{
+    name: string;
+    category: string;
+    essential: boolean;
+    notes?: string;
+  }>;
+}
+
 export interface TripReport {
   _id: string;
   title: string;
@@ -839,41 +868,51 @@ export class SanityService {
     `);
   }
 
-  // Get all guides (contentType contains 'guide')
+  // Get all guides
   async getAllGuides(): Promise<TripReport[]> {
     try {
       const guides = await this.client.fetch(`
-      *[_type == "tripReport" && contentType match "*guide*"] | order(publishedAt desc) {
+      *[_type == "guide"] | order(publishedAt desc) {
         _id,
         title,
         "slug": slug.current,
-        contentType,
+        guideType,
         excerpt,
         "mainImage": mainImage.asset->url,
         publishedAt,
-        date,
-        location,
-        coordinates,
-        elevation,
-        distance,
-        elevationGain,
-        difficulty,
+        body,
         activities,
-        weather,
+        "tags": tags[]->title,
+        routeNotes,
         gearUsed[]{
           name,
           category,
-          description
+          description,
+          essential
         },
-        routeNotes,
         achievement,
-        body,
         "author": author->{
           _id,
           name,
           "image": image.asset->url
         },
-        "tags": tags[]->title
+        "location": routeInfo.location,
+        "trailhead": routeInfo.trailhead, 
+        "coordinates": routeInfo.coordinates,
+        "distance": routeInfo.distance,
+        "elevation": routeInfo.elevation,
+        "elevationGain": routeInfo.elevationGain,
+        "difficulty": routeInfo.difficulty,
+        "seasons": routeInfo.seasons,
+        weather,
+        "gpxFile": gpxFile {
+          "asset": asset-> {
+            url,
+            originalFilename
+          }
+        },
+        "contentType": guideType,
+        "date": publishedAt
       }
     `);
 
@@ -884,47 +923,51 @@ export class SanityService {
     }
   }
 
-  // Get a specific guide by slug (contentType contains 'guide')
+  // Get a specific guide by slug 
   async getGuideBySlug(slug: string): Promise<TripReport | null> {
     try {
       const [guide] = await this.client.fetch(`
-      *[_type == "tripReport" && slug.current == $slug && contentType match "*guide*"] {
+      *[_type == "guide" && slug.current == $slug] {
         _id,
         title,
         "slug": slug.current,
+        guideType,
         excerpt,
-        contentType,
-        "gpxFile": gpxFile {
-          "asset": asset-> {
-            url,
-            originalFilename
-          }
-        },
         "mainImage": mainImage.asset->url,
         publishedAt,
-        date,
-        location,
-        coordinates,
-        elevation,
-        distance,
-        elevationGain,
-        difficulty,
+        body,
         activities,
-        weather,
+        "tags": tags[]->title,
+        routeNotes,
         gearUsed[]{
           name,
           category,
-          description
+          description,
+          essential
         },
-        routeNotes,
-        body,
         achievement,
         "author": author->{
           _id,
           name,
           "image": image.asset->url
         },
-        "tags": tags[]->title
+        "location": routeInfo.location,
+        "trailhead": routeInfo.trailhead,
+        "coordinates": routeInfo.coordinates,
+        "distance": routeInfo.distance,
+        "elevation": routeInfo.elevation,
+        "elevationGain": routeInfo.elevationGain,
+        "difficulty": routeInfo.difficulty,
+        "seasons": routeInfo.seasons,
+        weather,
+        "gpxFile": gpxFile {
+          "asset": asset-> {
+            url,
+            originalFilename
+          }
+        },
+        "contentType": guideType,
+        "date": publishedAt
       }
     `, { slug });
 
@@ -944,33 +987,39 @@ export class SanityService {
       const currentGuide = await this.getGuideBySlug(currentSlug);
       if (!currentGuide) return {};
 
-      const currentDate = currentGuide.date || currentGuide.publishedAt;
+      const currentDate = currentGuide.publishedAt;
 
       // Get previous guide (published before current)
       const [previousGuide] = await this.client.fetch(`
-      *[_type == "tripReport" && contentType match "*guide*" && (date < $currentDate || (!defined(date) && publishedAt < $currentDate))] | order(coalesce(date, publishedAt) desc) [0..0] {
+      *[_type == "guide" && slug.current != $currentSlug && publishedAt < $currentDate] 
+      | order(publishedAt desc) [0..0] {
         _id,
         title,
         "slug": slug.current,
-        location,
-        "date": coalesce(date, publishedAt),
-        difficulty,
-        "mainImage": mainImage.asset->url
+        guideType,
+        "location": routeInfo.location,
+        "date": publishedAt,
+        "difficulty": routeInfo.difficulty,
+        "mainImage": mainImage.asset->url,
+        "contentType": guideType
       }
-    `, { currentDate });
+    `, { currentSlug, currentDate });
 
       // Get next guide (published after current)
       const [nextGuide] = await this.client.fetch(`
-      *[_type == "tripReport" && contentType match "*guide*" && (date > $currentDate || (!defined(date) && publishedAt > $currentDate))] | order(coalesce(date, publishedAt) asc) [0..0] {
+      *[_type == "guide" && slug.current != $currentSlug && publishedAt > $currentDate] 
+      | order(publishedAt asc) [0..0] {
         _id,
         title,
         "slug": slug.current,
-        location,
-        "date": coalesce(date, publishedAt),
-        difficulty,
-        "mainImage": mainImage.asset->url
+        guideType,
+        "location": routeInfo.location,
+        "date": publishedAt,
+        "difficulty": routeInfo.difficulty,
+        "mainImage": mainImage.asset->url,
+        "contentType": guideType
       }
-    `, { currentDate });
+    `, { currentSlug, currentDate });
 
       return {
         previousGuide: previousGuide || undefined,
@@ -984,8 +1033,33 @@ export class SanityService {
 
   // Get recent guides for homepage/featured (if needed)
   async getRecentGuides(limit: number = 6): Promise<TripReport[]> {
-    const allGuides = await this.getAllGuides();
-    return allGuides.slice(0, limit);
+    try {
+      const recentGuides = await this.client.fetch(`
+      *[_type == "guide"] | order(publishedAt desc) [0...$limit] {
+        _id,
+        title,
+        "slug": slug.current,
+        guideType,
+        excerpt,
+        "mainImage": mainImage.asset->url,
+        publishedAt,
+        "author": author->{
+          _id,
+          name,
+          "image": image.asset->url
+        },
+        "location": routeInfo.location,
+        "difficulty": routeInfo.difficulty,
+        "contentType": guideType,
+        "date": publishedAt
+      }
+    `, { limit });
+
+      return recentGuides || [];
+    } catch (error) {
+      console.error('Error fetching recent guides:', error);
+      return [];
+    }
   }
 
   async getTechPosts(): Promise<Post[]> {

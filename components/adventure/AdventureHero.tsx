@@ -11,6 +11,7 @@ interface AdventureHeroProps {
     backgroundImage?: string
     mainText1?: string
     mainText2?: string
+    mobileImagePosition?: 'left' | 'center' | 'right'
     stats?: {
         label: string
         value: string
@@ -20,31 +21,40 @@ interface AdventureHeroProps {
 
 // Smart image source selection based on device capabilities
 const getOptimalImageSrc = (baseSrc: string): string => {
-    return baseSrc
     // Remove extension to work with optimized versions
     const pathParts = baseSrc.split('.');
     const baseName = pathParts.slice(0, -1).join('.');
 
-    // Check if we have optimized versions
-    const optimizedPath = `/optimized/${baseName.replace('/', '')}-hero`;
+    // Remove leading slash for optimized path
+    const cleanBaseName = baseName.replace('/', '');
 
-    // Feature detection for modern formats
+    // Check if we have optimized versions
+    const optimizedPath = `/optimized/${cleanBaseName}-hero`;
+
+    // Feature detection for modern formats (client-side only)
     if (typeof window !== 'undefined') {
         const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
 
         // Check AVIF support
-        if (canvas.toDataURL('image/avif').indexOf('data:image/avif') === 0) {
-            return `${optimizedPath}.avif`;
+        try {
+            if (canvas.toDataURL('image/avif').indexOf('data:image/avif') === 0) {
+                return `${optimizedPath}.avif`;
+            }
+        } catch (e) {
+            // AVIF not supported
         }
 
         // Check WebP support  
-        if (canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0) {
-            return `${optimizedPath}.webp`;
+        try {
+            if (canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0) {
+                return `${optimizedPath}.webp`;
+            }
+        } catch (e) {
+            // WebP not supported
         }
     }
 
-    // Fallback to optimized JPEG or original
+    // Fallback to optimized JPEG or original if optimized doesn't exist
     return `${optimizedPath}.jpg`;
 }
 
@@ -56,7 +66,8 @@ const AdventureHero = ({
     backgroundImage = "/mountain-trail.JPG",
     stats,
     mainText1 = "Field Reports &",
-    mainText2 = "Mountain Intel"
+    mainText2 = "Mountain Intel",
+    mobileImagePosition = 'center'
 }: AdventureHeroProps) => {
     const [offset, setOffset] = useState<number>(0)
     const [imageLoaded, setImageLoaded] = useState(false)
@@ -67,6 +78,19 @@ const AdventureHero = ({
     useEffect(() => {
         setOptimalSrc(getOptimalImageSrc(backgroundImage))
     }, [backgroundImage])
+
+    // Generate mobile position class
+    const getMobilePositionClass = () => {
+        switch (mobileImagePosition) {
+            case 'left':
+                return 'object-left'
+            case 'right':
+                return 'object-right'
+            case 'center':
+            default:
+                return 'object-center'
+        }
+    }
 
     // Optimized scroll handler
     const handleScroll = useCallback(() => {
@@ -137,7 +161,7 @@ const AdventureHero = ({
                 </div>
             )}
 
-            {/* Optimized Background Image */}
+            {/* Optimized Background Image with Mobile Positioning */}
             <div className="absolute inset-0">
                 <Image
                     id="adventureHeroImg"
@@ -157,6 +181,7 @@ const AdventureHero = ({
                         opacity: imageLoaded ? 1 : 0,
                         transition: 'opacity 0.5s ease-in-out'
                     }}
+                    className={`sm:object-center ${getMobilePositionClass()}`}
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/40" />
@@ -173,29 +198,37 @@ const AdventureHero = ({
                         </span>
                     </h1>
 
-                    {/* Stats Grid */}
+                    {/* Glassmorphism Stats Grid - Exact replica of GearReviewsHero */}
                     {stats && (
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
                             {stats.map((stat, index) => {
                                 const IconComponent = iconMap[stat.iconName] || Mountain
 
                                 return (
                                     <div
                                         key={index}
-                                        className="relative group"
-                                        style={{
-                                            animationDelay: `${index * 150}ms`,
-                                            animation: imageLoaded ? 'slideInUp 0.8s ease-out forwards' : 'none'
-                                        }}
+                                        className="group relative"
                                     >
-                                        <div className="relative backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                                            <div className="flex flex-col items-center text-center space-y-3">
-                                                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/30">
-                                                    <IconComponent className="w-6 h-6 text-yellow-300" style={{ filter: 'drop-shadow(1px 1px 1px rgba(0,0,0,0.8))' }} />
+                                        {/* Etched Glass Effect Container */}
+                                        <div className="relative backdrop-blur-md bg-gradient-to-br from-white/15 to-white/5 border border-white/20 rounded-xl p-6 text-center shadow-xl transition-all duration-300 hover:shadow-2xl hover:backdrop-blur-lg hover:from-white/20 hover:to-white/10">
+
+                                            {/* Subtle inner glow effect */}
+                                            <div className="absolute inset-0.5 bg-gradient-to-br from-white/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                                            <div className="relative z-10">
+                                                {/* Icon */}
+                                                <div className="flex justify-center mb-4">
+                                                    <div className="p-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                                                        <IconComponent size={24} className="text-yellow-300" style={{ filter: 'drop-shadow(1px 1px 1px rgba(0,0,0,0.8))' }} />
+                                                    </div>
                                                 </div>
+
+                                                {/* Value */}
                                                 <div className="text-2xl font-bold text-white mb-2" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
                                                     {stat.value}
                                                 </div>
+
+                                                {/* Label */}
                                                 <div className="text-white/80 text-sm font-medium" style={{ textShadow: '1px 1px 1px rgba(0,0,0,0.7)' }}>
                                                     {stat.label}
                                                 </div>

@@ -28,13 +28,13 @@ export function AdventureNav({ currentPage }: AdventureNavProps) {
       icon: Star,
       key: 'gear-reviews'
     },
-    // {
-    //   href: '/guides',
-    //   label: 'Guides',
-    //   description: 'Planning & route guides',
-    //   icon: BookIcon,
-    //   key: 'guides'
-    // },
+    {
+      href: '/guides',
+      label: 'Guides',
+      description: 'Planning & route guides',
+      icon: BookIcon,
+      key: 'guides'
+    },
     {
       href: '/peaks',
       label: 'Peak Tracker',
@@ -52,7 +52,9 @@ export function AdventureNav({ currentPage }: AdventureNavProps) {
         <h3 className="text-lg font-semibold text-center mb-6 text-[var(--color-text-primary)]">
           Explore More Adventures
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+        {/* Improved responsive grid for 5 items */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 gap-4 max-w-7xl mx-auto">
           {adventurePages.map((page) => (
             <Link
               key={page.key}
