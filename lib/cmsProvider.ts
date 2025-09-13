@@ -933,7 +933,6 @@ export class SanityService {
         "slug": slug.current,
         guideType,
         excerpt,
-        author,
         "mainImage": mainImage.asset->url,
         publishedAt,
         body,
