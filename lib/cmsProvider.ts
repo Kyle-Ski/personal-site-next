@@ -1013,6 +1013,7 @@ export class SanityService {
         title,
         "slug": slug.current,
         guideType,
+        author,
         "location": routeInfo.location,
         "date": publishedAt,
         "difficulty": routeInfo.difficulty,

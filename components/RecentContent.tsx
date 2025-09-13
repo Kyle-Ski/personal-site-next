@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Calendar, ArrowRight, User, Mountain, Star, FileText, MapPin } from 'lucide-react';
+import { Calendar, ArrowRight, User, Mountain, Star, FileText, MapPin, BookOpen } from 'lucide-react';
 import { format } from 'date-fns';
 import { SanityService } from "@/lib/cmsProvider";
 
@@ -15,7 +15,7 @@ interface BaseContent {
     name: string;
     image?: string;
   };
-  contentType: 'blog' | 'tripReport' | 'gearReview';
+  contentType: 'blog' | 'tripReport' | 'gearReview' | 'guide';
 }
 
 interface BlogPost extends BaseContent {
@@ -42,7 +42,15 @@ interface GearReview extends BaseContent {
   overallRating?: number;
 }
 
-type ContentItem = BlogPost | TripReport | GearReview;
+interface Guide extends BaseContent {
+  contentType: 'guide';
+  guideType?: string;
+  location?: string;
+  difficulty?: string;
+  activities?: string[];
+}
+
+type ContentItem = BlogPost | TripReport | GearReview | Guide;
 
 async function getAllRecentContent(): Promise<ContentItem[]> {
   const sanityService = new SanityService({
@@ -54,7 +62,7 @@ async function getAllRecentContent(): Promise<ContentItem[]> {
 
   try {
     // Fetch all content types in parallel using proper methods
-    const [blogPosts, tripReports, gearReviews] = await Promise.all([
+    const [blogPosts, tripReports, gearReviews, guides] = await Promise.all([
       // Blog posts
       sanityService.getAllPosts().then((posts: any[]) => 
         posts.map(post => ({ ...post, contentType: 'blog' as const }))
@@ -68,6 +76,11 @@ async function getAllRecentContent(): Promise<ContentItem[]> {
       // Gear reviews
       sanityService.getAllGearReviews().then((reviews: any[]) => 
         reviews.map(review => ({ ...review, contentType: 'gearReview' as const }))
+      ),
+
+      // Guides
+      sanityService.getAllGuides().then((guides: any[]) => 
+        guides.map(guide => ({ ...guide, contentType: 'guide' as const }))
       )
     ]);
 
@@ -75,7 +88,8 @@ async function getAllRecentContent(): Promise<ContentItem[]> {
     const allContent: ContentItem[] = [
       ...blogPosts,
       ...tripReports,
-      ...gearReviews
+      ...gearReviews,
+      ...guides
     ];
 
     // Sort by publishedAt (most recent first) and take top 6
@@ -118,6 +132,15 @@ function getContentTypeInfo(contentType: string) {
         bgColor: 'bg-orange-100 dark:bg-orange-900/30',
         textColor: 'text-orange-800 dark:text-orange-300'
       };
+    case 'guide':
+      return {
+        icon: BookOpen,
+        color: 'purple',
+        label: 'Guide',
+        urlPrefix: '/guides',
+        bgColor: 'bg-purple-100 dark:bg-purple-900/30',
+        textColor: 'text-purple-800 dark:text-purple-300'
+      };
     default:
       return {
         icon: FileText,
@@ -139,6 +162,16 @@ function getContentSubtext(item: ContentItem): string {
       const review = item as GearReview;
       const rating = review.overallRating ? ` • ${review.overallRating}/5 ⭐` : '';
       return `${review.brand || ''} ${review.model || ''}${rating}`.trim();
+    case 'guide':
+      const guide = item as Guide;
+      const guideTypeLabels: Record<string, string> = {
+        'route-guide': 'Route Guide',
+        'gear-guide': 'Gear Guide', 
+        'planning-guide': 'Planning Guide',
+        'skills-guide': 'Skills Guide'
+      };
+      const guideLabel = guideTypeLabels[guide.guideType || ''] || 'Adventure Guide';
+      return guide.location ? `${guideLabel} • ${guide.location}` : guideLabel;
     case 'blog':
     default:
       return 'Tech Insights';
@@ -161,7 +194,7 @@ export default async function RecentContent() {
             Latest Content
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Recent blog posts, trip reports, and gear reviews - sharing everything from code insights to mountain adventures.
+            Recent blog posts, trip reports, guides, and gear reviews - sharing everything from code insights to mountain adventures.
           </p>
         </div>
 
@@ -248,8 +281,8 @@ export default async function RecentContent() {
           })}
         </div>
 
-        {/* Navigation CTAs */}
-        <div className="grid md:grid-cols-3 gap-6 text-center">
+        {/* Enhanced Navigation CTAs */}
+        <div className="grid md:grid-cols-4 gap-6 text-center">
           <Link 
             href="/blog"
             className="group p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 hover:shadow-lg transition-all duration-300"
@@ -266,6 +299,15 @@ export default async function RecentContent() {
             <Mountain size={24} className="mx-auto mb-3 text-green-600 dark:text-green-400" />
             <h3 className="font-semibold mb-2 text-green-900 dark:text-green-100">Trip Reports</h3>
             <p className="text-sm text-green-600 dark:text-green-300 group-hover:underline">Adventure stories →</p>
+          </Link>
+
+          <Link 
+            href="/guides"
+            className="group p-6 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800 hover:shadow-lg transition-all duration-300"
+          >
+            <BookOpen size={24} className="mx-auto mb-3 text-purple-600 dark:text-purple-400" />
+            <h3 className="font-semibold mb-2 text-purple-900 dark:text-purple-100">Guides</h3>
+            <p className="text-sm text-purple-600 dark:text-purple-300 group-hover:underline">Planning & routes →</p>
           </Link>
 
           <Link 

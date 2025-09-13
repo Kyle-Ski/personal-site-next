@@ -168,17 +168,67 @@ export default async function GuidePage({ params }: PageProps) {
                     <ChevronLeft size={20} />
                     Back to all guides
                 </Link>
+                {/* Guide Type & Meta Information */}
+                <div className="mb-4">
+                    {/* Guide Type Badge */}
+                    <div className="flex items-center gap-2 mb-3">
+                        <ContentTypeIcon size={20} className={`text-${contentTypeInfo.color}-600`} />
+                        <span className={`text-sm font-medium text-${contentTypeInfo.color}-600 dark:text-${contentTypeInfo.color}-400`}>
+                            {contentTypeInfo.label}
+                        </span>
+                    </div>
 
+                    {/* Activities & Tags - Integrated with Guide Type */}
+                    {(guide.activities || guide.tags) && (
+                        <div className="space-y-2">
+                            {/* Activities */}
+                            {guide.activities && guide.activities.length > 0 && (
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                                        Activities:
+                                    </span>
+                                    {guide.activities.map((activity) => (
+                                        <Badge
+                                            key={activity}
+                                            variant="outline"
+                                            className="border-green-200 text-green-800 dark:border-green-800 dark:text-green-200 text-xs"
+                                        >
+                                            {activity}
+                                        </Badge>
+                                    ))}
+                                </div>
+                            )}
+
+                            {/* Tags */}
+                            {guide.tags && guide.tags.length > 0 && (
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                                        Tags:
+                                    </span>
+                                    {guide.tags.slice(0, 4).map((tag) => (
+                                        <Badge
+                                            key={tag}
+                                            variant="secondary"
+                                            className="text-xs"
+                                        >
+                                            {tag}
+                                        </Badge>
+                                    ))}
+                                    {guide.tags.length > 4 && (
+                                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                                            +{guide.tags.length - 4} more
+                                        </span>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                </div>
                 {/* Header */}
                 <div className="space-y-6 mb-8">
                     <div className="flex items-start justify-between">
                         <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-3">
-                                <ContentTypeIcon size={20} className={`text-${contentTypeInfo.color}-600`} />
-                                <span className={`text-sm font-medium text-${contentTypeInfo.color}-600 dark:text-${contentTypeInfo.color}-400`}>
-                                    {contentTypeInfo.label}
-                                </span>
-                            </div>
                             <h1 className="text-3xl sm:text-4xl font-bold mb-2">{guide.title}</h1>
                             {guide.excerpt && (
                                 <p className="text-lg text-muted-foreground mb-4">{guide.excerpt}</p>
@@ -194,11 +244,11 @@ export default async function GuidePage({ params }: PageProps) {
                                         <span>By {guide.author.name}</span>
                                     </div>
                                 )}
+                                <Badge className={getDifficultyColor(guide.difficulty)}>
+                                    {guide.difficulty || 'All Levels'}
+                                </Badge>
                             </div>
                         </div>
-                        <Badge className={getDifficultyColor(guide.difficulty)}>
-                            {guide.difficulty || 'All Levels'}
-                        </Badge>
                     </div>
                     <SocialShare
                         url={`https://kyle.czajkowski.tech/gear/guides/${guide.slug}`}
@@ -253,22 +303,6 @@ export default async function GuidePage({ params }: PageProps) {
                         )}
                     </div>
                 </div>
-
-                {/* Activities & Tags */}
-                {(guide.activities || guide.tags) && (
-                    <div className="flex flex-wrap gap-2 mb-8">
-                        {guide.activities?.map((activity) => (
-                            <Badge key={activity} variant="outline" className="border-green-200 text-green-800 dark:border-green-800 dark:text-green-200">
-                                {activity}
-                            </Badge>
-                        ))}
-                        {guide.tags?.slice(0, 3).map((tag) => (
-                            <Badge key={tag} variant="secondary">
-                                {tag}
-                            </Badge>
-                        ))}
-                    </div>
-                )}
 
                 {/* GPX Route Data (for route guides) */}
                 {guide.gpxFile && (
