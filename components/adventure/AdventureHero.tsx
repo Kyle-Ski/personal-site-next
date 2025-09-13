@@ -11,6 +11,7 @@ interface AdventureHeroProps {
     backgroundImage?: string
     mainText1?: string
     mainText2?: string
+    mobileImagePosition?: 'left' | 'center' | 'right'
     stats?: {
         label: string
         value: string
@@ -20,31 +21,40 @@ interface AdventureHeroProps {
 
 // Smart image source selection based on device capabilities
 const getOptimalImageSrc = (baseSrc: string): string => {
-    // return baseSrc
     // Remove extension to work with optimized versions
     const pathParts = baseSrc.split('.');
     const baseName = pathParts.slice(0, -1).join('.');
 
-    // Check if we have optimized versions
-    const optimizedPath = `/optimized/${baseName.replace('/', '')}-hero`;
+    // Remove leading slash for optimized path
+    const cleanBaseName = baseName.replace('/', '');
 
-    // Feature detection for modern formats
+    // Check if we have optimized versions
+    const optimizedPath = `/optimized/${cleanBaseName}-hero`;
+
+    // Feature detection for modern formats (client-side only)
     if (typeof window !== 'undefined') {
         const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
 
         // Check AVIF support
-        if (canvas.toDataURL('image/avif').indexOf('data:image/avif') === 0) {
-            return `${optimizedPath}.avif`;
+        try {
+            if (canvas.toDataURL('image/avif').indexOf('data:image/avif') === 0) {
+                return `${optimizedPath}.avif`;
+            }
+        } catch (e) {
+            // AVIF not supported
         }
 
         // Check WebP support  
-        if (canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0) {
-            return `${optimizedPath}.webp`;
+        try {
+            if (canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0) {
+                return `${optimizedPath}.webp`;
+            }
+        } catch (e) {
+            // WebP not supported
         }
     }
 
-    // Fallback to optimized JPEG or original
+    // Fallback to optimized JPEG or original if optimized doesn't exist
     return `${optimizedPath}.jpg`;
 }
 
@@ -56,7 +66,8 @@ const AdventureHero = ({
     backgroundImage = "/mountain-trail.JPG",
     stats,
     mainText1 = "Field Reports &",
-    mainText2 = "Mountain Intel"
+    mainText2 = "Mountain Intel",
+    mobileImagePosition = 'center'
 }: AdventureHeroProps) => {
     const [offset, setOffset] = useState<number>(0)
     const [imageLoaded, setImageLoaded] = useState(false)
@@ -67,6 +78,19 @@ const AdventureHero = ({
     useEffect(() => {
         setOptimalSrc(getOptimalImageSrc(backgroundImage))
     }, [backgroundImage])
+
+    // Generate mobile position class
+    const getMobilePositionClass = () => {
+        switch (mobileImagePosition) {
+            case 'left':
+                return 'object-left'
+            case 'right':
+                return 'object-right'
+            case 'center':
+            default:
+                return 'object-center'
+        }
+    }
 
     // Optimized scroll handler
     const handleScroll = useCallback(() => {
@@ -137,7 +161,7 @@ const AdventureHero = ({
                 </div>
             )}
 
-            {/* Optimized Background Image */}
+            {/* Optimized Background Image with Mobile Positioning */}
             <div className="absolute inset-0">
                 <Image
                     id="adventureHeroImg"
@@ -157,6 +181,7 @@ const AdventureHero = ({
                         opacity: imageLoaded ? 1 : 0,
                         transition: 'opacity 0.5s ease-in-out'
                     }}
+                    className={`sm:object-center ${getMobilePositionClass()}`}
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/40" />

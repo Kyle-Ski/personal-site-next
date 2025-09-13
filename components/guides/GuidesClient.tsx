@@ -245,6 +245,7 @@ export default function GuidesClient({ guides }: GuidesClientProps) {
                 backgroundImage="/guide-hero.jpg"
                 mainText1="Adventure"
                 mainText2="Guides"
+                mobileImagePosition="left"
             />
 
             {/* Main Content */}
