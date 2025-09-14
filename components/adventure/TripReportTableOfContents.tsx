@@ -208,7 +208,7 @@ export function TripReportTableOfContents({ tripReport }: TripReportTOCProps) {
 
   return (
     <div className="hidden xl:block fixed right-0.5 top-1/2 transform -translate-y-1/2 z-40">
-      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-4 max-w-xs">
+      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-4 max-w-56">
         <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-200 dark:border-gray-700">
           <List className="h-4 w-4 text-green-600" />
           <span className="font-medium text-sm text-gray-900 dark:text-gray-100">
