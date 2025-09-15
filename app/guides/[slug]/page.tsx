@@ -7,7 +7,6 @@ import { Metadata } from "next";
 import { SanityService, TripReport } from "@/lib/cmsProvider";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { urlFor } from "@/sanity/lib/image"
 import { AdventureNav } from "@/components/navigation/AdventureNav"
 import { TripReportTableOfContents } from "@/components/adventure/TripReportTableOfContents"
 import { TripReportNavigation } from "@/components/adventure/TripReportNavigation"
@@ -251,7 +250,7 @@ export default async function GuidePage({ params }: PageProps) {
                         </div>
                     </div>
                     <SocialShare
-                        url={`https://kyle.czajkowski.tech/gear/guides/${guide.slug}`}
+                        url={`https://kyle.czajkowski.tech/guides/${guide.slug}`}
                         title={`${guide.title}`}
                         variant="buttons"
                     />

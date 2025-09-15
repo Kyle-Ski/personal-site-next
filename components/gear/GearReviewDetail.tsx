@@ -23,6 +23,7 @@ import { GearReview } from "@/lib/cmsProvider"
 import styles from '@/styles/GearReviewDetail.module.css'
 import EnhancedImageGallery from "./EnhancedImageGallery"
 import SocialShare from "../SocialShare"
+import { portableTextComponents } from "@/utils/portableTextComponents"
 
 interface GearReviewDetailProps {
     review: GearReview
@@ -239,6 +240,13 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
         preloadImage(selectedImageIndex - 1)
     }, [selectedImageIndex, allImages, loadedImages])
 
+    const getRatingColorClasses = (rating: any) => {
+        if (rating >= 4) return 'bg-green-600'; // Excellent
+        if (rating >= 3) return 'bg-lime-600';  // Good  
+        if (rating >= 2) return 'bg-yellow-500'; // Fair
+        return 'bg-red-600'; // Poor
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.content}>
@@ -429,18 +437,24 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
 
                         {/* Detailed Ratings */}
                         {review.detailedRatings && (
-                            <div className={styles.detailedRatings}>
-                                <h3>Detailed Ratings</h3>
-                                <div className={styles.ratingsGrid}>
+                            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6">
+                                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                                    Detailed Ratings
+                                </h3>
+                                <div className="flex flex-col gap-4">
                                     {review.detailedRatings.durability && (
-                                        <div className={styles.ratingItem}>
-                                            <span>Durability</span>
-                                            <div className={styles.ratingBar}>
-                                                <div
-                                                    className={`${styles.ratingFill} ${getRatingColor(review.detailedRatings.durability)}`}
-                                                    style={{ width: `${(review.detailedRatings.durability / 5) * 100}%` }}
-                                                />
-                                                <span className={styles.ratingValue}>
+                                        <div className="flex items-center gap-4">
+                                            <span className="w-28 md:w-32 flex-shrink-0 font-medium text-gray-900 dark:text-gray-100 text-sm">
+                                                Durability
+                                            </span>
+                                            <div className="flex-1 flex items-center gap-3">
+                                                <div className="flex-1 h-4 md:h-3 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                                                    <div
+                                                        className={`h-full rounded-full transition-all duration-300 ease-out ${getRatingColorClasses(review.detailedRatings.durability)}`}
+                                                        style={{ width: `${(review.detailedRatings.durability / 5) * 100}%` }}
+                                                    />
+                                                </div>
+                                                <span className={`text-xs font-bold text-white min-w-[2.5rem] text-center px-2 py-1 rounded-full ${getRatingColorClasses(review.detailedRatings.durability)}`}>
                                                     {review.detailedRatings.durability}/5
                                                 </span>
                                             </div>
@@ -448,14 +462,18 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                                     )}
 
                                     {review.detailedRatings.comfort && (
-                                        <div className={styles.ratingItem}>
-                                            <span>Comfort</span>
-                                            <div className={styles.ratingBar}>
-                                                <div
-                                                    className={`${styles.ratingFill} ${getRatingColor(review.detailedRatings.comfort)}`}
-                                                    style={{ width: `${(review.detailedRatings.comfort / 5) * 100}%` }}
-                                                />
-                                                <span className={styles.ratingValue}>
+                                        <div className="flex items-center gap-4">
+                                            <span className="w-28 md:w-32 flex-shrink-0 font-medium text-gray-900 dark:text-gray-100 text-sm">
+                                                Comfort
+                                            </span>
+                                            <div className="flex-1 flex items-center gap-3">
+                                                <div className="flex-1 h-4 md:h-3 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                                                    <div
+                                                        className={`h-full rounded-full transition-all duration-300 ease-out ${getRatingColorClasses(review.detailedRatings.comfort)}`}
+                                                        style={{ width: `${(review.detailedRatings.comfort / 5) * 100}%` }}
+                                                    />
+                                                </div>
+                                                <span className={`text-xs font-bold text-white min-w-[2.5rem] text-center px-2 py-1 rounded-full ${getRatingColorClasses(review.detailedRatings.comfort)}`}>
                                                     {review.detailedRatings.comfort}/5
                                                 </span>
                                             </div>
@@ -463,14 +481,18 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                                     )}
 
                                     {review.detailedRatings.performance && (
-                                        <div className={styles.ratingItem}>
-                                            <span>Performance</span>
-                                            <div className={styles.ratingBar}>
-                                                <div
-                                                    className={`${styles.ratingFill} ${getRatingColor(review.detailedRatings.performance)}`}
-                                                    style={{ width: `${(review.detailedRatings.performance / 5) * 100}%` }}
-                                                />
-                                                <span className={styles.ratingValue}>
+                                        <div className="flex items-center gap-4">
+                                            <span className="w-28 md:w-32 flex-shrink-0 font-medium text-gray-900 dark:text-gray-100 text-sm">
+                                                Performance
+                                            </span>
+                                            <div className="flex-1 flex items-center gap-3">
+                                                <div className="flex-1 h-4 md:h-3 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                                                    <div
+                                                        className={`h-full rounded-full transition-all duration-300 ease-out ${getRatingColorClasses(review.detailedRatings.performance)}`}
+                                                        style={{ width: `${(review.detailedRatings.performance / 5) * 100}%` }}
+                                                    />
+                                                </div>
+                                                <span className={`text-xs font-bold text-white min-w-[2.5rem] text-center px-2 py-1 rounded-full ${getRatingColorClasses(review.detailedRatings.performance)}`}>
                                                     {review.detailedRatings.performance}/5
                                                 </span>
                                             </div>
@@ -478,14 +500,18 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                                     )}
 
                                     {review.detailedRatings.valueForMoney && (
-                                        <div className={styles.ratingItem}>
-                                            <span>Value for Money</span>
-                                            <div className={styles.ratingBar}>
-                                                <div
-                                                    className={`${styles.ratingFill} ${getRatingColor(review.detailedRatings.valueForMoney)}`}
-                                                    style={{ width: `${(review.detailedRatings.valueForMoney / 5) * 100}%` }}
-                                                />
-                                                <span className={styles.ratingValue}>
+                                        <div className="flex items-center gap-4">
+                                            <span className="w-28 md:w-32 flex-shrink-0 font-medium text-gray-900 dark:text-gray-100 text-sm">
+                                                Value for Money
+                                            </span>
+                                            <div className="flex-1 flex items-center gap-3">
+                                                <div className="flex-1 h-4 md:h-3 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                                                    <div
+                                                        className={`h-full rounded-full transition-all duration-300 ease-out ${getRatingColorClasses(review.detailedRatings.valueForMoney)}`}
+                                                        style={{ width: `${(review.detailedRatings.valueForMoney / 5) * 100}%` }}
+                                                    />
+                                                </div>
+                                                <span className={`text-xs font-bold text-white min-w-[2.5rem] text-center px-2 py-1 rounded-full ${getRatingColorClasses(review.detailedRatings.valueForMoney)}`}>
                                                     {review.detailedRatings.valueForMoney}/5
                                                 </span>
                                             </div>
@@ -511,7 +537,10 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                             <div className={styles.reviewContent}>
                                 <h3>Detailed Review</h3>
                                 <div className={styles.portableText}>
-                                    <PortableText value={review.body} />
+                                   <PortableText
+                                        value={review.body}
+                                        components={portableTextComponents}
+                                    />
                                 </div>
                             </div>
                         )}
