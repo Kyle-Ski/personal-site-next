@@ -21,9 +21,9 @@ import {
 import { PortableText } from '@portabletext/react'
 import { GearReview } from "@/lib/cmsProvider"
 import styles from '@/styles/GearReviewDetail.module.css'
-import EnhancedImageGallery from "./EnhancedImageGallery"
 import SocialShare from "../SocialShare"
 import { portableTextComponents } from "@/utils/portableTextComponents"
+import ImageGallery from "./ImageGallery"
 
 interface GearReviewDetailProps {
     review: GearReview
@@ -140,7 +140,6 @@ const UnifiedTagsSection = ({ review }: { review: GearReview }) => {
 
 export default function GearReviewDetail({ review }: GearReviewDetailProps) {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0)
-    const [loadingImageIndex, setLoadingImageIndex] = useState<number | null>(null)
     const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set([0]))
     const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -165,41 +164,6 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
             return `${url}?w=${width}&auto=format&q=75`
         }
         return url
-    }
-
-    const handleImageSelect = (index: number) => {
-        if (index === selectedImageIndex) return
-
-        setLoadingImageIndex(index)
-
-        // Only update selection after image is loaded
-        if (loadedImages.has(index)) {
-            setSelectedImageIndex(index)
-            setLoadingImageIndex(null)
-        } else {
-            // Preload the image
-            const img = new window.Image()
-            img.src = optimizeImageUrl(allImages[index].url)
-            img.onload = () => {
-                setLoadedImages(prev => new Set(prev).add(index))
-                setSelectedImageIndex(index)
-                setLoadingImageIndex(null)
-            }
-            img.onerror = () => {
-                // Fallback after timeout
-                setTimeout(() => {
-                    setSelectedImageIndex(index)
-                    setLoadingImageIndex(null)
-                }, 1000)
-            }
-        }
-    }
-
-    const getRatingColor = (rating: number) => {
-        if (rating >= 4) return styles.ratingExcellent
-        if (rating >= 3) return styles.ratingGood
-        if (rating >= 2) return styles.ratingFair
-        return styles.ratingPoor
     }
 
     const formatTimeUsed = (timeUsed: string) => {
@@ -296,58 +260,18 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                 <div className={styles.mainContent}>
                     {/* Left Column - Images and Quick Info */}
                     <div className={styles.leftColumn}>
-                        {/* Image Gallery */}
-                        {allImages.length > 0 && (
-                            <div className={styles.imageGallery}>
-                                {/* Main Image with Expand Button */}
-                                <div className={styles.mainImageContainer}>
-                                    <div
-                                        className={styles.imageWrapper}
-                                        onClick={() => setIsModalOpen(true)}
-                                    >
-                                        <Image
-                                            src={optimizeImageUrl(allImages[selectedImageIndex].url)}
-                                            alt={allImages[selectedImageIndex].alt}
-                                            width={600}
-                                            height={400}
-                                            className={styles.mainImage}
-                                            priority={selectedImageIndex === 0}
-                                        />
+                            {/* <div className={styles.imageGallery}> */}
 
-                                        {/* Expand Button Pill */}
-                                        <button
-                                            className={styles.expandButton}
-                                            onClick={(e) => {
-                                                e.stopPropagation()
-                                                setIsModalOpen(true)
-                                            }}
-                                            aria-label="Expand image"
-                                        >
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
-                                            </svg>
-                                            Expand
-                                        </button>
-                                    </div>
-
-                                    {allImages[selectedImageIndex].caption && (
-                                        <p className={styles.imageCaption}>
-                                            {allImages[selectedImageIndex].caption}
-                                        </p>
-                                    )}
-                                </div>
-
-                                <EnhancedImageGallery
-                                    allImages={allImages}
-                                    selectedImageIndex={selectedImageIndex}
-                                    handleImageSelect={handleImageSelect}
-                                    isModalOpen={isModalOpen}
-                                    setIsModalOpen={setIsModalOpen}
-                                    optimizeImageUrl={optimizeImageUrl}
-                                    gearName={review.gearName}
-                                />
-                            </div>
-                        )}
+                                {/* Image Gallery */}
+                                {allImages.length > 0 && (
+                                    <ImageGallery
+                                        images={allImages}
+                                        gearName={review.gearName}
+                                        optimizeImageUrl={optimizeImageUrl}
+                                    />
+                                )}
+                            {/* </div> */}
+                        
 
                         {/* Quick Info Card */}
                         <div className={styles.quickInfo}>
@@ -537,7 +461,7 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                             <div className={styles.reviewContent}>
                                 <h3>Detailed Review</h3>
                                 <div className={styles.portableText}>
-                                   <PortableText
+                                    <PortableText
                                         value={review.body}
                                         components={portableTextComponents}
                                     />
