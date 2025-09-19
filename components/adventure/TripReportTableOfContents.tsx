@@ -1,15 +1,16 @@
 "use client"
 
-import { useEffect, useState } from 'react'
-import { List, Compass, Backpack, Map } from 'lucide-react'
+import { useEffect, useState, useRef } from 'react'
+import { List, Compass, Backpack, Map, ChevronDown } from 'lucide-react'
 import { GearItem } from '@/lib/cmsProvider'
 
 interface TOCItem {
   id: string
   title: string
-  level: 'section' | 'h2' | 'h3'
+  level: 'section' | 'h1' | 'h2' | 'h3'
   icon?: React.ComponentType<{ className?: string }>
   order: number
+  children?: TOCItem[]
 }
 
 interface TripReportTOCProps {
@@ -30,7 +31,6 @@ interface TripReportTOCProps {
 }
 
 // Section registry - maps section IDs to their display info and priority order
-// Only includes sections that actually exist in current trip reports
 const SECTION_REGISTRY = {
   'route-data': {
     title: 'Route & Elevation',
@@ -53,6 +53,8 @@ export function TripReportTableOfContents({ tripReport }: TripReportTOCProps) {
   const [tocItems, setTocItems] = useState<TOCItem[]>([])
   const [activeId, setActiveId] = useState<string>('')
   const [userClicked, setUserClicked] = useState(false)
+  const [showScrollIndicator, setShowScrollIndicator] = useState(false)
+  const navRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // Scan the DOM for what sections actually exist
@@ -74,10 +76,14 @@ export function TripReportTableOfContents({ tripReport }: TripReportTOCProps) {
         }
       })
 
-      // 2. Scan for H2/H3 headings in content
-      const headings = document.querySelectorAll('.adventure-content h2, .adventure-content h3')
+      // 2. Scan for H1/H2/H3 headings in content
+      const headings = document.querySelectorAll('.adventure-content h1, .adventure-content h2, .adventure-content h3')
+      let lastH1: TOCItem | null = null
+      let lastH2: TOCItem | null = null
+      
       headings.forEach((heading, index) => {
-        const level = heading.tagName.toLowerCase() as 'h2' | 'h3'
+        const tagName = heading.tagName.toLowerCase()
+        const level = tagName as 'h1' | 'h2' | 'h3'
         const text = heading.textContent || `Heading ${index + 1}`
         const id = `heading-${index}`
 
@@ -95,120 +101,188 @@ export function TripReportTableOfContents({ tripReport }: TripReportTOCProps) {
           heading.id = id
         }
 
-        foundHeadings.push({
-          id: heading.id,
-          title: text,
-          level,
-          order: 1000 + index // High number to put content headings after sections
-        })
+        if (level === 'h1') {
+          const h1Item: TOCItem = {
+            id: heading.id,
+            title: text,
+            level,
+            order: 1000 + index,
+            children: []
+          }
+          lastH1 = h1Item
+          lastH2 = null
+          foundHeadings.push(h1Item)
+        } else if (level === 'h2') {
+          const h2Item: TOCItem = {
+            id: heading.id,
+            title: text,
+            level,
+            order: 1000 + index,
+            children: []
+          }
+          
+          if (lastH1 && lastH1.children) {
+            lastH1.children.push(h2Item)
+          } else {
+            foundHeadings.push(h2Item)
+          }
+          lastH2 = h2Item
+        } else if (level === 'h3') {
+          const h3Item: TOCItem = {
+            id: heading.id,
+            title: text,
+            level,
+            order: 1000 + index
+          }
+          
+          if (lastH2 && lastH2.children) {
+            lastH2.children.push(h3Item)
+          } else {
+            foundHeadings.push(h3Item)
+          }
+        }
       })
 
-      // 3. Combine and sort by order, then set state
-      const allItems = [...foundSections, ...foundHeadings].sort((a, b) => a.order - b.order)
+      // 3. Combine and sort all items
+      const allItems = [...foundSections, ...foundHeadings]
+        .sort((a, b) => a.order - b.order)
+
       setTocItems(allItems)
     }, 100)
   }, [tripReport])
 
+  // Check if nav needs scroll indicator
   useEffect(() => {
-    const handleScroll = () => {
-      // Don't update if user just clicked
-      if (userClicked) return
-
-      // Get all section elements with their positions
-      const sections = tocItems.map(item => {
-        const element = document.getElementById(item.id)
-        if (!element) return null
-
-        const rect = element.getBoundingClientRect()
-        return {
-          id: item.id,
-          top: rect.top + window.scrollY,
-          bottom: rect.bottom + window.scrollY,
-          element
-        }
-      }).filter((section): section is NonNullable<typeof section> => section !== null)
-
-      // Find the section that's currently most visible
-      const viewportTop = window.scrollY + 100 // Account for header
-      let activeSection = sections[0]?.id || ''
-
-      for (const section of sections) {
-        if (viewportTop >= section.top - 100) { // 100px before section starts
-          activeSection = section.id
-        } else {
-          break
-        }
-      }
-
-      if (activeSection !== activeId) {
-        setActiveId(activeSection)
+    const checkScrollable = () => {
+      if (navRef.current) {
+        const { scrollHeight, clientHeight } = navRef.current
+        setShowScrollIndicator(scrollHeight > clientHeight)
       }
     }
 
-    // Throttle scroll events for performance
-    let ticking = false
-    const throttledScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll()
-          ticking = false
+    checkScrollable()
+    window.addEventListener('resize', checkScrollable)
+    return () => window.removeEventListener('resize', checkScrollable)
+  }, [tocItems])
+
+  // Set up intersection observer
+  useEffect(() => {
+    if (tocItems.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (userClicked) return
+
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id)
+          }
         })
-        ticking = true
-      }
+      },
+      { rootMargin: '-10% 0px -70% 0px' }
+    )
+
+    // Observe all elements recursively
+    const observeItems = (items: TOCItem[]) => {
+      items.forEach(item => {
+        const element = document.getElementById(item.id)
+        if (element) observer.observe(element)
+        
+        if (item.children) {
+          observeItems(item.children)
+        }
+      })
     }
+    observeItems(tocItems)
 
-    window.addEventListener('scroll', throttledScroll, { passive: true })
-    handleScroll() // Set initial state
+    return () => observer.disconnect()
+  }, [tocItems, userClicked])
 
-    return () => window.removeEventListener('scroll', throttledScroll)
-  }, [tocItems, activeId, userClicked])
-
-  // Reset click state on manual scroll
+  // Auto-scroll TOC to show active section
   useEffect(() => {
-    let scrollTimeout: NodeJS.Timeout
+    if (!activeId || userClicked) return
 
-    const handleScroll = () => {
-      // If user manually scrolls (not via TOC click), reset click state after a delay
-      if (userClicked) {
-        clearTimeout(scrollTimeout)
-        scrollTimeout = setTimeout(() => {
-          setUserClicked(false)
-        }, 150)
+    // Find the active button in the TOC
+    const activeButton = navRef.current?.querySelector(`button[data-toc-id="${activeId}"]`)
+    if (activeButton && navRef.current) {
+      // Scroll the active item into view within the TOC
+      const navRect = navRef.current.getBoundingClientRect()
+      const buttonRect = activeButton.getBoundingClientRect()
+      
+      // Check if button is outside visible area
+      if (buttonRect.top < navRect.top || buttonRect.bottom > navRect.bottom) {
+        activeButton.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest'
+        })
       }
     }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      clearTimeout(scrollTimeout)
-    }
-  }, [userClicked])
+  }, [activeId, userClicked])
 
   const scrollToSection = (id: string) => {
+    setUserClicked(true)
+    setActiveId(id)
+
     const element = document.getElementById(id)
     if (element) {
-      // Set clicked state to temporarily disable scroll listener
-      setUserClicked(true)
-      setActiveId(id) // Immediately set the clicked item as active
-
-      // Use element.scrollIntoView for more reliable scrolling
       element.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
       })
 
-      // Re-enable scroll detection after animation completes
       setTimeout(() => {
         setUserClicked(false)
-      }, 800) // Shorter timeout
+      }, 800)
     }
+  }
+
+  const renderTOCItems = (items: TOCItem[], depth = 0) => {
+    return items.map((item) => {
+      const isActive = activeId === item.id
+      const IconComponent = item.icon
+      const hasChildren = item.children && item.children.length > 0
+
+      return (
+        <div key={item.id}>
+          <button
+            data-toc-id={item.id}
+            onClick={() => scrollToSection(item.id)}
+            className={`
+              w-full text-left px-2 py-1.5 rounded text-xs flex items-center gap-2 transition-all duration-200
+              ${isActive
+                ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-l-2 border-green-500 font-medium'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700'
+              }
+              ${item.level === 'h3' ? 'ml-4' : ''}
+              ${item.level === 'h2' ? 'ml-2' : ''}
+              ${depth === 1 ? 'ml-2' : ''}
+              ${depth === 2 ? 'ml-4' : ''}
+            `}
+          >
+            {IconComponent && item.level === 'section' && (
+              <IconComponent className="h-3 w-3 flex-shrink-0" />
+            )}
+            
+            <span className="truncate leading-relaxed">
+              {item.title}
+            </span>
+          </button>
+
+          {hasChildren && (
+            <div>
+              {renderTOCItems(item.children!, depth + 1)}
+            </div>
+          )}
+        </div>
+      )
+    })
   }
 
   if (tocItems.length <= 2) return null
 
   return (
     <div className="hidden xl:block fixed right-0.5 top-1/2 transform -translate-y-1/2 z-40">
-      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-4 max-w-56">
+      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-4 max-w-56 relative">
         <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-200 dark:border-gray-700">
           <List className="h-4 w-4 text-green-600" />
           <span className="font-medium text-sm text-gray-900 dark:text-gray-100">
@@ -216,35 +290,19 @@ export function TripReportTableOfContents({ tripReport }: TripReportTOCProps) {
           </span>
         </div>
 
-        <nav className="space-y-1 max-h-96 overflow-y-auto scrollbar-thin">
-          {tocItems.map((item) => {
-            const isActive = activeId === item.id
-            const IconComponent = item.icon
-
-            return (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`
-                  w-full text-left px-2 py-1.5 rounded text-xs flex items-center gap-2 transition-all duration-200
-                  ${isActive
-                    ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-l-2 border-green-500 font-medium'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700'
-                  }
-                  ${item.level === 'h3' ? 'ml-4' : ''}
-                  ${item.level === 'h2' ? 'ml-2' : ''}
-                `}
-              >
-                {IconComponent && item.level === 'section' && (
-                  <IconComponent className="h-3 w-3 flex-shrink-0" />
-                )}
-                <span className="truncate leading-relaxed">
-                  {item.title}
-                </span>
-              </button>
-            )
-          })}
+        <nav 
+          ref={navRef}
+          className="space-y-1 max-h-96 overflow-y-auto scrollbar-thin"
+        >
+          {renderTOCItems(tocItems)}
         </nav>
+
+        {/* Scroll indicator at bottom */}
+        {showScrollIndicator && (
+          <div className="absolute bottom-4 left-4 right-4 h-8 bg-gradient-to-t from-white dark:from-gray-800 to-transparent pointer-events-none flex items-end justify-center pb-1">
+            <ChevronDown className="h-3 w-3 text-gray-400 animate-bounce" />
+          </div>
+        )}
       </div>
     </div>
   )

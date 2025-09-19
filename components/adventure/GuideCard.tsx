@@ -128,11 +128,13 @@ const GuideCard = ({ guide }: GuideCardProps) => {
                     {/* Tags as fallback if no activities */}
                     {(!guide.activities || guide.activities.length === 0) && guide.tags && guide.tags.length > 0 && (
                         <div className="flex flex-wrap gap-1 mb-3">
-                            {guide.tags.slice(0, 3).map((tag) => (
+                            {guide.tags.slice(0, 3).map((tag) => {
+                                return (
                                 <Badge key={tag} variant="outline" className="text-xs border-green-200 text-green-800 dark:border-green-800 dark:text-green-200">
                                     {tag}
                                 </Badge>
-                            ))}
+                            )
+                            })}
                             {guide.tags.length > 3 && (
                                 <Badge variant="outline" className="text-xs">
                                     +{guide.tags.length - 3}
