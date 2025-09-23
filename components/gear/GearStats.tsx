@@ -1,11 +1,11 @@
 "use client"
 
 import { Package, Weight, DollarSign, Calendar } from 'lucide-react'
-import { GearItem, calculateTotalWeight } from '@/utils/notionGear'
+import { GearItem1, calculateTotalWeight } from '@/utils/notionGear'
 import styles from '@/styles/GearStats.module.css'
 
 interface GearStatsProps {
-  gear: GearItem[]
+  gear: GearItem1[]
 }
 
 const GearStats = ({ gear }: GearStatsProps) => {

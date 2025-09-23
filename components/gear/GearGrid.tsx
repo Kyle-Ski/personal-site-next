@@ -228,7 +228,7 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
     })
 
     return filtered
-  }, [gear, showRetired, showReviewedOnly, searchTerm, selectedCategory, selectedBrand, selectedPackList, showRetired, sortBy])
+  }, [gear, showReviewedOnly, searchTerm, selectedCategory, selectedBrand, selectedPackList, showRetired, sortBy])
 
   const clearFilters = () => {
     setSearchTerm('') // Clear search
