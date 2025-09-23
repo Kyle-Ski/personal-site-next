@@ -68,7 +68,18 @@ export const portableTextComponents: PortableTextComponents = {
                         )}
                         {value.credit && (
                             <div className="text-xs text-muted-foreground/80">
-                                {value.credit}
+                                {value.credit.url ? (
+                                    <a 
+                                        href={value.credit.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-green-600 dark:hover:text-green-400 transition-colors underline decoration-1 underline-offset-2"
+                                    >
+                                        {value.credit.name}
+                                    </a>
+                                ) : (
+                                    value.credit.name || value.credit
+                                )}
                             </div>
                         )}
                     </figcaption>
