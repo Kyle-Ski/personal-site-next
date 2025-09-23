@@ -7,7 +7,7 @@ export const notion = new Client({
 
 export const GEAR_DATABASE_ID = '4b1821fe-47eb-4140-9545-3376110383d5'
 
-export interface GearItem {
+export interface GearItem1 {
   id: string
   title: string
   product: string
@@ -19,6 +19,7 @@ export interface GearItem {
   weight_lb?: number
   weight_g?: number
   cost?: number
+  description?: string
   acquiredOn?: string
   retiredOn?: string
   url?: string
@@ -26,16 +27,17 @@ export interface GearItem {
   color?: string
   moreInfo?: string
   isRetired: boolean
+  reviewLink: string | null
 }
 
-export const getAllGear = async (): Promise<GearItem[]> => {
+export const getAllGear = async (): Promise<GearItem1[]> => {
   try {
     const response = await notion.databases.query({
       database_id: GEAR_DATABASE_ID,
       page_size: 100,
     })
 
-    const gear: GearItem[] = response.results.map((page: any) => {
+    const gear: GearItem1[] = response.results.map((page: any) => {
       const props = page.properties
       
       return {
@@ -57,6 +59,7 @@ export const getAllGear = async (): Promise<GearItem[]> => {
         color: props.color?.rich_text?.[0]?.plain_text || null,
         moreInfo: props.more_info?.rich_text?.[0]?.plain_text || null,
         isRetired: !!props.retired_on?.date?.start,
+        reviewLink: props['review-link']?.rich_text?.[0]?.plain_text || null,
       }
     })
 
@@ -71,7 +74,7 @@ export const getAllGear = async (): Promise<GearItem[]> => {
         start_cursor: nextCursor,
       })
 
-      const nextGear: GearItem[] = nextResponse.results.map((page: any) => {
+      const nextGear: GearItem1[] = nextResponse.results.map((page: any) => {
         const props = page.properties
         
         return {
@@ -93,6 +96,7 @@ export const getAllGear = async (): Promise<GearItem[]> => {
           color: props.color?.rich_text?.[0]?.plain_text || null,
           moreInfo: props.more_info?.rich_text?.[0]?.plain_text || null,
           isRetired: !!props.retired_on?.date?.start,
+          reviewLink: props['review-link']?.rich_text?.[0]?.plain_text || null,
         }
       })
 
@@ -109,7 +113,7 @@ export const getAllGear = async (): Promise<GearItem[]> => {
 }
 
 // Get featured gear based on pack list frequency and importance
-export const getFeaturedGear = (gear: GearItem[]): GearItem[] => {
+export const getFeaturedGear = (gear: GearItem1[]): GearItem1[] => {
   // Priority items that appear in multiple pack lists
   const priorityIds = [
     'FINDr 102 Skis', 
@@ -131,25 +135,25 @@ export const getFeaturedGear = (gear: GearItem[]): GearItem[] => {
 }
 
 // Get unique categories from gear
-export const getCategories = (gear: GearItem[]): string[] => {
+export const getCategories = (gear: GearItem1[]): string[] => {
   const categories = new Set(gear.map(item => item.category))
   return Array.from(categories).filter(cat => cat !== 'Uncategorized').sort()
 }
 
 // Get unique brands from gear
-export const getBrands = (gear: GearItem[]): string[] => {
+export const getBrands = (gear: GearItem1[]): string[] => {
   const brands = new Set(gear.map(item => item.brand).filter(Boolean))
   return Array.from(brands).sort()
 }
 
 // Get unique pack lists from gear
-export const getPackLists = (gear: GearItem[]): string[] => {
+export const getPackLists = (gear: GearItem1[]): string[] => {
   const packLists = new Set(gear.flatMap(item => item.packLists))
   return Array.from(packLists).sort()
 }
 
 // Calculate total weight for a set of gear
-export const calculateTotalWeight = (gear: GearItem[]): { oz: number, lb: number, g: number } => {
+export const calculateTotalWeight = (gear: GearItem1[]): { oz: number, lb: number, g: number } => {
   const totalOz = gear.reduce((sum, item) => sum + (item.weight_oz || 0), 0)
   const totalG = gear.reduce((sum, item) => sum + (item.weight_g || 0), 0)
   

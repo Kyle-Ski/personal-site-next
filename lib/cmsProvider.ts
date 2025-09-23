@@ -1,5 +1,6 @@
 import { Category, Post } from '@/app/blog/page';
 import { createClient } from 'next-sanity'
+import { GearItem1 } from '@/utils/notionGear';
 import fs from 'fs';
 import path from 'path';
 
@@ -174,19 +175,7 @@ export interface AdventureStats {
   duplicatesRemoved: number;
 }
 
-export type LegacyGearItem = string
-
-export type NewGearItem = {
-  name: string
-  category: 'shelter' | 'clothing' | 'navigation' | 'food' | 'water' | 'pack' | 'tools' | 'other'
-  description?: string
-}
-
-export type GearItem = LegacyGearItem | NewGearItem
-
-export function isNewGearItem(item: GearItem): item is NewGearItem {
-  return typeof item === 'object' && 'name' in item && 'category' in item
-}
+export type GearItem = GearItem1
 
 export class SanityService {
   private client;

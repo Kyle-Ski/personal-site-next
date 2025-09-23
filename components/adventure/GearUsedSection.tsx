@@ -3,15 +3,8 @@
 import { useState } from 'react'
 import { ChevronDown, ChevronRight, Backpack } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { GearItem } from '@/lib/cmsProvider'
 
-// Define the gear item types to handle both legacy and new formats
-type LegacyGearItem = string
-type NewGearItem = {
-    name: string
-    category: string
-    description?: string
-}
-type GearItem = LegacyGearItem | NewGearItem
 
 // Category definitions with emojis
 const GEAR_CATEGORIES = {
@@ -29,11 +22,6 @@ interface GearUsedSectionProps {
     gearUsed?: GearItem[]
 }
 
-// Type guard to check if gear item is new format
-function isNewGearItem(item: GearItem): item is NewGearItem {
-    return typeof item === 'object' && 'name' in item && 'category' in item
-}
-
 export function GearUsedSection({ gearUsed }: GearUsedSectionProps) {
     const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set())
 
@@ -43,18 +31,11 @@ export function GearUsedSection({ gearUsed }: GearUsedSectionProps) {
 
     // Process gear items and group by category
     const processedGear = gearUsed.reduce((acc, item) => {
-        if (isNewGearItem(item)) {
-            // New format: use specified category
-            const category = item.category || 'other'
+        const category = item.category || 'other'
             if (!acc[category]) acc[category] = []
             acc[category].push(item)
-        } else {
-            // Legacy format: put in 'other' category
-            if (!acc.other) acc.other = []
-            acc.other.push({ name: item, category: 'other' })
-        }
         return acc
-    }, {} as Record<string, NewGearItem[]>)
+    }, {} as Record<string, GearItem[]>)
 
     // Filter out empty categories and sort
     const categoriesWithGear = Object.entries(processedGear)
@@ -133,9 +114,6 @@ export function GearUsedSection({ gearUsed }: GearUsedSectionProps) {
                                                 key={`${categoryKey}-${index}`}
                                                 className="p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-600 transition-colors"
                                             >
-                                                <div className="font-medium text-sm mb-1">
-                                                    {item.name}
-                                                </div>
                                                 {item.description && (
                                                     <div className="text-sm text-muted-foreground">
                                                         {item.description}

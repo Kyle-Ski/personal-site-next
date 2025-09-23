@@ -1,3 +1,5 @@
+import { GearItem } from "./cmsProvider";
+
 /**
  * Generate a URL-friendly slug from gear title
  * In the components, we can now generate links like:
@@ -80,3 +82,46 @@ export const decodeFilterValue = (value: string): string => {
         return value; // Return original if decoding fails
     }
 };
+
+/**
+ * Get the full review URL path from the stored review link
+ */
+export function getReviewUrl(reviewLink: string): string {
+  // Handle both "/slug" and "slug" formats
+  if (reviewLink.startsWith('/')) {
+    return `/gear/reviews${reviewLink}`
+  }
+  return `/gear/reviews/${reviewLink}`
+}
+
+/**
+ * Check if a gear item has a review
+ */
+export function hasReview(gearItem: GearItem): boolean {
+  return !!(gearItem.reviewLink && gearItem.reviewLink.trim())
+}
+
+/**
+ * Get gear items that have reviews
+ */
+export function getGearWithReviews(gearItems: GearItem[]): GearItem[] {
+  return gearItems.filter(hasReview)
+}
+
+/**
+ * Get gear statistics including review count
+ */
+export function getGearStats(gearItems: GearItem[]) {
+  const totalItems = gearItems.length
+  const itemsWithReviews = getGearWithReviews(gearItems).length
+  const retiredItems = gearItems.filter(item => item.isRetired).length
+  const activeItems = totalItems - retiredItems
+  
+  return {
+    totalItems,
+    activeItems,
+    retiredItems,
+    itemsWithReviews,
+    reviewPercentage: totalItems > 0 ? Math.round((itemsWithReviews / totalItems) * 100) : 0
+  }
+}
