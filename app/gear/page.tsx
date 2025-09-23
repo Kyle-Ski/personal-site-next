@@ -49,6 +49,8 @@ function GearGridWrapper({ gear, categories, brands, packLists }: {
   )
 }
 
+export const revalidate = 3600
+
 export default async function GearPage() {
   const allGear = await getAllGear()
   const featuredGear = getFeaturedGear(allGear)

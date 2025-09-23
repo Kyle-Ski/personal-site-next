@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge'
 import { GearItem } from '@/utils/notionGear'
 import { createGearSlug, buildGearUrl, parseGearFilters, findGearBySlug } from '@/lib/gearUrlUtils'
 import styles from '@/styles/GearGrid.module.css'
-import { getGearCardImageSizes, getProxiedImageUrl, isNotionImage } from '@/utils/imageHelpers'
+import { getGearCardImageSizes, isNotionImage } from '@/utils/imageHelpers'
 
 interface GearGridProps {
   gear: GearItem[]
@@ -221,7 +221,7 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
     if (process.env.NODE_ENV === 'development') {
       return '/gear-placeholder.svg'
     }
-    return item.imageUrl ? getProxiedImageUrl(item.imageUrl) : item.imageUrl
+    return item.imageUrl
   }
 
   return (

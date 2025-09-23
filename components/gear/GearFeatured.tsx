@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { GearItem } from '@/utils/notionGear'
 import styles from '@/styles/GearFeatured.module.css'
-import { getGearCardImageSizes, getProxiedImageUrl, isNotionImage } from '@/utils/imageHelpers'
+import { getGearCardImageSizes, isNotionImage } from '@/utils/imageHelpers'
 
 interface GearFeaturedProps {
     items: GearItem[]
@@ -35,7 +35,7 @@ const GearFeatured = ({ items }: GearFeaturedProps) => {
                         <div className={styles.imageWrapper}>
                             {item.imageUrl ? (
                                 <Image
-                                    src={getProxiedImageUrl(item.imageUrl)}
+                                    src={item.imageUrl}
                                     alt={`${item.brand} ${item.title}` || item.title}
                                     width={200}
                                     height={200}
