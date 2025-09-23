@@ -47,16 +47,33 @@ const extractText = (children: any): string => {
 export const portableTextComponents: PortableTextComponents = {
     types: {
         image: ({ value }: { value: any }) => (
-            <div className="relative w-full my-8">
-                <Image
-                    src={urlFor(value)}
-                    alt={value.alt || "Blog post image"}
-                    width={800}
-                    height={500}
-                    className="object-contain mx-auto rounded-md"
-                    loading="lazy"
-                />
-            </div>
+            <figure className="my-8">
+                <div className="relative w-full">
+                    <Image
+                        src={urlFor(value)}
+                        alt={value.alt || "Blog post image"}
+                        width={800}
+                        height={500}
+                        className="object-contain mx-auto rounded-md w-full h-auto"
+                        loading="lazy"
+                    />
+                </div>
+                {/* Caption and Credit */}
+                {(value.caption || value.credit) && (
+                    <figcaption className="mt-2 text-center">
+                        {value.caption && (
+                            <div className="text-sm text-muted-foreground italic mb-1">
+                                {value.caption}
+                            </div>
+                        )}
+                        {value.credit && (
+                            <div className="text-xs text-muted-foreground/80">
+                                {value.credit}
+                            </div>
+                        )}
+                    </figcaption>
+                )}
+            </figure>
         ),
         code: ({ value }: { value: { code: string; language?: string } }) => (
             <CodeBlock code={value.code} language={value.language} />
