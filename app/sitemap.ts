@@ -14,10 +14,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     // Fetch all content types in parallel
-    const [posts, tripReports, gearReviews] = await Promise.all([
+    const [posts, tripReports, gearReviews, guides] = await Promise.all([
       sanityService.getAllPosts(),
       sanityService.getAllTripReports(),
-      sanityService.getAllGearReviews()
+      sanityService.getAllGearReviews(),
+      sanityService.getAllGuides()
     ]);
 
     // Static pages - Updated for new structure
@@ -110,12 +111,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     }));
 
+    // Guides
+    const guidesPages: MetadataRoute.Sitemap = guides.map(guide => ({
+      url: `${baseUrl}/guides/${guide.slug}`,
+      lastModified: new Date(guide.publishedAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    }));
+
     // Combine all pages
     return [
       ...staticPages,
       ...blogPages,
       ...tripReportPages,
-      ...gearReviewPages
+      ...gearReviewPages,
+      ...guidesPages
     ];
 
   } catch (error) {
