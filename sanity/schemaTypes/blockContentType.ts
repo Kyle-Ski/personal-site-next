@@ -99,9 +99,24 @@ export const blockContentType = defineType({
         },
         {
           name: 'credit',
-          type: 'string',
+          type: 'object',
           title: 'Photo Credit',
-          description: 'Photographer or source attribution (e.g., "Photo by John Doe" or "Kyle Czajkowski")'
+          description: 'Photographer or source attribution',
+          fields: [
+            {
+              name: 'name',
+              type: 'string',
+              title: 'Credit Text',
+              description: 'e.g., "Photo by John Doe" or "Kyle Czajkowski"',
+              validation: Rule => Rule.required()
+            },
+            {
+              name: 'url',
+              type: 'url',
+              title: 'Link URL (optional)',
+              description: 'Instagram, website, or other social media link'
+            }
+          ]
         }
       ]
     }),
