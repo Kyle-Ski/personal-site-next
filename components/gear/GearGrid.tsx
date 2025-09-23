@@ -4,19 +4,33 @@ import { useState, useMemo, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Search, Filter, X, ExternalLink, Weight, Package, Eye, EyeOff, DollarSign, Share2 } from 'lucide-react'
+import { Search, Filter, X, ExternalLink, Weight, Package, Eye, EyeOff, DollarSign, Share2, Star, FileText } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { GearItem } from '@/utils/notionGear'
-import { createGearSlug, buildGearUrl, parseGearFilters, findGearBySlug } from '@/lib/gearUrlUtils'
+import { GearItem } from '@/lib/cmsProvider'
+import { createGearSlug, buildGearUrl, parseGearFilters, findGearBySlug, getReviewUrl, hasReview } from '@/lib/gearUrlUtils'
 import styles from '@/styles/GearGrid.module.css'
-import { getGearCardImageSizes, getProxiedImageUrl, isNotionImage } from '@/utils/imageHelpers'
+import { getGearCardImageSizes, isNotionImage } from '@/utils/imageHelpers'
 
 interface GearGridProps {
   gear: GearItem[]
   categories: string[]
   brands: string[]
   packLists: string[]
+}
+
+// Simple review badge component
+const GearReviewBadge = ({ reviewLink }: { reviewLink: string }) => {
+  return (
+    <Link
+      href={getReviewUrl(reviewLink)}
+      className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-md hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors group"
+    >
+      <Star size={12} className="fill-current" />
+      <span>Review</span>
+      <ExternalLink size={10} />
+    </Link>
+  )
 }
 
 const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
@@ -37,6 +51,8 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
   const [sortBy, setSortBy] = useState<'name' | 'weight' | 'cost' | 'date'>('name')
   const [showFilters, setShowFilters] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
+  const [showReviewedOnly, setShowReviewedOnly] = useState(false)
+
 
   // Update URL when filters change (excluding search)
   const updateUrl = (newFilters: any) => {
@@ -157,11 +173,20 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
   }
 
   const filteredGear = useMemo(() => {
-    let filtered = gear
+    let filtered = [...gear]
 
     // Filter by retired status
     if (!showRetired) {
       filtered = filtered.filter(item => !item.isRetired)
+    }
+
+    // Filter by reviewed items only
+    if (showReviewedOnly) {
+      const beforeCount = filtered.length
+      filtered = filtered.filter(item => {
+        const hasReviewResult = hasReview(item)
+        return hasReviewResult
+      })
     }
 
     // Search filter
@@ -203,7 +228,7 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
     })
 
     return filtered
-  }, [gear, searchTerm, selectedCategory, selectedBrand, selectedPackList, showRetired, sortBy])
+  }, [gear, showReviewedOnly, searchTerm, selectedCategory, selectedBrand, selectedPackList, showRetired, sortBy])
 
   const clearFilters = () => {
     setSearchTerm('') // Clear search
@@ -211,18 +236,35 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
     setSelectedBrand('')
     setSelectedPackList('')
     hasScrolledRef.current = false // Reset scroll flag when clearing filters
+    setShowReviewedOnly(false)
+    setShowRetired(false)
     router.push('/gear', { scroll: false })
   }
 
-  const activeFiltersCount = [selectedCategory, selectedBrand, selectedPackList].filter(Boolean).length
+  const activeFiltersCount = [
+    selectedCategory,
+    selectedBrand,
+    selectedPackList,
+    showReviewedOnly ? 'reviewed' : null
+  ].filter(Boolean).length
 
   // Development placeholder image
   const getImageSrc = (item: GearItem) => {
     if (process.env.NODE_ENV === 'development') {
       return '/gear-placeholder.svg'
     }
-    return item.imageUrl ? getProxiedImageUrl(item.imageUrl) : item.imageUrl
+    return item.imageUrl
   }
+
+  // Calculate review stats for display
+  const reviewStats = useMemo(() => {
+    const totalItems = gear.filter(item => showRetired || !item.isRetired).length
+    const reviewedItems = gear.filter(item => 
+      (showRetired || !item.isRetired) && hasReview(item)
+    ).length
+    
+    return { totalItems, reviewedItems }
+  }, [gear, showRetired])
 
   return (
     <div className={styles.container}>
@@ -257,6 +299,15 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
           >
             {showRetired ? <Eye size={18} /> : <EyeOff size={18} />}
             <span>{showRetired ? 'Hide' : 'Show'} Retired</span>
+          </button>
+
+          <button
+            onClick={() => setShowReviewedOnly(!showReviewedOnly)}
+            className={`${styles.retiredButton} ${showReviewedOnly ? styles.active : ''}`}
+            title={`Show ${showReviewedOnly ? 'all items' : 'only reviewed items'}`}
+          >
+            <FileText size={18} />
+            <span>{showReviewedOnly ? 'Show All' : 'Show Reviews'}</span>
           </button>
 
           <select
@@ -328,7 +379,14 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
 
       {/* Results Count */}
       <div className={styles.resultsInfo}>
-        <p>Showing {filteredGear.length} items</p>
+        <p>
+          Showing {filteredGear.length} items
+          {showReviewedOnly && (
+            <span className="text-green-600 dark:text-green-400 ml-2">
+              (reviewed only)
+            </span>
+          )}
+        </p>
       </div>
 
       {/* Gear Grid - Using your original structure */}
@@ -378,6 +436,13 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
                   <Badge variant="outline" className={styles.brandBadge}>
                     {item.brand}
                   </Badge>
+                )}
+
+                {/* Review Badge */}
+                {hasReview(item) && (
+                  <div className="mb-3">
+                    <GearReviewBadge reviewLink={item.reviewLink!} />
+                  </div>
                 )}
 
                 <div className={styles.specs}>

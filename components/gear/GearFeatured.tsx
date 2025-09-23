@@ -2,15 +2,30 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { ExternalLink, Weight, DollarSign } from 'lucide-react'
+import { ExternalLink, Weight, DollarSign, Star, FileText } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { GearItem } from '@/utils/notionGear'
+import { GearItem } from '@/lib/cmsProvider'
+import { hasReview, getReviewUrl } from '@/lib/gearUrlUtils' // Add these imports
 import styles from '@/styles/GearFeatured.module.css'
-import { getGearCardImageSizes, getProxiedImageUrl, isNotionImage } from '@/utils/imageHelpers'
+import { getGearCardImageSizes, isNotionImage } from '@/utils/imageHelpers'
 
 interface GearFeaturedProps {
     items: GearItem[]
+}
+
+// Review badge component
+const FeaturedGearReviewBadge = ({ reviewLink }: { reviewLink: string }) => {
+    return (
+        <Link
+            href={getReviewUrl(reviewLink)}
+            className="!inline-flex !items-center gap-1 !h-6 mb-3 !leading-none rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-green-300 bg-green-50 text-green-700 hover:bg-green-100 dark:border-green-700 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-900/50"
+        >
+            <Star size={12} className="fill-current" />
+            <span>Review</span>
+            <ExternalLink size={10} />
+        </Link>
+    )
 }
 
 const GearFeatured = ({ items }: GearFeaturedProps) => {
@@ -27,6 +42,7 @@ const GearFeatured = ({ items }: GearFeaturedProps) => {
     };
 
     const getCategoryEmoji = (category: string) => emojiMap[category] || '⭐️';
+
     return (
         <div className={styles.featuredGrid}>
             {items.map((item) => {
@@ -35,7 +51,7 @@ const GearFeatured = ({ items }: GearFeaturedProps) => {
                         <div className={styles.imageWrapper}>
                             {item.imageUrl ? (
                                 <Image
-                                    src={getProxiedImageUrl(item.imageUrl)}
+                                    src={item.imageUrl}
                                     alt={`${item.brand} ${item.title}` || item.title}
                                     width={200}
                                     height={200}
@@ -47,7 +63,6 @@ const GearFeatured = ({ items }: GearFeaturedProps) => {
                                         e.currentTarget.style.display = 'none';
                                     }}
                                     className={styles.image}
-                                    // Add unoptimized flag for problematic Notion images as fallback
                                     unoptimized={isNotionImage(item.imageUrl)}
                                 />
                             ) : (
@@ -64,12 +79,19 @@ const GearFeatured = ({ items }: GearFeaturedProps) => {
                             <h3 className={styles.itemTitle}>{item.title}</h3>
                             <p className={styles.itemProduct}>{item.product}</p>
 
-                            {item.brand && (
-                                <Badge variant="outline" className={styles.brandBadge}>
-                                    {item.brand}
-                                </Badge>
-                            )}
+                            {/* Brand and Review badges row */}
+                            <div className="flex items-center gap-2 flex-wrap">
+                                {item.brand && (
+                                    <Badge variant="outline" className={styles.brandBadge}>
+                                        {item.brand}
+                                    </Badge>
+                                )}
+                            </div>
 
+                            {/* Review Badge */}
+                            {hasReview(item) && (
+                                <FeaturedGearReviewBadge reviewLink={item.reviewLink!} />
+                            )}
                             <div className={styles.specs}>
                                 {item.weight_oz && (
                                     <div className={styles.spec}>
@@ -80,7 +102,7 @@ const GearFeatured = ({ items }: GearFeaturedProps) => {
                                 {item.cost && (
                                     <div className={styles.spec}>
                                         <DollarSign size={14} />
-                                        <span>{item.cost}</span>
+                                        <span>${item.cost}</span>
                                     </div>
                                 )}
                             </div>
@@ -103,17 +125,19 @@ const GearFeatured = ({ items }: GearFeaturedProps) => {
                                 </div>
                             )}
 
-                            {item.url && (
-                                <Link
-                                    href={item.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={styles.link}
-                                >
-                                    <span>View Product</span>
-                                    <ExternalLink size={14} />
-                                </Link>
-                            )}
+                            <div className="flex flex-col gap-2 mt-4">
+                                {item.url && (
+                                    <Link
+                                        href={item.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.link}
+                                    >
+                                        <span>View Product</span>
+                                        <ExternalLink size={14} />
+                                    </Link>
+                                )}
+                            </div>
                         </CardContent>
                     </Card>
                 )

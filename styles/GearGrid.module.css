@@ -487,6 +487,28 @@
   }
 }
 
+/* Add to your GearGrid.module.css */
+@media (max-width: 640px) {
+  .controls {
+    gap: 0.5rem;
+  }
+  
+  .filterButton,
+  .retiredButton {
+    min-width: 44px; /* iOS minimum touch target */
+    min-height: 44px;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .sortSelect {
+    min-width: 80px;
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+  
+  .reviewCount {
+    display: none; /* Hide counts on mobile to save space */
+  }
+}
 /* Dark mode adjustments */
 [data-theme='dark'] .imageWrapper {
   background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
