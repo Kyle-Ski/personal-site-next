@@ -1,7 +1,7 @@
 export const websiteData = {
   about: {
     aboutParagraph:
-      "My passion in life has always been learning new skills and exploring alluring\nplaces. To me happiness is constantly engaging in activities that keep me in\nmotion towards a better future.\n\nAs a Full-Stack Developer, I have been able to pursue my love of problem\nsolving, experimenting, improvement of my work and myself.\n\nWhile I am not working, I enjoy learning the Guitar, playing board games, and\nreading. When I have more free time, I love to spend time outdoors with my wife\nand our dog: backpacking, hiking, and climbing 14er's.",
+      "My passion in life has always been learning new skills and exploring alluring\nplaces. To me happiness is constantly engaging in activities that keep me in\nmotion towards a better future.\n\nAs a Full-Stack Developer, I have been able to pursue my love of problem\nsolving, experimenting, improvement of my work and myself.\n\nWhile I am not working, I enjoy learning the Guitar, playing board games, and\nreading. When I have more free time, I love to spend time: backpacking, hiking, and climbing 14er's.",
   },
   personalTimeline: [
     {

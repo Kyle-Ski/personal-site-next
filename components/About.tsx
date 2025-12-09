@@ -113,17 +113,7 @@ const About = ({ about }: Props) => {
           </div>
           <div className="prose prose-lg max-w-none" style={{ color: 'var(--color-text-secondary)' }}>
             <p>
-              With{' '}
-              <Link
-                href="https://www.kylieis.online/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors font-medium hover:opacity-80"
-                style={{ color: 'var(--color-text-accent)' }}
-              >
-                my wife&apos;s
-              </Link>{' '}
-              support, I took an extended sabbatical to reflect on what I really wanted to do
+              I took an extended sabbatical to reflect on what I really wanted to do
               with my life. This time allowed for personal growth and helped me realign with my
               values. I realized I wanted to get back to what had always driven me: helping people
               experience the outdoors and working to conserve these spaces for future generations.
