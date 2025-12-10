@@ -48,8 +48,6 @@ const nextConfig = {
       'react-chartjs-2'
     ],
   },
-  esmExternals: true,
-  serverComponentsExternalPackages: ['sharp'],
   compiler: {
     // Remove console logs in production
     removeConsole: process.env.NODE_ENV === 'production',

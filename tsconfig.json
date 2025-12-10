@@ -7,7 +7,9 @@
       "esnext"
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -32,8 +34,10 @@
     "**/*.tsx",
     "next-env.d.ts",
     "pages/_document.js",
-    ".next/types/**/*.ts"
-, "lib/stravaUtilities.ts"  ],
+    ".next/types/**/*.ts",
+    "lib/stravaUtilities.ts",
+    ".next/dev/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]
