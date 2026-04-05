@@ -384,7 +384,7 @@ export default async function GuidePage({ params }: PageProps) {
                 )}
 
                 {/* Recommended Gear */}
-                <GearUsedSection gearUsed={guide.gearUsed} />
+                <GearUsedSection gearUsed={guide.gearUsed?.filter(item => item.description !== null)} />
 
                 {/* Main Guide Content */}
                 <div id="main-content" className="prose prose-lg max-w-none adventure-content dark:prose-invert">
