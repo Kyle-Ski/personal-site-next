@@ -38,3 +38,13 @@ yarn-error.log*
 /public/webviewer*
 
 # /data/strava-activities.json
+# OpenNext
+.open-next
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+
+# generated gear images
+/public/gear-images/
