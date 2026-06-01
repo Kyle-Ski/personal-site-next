@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { GearItem } from '@/lib/cmsProvider'
 import { hasReview, getReviewUrl } from '@/lib/gearUrlUtils' // Add these imports
 import styles from '@/styles/GearFeatured.module.css'
-import { getGearCardImageSizes, isNotionImage } from '@/utils/imageHelpers'
+import { getGearCardImageSizes } from '@/utils/imageHelpers'
 
 interface GearFeaturedProps {
     items: GearItem[]
@@ -63,7 +63,7 @@ const GearFeatured = ({ items }: GearFeaturedProps) => {
                                         e.currentTarget.style.display = 'none';
                                     }}
                                     className={styles.image}
-                                    unoptimized={isNotionImage(item.imageUrl)}
+                                    unoptimized={!!item.imageUrl?.startsWith('/gear-images/')}
                                 />
                             ) : (
                                 <div className={styles.imagePlaceholder}>

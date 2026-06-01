@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge'
 import { GearItem } from '@/lib/cmsProvider'
 import { createGearSlug, buildGearUrl, parseGearFilters, findGearBySlug, getReviewUrl, hasReview } from '@/lib/gearUrlUtils'
 import styles from '@/styles/GearGrid.module.css'
-import { getGearCardImageSizes, isNotionImage } from '@/utils/imageHelpers'
+import { getGearCardImageSizes } from '@/utils/imageHelpers'
 
 interface GearGridProps {
   gear: GearItem[]
@@ -414,8 +414,7 @@ const GearGrid = ({ gear, categories, brands, packLists }: GearGridProps) => {
                       e.currentTarget.style.display = 'none';
                     }}
                     className={styles.image}
-                    // Add unoptimized flag for problematic Notion images as fallback
-                    unoptimized={item.imageUrl ? isNotionImage(item.imageUrl) : undefined}
+                    unoptimized={!!item.imageUrl?.startsWith('/gear-images/')}
                   />
                 ) : (
                   <div className={styles.imagePlaceholder}>
