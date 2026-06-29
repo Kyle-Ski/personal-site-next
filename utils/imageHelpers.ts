@@ -12,7 +12,7 @@ export const shimmer = (w: number, h: number) => `
   <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
 </svg>`
 
-export const imgStrToBase64 = (str: string) => Buffer.from(str).toString('base64');
+export const imgStrToBase64 = (str: string) => btoa(str);
 
 /**
  * Get responsive sizes for gear card images

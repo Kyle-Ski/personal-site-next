@@ -1,9 +1,22 @@
 import '../styles/globals.css'
 import { DarkModeProvider } from '../hooks/useDarkMode';
 import Script from 'next/script';
+import { Fraunces, Inter } from 'next/font/google';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
+
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap',
+});
 
 export const metadata = {
   title: 'Kyle Czajkowski - Full-Stack Developer & Mountain Enthusiast',
@@ -56,7 +69,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
       <head>
         <Script
           id="google-tag-manager"

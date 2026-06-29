@@ -1,4 +1,5 @@
-import { getAllGear, getFeaturedGear, getCategories, getBrands, getPackLists } from '@/utils/notionGear'
+import { getFeaturedGear, getCategories, getBrands, getPackLists } from '@/utils/notionGear'
+import gearData from '@/data/notion-gear.json'
 import GearHero from '@/components/gear/GearHero'
 import GearFeatured from '@/components/gear/GearFeatured'
 import GearGrid from '@/components/gear/GearGrid'
@@ -49,10 +50,10 @@ function GearGridWrapper({ gear, categories, brands, packLists }: {
   )
 }
 
-export const revalidate = 3600
+export const dynamic = 'force-static'
 
 export default async function GearPage() {
-  const allGear = await getAllGear()
+  const allGear = gearData.gear
   const featuredGear = getFeaturedGear(allGear)
   const categories = getCategories(allGear)
   const brands = getBrands(allGear)

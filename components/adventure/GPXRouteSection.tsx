@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Download, Mountain, Loader2, AlertCircle } from 'lucide-react';
+import { Download, Mountain, AlertCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import Skeleton from '@/components/ui/skeleton';
 import ElevationChart from './ElevationChart';
 import RouteMap, { RouteMapRef } from './RouteMap';
 import { fetchAndParseGPX, GPXData } from '@/lib/gpxParser';
@@ -113,14 +114,10 @@ export default function GPXRouteSection({ gpxFile, routeName }: GPXRouteSectionP
         <div className="space-y-6">
             {/* Loading State */}
             {loading && (
-                <Card className="border-border bg-card">
-                    <CardContent className="flex items-center justify-center py-8">
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                            <span>Processing elevation data...</span>
-                        </div>
-                    </CardContent>
-                </Card>
+                <div className="space-y-4">
+                    <Skeleton className="w-full h-72" />
+                    <Skeleton className="w-full h-48" />
+                </div>
             )}
 
             {/* Error State */}

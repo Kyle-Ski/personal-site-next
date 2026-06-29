@@ -206,11 +206,14 @@ export default async function RecentContent() {
             const contentUrl = `${typeInfo.urlPrefix}/${item.slug}`;
             
             return (
-              <article 
+              <Link
                 key={`${item.contentType}-${item._id}`}
-                className="group bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700"
+                href={contentUrl}
+                className="group block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--color-text-accent)]"
               >
-                <Link href={contentUrl}>
+                <article
+                  className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700 group-hover:border-[var(--color-text-accent)]/50 h-full"
+                >
                   {/* Featured Image */}
                   {item.mainImage ? (
                     <div className="aspect-video overflow-hidden relative">
@@ -275,44 +278,44 @@ export default async function RecentContent() {
                       )}
                     </div>
                   </div>
-                </Link>
-              </article>
+                </article>
+              </Link>
             );
           })}
         </div>
 
         {/* Enhanced Navigation CTAs */}
         <div className="grid md:grid-cols-4 gap-6 text-center">
-          <Link 
+          <Link
             href="/blog"
-            className="group p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 hover:shadow-lg transition-all duration-300"
+            className="group p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
           >
             <FileText size={24} className="mx-auto mb-3 text-blue-600 dark:text-blue-400" />
             <h3 className="font-semibold mb-2 text-blue-900 dark:text-blue-100">All Blog Posts</h3>
             <p className="text-sm text-blue-600 dark:text-blue-300 group-hover:underline">Tech insights & tutorials →</p>
           </Link>
 
-          <Link 
+          <Link
             href="/reports"
-            className="group p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800 hover:shadow-lg transition-all duration-300"
+            className="group p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500"
           >
             <Mountain size={24} className="mx-auto mb-3 text-green-600 dark:text-green-400" />
             <h3 className="font-semibold mb-2 text-green-900 dark:text-green-100">Trip Reports</h3>
             <p className="text-sm text-green-600 dark:text-green-300 group-hover:underline">Adventure stories →</p>
           </Link>
 
-          <Link 
+          <Link
             href="/guides"
-            className="group p-6 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800 hover:shadow-lg transition-all duration-300"
+            className="group p-6 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-purple-500"
           >
             <BookOpen size={24} className="mx-auto mb-3 text-purple-600 dark:text-purple-400" />
             <h3 className="font-semibold mb-2 text-purple-900 dark:text-purple-100">Guides</h3>
             <p className="text-sm text-purple-600 dark:text-purple-300 group-hover:underline">Planning & routes →</p>
           </Link>
 
-          <Link 
+          <Link
             href="/gear/reviews"
-            className="group p-6 bg-orange-50 dark:bg-orange-900/20 rounded-lg border border-orange-200 dark:border-orange-800 hover:shadow-lg transition-all duration-300"
+            className="group p-6 bg-orange-50 dark:bg-orange-900/20 rounded-lg border border-orange-200 dark:border-orange-800 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500"
           >
             <Star size={24} className="mx-auto mb-3 text-orange-600 dark:text-orange-400" />
             <h3 className="font-semibold mb-2 text-orange-900 dark:text-orange-100">Gear Reviews</h3>

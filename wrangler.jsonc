@@ -1,0 +1,30 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "personal-site-next",
+  "compatibility_date": "2026-05-25",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "main": "./worker/index.ts",
+  "assets": {
+    "directory": "dist/client",
+    "not_found_handling": "none",
+    "binding": "ASSETS"
+  },
+  "images": {
+    "binding": "IMAGES"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "VINEXT_CACHE",
+      "id": "dcdec1ec66ae44afa1a02dd085091add"
+    }
+  ],
+  "vars": {
+    "NEXT_PUBLIC_SANITY_PROJECT_ID": "be82egj8",
+    "NEXT_PUBLIC_SANITY_DATASET": "production",
+    "NOTION_DATABASE_ID": "4995c333c1df406680b7e9b547e8e674",
+    "NOTION_PAGE_ID": "a02addf4de7f4088b00971967cd59ff0",
+    "UPDATED_RESUME_LINK": "/Kyle_Czajkowski_2024_L.pdf"
+  }
+}

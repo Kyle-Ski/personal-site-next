@@ -16,6 +16,7 @@ import { MobileTOC } from "@/components/MobileTOC"
 import GPXRouteSection from "@/components/adventure/GPXRouteSection"
 import { portableTextComponents } from "@/utils/portableTextComponents"
 import SocialShare from "@/components/SocialShare"
+import MountainDivider from '@/components/ui/mountain-divider'
 
 interface PageProps {
     params: Promise<{ slug: string }>
@@ -302,6 +303,8 @@ export default async function GuidePage({ params }: PageProps) {
                         )}
                     </div>
                 </div>
+
+                <MountainDivider />
 
                 {/* GPX Route Data (for route guides) */}
                 {guide.gpxFile && (

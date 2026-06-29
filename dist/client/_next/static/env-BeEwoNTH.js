@@ -1,0 +1,1 @@
+var e={}.NEXT_PUBLIC_SANITY_API_VERSION||`2024-12-31`,t=r(`production`,`Missing environment variable: NEXT_PUBLIC_SANITY_DATASET`),n=r(`be82egj8`,`Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID`);function r(e,t){if(e===void 0)throw Error(t);return e}export{t as n,n as r,e as t};

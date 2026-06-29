@@ -1,0 +1,41 @@
+{
+  "_stegaClean-6GPOobiq.js": {
+    "file": "_next/static/stegaClean-6GPOobiq.js",
+    "name": "stegaClean"
+  },
+  "node_modules/@sanity/client/dist/_chunks-es/stegaEncodeSourceMap.js": {
+    "file": "_next/static/stegaEncodeSourceMap-CqoLobnR.js",
+    "name": "stegaEncodeSourceMap",
+    "src": "node_modules/@sanity/client/dist/_chunks-es/stegaEncodeSourceMap.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_stegaClean-6GPOobiq.js"
+    ]
+  },
+  "node_modules/@sanity/eventsource/browser.js": {
+    "file": "_next/static/browser-qBahrdGV.js",
+    "name": "browser",
+    "src": "node_modules/@sanity/eventsource/browser.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "virtual:cloudflare/worker-entry"
+    ]
+  },
+  "virtual:cloudflare/worker-entry": {
+    "file": "index.js",
+    "name": "index",
+    "src": "virtual:cloudflare/worker-entry",
+    "isEntry": true,
+    "imports": [
+      "_stegaClean-6GPOobiq.js"
+    ],
+    "dynamicImports": [
+      "virtual:cloudflare/worker-entry",
+      "node_modules/@sanity/client/dist/_chunks-es/stegaEncodeSourceMap.js",
+      "node_modules/@sanity/eventsource/browser.js"
+    ],
+    "css": [
+      "_next/static/index-DHuRP_w1.css"
+    ]
+  }
+}

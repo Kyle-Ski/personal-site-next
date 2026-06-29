@@ -246,8 +246,8 @@ export default function GearReviewsClient({ reviews }: GearReviewsClientProps) {
                                             <Image
                                                 src={review.mainImage}
                                                 alt={review.gearName}
-                                                width={300}
-                                                height={200}
+                                                fill
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                                 className={styles.reviewImage}
                                             />
                                             {/* Rating overlay */}

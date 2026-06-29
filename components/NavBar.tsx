@@ -124,9 +124,9 @@ const NavBar = () => {
                   key={item.href}
                   href={item.href}
                   onClick={() => handleLinkClick(item.href)}
-                  className={`text-sm font-medium transition-colors duration-300 flex items-center gap-1 ${isActive(item.href)
-                    ? 'text-[var(--color-text-accent)]'
-                    : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+                  className={`text-sm font-medium transition-colors duration-300 flex items-center gap-1 relative pb-1 ${isActive(item.href)
+                    ? 'text-[var(--color-text-accent)] after:content-[""] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[2px] after:bg-[var(--color-text-accent)] after:rounded-full'
+                    : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:after:content-[""] hover:after:absolute hover:after:left-0 hover:after:right-0 hover:after:bottom-0 hover:after:h-[2px] hover:after:bg-[var(--color-text-accent)]/30 hover:after:rounded-full'
                     }`}
                 >
                   {item.icon && <item.icon size={16} />}
@@ -142,9 +142,9 @@ const NavBar = () => {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className={`text-sm font-medium transition-colors duration-300 flex items-center gap-1 ${isAdventureActive()
-                    ? 'text-[var(--color-text-accent)]'
-                    : ''
+                  className={`text-sm font-medium transition-colors duration-300 flex items-center gap-1 relative pb-1 ${isAdventureActive()
+                    ? 'text-[var(--color-text-accent)] after:content-[""] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[2px] after:bg-[var(--color-text-accent)] after:rounded-full'
+                    : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:after:content-[""] hover:after:absolute hover:after:left-0 hover:after:right-0 hover:after:bottom-0 hover:after:h-[2px] hover:after:bg-[var(--color-text-accent)]/30 hover:after:rounded-full'
                     }`}
                   onClick={() => setShowAdventureDropdown(!showAdventureDropdown)}
                 >
@@ -156,7 +156,7 @@ const NavBar = () => {
                 {/* Dropdown Menu - Improved positioning and hover handling */}
                 {showAdventureDropdown && (
                   <div
-                    className="absolute top-full right-0 mt-2 w-72 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg overflow-hidden z-50"
+                    className="absolute top-full right-0 mt-2 w-72 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl ring-1 ring-black/5 dark:ring-white/10 overflow-hidden z-50"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                   >
@@ -166,16 +166,21 @@ const NavBar = () => {
                           key={item.href}
                           href={item.href}
                           onClick={() => handleLinkClick(item.href)}
-                          className={`block px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${isActive(item.href) ? 'bg-green-50 dark:bg-green-900/20' : ''
+                          className={`block px-4 py-3 transition-colors duration-150 border-l-4 hover:bg-[var(--color-bg-primary)] dark:hover:bg-[var(--color-bg-tertiary)] ${isActive(item.href)
+                            ? 'bg-[var(--color-text-accent)]/10 border-[var(--color-text-accent)]'
+                            : 'border-transparent'
                             }`}
                         >
-                          <div className={`font-medium ${isActive(item.href)
-                            ? 'text-[var(--color-text-accent)]'
-                            : 'text-gray-900 dark:text-gray-100'
+                          <div className={`${isActive(item.href)
+                            ? 'font-semibold text-[var(--color-text-accent)]'
+                            : 'font-medium text-[var(--color-text-primary)]'
                             }`}>
                             {item.label}
                           </div>
-                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                          <div className={`text-sm ${isActive(item.href)
+                            ? 'text-[var(--color-text-accent)]/70'
+                            : 'text-[var(--color-text-secondary)]'
+                            }`}>
                             {item.description}
                           </div>
                         </Link>
@@ -211,9 +216,9 @@ const NavBar = () => {
                   key={item.href}
                   href={item.href}
                   onClick={() => handleLinkClick(item.href)}
-                  className={`block px-3 py-2 text-base font-medium flex items-center gap-2 ${isActive(item.href)
-                    ? 'text-[var(--color-text-accent)]'
-                    : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+                  className={`block px-3 py-2 text-base font-medium flex items-center gap-2 border-l-4 transition-colors duration-150 ${isActive(item.href)
+                    ? 'text-[var(--color-text-accent)] bg-[var(--color-text-accent)]/10 border-[var(--color-text-accent)]'
+                    : 'text-[var(--color-text-secondary)] border-transparent hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-primary)] dark:hover:bg-[var(--color-bg-tertiary)]'
                     }`}
                 >
                   {item.icon && <item.icon size={16} />}
@@ -236,9 +241,9 @@ const NavBar = () => {
                       key={item.href}
                       href={item.href}
                       onClick={() => handleLinkClick(item.href)}
-                      className={`block py-2 text-sm ${isActive(item.href)
-                        ? 'text-green-600 dark:text-green-400 font-medium'
-                        : ''
+                      className={`block px-2 py-2 text-sm border-l-4 transition-colors duration-150 ${isActive(item.href)
+                        ? 'text-[var(--color-text-accent)] font-semibold bg-[var(--color-text-accent)]/10 border-[var(--color-text-accent)]'
+                        : 'text-[var(--color-text-secondary)] border-transparent hover:bg-[var(--color-bg-primary)] dark:hover:bg-[var(--color-bg-tertiary)]'
                         }`}
                     >
                       {item.label}

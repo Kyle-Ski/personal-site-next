@@ -26,8 +26,11 @@ const TripReportCard = ({ trip }: TripReportCardProps) => {
     const formattedDate = tripDate ? format(new Date(tripDate), 'MMM dd, yyyy') : 'Date TBD'
 
     return (
-        <Link href={`/adventures/${trip.slug}`}>
-            <Card className="group h-full overflow-hidden hover:shadow-lg transition-all duration-300 adventure-card">
+        <Link
+            href={`/adventures/${trip.slug}`}
+            className="block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--color-text-accent)]"
+        >
+            <Card className="group h-full overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 adventure-card">
                 {/* Hero Image */}
                 {trip.mainImage && (
                     <div className="aspect-video w-full overflow-hidden">

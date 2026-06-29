@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2022",
     "lib": [
       "dom",
       "dom.iterable",
@@ -18,25 +18,19 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "incremental": true
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
-    "pages/_document.js",
-    ".next/types/**/*.ts",
-    "lib/stravaUtilities.ts",
-    ".next/dev/types/**/*.ts"
+    "**/*.js",
+    "**/*.cjs",
+    "**/*.mjs"
   ],
   "exclude": [
     "node_modules"

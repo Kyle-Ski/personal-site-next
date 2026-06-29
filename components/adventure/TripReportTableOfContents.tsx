@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { List, Compass, Backpack, Map, ChevronDown } from 'lucide-react'
-import { GearItem } from '@/lib/cmsProvider'
+import { TripReportGearItem } from '@/lib/cmsProvider'
 
 interface TOCItem {
   id: string
@@ -22,7 +22,7 @@ interface TripReportTOCProps {
         originalFilename?: string;
       }
     };
-    gearUsed?: GearItem[];
+    gearUsed?: TripReportGearItem[];
     elevation?: number
     distance?: number
     elevationGain?: number

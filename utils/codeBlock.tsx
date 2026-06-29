@@ -1,16 +1,16 @@
 'use client'
 
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { materialLight } from 'react-syntax-highlighter/dist/cjs/styles/prism'
-import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { useTheme } from 'next-themes'
-import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript'
-import ts from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript'
-import json from 'react-syntax-highlighter/dist/cjs/languages/prism/json'
-import html from 'react-syntax-highlighter/dist/cjs/languages/prism/markup'
-import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css'
-import bash from 'react-syntax-highlighter/dist/cjs/languages/prism/bash'
-import sql from 'react-syntax-highlighter/dist/cjs/languages/prism/sql'
+import js from 'react-syntax-highlighter/dist/esm/languages/prism/javascript'
+import ts from 'react-syntax-highlighter/dist/esm/languages/prism/typescript'
+import json from 'react-syntax-highlighter/dist/esm/languages/prism/json'
+import html from 'react-syntax-highlighter/dist/esm/languages/prism/markup'
+import css from 'react-syntax-highlighter/dist/esm/languages/prism/css'
+import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash'
+import sql from 'react-syntax-highlighter/dist/esm/languages/prism/sql'
 
 SyntaxHighlighter.registerLanguage('javascript', js)
 SyntaxHighlighter.registerLanguage('typescript', ts)

@@ -1,8 +1,7 @@
 import { Category, Post } from '@/app/blog/page';
-import { createClient } from 'next-sanity'
+import { createClient } from '@sanity/client'
 import { GearItem1 } from '@/utils/notionGear';
-import fs from 'fs';
-import path from 'path';
+import stravaData from '@/data/strava-activities.json';
 
 interface SanityConfig {
   projectId: string;
@@ -100,7 +99,7 @@ export interface TripReport {
       high: number;
     };
   };
-  gearUsed?: GearItem[];
+  gearUsed?: TripReportGearItem[];
   routeNotes?: string;
   body?: any[];
   author?: {
@@ -177,6 +176,12 @@ export interface AdventureStats {
 
 export type GearItem = GearItem1
 
+export interface TripReportGearItem {
+    name: string;
+    category: string;
+    description?: string;
+}
+
 export class SanityService {
   private client;
 
@@ -245,21 +250,9 @@ export class SanityService {
   }
 
   private async loadStravaActivities(): Promise<ProcessedActivity[]> {
-    try {
-      const dataFilePath = path.join(process.cwd(), 'data', 'strava-activities.json');
-
-      if (!fs.existsSync(dataFilePath)) {
-        console.log('No Strava activities found. Run "npm run fetch-strava" to cache activities.');
-        return [];
-      }
-
-      const data = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
-      console.log(`Loaded ${data.totalActivities} Strava activities from cache (last updated: ${data.lastUpdated})`);
-      return data.activities || [];
-    } catch (error) {
-      console.error('Error loading Strava activities:', error);
-      return [];
-    }
+    const data = stravaData;
+    console.log(`Loaded ${data.totalActivities} Strava activities from cache (last updated: ${data.lastUpdated})`);
+    return data.activities || [];
   }
 
   async getAllPosts(): Promise<Post[]> {

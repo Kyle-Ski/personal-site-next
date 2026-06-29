@@ -1,0 +1,1 @@
+var e=typeof window<`u`,t=e=>e,n=t,r=t;function i(e){let t;return()=>(t===void 0&&(t=e()),t)}var a=(e,t,n)=>{let r=t-e;return r===0?1:(n-e)/r},o=e=>e*1e3,s=e=>e/1e3;export{r as a,e as c,i,o as n,n as o,a as r,t as s,s as t};

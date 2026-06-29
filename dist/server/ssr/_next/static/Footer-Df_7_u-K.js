@@ -1,0 +1,180 @@
+import { n as require_jsx_runtime } from "../../index.js";
+import { t as GenIcon } from "./iconBase-Bcz5pr_J.js";
+import { t as Link } from "./link-tMsNEX__.js";
+import { n as FOOTER } from "./constants-DFxRiK_T.js";
+import { t as FaBluesky } from "./fa6-DWMARgVA.js";
+var Footer_module_default = { footerWrapper: "_footerWrapper_1dn8b_1" };
+//#endregion
+//#region node_modules/react-icons/ai/index.mjs
+function AiFillLinkedin(props) {
+	return GenIcon({
+		"tag": "svg",
+		"attr": { "viewBox": "0 0 1024 1024" },
+		"child": [{
+			"tag": "path",
+			"attr": { "d": "M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zM349.3 793.7H230.6V411.9h118.7v381.8zm-59.3-434a68.8 68.8 0 1 1 68.8-68.8c-.1 38-30.9 68.8-68.8 68.8zm503.7 434H675.1V608c0-44.3-.8-101.2-61.7-101.2-61.7 0-71.2 48.2-71.2 98v188.9H423.7V411.9h113.8v52.2h1.6c15.8-30 54.5-61.7 112.3-61.7 120.2 0 142.3 79.1 142.3 181.9v209.4z" },
+			"child": []
+		}]
+	})(props);
+}
+function AiOutlineGithub(props) {
+	return GenIcon({
+		"tag": "svg",
+		"attr": { "viewBox": "0 0 1024 1024" },
+		"child": [{
+			"tag": "path",
+			"attr": { "d": "M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0 1 38.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z" },
+			"child": []
+		}]
+	})(props);
+}
+function AiOutlineInstagram(props) {
+	return GenIcon({
+		"tag": "svg",
+		"attr": { "viewBox": "0 0 1024 1024" },
+		"child": [{
+			"tag": "path",
+			"attr": { "d": "M512 306.9c-113.5 0-205.1 91.6-205.1 205.1S398.5 717.1 512 717.1 717.1 625.5 717.1 512 625.5 306.9 512 306.9zm0 338.4c-73.4 0-133.3-59.9-133.3-133.3S438.6 378.7 512 378.7 645.3 438.6 645.3 512 585.4 645.3 512 645.3zm213.5-394.6c-26.5 0-47.9 21.4-47.9 47.9s21.4 47.9 47.9 47.9 47.9-21.3 47.9-47.9a47.84 47.84 0 0 0-47.9-47.9zM911.8 512c0-55.2.5-109.9-2.6-165-3.1-64-17.7-120.8-64.5-167.6-46.9-46.9-103.6-61.4-167.6-64.5-55.2-3.1-109.9-2.6-165-2.6-55.2 0-109.9-.5-165 2.6-64 3.1-120.8 17.7-167.6 64.5C132.6 226.3 118.1 283 115 347c-3.1 55.2-2.6 109.9-2.6 165s-.5 109.9 2.6 165c3.1 64 17.7 120.8 64.5 167.6 46.9 46.9 103.6 61.4 167.6 64.5 55.2 3.1 109.9 2.6 165 2.6 55.2 0 109.9.5 165-2.6 64-3.1 120.8-17.7 167.6-64.5 46.9-46.9 61.4-103.6 64.5-167.6 3.2-55.1 2.6-109.8 2.6-165zm-88 235.8c-7.3 18.2-16.1 31.8-30.2 45.8-14.1 14.1-27.6 22.9-45.8 30.2C695.2 844.7 570.3 840 512 840c-58.3 0-183.3 4.7-235.9-16.1-18.2-7.3-31.8-16.1-45.8-30.2-14.1-14.1-22.9-27.6-30.2-45.8C179.3 695.2 184 570.3 184 512c0-58.3-4.7-183.3 16.1-235.9 7.3-18.2 16.1-31.8 30.2-45.8s27.6-22.9 45.8-30.2C328.7 179.3 453.7 184 512 184s183.3-4.7 235.9 16.1c18.2 7.3 31.8 16.1 45.8 30.2 14.1 14.1 22.9 27.6 30.2 45.8C844.7 328.7 840 453.7 840 512c0 58.3 4.7 183.2-16.2 235.8z" },
+			"child": []
+		}]
+	})(props);
+}
+function AiOutlineMail(props) {
+	return GenIcon({
+		"tag": "svg",
+		"attr": { "viewBox": "0 0 1024 1024" },
+		"child": [{
+			"tag": "path",
+			"attr": { "d": "M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5zM833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6a55.99 55.99 0 0 0 68.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" },
+			"child": []
+		}]
+	})(props);
+}
+function AiOutlineTwitter(props) {
+	return GenIcon({
+		"tag": "svg",
+		"attr": { "viewBox": "0 0 1024 1024" },
+		"child": [{
+			"tag": "path",
+			"attr": { "d": "M928 254.3c-30.6 13.2-63.9 22.7-98.2 26.4a170.1 170.1 0 0 0 75-94 336.64 336.64 0 0 1-108.2 41.2A170.1 170.1 0 0 0 672 174c-94.5 0-170.5 76.6-170.5 170.6 0 13.2 1.6 26.4 4.2 39.1-141.5-7.4-267.7-75-351.6-178.5a169.32 169.32 0 0 0-23.2 86.1c0 59.2 30.1 111.4 76 142.1a172 172 0 0 1-77.1-21.7v2.1c0 82.9 58.6 151.6 136.7 167.4a180.6 180.6 0 0 1-44.9 5.8c-11.1 0-21.6-1.1-32.2-2.6C211 652 273.9 701.1 348.8 702.7c-58.6 45.9-132 72.9-211.7 72.9-14.3 0-27.5-.5-41.2-2.1C171.5 822 261.2 850 357.8 850 671.4 850 843 590.2 843 364.7c0-7.4 0-14.8-.5-22.2 33.2-24.3 62.3-54.4 85.5-88.2z" },
+			"child": []
+		}]
+	})(props);
+}
+//#endregion
+//#region node_modules/react-icons/si/index.mjs
+function SiBuymeacoffee(props) {
+	return GenIcon({
+		"tag": "svg",
+		"attr": {
+			"role": "img",
+			"viewBox": "0 0 24 24"
+		},
+		"child": [{
+			"tag": "path",
+			"attr": { "d": "M20.216 6.415l-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.195-.4-.597-.634-.996-.788a5.723 5.723 0 00-.626-.194c-1-.263-2.05-.36-3.077-.416a25.834 25.834 0 00-3.7.062c-.915.083-1.88.184-2.75.5-.318.116-.646.256-.888.501-.297.302-.393.77-.177 1.146.154.267.415.456.692.58.36.162.737.284 1.123.366 1.075.238 2.189.331 3.287.37 1.218.05 2.437.01 3.65-.118.299-.033.598-.073.896-.119.352-.054.578-.513.474-.834-.124-.383-.457-.531-.834-.473-.466.074-.96.108-1.382.146-1.177.08-2.358.082-3.536.006a22.228 22.228 0 01-1.157-.107c-.086-.01-.18-.025-.258-.036-.243-.036-.484-.08-.724-.13-.111-.027-.111-.185 0-.212h.005c.277-.06.557-.108.838-.147h.002c.131-.009.263-.032.394-.048a25.076 25.076 0 013.426-.12c.674.019 1.347.067 2.017.144l.228.031c.267.04.533.088.798.145.392.085.895.113 1.07.542.055.137.08.288.111.431l.319 1.484a.237.237 0 01-.199.284h-.003c-.037.006-.075.01-.112.015a36.704 36.704 0 01-4.743.295 37.059 37.059 0 01-4.699-.304c-.14-.017-.293-.042-.417-.06-.326-.048-.649-.108-.973-.161-.393-.065-.768-.032-1.123.161-.29.16-.527.404-.675.701-.154.316-.199.66-.267 1-.069.34-.176.707-.135 1.056.087.753.613 1.365 1.37 1.502a39.69 39.69 0 0011.343.376.483.483 0 01.535.53l-.071.697-1.018 9.907c-.041.41-.047.832-.125 1.237-.122.637-.553 1.028-1.182 1.171-.577.131-1.165.2-1.756.205-.656.004-1.31-.025-1.966-.022-.699.004-1.556-.06-2.095-.58-.475-.458-.54-1.174-.605-1.793l-.731-7.013-.322-3.094c-.037-.351-.286-.695-.678-.678-.336.015-.718.3-.678.679l.228 2.185.949 9.112c.147 1.344 1.174 2.068 2.446 2.272.742.12 1.503.144 2.257.156.966.016 1.942.053 2.892-.122 1.408-.258 2.465-1.198 2.616-2.657.34-3.332.683-6.663 1.024-9.995l.215-2.087a.484.484 0 01.39-.426c.402-.078.787-.212 1.074-.518.455-.488.546-1.124.385-1.766zm-1.478.772c-.145.137-.363.201-.578.233-2.416.359-4.866.54-7.308.46-1.748-.06-3.477-.254-5.207-.498-.17-.024-.353-.055-.47-.18-.22-.236-.111-.71-.054-.995.052-.26.152-.609.463-.646.484-.057 1.046.148 1.526.22.577.088 1.156.159 1.737.212 2.48.226 5.002.19 7.472-.14.45-.06.899-.13 1.345-.21.399-.072.84-.206 1.08.206.166.281.188.657.162.974a.544.544 0 01-.169.364zm-6.159 3.9c-.862.37-1.84.788-3.109.788a5.884 5.884 0 01-1.569-.217l.877 9.004c.065.78.717 1.38 1.5 1.38 0 0 1.243.065 1.658.065.447 0 1.786-.065 1.786-.065.783 0 1.434-.6 1.499-1.38l.94-9.95a3.996 3.996 0 00-1.322-.238c-.826 0-1.491.284-2.26.613z" },
+			"child": []
+		}]
+	})(props);
+}
+var ContactIcons_module_default = {
+	iconsWrapper: "_iconsWrapper_gh87d_1",
+	rowContainer: "_rowContainer_gh87d_10",
+	iconItem: "_iconItem_gh87d_16"
+};
+//#endregion
+//#region components/ContactIcons.tsx
+var import_jsx_runtime = require_jsx_runtime();
+var ContactIcons = () => {
+	const topRowIcons = [
+		{
+			href: "https://github.com/Kyle-Ski",
+			icon: AiOutlineGithub,
+			label: "Link to Kyle's GitHub"
+		},
+		{
+			href: "https://www.instagram.com/ski_roy_jenkins",
+			icon: AiOutlineInstagram,
+			label: "Link to Kyle's Instagram"
+		},
+		{
+			href: "https://www.linkedin.com/in/kyle-czajkowski",
+			icon: AiFillLinkedin,
+			label: "Link to Kyle's LinkedIn"
+		},
+		{
+			href: "mailto:kyle@czajkowski.tech",
+			icon: AiOutlineMail,
+			label: "Link to send Kyle an email"
+		}
+	];
+	const bottomRowIcons = [
+		{
+			href: "https://twitter.com/SkiRoyJenkins",
+			icon: AiOutlineTwitter,
+			label: "Link to Kyle's Twitter"
+		},
+		{
+			href: "https://bsky.app/profile/skiroyjenkins.bsky.social",
+			icon: FaBluesky,
+			label: "Link to Kyle's BlueSky"
+		},
+		{
+			href: "https://buymeacoffee.com/skiroyjenkins",
+			icon: SiBuymeacoffee,
+			label: "Buy Kyle a coffee"
+		}
+	];
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: ContactIcons_module_default.iconsWrapper,
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: ContactIcons_module_default.rowContainer,
+			children: topRowIcons.map((icon, index) => {
+				const IconComponent = icon.icon;
+				return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+					href: icon.href,
+					"aria-label": icon.label,
+					target: "_blank",
+					rel: "noopener noreferrer",
+					className: ContactIcons_module_default.iconItem,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(IconComponent, {})
+				}, index);
+			})
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: ContactIcons_module_default.rowContainer,
+			children: bottomRowIcons.map((icon, index) => {
+				const IconComponent = icon.icon;
+				return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+					href: icon.href,
+					"aria-label": icon.label,
+					target: "_blank",
+					rel: "noopener noreferrer",
+					className: ContactIcons_module_default.iconItem,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(IconComponent, {})
+				}, index);
+			})
+		})]
+	});
+};
+//#endregion
+//#region components/Footer.tsx
+var Footer = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+	id: FOOTER,
+	className: Footer_module_default.footerWrapper,
+	children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "flex-1",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContactIcons, {})
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("footer", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+		href: "https://github.com/Kyle-Ski/personal-site-next",
+		target: "_blank",
+		rel: "noopener noreferrer",
+		className: "text-gray-700 dark:text-gray-400 hover:underline",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
+			"© ",
+			(/* @__PURE__ */ new Date()).getFullYear(),
+			" By Kyle Czajkowski"
+		] })
+	}) })]
+});
+//#endregion
+export { Footer as default };

@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { ChevronLeft, ChevronRight, List, Compass, Backpack, X, Map } from 'lucide-react'
-import { GearItem } from '@/lib/cmsProvider'
+import { TripReportGearItem } from '@/lib/cmsProvider'
 
 interface TOCItem {
     id: string
@@ -16,7 +16,7 @@ interface MobileTOCProps {
     // For adventure posts
     tripReport?: {
         routeNotes?: string
-        gearUsed?: GearItem[]
+        gearUsed?: TripReportGearItem[]
         body?: any[]
         gpxFile?: any
     }

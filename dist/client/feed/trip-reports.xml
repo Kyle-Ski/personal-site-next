@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title><![CDATA[Kyle Czajkowski's Content Feed - Trip Reports]]></title>
+    <description><![CDATA[Detailed trip reports from outdoor adventures]]></description>
+    <link>https://kyle.czajkowski.tech/reports</link>
+    <atom:link href="https://kyle.czajkowski.tech/feed/trip-reports.xml" rel="self" type="application/rss+xml"/>
+    <language>en-US</language>
+    <managingEditor>Kyle Czajkowski</managingEditor>
+    <webMaster>Kyle Czajkowski</webMaster>
+    <lastBuildDate>Sun, 31 Aug 2025 02:59:00 GMT</lastBuildDate>
+    <generator>Next.js RSS Generator</generator>
+    <item>
+      <title><![CDATA[Marion Lake and Wildflower Heaven]]></title>
+      <description><![CDATA[Our final day exploring the Tetons took us on a 19-mile tram-assisted journey to Marion Lake via the Fox Creek Pass trail. What started as wanting a big day out in the Tetons turned into an unforgettable encounter with the most fragrant wildflower fields I've ever experienced in the mountains.]]></description>
+      <link>https://kyle.czajkowski.tech/reports/marion-lake-and-wildflower-heaven</link>
+      <guid isPermaLink="true">https://kyle.czajkowski.tech/reports/marion-lake-and-wildflower-heaven</guid>
+      <pubDate>Sun, 31 Aug 2025 02:59:00 GMT</pubDate>
+      <category><![CDATA[Trip Report]]></category>
+    </item>
+    <item>
+      <title><![CDATA[Finishing Kylie's CO 14ers]]></title>
+      <description><![CDATA[An awesome 2-day adventure completing Kylie's final Colorado 14er! Technical traverse between peaks, dramatic rockfall events, and an unforgettable celebration at 14,350 feet. This route has real rockfall potential and requires group coordination, but offers incredible rewards for experienced climbers.]]></description>
+      <link>https://kyle.czajkowski.tech/reports/finishing-kylie-s-co-14ers</link>
+      <guid isPermaLink="true">https://kyle.czajkowski.tech/reports/finishing-kylie-s-co-14ers</guid>
+      <pubDate>Thu, 21 Aug 2025 18:30:00 GMT</pubDate>
+      <category><![CDATA[Trip Report]]></category>
+    </item>
+  </channel>
+</rss>

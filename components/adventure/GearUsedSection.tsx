@@ -1,9 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { ChevronDown, ChevronRight, Backpack } from 'lucide-react'
+import Link from 'next/link'
+import { ChevronDown, ChevronRight, Backpack, ArrowUpRight } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { GearItem } from '@/lib/cmsProvider'
+import { TripReportGearItem } from '@/lib/cmsProvider'
+import { createGearSlug } from '@/lib/gearUrlUtils'
 
 
 // Category definitions with emojis
@@ -19,10 +21,11 @@ const GEAR_CATEGORIES = {
 } as const
 
 interface GearUsedSectionProps {
-    gearUsed?: GearItem[]
+    gearUsed?: TripReportGearItem[]
+    availableGearSlugs: Set<string>
 }
 
-export function GearUsedSection({ gearUsed }: GearUsedSectionProps) {
+export function GearUsedSection({ gearUsed, availableGearSlugs }: GearUsedSectionProps) {
     const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set())
 
     if (!gearUsed || gearUsed.length === 0) {
@@ -35,7 +38,7 @@ export function GearUsedSection({ gearUsed }: GearUsedSectionProps) {
             if (!acc[category]) acc[category] = []
             acc[category].push(item)
         return acc
-    }, {} as Record<string, GearItem[]>)
+    }, {} as Record<string, TripReportGearItem[]>)
 
     // Filter out empty categories and sort
     const categoriesWithGear = Object.entries(processedGear)
@@ -109,18 +112,48 @@ export function GearUsedSection({ gearUsed }: GearUsedSectionProps) {
                                     className="px-4 pb-4 border-t border-gray-200 dark:border-gray-700"
                                 >
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-4">
-                                        {items.map((item, index) => (
-                                            <div
-                                                key={`${categoryKey}-${index}`}
-                                                className="p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-600 transition-colors"
-                                            >
-                                                {item.description && (
-                                                    <div className="text-sm text-muted-foreground">
-                                                        {item.description}
+                                        {items.map((item, index) => {
+                                            const slug = createGearSlug(item.name || '')
+                                            const slugExists = !!slug && availableGearSlugs.has(slug)
+                                            const gearHref = slugExists ? `/gear?item=${slug}` : null
+
+                                            const cardContent = (
+                                                <>
+                                                    <div className="font-medium text-sm text-[var(--color-text-primary)]">
+                                                        {item.name}
                                                     </div>
-                                                )}
-                                            </div>
-                                        ))}
+                                                    {item.description && (
+                                                        <div className="text-sm text-muted-foreground mt-1">
+                                                            {item.description}
+                                                        </div>
+                                                    )}
+                                                    {gearHref && (
+                                                        <ArrowUpRight className="h-3.5 w-3.5 text-[var(--color-text-secondary)] absolute top-2 right-2 opacity-50 group-hover:opacity-100 transition-opacity" />
+                                                    )}
+                                                </>
+                                            )
+
+                                            const linkedClasses = "p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-[var(--color-text-accent)] transition-colors relative block group"
+
+                                            const plainClasses = "p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700"
+
+                                            return gearHref ? (
+                                                <Link
+                                                    key={`${categoryKey}-${index}`}
+                                                    href={gearHref}
+                                                    className={linkedClasses}
+                                                >
+                                                    {cardContent}
+                                                </Link>
+                                            ) : (
+                                                <div
+                                                    key={`${categoryKey}-${index}`}
+                                                    className={plainClasses}
+                                                >
+                                                    {cardContent}
+                                                </div>
+                                            )
+                                        })}
                                     </div>
                                 </div>
                             )}

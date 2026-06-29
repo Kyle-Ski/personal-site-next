@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect, useState, useCallback } from 'react'
-import Image from 'next/image'
-import { Mountain, MapPin, Calendar, Trophy, TrendingUp, ArrowUp, Map, Heart, Loader2 } from 'lucide-react'
-import { imgStrToBase64, shimmer } from '@/utils/imageHelpers'
+import { useEffect, useState, useCallback, useRef } from 'react'
+import { Mountain, MapPin, Calendar, Trophy, TrendingUp, ArrowUp, Map, Heart } from 'lucide-react'
+import Skeleton from '@/components/ui/skeleton'
+import Counter from '@/components/ui/counter'
 
 interface AdventureHeroProps {
     title?: string
@@ -19,47 +19,13 @@ interface AdventureHeroProps {
     }[]
 }
 
-// Smart image source selection based on device capabilities
-const getOptimalImageSrc = (baseSrc: string): string => {
-    // Remove extension to work with optimized versions
+// Get optimized path base for static images, null for Sanity CMS URLs
+const getOptimizedBase = (baseSrc: string): string | null => {
+    if (baseSrc.includes('cdn.sanity.io')) return null;
     const pathParts = baseSrc.split('.');
-    const baseName = pathParts.slice(0, -1).join('.');
-
-    // Remove leading slash for optimized path
-    const cleanBaseName = baseName.replace('/', '');
-
-    // Check if we have optimized versions
-    const optimizedPath = `/optimized/${cleanBaseName}-hero`;
-
-    // Feature detection for modern formats (client-side only)
-    if (typeof window !== 'undefined') {
-        const canvas = document.createElement('canvas');
-
-        // Check AVIF support
-        try {
-            if (canvas.toDataURL('image/avif').indexOf('data:image/avif') === 0) {
-                return `${optimizedPath}.avif`;
-            }
-        } catch (e) {
-            // AVIF not supported
-        }
-
-        // Check WebP support  
-        try {
-            if (canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0) {
-                return `${optimizedPath}.webp`;
-            }
-        } catch (e) {
-            // WebP not supported
-        }
-    }
-
-    // Fallback to optimized JPEG or original if optimized doesn't exist
-    return `${optimizedPath}.jpg`;
-}
-
-const generateResponsiveSizes = () => {
-    return `(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1920px`;
+    if (pathParts.length < 2) return null;
+    const baseName = pathParts.slice(0, -1).join('.').replace('/', '');
+    return `/optimized/${baseName}`;
 }
 
 const AdventureHero = ({
@@ -72,12 +38,29 @@ const AdventureHero = ({
     const [offset, setOffset] = useState<number>(0)
     const [imageLoaded, setImageLoaded] = useState(false)
     const [imageError, setImageError] = useState(false)
-    const [optimalSrc, setOptimalSrc] = useState(backgroundImage)
+    const [showOptimized, setShowOptimized] = useState(true)
+    const [showSpinner, setShowSpinner] = useState(false)
+    const imgRef = useRef<HTMLImageElement | null>(null)
 
-    // Get optimal image source on mount
+    const optimizedBase = getOptimizedBase(backgroundImage)
+    const currentSrc = showOptimized && optimizedBase ? optimizedBase : backgroundImage
+
+    // Skip loading state if image is already cached
     useEffect(() => {
-        setOptimalSrc(getOptimalImageSrc(backgroundImage))
+        if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+            setImageLoaded(true)
+        }
     }, [backgroundImage])
+
+    // Only show the skeleton placeholder after 200ms — prevents flicker on cached/fast loads
+    useEffect(() => {
+        if (imageLoaded || imageError) {
+            setShowSpinner(false)
+            return
+        }
+        const t = setTimeout(() => setShowSpinner(true), 200)
+        return () => clearTimeout(t)
+    }, [imageLoaded, imageError])
 
     // Generate mobile position class
     const getMobilePositionClass = () => {
@@ -120,13 +103,12 @@ const AdventureHero = ({
     }, [])
 
     const handleImageError = useCallback(() => {
-        setImageError(true)
-        // Fallback to original image if optimized version fails
-        if (optimalSrc !== backgroundImage) {
-            setOptimalSrc(backgroundImage)
-            setImageError(false)
+        if (optimizedBase && showOptimized) {
+            setShowOptimized(false)
+        } else {
+            setImageError(true)
         }
-    }, [optimalSrc, backgroundImage])
+    }, [optimizedBase, showOptimized])
 
     const iconMap: Record<string, React.ComponentType<any>> = {
         'Mountain': Mountain,
@@ -139,16 +121,27 @@ const AdventureHero = ({
         'Heart': Heart
     }
 
+    const imgStyle = {
+        position: 'absolute' as const,
+        inset: 0,
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover' as const,
+        transform: `translateY(${offset * 0.5}px)`,
+        opacity: imageLoaded ? 1 : 0,
+        transition: 'opacity 0.5s ease-in-out'
+    }
+
+    const imgClass = `sm:object-center ${getMobilePositionClass()}`
+
+    // Scroll-darkening: overlay opacity grows as user scrolls so text stays readable
+    const overlayOpacity = Math.min(0.4 + offset / 800, 0.75)
+
     return (
         <section className="relative px-4 overflow-hidden h-[80vh] flex items-center pt-20">
-            {/* Loading State */}
-            {!imageLoaded && !imageError && (
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center z-20">
-                    <div className="text-center text-white">
-                        <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4" />
-                        <p className="text-sm font-medium">Loading image...</p>
-                    </div>
-                </div>
+            {/* Loading State (skeleton, only after 200ms to avoid flicker) */}
+            {!imageLoaded && !imageError && showSpinner && (
+                <Skeleton className="absolute inset-0 z-20 rounded-none" />
             )}
 
             {/* Error State */}
@@ -161,30 +154,53 @@ const AdventureHero = ({
                 </div>
             )}
 
-            {/* Optimized Background Image with Mobile Positioning */}
+            {/* Responsive Background Image */}
             <div className="absolute inset-0">
-                <Image
-                    id="adventureHeroImg"
-                    priority={true}
-                    src={optimalSrc}
-                    alt="Mountain trail adventure scene"
-                    fill
-                    sizes={generateResponsiveSizes()}
-                    placeholder="blur"
-                    blurDataURL={`data:image/svg+xml;base64,${imgStrToBase64(shimmer(1200, 800))}`}
-                    quality={85}
-                    onLoad={handleImageLoad}
-                    onError={handleImageError}
-                    style={{
-                        objectFit: "cover",
-                        transform: `translateY(${offset * 0.5}px)`,
-                        opacity: imageLoaded ? 1 : 0,
-                        transition: 'opacity 0.5s ease-in-out'
-                    }}
-                    className={`sm:object-center ${getMobilePositionClass()}`}
-                />
+                {optimizedBase && showOptimized ? (
+                    <picture>
+                        <source
+                            srcSet={`${optimizedBase}-mobile.avif 640w, ${optimizedBase}-tablet.avif 1024w, ${optimizedBase}-hero.avif 2880w`}
+                            sizes="100vw"
+                            type="image/avif"
+                        />
+                        <source
+                            srcSet={`${optimizedBase}-mobile.webp 640w, ${optimizedBase}-tablet.webp 1024w, ${optimizedBase}-hero.webp 2880w`}
+                            sizes="100vw"
+                            type="image/webp"
+                        />
+                        <source
+                            srcSet={`${optimizedBase}-mobile.jpg 640w, ${optimizedBase}-tablet.jpg 1024w, ${optimizedBase}-hero.jpg 2880w`}
+                            sizes="100vw"
+                            type="image/jpeg"
+                        />
+                        <img
+                            ref={imgRef}
+                            src={`${optimizedBase}-hero.jpg`}
+                            alt="Mountain trail adventure scene"
+                            onLoad={handleImageLoad}
+                            onError={handleImageError}
+                            style={imgStyle}
+                            className={imgClass}
+                        />
+                    </picture>
+                ) : (
+                    <img
+                        ref={imgRef}
+                        src={backgroundImage}
+                        alt="Mountain trail adventure scene"
+                        onLoad={handleImageLoad}
+                        onError={handleImageError}
+                        style={imgStyle}
+                        className={imgClass}
+                    />
+                )}
 
-                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/40" />
+                <div
+                    className="absolute inset-0 transition-opacity duration-300"
+                    style={{
+                        background: `linear-gradient(to bottom, rgba(0,0,0,${overlayOpacity * 0.5}), transparent 30%, rgba(0,0,0,${overlayOpacity}))`,
+                    }}
+                />
             </div>
 
             {/* Content */}
@@ -193,7 +209,7 @@ const AdventureHero = ({
                 <div className="max-w-4xl mx-auto">
                     <h1 className="text-4xl lg:text-6xl font-bold mb-6 text-white" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
                         {mainText1}
-                        <span className="block text-yellow-300" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
+                        <span className="block text-amber-400" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
                             {mainText2}
                         </span>
                     </h1>
@@ -219,13 +235,13 @@ const AdventureHero = ({
                                                 {/* Icon */}
                                                 <div className="flex justify-center mb-4">
                                                     <div className="p-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-                                                        <IconComponent size={24} className="text-yellow-300" style={{ filter: 'drop-shadow(1px 1px 1px rgba(0,0,0,0.8))' }} />
+                                                        <IconComponent size={24} className="text-amber-400" style={{ filter: 'drop-shadow(1px 1px 1px rgba(0,0,0,0.8))' }} />
                                                     </div>
                                                 </div>
 
                                                 {/* Value */}
                                                 <div className="text-2xl font-bold text-white mb-2" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
-                                                    {stat.value}
+                                                    <AnimatedStatValue value={stat.value} />
                                                 </div>
 
                                                 {/* Label */}
@@ -268,3 +284,21 @@ const AdventureHero = ({
 }
 
 export default AdventureHero
+
+/**
+ * Parses a stat value like "75+", "5.0", "1,234", "100%" and animates the
+ * numeric portion. Falls back to plain text if no number can be parsed.
+ */
+function AnimatedStatValue({ value }: { value: string }) {
+    // Match leading optional non-digits (prefix like "$"), digits with optional comma/decimal, then trailing chars (suffix like "+", "%", "k")
+    const match = value.match(/^([^\d-]*)(-?[\d,]+(?:\.\d+)?)(.*)$/)
+    if (!match) {
+        return <>{value}</>
+    }
+    const [, prefix, numStr, suffix] = match
+    const cleaned = numStr.replace(/,/g, '')
+    const num = parseFloat(cleaned)
+    if (Number.isNaN(num)) return <>{value}</>
+    const decimals = cleaned.includes('.') ? cleaned.split('.')[1].length : 0
+    return <Counter to={num} prefix={prefix} suffix={suffix} decimals={decimals} />
+}

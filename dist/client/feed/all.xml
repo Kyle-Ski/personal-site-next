@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title><![CDATA[Kyle Czajkowski's Content Feed - All Posts]]></title>
+    <description><![CDATA[All trip reports, guides, gear reviews, and blog posts]]></description>
+    <link>https://kyle.czajkowski.tech</link>
+    <atom:link href="https://kyle.czajkowski.tech/feed/all.xml" rel="self" type="application/rss+xml"/>
+    <language>en-US</language>
+    <managingEditor>Kyle Czajkowski</managingEditor>
+    <webMaster>Kyle Czajkowski</webMaster>
+    <lastBuildDate>Fri, 19 Sep 2025 03:58:00 GMT</lastBuildDate>
+    <generator>Next.js RSS Generator</generator>
+    <item>
+      <title><![CDATA[Chasing Peak Colors: A Guide to Fall Foliage]]></title>
+      <description><![CDATA[A comprehensive guide to timing fall foliage adventures in western mountains using scientific understanding, strategic planning, and tactical flexibility. Learn to predict peak colors across elevation zones, avoid crowds through smart timing, and chase spectacular displays from Colorado's aspens to the Pacific Northwest's larches.]]></description>
+      <link>https://kyle.czajkowski.tech/guides/chasing-peak-colors-a-guide-to-fall-foliage</link>
+      <guid isPermaLink="true">https://kyle.czajkowski.tech/guides/chasing-peak-colors-a-guide-to-fall-foliage</guid>
+      <pubDate>Fri, 19 Sep 2025 03:58:00 GMT</pubDate>
+      <category><![CDATA[Guide]]></category>
+    </item>
+    <item>
+      <title><![CDATA[Versatile Footwear for Fall Conditions: Your Complete Guide]]></title>
+      <description><![CDATA[Learn how to extend your summer trail runners into fall conditions without breaking your gear budget. This comprehensive guide covers sock strategies, foot care prevention, traction devices, and real-world testing insights for handling fall's unpredictable temperature swings and changing terrain. From merino wool sock selection to microspike recommendations, get practical advice that keeps your feet comfortable and blister-free through shoulder season adventures.]]></description>
+      <link>https://kyle.czajkowski.tech/guides/versatile-footwear-for-fall-conditions-your-complete-guide</link>
+      <guid isPermaLink="true">https://kyle.czajkowski.tech/guides/versatile-footwear-for-fall-conditions-your-complete-guide</guid>
+      <pubDate>Sat, 13 Sep 2025 23:32:00 GMT</pubDate>
+      <category><![CDATA[Guide]]></category>
+    </item>
+    <item>
+      <title><![CDATA[Marion Lake and Wildflower Heaven]]></title>
+      <description><![CDATA[Our final day exploring the Tetons took us on a 19-mile tram-assisted journey to Marion Lake via the Fox Creek Pass trail. What started as wanting a big day out in the Tetons turned into an unforgettable encounter with the most fragrant wildflower fields I've ever experienced in the mountains.]]></description>
+      <link>https://kyle.czajkowski.tech/reports/marion-lake-and-wildflower-heaven</link>
+      <guid isPermaLink="true">https://kyle.czajkowski.tech/reports/marion-lake-and-wildflower-heaven</guid>
+      <pubDate>Sun, 31 Aug 2025 02:59:00 GMT</pubDate>
+      <category><![CDATA[Trip Report]]></category>
+    </item>
+    <item>
+      <title><![CDATA[Finishing Kylie's CO 14ers]]></title>
+      <description><![CDATA[An awesome 2-day adventure completing Kylie's final Colorado 14er! Technical traverse between peaks, dramatic rockfall events, and an unforgettable celebration at 14,350 feet. This route has real rockfall potential and requires group coordination, but offers incredible rewards for experienced climbers.]]></description>
+      <link>https://kyle.czajkowski.tech/reports/finishing-kylie-s-co-14ers</link>
+      <guid isPermaLink="true">https://kyle.czajkowski.tech/reports/finishing-kylie-s-co-14ers</guid>
+      <pubDate>Thu, 21 Aug 2025 18:30:00 GMT</pubDate>
+      <category><![CDATA[Trip Report]]></category>
+    </item>
+  </channel>
+</rss>

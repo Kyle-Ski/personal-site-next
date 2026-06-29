@@ -22,6 +22,7 @@ import { PortableText } from '@portabletext/react'
 import { GearReview } from "@/lib/cmsProvider"
 import styles from '@/styles/GearReviewDetail.module.css'
 import SocialShare from "../SocialShare"
+import MountainDivider from '@/components/ui/mountain-divider'
 import { portableTextComponents } from "@/utils/portableTextComponents"
 import ImageGallery from "./ImageGallery"
 
@@ -323,6 +324,8 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                             </div>
                         )}
 
+                        <MountainDivider />
+
                         {/* Pros and Cons */}
                         {(review.pros?.length || review.cons?.length) && (
                             <div className={styles.prosConsSection}>
@@ -468,6 +471,8 @@ export default function GearReviewDetail({ review }: GearReviewDetailProps) {
                                 </div>
                             </div>
                         )}
+
+                        <MountainDivider />
 
                         {/* Technical Specifications */}
                         {review.specifications && (

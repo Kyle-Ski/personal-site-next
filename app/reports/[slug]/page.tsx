@@ -5,6 +5,7 @@ import { format } from "date-fns"
 import { notFound } from "next/navigation"
 import { Metadata } from "next";
 import { SanityService, TripReport } from "@/lib/cmsProvider";
+import { getAvailableGearSlugs } from "@/lib/gearSlugs.server";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { urlFor } from "@/sanity/lib/image"
@@ -16,6 +17,7 @@ import { GearUsedSection } from "@/components/adventure/GearUsedSection"
 import { MobileTOC } from "@/components/MobileTOC"
 import GPXRouteSection from "@/components/adventure/GPXRouteSection"
 import SocialShare from "@/components/SocialShare"
+import MountainDivider from '@/components/ui/mountain-divider'
 
 interface PageProps {
     params: Promise<{ slug: string }>
@@ -316,6 +318,7 @@ export default async function TripReportPage({ params }: PageProps) {
                         ))} */}
                     </div>
                 )}
+                <MountainDivider />
                 {tripReport.gpxFile && (
                     <section className="adventure-content" id="route-data">
                         <h2 className="text-2xl font-bold mb-4">Route & Elevation</h2>
@@ -378,7 +381,7 @@ export default async function TripReportPage({ params }: PageProps) {
                 )}
 
                 {/* Gear Used */}
-                <GearUsedSection gearUsed={tripReport.gearUsed} />
+                <GearUsedSection gearUsed={tripReport.gearUsed} availableGearSlugs={getAvailableGearSlugs()} />
 
                 {/* Main Content with Image Support and ID for TOC */}
                 <div id="main-content" className="prose prose-lg max-w-none adventure-content dark:prose-invert">
